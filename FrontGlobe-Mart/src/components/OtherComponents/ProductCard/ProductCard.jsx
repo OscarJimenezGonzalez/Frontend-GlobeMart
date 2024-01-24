@@ -1,24 +1,63 @@
-import React from 'react'
+import * as React from 'react';
+import { useState } from 'react';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Button from '@mui/material/Button';
 import { Box, Typography } from '@mui/material'
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 
+export default function ProductCard({ productName, productModel, productBrand, price, productImg }) {
 
-function ProductCard({ id, productName, productModel, productBrand, price }) {
+  const [favClicked, setFavClicked] = useState(false)
+
+  const handleFavClick = () => {
+
+    setFavClicked(!favClicked)
+    console.log(favClicked)
+
+  }
 
   return (
 
-    <Box sx={{
-      display: 'flex', flexDirection:
-        'column', alignItems: 'center', justifyContent: 'center', width: '25%', border: '1px solid black', borderRadius: '10px', padding: '10px', margin: '10px', flexWrap: 'wrap', lineHeight: '2'
-    }}>
+    <Card sx={{ width: { sx: 100, md: 250 } }}>
+      <CardMedia
+        component="img"
+        alt="img"
+        height="140"
+        image={productImg}
+      />
+      <CardContent>
+        <Typography gutterBottom variant="h7" component="div">
+          {productName}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          {productModel}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          {productBrand}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          {price} €
+        </Typography>
+      </CardContent>
+      <CardActions sx={{ display: 'flex' }}>
+        <Button size="small">Add to Cart</Button>
+        <Button onClick={handleFavClick} size="small">
+          {favClicked ?
+            <FavoriteIcon sx={{ color: '#1976D2', fontSize: '18px', width: '18px', height: '18px' }} /> :
+            <FavoriteBorderIcon sx={{ color: '#1976D2', fontSize: '18px', width: '18px', height: '18px' }} />
+          }
+        </Button>
+      </CardActions>
+    </Card>
 
-      <Typography>{productName}</Typography>
-      <Typography>{productModel}</Typography>
-      <Typography>{productBrand}</Typography>
-      <Typography>{price}</Typography>
+  );
 
-    </Box>
-
-  )
 }
 
-export default ProductCard
+
+
+

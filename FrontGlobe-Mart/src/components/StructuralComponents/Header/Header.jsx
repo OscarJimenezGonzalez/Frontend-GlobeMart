@@ -12,13 +12,12 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import PublicIcon from '@mui/icons-material/Public';
 import { Link } from 'react-router-dom';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useNavigate } from 'react-router-dom';
 import { useTheme } from '@emotion/react';
-
-/* const pages = ['Products', 'Pricing', 'Blog']; */
-// const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+import { CardMedia } from '@mui/material';
 
 const settings = [{ name: 'Profile', path: '/profile' }, { name: 'Logout' }];
 
@@ -39,7 +38,7 @@ function Header() {
   };
 
   const handleCloseUserMenu = (e) => {
-    if(e.target.outerText === 'Logout'){
+    if (e.target.outerText === 'Logout') {
       localStorage.removeItem('token')
       navigate('/')
     }
@@ -51,7 +50,7 @@ function Header() {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}>
-            <Box sx={{width: '35px'}}></Box>
+            <Box sx={{ width: '35px' }}></Box>
           </Box>
           <Typography
             variant="h6"
@@ -72,7 +71,7 @@ function Header() {
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
- {/*            <IconButton
+            {/*            <IconButton
               size="large"
               aria-label="account of current user"
               aria-controls="menu-appbar"
@@ -106,8 +105,11 @@ function Header() {
                 </MenuItem>
               ))}
             </Menu> */}
+
           </Box>
-          <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+
+          <PublicIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+
           <Typography
             variant="h5"
             noWrap
@@ -124,9 +126,9 @@ function Header() {
               textDecoration: 'none',
             }}
           >
-            Itinero
+            Globe-Mart
           </Typography>
-{/*           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          {/*           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
               <Button
                 key={page}
@@ -138,13 +140,13 @@ function Header() {
             ))}
           </Box> */}
           {!localStorage.getItem("token") && (
-            <Button component={Link} to={'/login'} sx={{ color: '#fff', mr: 5}}>Sign in <AccountCircleIcon sx={{ml: 1}}/></Button>
-          )} 
-    
+            <Button component={Link} to={'/login'} sx={{ color: '#fff', mr: 5 }}>Sign in <AccountCircleIcon sx={{ ml: 1 }} /></Button>
+          )}
+
           {localStorage.getItem("token") && (<Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar sx={{backgroundColor: '#858585'}} />
+                <Avatar sx={{ backgroundColor: '#858585' }} />
               </IconButton>
             </Tooltip>
             <Menu
@@ -165,10 +167,10 @@ function Header() {
             >
 
               {settings.map((setting) => {
-                 return ( 
-                 <Link to={setting.path} style={{ textDecoration: 'none' }} key={setting.name} >
+                return (
+                  <Link to={setting.path} style={{ textDecoration: 'none' }} key={setting.name} >
                     <MenuItem onClick={handleCloseUserMenu} sx={{ width: '130px', display: 'flex', justifyContent: 'center' }}>
-                        <Typography textAlign="center" sx={{ color: "#191C1B" }}>{setting.name}</Typography>
+                      <Typography textAlign="center" sx={{ color: "#191C1B" }}>{setting.name}</Typography>
                     </MenuItem>
                   </Link>
                 )
@@ -181,5 +183,6 @@ function Header() {
     </AppBar>
   );
 }
+
 
 export default Header;
