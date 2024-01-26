@@ -1,3 +1,10 @@
+
+import AccountCircle from '@mui/icons-material/AccountCircle';
+import Switch from '@mui/material/Switch';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormGroup from '@mui/material/FormGroup';
+import SwipeableDrawerMenu from '../../MicroComponents/DrawerMenu/SwipableDrawerMenu';
+
 import { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -17,26 +24,29 @@ import { Link } from 'react-router-dom';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useNavigate } from 'react-router-dom';
 import { useTheme } from '@emotion/react';
-import { CardMedia } from '@mui/material';
+import { CardMedia, TextField } from '@mui/material';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
-const settings = [{ name: 'Profile', path: '/profile' }, { name: 'Logout' }];
+import * as React from 'react';
+import { styled, alpha } from '@mui/material/styles';
+
+import InputBase from '@mui/material/InputBase';
+import SearchIcon from '@mui/icons-material/Search';
+
 
 function Header() {
-  const navigate = useNavigate()
-  const [anchorElNav, setAnchorElNav] = useState(null);
-  const [anchorElUser, setAnchorElUser] = useState(null);
 
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
+  const navigate = useNavigate()
+  const [anchorElUser, setAnchorElUser] = useState(null);
+  const [auth, setAuth] = React.useState(true);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-
+  // Mantener para el LOGOUT 
   const handleCloseUserMenu = (e) => {
     if (e.target.outerText === 'Logout') {
       localStorage.removeItem('token')
@@ -44,115 +54,57 @@ function Header() {
     }
     setAnchorElUser(null);
   };
+  // Mantener para el LOGOUT 
+
+  const handleChange = (event) => {
+    setAuth(event.target.checked);
+  };
+
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
 
   return (
     <AppBar position="static">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }}>
-            <Box sx={{ width: '35px' }}></Box>
+      <Box sx={{ height: '100px', backgroundColor: '#FFFFFF', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+          <Box sx={{ ml: 3 }}>
+            <Typography color={'#1976D2'} variant="h5" component="div" sx={{ flexGrow: 1 }}> <Link to={'/'} style={{ textDecoration: 'none', color: 'inherit' }}>Globe-Mart </Link></Typography>
           </Box>
-          <Typography
-            variant="h6"
-            noWrap
-            component={Link}
-            to="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            Globe-Mart
-          </Typography>
+          <Box sx={{ ml: 2, minWidth: '0%', maxwidth: '100%' }}>
+            <TextField
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {/*            <IconButton
+              //hay que trabajar el valor del input. con un onChange.
+
+              fullWidth label="Search!"
+              id="fullWidth"
+              sx={{ backgroundColor: '#E7E7E7' }}
+
+            />
+          </Box>
+        </Box>
+        {auth && (
+          <Box sx={{ mr: 3 }}>
+            <IconButton
               size="large"
+              edge="start"
               aria-label="account of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
-              onClick={handleOpenNavMenu}
-              color="inherit"
+              onClick={handleMenu}
+              color="default"
+              sx={{ mr: 1 }}
             >
-              <MenuIcon />
+              <AccountCircle sx={{ fontSize: 35 }} />
             </IconButton>
             <Menu
               id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
-              ))}
-            </Menu> */}
-
-          </Box>
-
-          <PublicIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
-
-          <Typography
-            variant="h5"
-            noWrap
-            component={Link}
-            to="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'flex', md: 'none' },
-              flexGrow: 1,
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            Globe-Mart
-          </Typography>
-          {/*           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
-            ))}
-          </Box> */}
-          {!localStorage.getItem("token") && (
-            <Button component={Link} to={'/login'} sx={{ color: '#fff', mr: 5 }}>Sign in <AccountCircleIcon sx={{ ml: 1 }} /></Button>
-          )}
-
-          {localStorage.getItem("token") && (<Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar sx={{ backgroundColor: '#858585' }} />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
+              anchorEl={anchorEl}
               anchorOrigin={{
                 vertical: 'top',
                 horizontal: 'right',
@@ -162,25 +114,50 @@ function Header() {
                 vertical: 'top',
                 horizontal: 'right',
               }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
             >
-
-              {settings.map((setting) => {
-                return (
-                  <Link to={setting.path} style={{ textDecoration: 'none' }} key={setting.name} >
-                    <MenuItem onClick={handleCloseUserMenu} sx={{ width: '130px', display: 'flex', justifyContent: 'center' }}>
-                      <Typography textAlign="center" sx={{ color: "#191C1B" }}>{setting.name}</Typography>
-                    </MenuItem>
-                  </Link>
-                )
-              })}
+              <MenuItem onClick={handleClose}>
+                <Link to="/Login" style={{ textDecoration: 'none', color: 'inherit' }}>
+                  Sign In
+                </Link>
+              </MenuItem>
+              <MenuItem onClick={handleClose}>My account</MenuItem>
 
             </Menu>
-          </Box>)}
-        </Toolbar>
-      </Container>
-    </AppBar>
+          </Box>
+        )}
+      </Box>
+
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', ml: 3, mr: 3 }}>
+
+        <Box>
+          <IconButton
+            size="small"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+          >
+            <SwipeableDrawerMenu />
+
+          </IconButton>
+        </Box>
+
+        <Box>
+          <IconButton
+            size="large"
+            edge="end"
+            color="inherit"
+            aria-label="shopping cart"
+            sx={{ mr: 1 }}
+          >
+            <ShoppingCartIcon sx={{ fontSize: 35 }} />
+          </IconButton>
+        </Box>
+
+      </Box>
+
+    </AppBar >
   );
 }
 

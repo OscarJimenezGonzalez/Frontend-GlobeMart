@@ -8,10 +8,11 @@ export default function Root() {
         <Box sx={{
             minHeight: '100vh',
             display: 'flex',
-            flexDirection: 'column'
+            flexDirection: 'column',
+
         }}>
             <Header />
-            <Box sx={{ flex: 1 }}>
+            <Box sx={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
                 <Outlet />
             </Box>
             <Footer />

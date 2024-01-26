@@ -22,12 +22,15 @@ export default function ProductCard({ productName, productModel, productBrand, p
 
   return (
 
-    <Card sx={{ width: { sx: 100, md: 250 } }}>
+    <Card sx={{minWidth: 150, maxWidth: 250}}>
       <CardMedia
         component="img"
         alt="img"
-        height="140"
-        image={productImg}
+        height="160px"
+        width='100%'
+        style={{ objectFit: 'cover' }}  // controla como se ajusta la imagen dentro de su contenedor
+        image={productImg}  // este es el prop de imnagen 
+        
       />
       <CardContent>
         <Typography gutterBottom variant="h7" component="div">
