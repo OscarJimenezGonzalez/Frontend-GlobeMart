@@ -1,4 +1,3 @@
-
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import Switch from '@mui/material/Switch';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -26,6 +25,7 @@ import { useNavigate } from 'react-router-dom';
 import { useTheme } from '@emotion/react';
 import { CardMedia, TextField } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { useEffect } from 'react';
 
 import * as React from 'react';
 import { styled, alpha } from '@mui/material/styles';
@@ -34,12 +34,31 @@ import InputBase from '@mui/material/InputBase';
 import SearchIcon from '@mui/icons-material/Search';
 
 
+import { getProductCategories } from '../../../services/productCategoryService';
+
 function Header() {
 
   const navigate = useNavigate()
+
+  const [productCategories, setProductCategories] = useState([])
+
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
+
+
+  useEffect(() => {
+
+    const fetchCategories = async () => {
+
+      const categories = await getProductCategories()
+      setProductCategories(categories)
+      console.log("categories", categories)
+
+    }
+    fetchCategories()
+
+  }, [])
 
 
   const handleOpenUserMenu = (event) => {
@@ -80,7 +99,6 @@ function Header() {
             <TextField
 
               //hay que trabajar el valor del input. con un onChange.
-
               fullWidth label="Search!"
               id="fullWidth"
               sx={{ backgroundColor: '#E7E7E7' }}
@@ -132,15 +150,7 @@ function Header() {
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', ml: 3, mr: 3 }}>
 
         <Box>
-          <IconButton
-            size="small"
-            edge="start"
-            color="inherit"
-            aria-label="menu"
-          >
-            <SwipeableDrawerMenu />
-
-          </IconButton>
+            <SwipeableDrawerMenu productCategory={productCategories} />  {/* Le pasamos las categorias de proguctos como props  */}
         </Box>
 
         <Box>

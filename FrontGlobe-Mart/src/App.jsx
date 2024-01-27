@@ -1,12 +1,29 @@
 import { RouterProvider } from 'react-router-dom'
+import { useState } from 'react'
+
 import router from './router'
 import './App.css'
 
+import { CssBaseline, ThemeProvider } from '@mui/material'
+import { mainContext } from './contexts/mainContext'
+
 function App() {
-  
+
+  const [mainData, setMainData] = useState({
+
+    productCategories: [],
+
+  })
+
+  const data = { mainData, setMainData }
+
+
   return (
     <>
-      <RouterProvider router={router} />
+      <CssBaseline />
+      <mainContext.Provider value={data}>
+        <RouterProvider router={router} />
+      </mainContext.Provider>
     </>
   )
 }

@@ -14,20 +14,13 @@ function MainPage() {
         const fetchProductData = async () => {
 
             const pData = await getProductsFromSellers()
-            console.log(pData)
+            console.log("product data", pData)
             setProductData(pData)
 
         }
         fetchProductData()
 
     }, [])
-
-
-    useEffect(() => {
-
-        console.log(productData)
-
-    })
 
     const renderProducts = () => {
 

@@ -22,7 +22,7 @@ export default function ProductCard({ productName, productModel, productBrand, p
 
   return (
 
-    <Card sx={{minWidth: 150, maxWidth: 250}}>
+    <Card sx={{minWidth: 200, maxWidth: 300}}>
       <CardMedia
         component="img"
         alt="img"
