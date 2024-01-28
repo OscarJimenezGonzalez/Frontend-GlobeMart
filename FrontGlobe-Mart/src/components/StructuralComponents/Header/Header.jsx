@@ -1,51 +1,32 @@
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import Switch from '@mui/material/Switch';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormGroup from '@mui/material/FormGroup';
 import SwipeableDrawerMenu from '../../MicroComponents/DrawerMenu/SwipableDrawerMenu';
-
 import { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
-import PublicIcon from '@mui/icons-material/Public';
 import { Link } from 'react-router-dom';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import { useNavigate } from 'react-router-dom';
-import { useTheme } from '@emotion/react';
 import { CardMedia, TextField } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { useEffect } from 'react';
-
 import * as React from 'react';
-import { styled, alpha } from '@mui/material/styles';
-
-import InputBase from '@mui/material/InputBase';
-import SearchIcon from '@mui/icons-material/Search';
-
-
 import { getProductCategories } from '../../../services/productCategoryService';
+
+import useMediaQuery from '@mui/material/useMediaQuery';
+
 
 function Header() {
 
   const navigate = useNavigate()
-
   const [productCategories, setProductCategories] = useState([])
+  const isSmallScreen = useMediaQuery('(max-width: 600px)')
 
   const [anchorElUser, setAnchorElUser] = useState(null);
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
-
 
   useEffect(() => {
 
@@ -59,6 +40,11 @@ function Header() {
     fetchCategories()
 
   }, [])
+
+
+  const searchProducts = (e) => {
+
+  }
 
 
   const handleOpenUserMenu = (event) => {
@@ -87,25 +73,32 @@ function Header() {
     setAnchorEl(null);
   };
 
-
   return (
     <AppBar position="static">
+
+      {/* {barra menu BLANCA - con logo e inicio de sesion} */}
       <Box sx={{ height: '100px', backgroundColor: '#FFFFFF', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
-          <Box sx={{ ml: 3 }}>
-            <Typography color={'#1976D2'} variant="h5" component="div" sx={{ flexGrow: 1 }}> <Link to={'/'} style={{ textDecoration: 'none', color: 'inherit' }}>Globe-Mart </Link></Typography>
-          </Box>
-          <Box sx={{ ml: 2, minWidth: '0%', maxwidth: '100%' }}>
-            <TextField
 
-              //hay que trabajar el valor del input. con un onChange.
-              fullWidth label="Search!"
-              id="fullWidth"
-              sx={{ backgroundColor: '#E7E7E7' }}
+        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'start', width: "90%" }}>
 
-            />
+          <Box sx={{ ml: 4, mr: 1, width: "10%", minWidth: 130 }}>
+            <Typography color={'#1976D2'} variant="h5" component="div" > <Link to={'/'} style={{ textDecoration: 'none', color: 'inherit' }}> Globe-Mart </Link></Typography>
           </Box>
+
+          {!isSmallScreen && // SEARCHBAR - cuando es mayor de 600px renderiza esto 
+            <Box sx={{ ml: 1, mr: 3, width: "100%" }}>
+
+              <TextField
+                //hay que trabajar el valor del input. con un onChange.
+                fullWidth label="Search!"
+                id="fullWidth"
+                sx={{ backgroundColor: '#E7E7E7', width: '100%' }}
+              />
+
+            </Box>}
+
         </Box>
+
         {auth && (
           <Box sx={{ mr: 3 }}>
             <IconButton
@@ -145,12 +138,26 @@ function Header() {
             </Menu>
           </Box>
         )}
+
       </Box>
 
+      {/* searchBAR - cuando es menor de 600px renderiza esto */}
+      {isSmallScreen &&
+        <Box sx={{ backgroundColor: '#1976D2', display: 'flex', width: "80%", minHeight: "100px", justifyContent: 'center', alignItems: 'center', ml: 3, mr: 3 }}>
+          <Box sx={{ ml: 1, mr: 3, width: "100%", backgroundColor: '#1976D2', color: '#1976D2' }}>
+            <TextField
+              fullWidth label="Search!"
+              id="fullWidth"
+              sx={{ backgroundColor: '#E7E7E7', width: '100%' }}
+            />
+          </Box>
+        </Box>}
+
+      {/* {barra menu AZUL - con cesta de la compra y drawer} */}
       <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', ml: 3, mr: 3 }}>
 
         <Box>
-            <SwipeableDrawerMenu productCategory={productCategories} />  {/* Le pasamos las categorias de proguctos como props  */}
+          <SwipeableDrawerMenu productCategory={productCategories} />  {/* Le pasamos las categorias de proguctos como props  */}
         </Box>
 
         <Box>
