@@ -9,10 +9,11 @@ export default function Root() {
             minHeight: '100vh',
             display: 'flex',
             flexDirection: 'column',
+            padding: 0
 
         }}>
             <Header />
-            <Box sx={{ flex: 1, display: 'flex', justifyContent: 'center' }}>
+            <Box sx={{ flex: 1, display: 'flex', justifyContent: 'center', marginTop: "200px" }}>
                 <Outlet />
             </Box>
             <Footer />

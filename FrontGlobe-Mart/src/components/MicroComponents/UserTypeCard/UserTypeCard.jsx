@@ -36,7 +36,6 @@ export default function UserTypeCard({ handleCustomerClick, handleSellerClick })
                 <Typography sx={{ fontSize: 16 }} color="text.secondary">
                     Select the type of account you want to create:
                 </Typography>
-
             </CardContent>
             <CardActions>
                 <Button onClick={handleCustomerFormClick} size="small">Customer Account</Button>

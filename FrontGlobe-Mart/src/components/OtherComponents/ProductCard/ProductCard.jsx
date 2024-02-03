@@ -11,6 +11,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import { Link } from 'react-router-dom';
 
 
+
 export default function ProductCard({ productName, productModel, productBrand, price, productImg }) {
 
   const [favClicked, setFavClicked] = useState(false)
@@ -24,10 +25,9 @@ export default function ProductCard({ productName, productModel, productBrand, p
 
   return (
 
-    <Link to={"/ProductPage"} style={{ textDecoration: 'none', color: 'black' }} >
 
-      <Card sx={{ minWidth: 200, maxWidth: 300 }}>
-
+    <Card sx={{ minWidth: 200, maxWidth: 300 }}>
+      <Link to={"/ProductPage"} style={{ textDecoration: 'none', color: 'black' }} >
         <CardMedia
           component="img"
           alt="img"
@@ -36,35 +36,35 @@ export default function ProductCard({ productName, productModel, productBrand, p
           style={{ objectFit: 'cover' }}  // controla como se ajusta la imagen dentro de su contenedor
           image={productImg}  // este es el prop de imnagen 
 
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h7" component="div">
+        /> </ Link >
+      <CardContent>
+        <Typography gutterBottom variant="h7" component="div">
 
-            {productName}
+          {productName}
 
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {productModel}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {productBrand}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {price} €
-          </Typography>
-        </CardContent>
-        <CardActions sx={{ display: 'flex' }}>
-          <Button size="small">Add to Cart</Button>
-          <Button onClick={handleFavClick} size="small">
-            {favClicked ?
-              <FavoriteIcon sx={{ color: '#1976D2', fontSize: '18px', width: '18px', height: '18px' }} /> :
-              <FavoriteBorderIcon sx={{ color: '#1976D2', fontSize: '18px', width: '18px', height: '18px' }} />
-            }
-          </Button>
-        </CardActions>
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          {productModel}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          {productBrand}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          {price} €
+        </Typography>
+      </CardContent>
+      <CardActions sx={{ display: 'flex' }}>
+        <Button size="small">Add to Cart</Button>
+        <Button onClick={handleFavClick} size="small">
+          {favClicked ?
+            <FavoriteIcon sx={{ color: '#1976D2', fontSize: '18px', width: '18px', height: '18px' }} /> :
+            <FavoriteBorderIcon sx={{ color: '#1976D2', fontSize: '18px', width: '18px', height: '18px' }} />
+          }
+        </Button>
+      </CardActions>
 
-      </Card >
-    </ Link >
+    </Card >
+
   );
 
 }

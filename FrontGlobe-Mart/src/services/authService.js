@@ -7,7 +7,8 @@ export async function login(loginData) {
         localStorage.setItem('token', data.token)
         return data
     } catch (error) {
-        console.log(error.message)
+        // console.log(error.message)
+        throw new Error("Invalid credentials")
     }
 
 }
@@ -19,6 +20,7 @@ export async function signup(signupData) {
         return data
     }
     catch (error) {
-        console.log(error.message)
+        // console.log(error.message)
+        throw new Error("Invalid credentials in signup")
     }
 }

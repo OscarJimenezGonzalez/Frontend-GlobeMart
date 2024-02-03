@@ -12,6 +12,10 @@ import Typography from '@mui/material/Typography';
 import { useNavigate, Link } from "react-router-dom";
 import { Container } from '@mui/material';
 import { login } from '../../../services/authService';
+import { mainContext } from '../../../contexts/mainContext';
+import { useContext, useState } from 'react';
+import { validateEmail } from '../../../auxStr/auxStructures';
+
 
 function Copyright(props) {
     return (
@@ -21,13 +25,20 @@ function Copyright(props) {
     );
 }
 
-// TODO remove, this demo shouldn't need to reset the theme.
-//const defaultTheme = createTheme();
-
 export default function LogInForm() {
 
     const navigate = useNavigate()
+    const { mainData, setMainData } = useContext(mainContext)
+    const [errorSt, setErrorSt] = useState('');
 
+    const loggingIn = async () => {
+
+        setMainData(prevData => ({
+            ...prevData,
+            logged: true
+        }))
+        navigate('/')
+    }
     const handleSubmit = async (event) => {
 
         event.preventDefault();
@@ -35,15 +46,37 @@ export default function LogInForm() {
         const email = data.get('email')
         const password = data.get('password')
 
-        try {
+        if (!validateEmail(email)) {
+            setErrorSt("Email is not valid")
+            return
+        }
 
-            const response = await login({ email, password });
-            console.log(response)
-            navigate('/')
+        if (email && password) {  // Si están rellenos Email y Password haz la solicitud a la API.
 
-        } catch (error) {
+            try {
 
-            console.error("Error during login:", error);
+                const response = await login({ email, password });
+
+                if (response) {  // Si la api nos devuelve una respuesta exitosa, redirigimos a la página principal.
+
+                    await loggingIn()
+                    console.log(response)
+                    console.log("Login successful");
+                    // console.log(response.error)
+
+                }
+
+            } catch (error) {   // Si la peticion no nos devuelve una respuesta exitosa escribimos el error en el form.
+
+                console.error("Error during login:", error);
+                setErrorSt("Email Or Password Incorrect")
+
+
+            }
+
+        } else {    // Si no están rellensos Email y Password devuelve un error escrito en el form.
+
+            setErrorSt("Email and password are required")
 
         }
 
@@ -88,6 +121,9 @@ export default function LogInForm() {
                         id="password"
                         autoComplete="off"
                     />
+
+                    {errorSt && <Typography variant="body2" color="error">{errorSt}</Typography>}
+
                     <FormControlLabel
                         control={<Checkbox value="remember" color="primary" />}
                         label="Remember me"

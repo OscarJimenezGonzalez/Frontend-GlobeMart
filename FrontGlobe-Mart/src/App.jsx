@@ -9,6 +9,8 @@ function App() {
 
   const [mainData, setMainData] = useState({
 
+    logged: false,
+    searchData: "",
     selectedPCategories: [],
 
   })
