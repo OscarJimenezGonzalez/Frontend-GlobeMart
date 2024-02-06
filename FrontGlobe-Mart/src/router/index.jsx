@@ -1,12 +1,12 @@
 import { createBrowserRouter } from 'react-router-dom'
 import Root from '../layouts'
 import ErrorPage from '../pages/ErrorPage'
-import MainPage from '../pages/MainPage'
+import LandingPage from '../pages/LandingPage'
 import AboutPage from '../pages/AboutPage'
 import LogInPage from '../pages/LoginPage'
 import SignUpPage from '../pages/SignUpPage'
+import ProfilePage from '../pages/ProfilePage'
 import ProductPage from '../pages/ProductPage'
-import Profile from '../pages/Profile'
 
 
 const router = createBrowserRouter([
@@ -18,7 +18,7 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/',
-                element: <MainPage />
+                element: <LandingPage />
             },
             {
                 path: '/About',
@@ -33,13 +33,18 @@ const router = createBrowserRouter([
                 element: <SignUpPage />
             },
             {
-                path: '/ProductPage',
-                element: <ProductPage />
+                path: '/Profile',
+                element: <ProfilePage />
             },
             {
-                path: '/Profile',
-                element: <Profile />
+                path: '/ProductPage',
+                element: <ProductPage />
             }
+
+            // {
+            //     path: `/ProductPage?=${productId}`,
+            //     element: <ProductPage />
+            // },
 
         ]
 

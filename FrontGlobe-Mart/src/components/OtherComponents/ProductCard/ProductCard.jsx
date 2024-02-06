@@ -12,23 +12,33 @@ import { Link } from 'react-router-dom';
 
 
 
-export default function ProductCard({ productName, productModel, productBrand, price, productImg }) {
+export default function ProductCard({ productName, productModel, productBrand, price, productImg, handleClickProduct }) {
 
   const [favClicked, setFavClicked] = useState(false)
+  const [productClicked, setProductClicked] = useState(false)
 
   const handleFavClick = () => {
+
 
     setFavClicked(!favClicked)
     console.log(favClicked)
 
   }
 
+  // const handleClickProduct = (e) => {
+
+  //   console.log(e.target)
+  //   console.log("Product Clicked")
+
+  // }
+
   return (
 
-
-    <Card sx={{ minWidth: 200, maxWidth: 300 }}>
-      <Link to={"/ProductPage"} style={{ textDecoration: 'none', color: 'black' }} >
+    <Card onClick={handleClickProduct} sx={{ minWidth: 200, maxWidth: 300 }}>
+      {/* <Link onClick={handleProductClick} to={"/ProductPage"} style={{ textDecoration: 'none', color: 'black' }} > */}
+      <Link style={{ textDecoration: 'none', color: 'black' }} >
         <CardMedia
+
           component="img"
           alt="img"
           height="160px"

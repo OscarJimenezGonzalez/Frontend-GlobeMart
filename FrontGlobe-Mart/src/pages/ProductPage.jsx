@@ -1,10 +1,156 @@
 import React from 'react'
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
+import { Container, } from '@mui/system';
 import { Link } from 'react-router-dom'
+import { useState, useEffect, useContext } from 'react';
+import { getProductsFromSellers } from '../services/productSellerService';
+import { mainContext } from '../contexts/mainContext';
+import { Divider } from '@mui/material';
+import ProductImageCaroussel from '../components/ProductPageComponents/ProductImageCaroussel/ProductImageCaroussel';
+import ProductImage from '../components/ProductPageComponents/ProductImage/ProductImage';
+import ProductOptions from '../components/ProductPageComponents/ProductOptions/ProductOptions';
+import CartCard from '../components/ProductPageComponents/CartCard/CartCard';
 
 function ProductPage() {
+
+    const [product, setProduct] = useState();
+    const [typoClick, setTypoClick] = useState(true);
+    const { mainData, setMainData } = useContext(mainContext);
+
+    useEffect(() => {
+
+        const fetchData = async () => {
+
+            const productData = await getProductsFromSellers();
+
+            setProduct(productData);
+
+        }
+
+        fetchData();
+
+
+    }, [])
+
+    useEffect(() => {
+        console.log("Products", product)
+    }, [product])
+
+    const handleDescriptionClick = () => {
+
+        setTypoClick(true)
+
+    }
+    const handlePolicyClick = () => {
+
+        setTypoClick(false)
+
+    }
+
+
+
     return (
-        <div>ProductPage</div>
+
+        <Container sx={{ mx: "10%", display: 'flex', flexWrap: 'wrap', flexDirection: 'column', minWidth: '100%' }}>
+
+            <Box sx={{
+                minWidth: '100%',
+                maxHeight: 405,
+                display: 'flex',
+                justifyContent: 'space-between',
+                my: '20px',
+                flexDirection: 'row',
+                alignContent: 'start',
+                // ml: '0%',
+                // mr: '0%'
+                mb: "7%"
+            }}>
+
+                {/* <ProductImage/> */}
+
+                <ProductImageCaroussel></ProductImageCaroussel>
+                <ProductOptions />
+                <CartCard />
+
+            </Box>
+
+            <Divider></Divider>
+
+            <Box sx={{
+                width: '100%', minHeight: 400, mt: '2%', mb: '3%',
+            }}>
+
+                <Box sx={{ minHeight: 50, mb: '3%' }}>
+
+                    <Box sx={{ width: '30%', display: 'flex', flexDirection: 'row', justifyContent: 'start', gap: 4, mb: '2%' }}>
+
+                        <Typography
+                            onClick={handleDescriptionClick}
+                            variant="h6"
+                            sx={{
+                                cursor: 'pointer', // Cambia el cursor a un puntero para indicar interactividad
+                                color: typoClick ? "black" : "#1976D2",
+                                fontWeight: 'bold'
+                            }}
+                        >
+                            Description
+                        </Typography>
+
+                        <Typography
+                            onClick={handlePolicyClick}
+                            variant="h6"
+                            sx={{
+                                cursor: 'pointer',
+                                color: typoClick ? "#1976D2" : "black",
+                                fontWeight: 'bold'
+                            }}
+                        >
+                            Policy
+                        </Typography>
+
+                    </Box>
+
+                    {typoClick ?
+                        <Box>
+                            This product is Crema Cotton.
+                            It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                        </Box>
+                        :
+                        <Box>
+                            Returns: Customers can return products within 30 days of receipt if in original condition for a full refund. Initiate returns through your account under 'My Orders'.
+                            Warranty: We offer a 1-year warranty against manufacturing defects, covering repair or replacement. Does not include damage from misuse or wear and tear.
+                            Process: For returns, follow the on-site steps for item return. For warranty claims, contact customer service with order details and issue description.
+                            Exclusions: Shipping fees are non-refundable. Warranty does not cover accidental damage or unauthorized modifications.
+                            Refunds & Replacements: Refunds processed within 7-14 business days to the original payment method. Warranty claims may result in repair or replacement based on our assessment.
+                            Contact Us: For questions or to initiate a claim, contact our customer service. We're committed to a seamless
+                        </Box>
+                    }
+
+                </Box>
+
+                <Divider></Divider>
+
+                <Typography variant="h6" sx={{ color: "#1976D2", fontWeight: 'bold', mb: '2%', mt: '2%' }}>Related Products</Typography>
+
+                <Box sx={{ minHeight: 50, mb: '2%', display: 'flex', }}>
+
+
+
+
+
+                </Box>
+
+
+
+            </Box>
+
+        </Container>
     )
+
+
 }
+
 
 export default ProductPage

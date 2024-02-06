@@ -22,7 +22,7 @@ import { Navigate } from 'react-router-dom';
 function Header() {
 
   const isSmallScreen = useMediaQuery('(max-width: 600px)')
-  // const isMobileScreen = useMediaQuery('(max-width: 400px)')
+  const isTinyScreen = useMediaQuery('(max-width: 400px)')
 
   const { mainData, setMainData } = useContext(mainContext)
   const [searchInput, setSearchInput] = useState("")
@@ -128,9 +128,9 @@ function Header() {
 
         isSmallScreen &&
         <Box sx={{ height: '100px', backgroundColor: '#FFFFFF', display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: "100%" }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', alignContent: 'center', width: "90%" }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', alignContent: 'center', width: "100%" }}>
 
-            <Box sx={{ ml: 4, mr: 1, width: "100%", minWidth: 200 }}>
+            <Box sx={{ ml: 4, mr: 1, width: "100%", minWidth: 134 }}>
               <Typography color={'#1976D2'} variant="h5" component="div" ><Link to={'/'} style={{ textDecoration: 'none', color: 'inherit' }}>  Globe-Mart </Link></Typography>
             </Box>
 
@@ -202,7 +202,8 @@ function Header() {
           <Box sx={{ ml: 3, mr: 2, width: "100%" }}>
             <TextField
               onChange={searchProducts}
-              fullWidth label="Search for products ..."
+              fullWidth
+              label={!isTinyScreen && "Search ..."}
               id="fullWidth"
               sx={{ backgroundColor: '#E7E7E7', width: '100%' }}
               InputProps={{
