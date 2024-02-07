@@ -4,19 +4,22 @@ import ProductCard from '../components/OtherComponents/ProductCard/ProductCard';
 import { useState, useEffect, useContext } from 'react';
 import { getProductsFromSellers } from '../services/productSellerService';
 import { mainContext } from '../contexts/mainContext';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import Link from '@mui/material/Link';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import { useParams } from 'react-router-dom';
 
 
 function LandingPage() {
 
     // const isSmallScreen = useMediaQuery('(max-width: 600px)')
     const [productData, setProductData] = useState([])
+    const [selectedProduct, setSelectedProduct] = useState()
     const { mainData, setMainData } = useContext(mainContext)
     const selectedCatsLength = mainData.selectedPCategories.length
     const selectedCats = mainData.selectedPCategories
     const searchInputData = mainData.searchData
+    const navigate = useNavigate()
 
     console.log("Leyendo nuestro contexto principal: ", mainData)
 
@@ -35,16 +38,28 @@ function LandingPage() {
 
     }, [searchInputData])
 
-    const handleProductClick = (productId) => {
 
-        console.log("product id: ", productId)
-        setMainData(prevData => {
-            return {
-                ...prevData,
-                selectedProduct: productId
-            }
-        })
+    // const handleProductClick = (productId) => {
+
+    //     console.log("product id: ", productId)
+    //     setMainData(prevData => {
+    //         return {
+    //             ...prevData,
+    //             selectedProduct: productId
+    //         }
+    //     })
+    // }
+
+    async function handleProductClick(productId) {
+
+        await setSelectedProduct(productId)
+        navigate(`/productPage/${productId}`)
     }
+
+    useEffect(() => {
+        console.log("product id: ", selectedProduct)
+    }, [selectedProduct])
+
 
     const renderProducts = () => {
 

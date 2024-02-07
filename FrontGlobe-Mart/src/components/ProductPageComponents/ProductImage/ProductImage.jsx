@@ -9,26 +9,18 @@ import { Box, Typography } from '@mui/material'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { Link } from 'react-router-dom';
-import ProductImageCaroussel from '../ProductImageCaroussel/ProductImageCaroussel';
 
-
-export default function ProductImage() {
+export default function ProductImage({ productImg }) {
 
     return (
-
-        <Card sx={{ minWidth: "35%", minHeight: 400 }}>
-            {/* <CardMedia
+        <Card sx={{ width: "35%", height: "auto", maxHeight: 435, backgroundColor: "#f5f5f5" }}>
+            <CardMedia
                 component="img"
-                alt="img"
-                height="160px"
-                width='100%'
-                style={{ objectFit: 'cover' }}
+                alt="Product Image"
+                style={{ width: '100%', height: '100%', objectFit: 'contain' }}
                 image={productImg}
-            /> */}
-
-            <ProductImageCaroussel></ProductImageCaroussel>
-
-        </Card >
+            />
+        </Card>
 
     );
 

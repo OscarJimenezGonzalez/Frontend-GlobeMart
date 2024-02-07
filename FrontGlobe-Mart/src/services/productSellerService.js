@@ -12,3 +12,17 @@ export async function getProductsFromSellers() {
 
     }
 }
+
+export async function getOneProductFromSeller(id) {
+    try {
+
+        const { data } = await api.get(`/productSellerCompany/${id}`)
+        return data
+
+    } catch (error) {
+
+        console.log(error.message)
+        throw error;
+
+    }
+}

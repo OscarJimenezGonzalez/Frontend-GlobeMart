@@ -10,7 +10,9 @@ import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
 
-const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
+
+
+// const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const images = [
     {
@@ -55,7 +57,7 @@ function ProductImageCaroussel() {
     };
 
     return (
-        <Box sx={{ maxWidth: 400, flexGrow: 1 }}>
+        <Box sx={{ maxWidth: 470, flexGrow: 1 }}>
             <Paper
                 square
                 elevation={0}
@@ -67,15 +69,16 @@ function ProductImageCaroussel() {
                     bgcolor: 'background.default',
                 }}
             >
-                {/* <Typography>{images[activeStep].label}</Typography> */}
+            {/* <Typography>{images[activeStep].label}</Typography> */}
             </Paper>
-            <AutoPlaySwipeableViews
+            {/* <AutoPlaySwipeableViews */}
+            <SwipeableViews
                 axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
                 index={activeStep}
                 onChangeIndex={handleStepChange}
                 enableMouseEvents
             >
-                {images.map((step, index ) => (
+                {images.map((step, index) => (
                     <div key={step.id} >
                         {Math.abs(activeStep - index) <= 2 ? (
                             <Box
@@ -83,9 +86,9 @@ function ProductImageCaroussel() {
                                 component="img"
                                 sx={{
                                     mb: 2,
-                                    height: 360,
+                                    height: 380,
                                     display: 'block',
-                                    maxWidth: 400,
+                                    maxWidth: 460,
                                     overflow: 'hidden',
                                     width: '100%',
                                 }}
@@ -95,7 +98,8 @@ function ProductImageCaroussel() {
                         ) : null}
                     </div>
                 ))}
-            </AutoPlaySwipeableViews>
+            </SwipeableViews>
+            {/* </AutoPlaySwipeableViews> */}
             <MobileStepper
                 steps={maxSteps}
                 position="static"

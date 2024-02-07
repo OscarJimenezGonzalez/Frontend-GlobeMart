@@ -20,7 +20,7 @@ export default function CartCard() {
     return (
 
         <Card sx={{
-            minWidth: "30%",
+            minWidth: "25%",
             maxHeight: 400,
             display: "flex",
             flexDirection: "column",
