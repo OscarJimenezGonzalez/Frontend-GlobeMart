@@ -9,6 +9,9 @@ function App() {
 
   const [mainData, setMainData] = useState({
 
+
+    productsOnCart: [],
+    productQtyOnCart: 0,
     shippingInfoClick: false,
     logged: false,
     searchData: "",

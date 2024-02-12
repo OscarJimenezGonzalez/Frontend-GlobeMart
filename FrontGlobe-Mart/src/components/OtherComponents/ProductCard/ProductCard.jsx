@@ -19,37 +19,28 @@ export default function ProductCard({ productName, productModel, productBrand, p
 
   const handleFavClick = () => {
 
-
     setFavClicked(!favClicked)
     console.log(favClicked)
 
   }
 
-  // const handleClickProduct = (e) => {
-
-  //   console.log(e.target)
-  //   console.log("Product Clicked")
-
-  // }
-
   return (
 
-    <Card onClick={handleClickProduct} sx={{
+    <Card sx={{
       minWidth: 200, maxWidth: 300, '&:hover': {
-        backgroundColor:   "grey.200",
+        backgroundColor: "grey.200",
       }
     }}>
       {/* <Link onClick={handleProductClick} to={"/ProductPage"} style={{ textDecoration: 'none', color: 'black' }} > */}
       <Link style={{ textDecoration: 'none', color: 'black' }} >
         <CardMedia
-
+          onClick={handleClickProduct}
           component="img"
           alt="img"
           height="160px"
           width='100%'
           style={{ objectFit: 'cover' }}  // controla como se ajusta la imagen dentro de su contenedor
-          image={productImg}  // este es el prop de imnagen 
-
+          image={productImg}
         /> </ Link >
       <CardContent>
         <Typography gutterBottom variant="h7" component="div">

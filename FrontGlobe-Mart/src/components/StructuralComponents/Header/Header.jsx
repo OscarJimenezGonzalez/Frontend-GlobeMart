@@ -65,6 +65,15 @@ function Header() {
     navigate("/")
 
   }
+  const cartLink = () => {
+
+    if (localStorage.getItem("token")) {
+      navigate("/CartPage")
+    } else {
+      navigate("/login")
+    }
+
+  }
 
   return (
 
@@ -177,6 +186,7 @@ function Header() {
 
           <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', alignContent: 'center', mr: 4 }}>
             <IconButton
+              onClick={cartLink}
               size="large"
               edge="end"
               color="inherit"

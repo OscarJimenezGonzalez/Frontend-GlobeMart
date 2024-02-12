@@ -7,6 +7,7 @@ import LogInPage from '../pages/LoginPage'
 import SignUpPage from '../pages/SignUpPage'
 import ProfilePage from '../pages/ProfilePage'
 import ProductPage from '../pages/ProductPage'
+import CartPage from '../pages/CartPage'
 
 
 const router = createBrowserRouter([
@@ -44,6 +45,11 @@ const router = createBrowserRouter([
                 path: `/ProductPage/:productVersionId`,
                 element: <ProductPage />
             },
+            {
+                path: '/CartPage',
+                element: <CartPage />
+
+            }
 
         ]
 
