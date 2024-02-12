@@ -17,12 +17,12 @@ import ToggleButtonSizeShoe from '../../MicroComponents/ToggleButtonSizeShoe/Tog
 import ShippingInfoCard from '../../MicroComponents/ShippingInfoCard/ShippingInfoCard';
 import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import { mainContext } from '../../../contexts/mainContext';
-import { PROPERTY_TYPES } from '@babel/types';
 
 export default function ProductOptions({ hasShoeSize, hasClothingSize, hasColorOption, sale, name, brand, model, price, id, salePerc }) {
 
     const [shippingInfoOff, setShippingInfoOff] = useState(true);
     const [financialInfoOff, setFinancialInfoOff] = useState(true);
+    
     const { mainData, setMainData } = useContext(mainContext)
     const shippingClick = mainData.shippingInfoClick
 
