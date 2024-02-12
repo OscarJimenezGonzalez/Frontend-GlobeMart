@@ -34,7 +34,11 @@ export default function ProductCard({ productName, productModel, productBrand, p
 
   return (
 
-    <Card onClick={handleClickProduct} sx={{ minWidth: 200, maxWidth: 300 }}>
+    <Card onClick={handleClickProduct} sx={{
+      minWidth: 200, maxWidth: 300, '&:hover': {
+        backgroundColor:   "grey.200",
+      }
+    }}>
       {/* <Link onClick={handleProductClick} to={"/ProductPage"} style={{ textDecoration: 'none', color: 'black' }} > */}
       <Link style={{ textDecoration: 'none', color: 'black' }} >
         <CardMedia

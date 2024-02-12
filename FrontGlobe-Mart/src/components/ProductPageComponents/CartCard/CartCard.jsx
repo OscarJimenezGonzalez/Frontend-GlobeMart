@@ -14,20 +14,21 @@ import QuantitySelector from '../../MicroComponents/QuantitySelector/QuantitySel
 import Divider from '@mui/material/Divider';
 // import { Divider } from '@mui/material';
 
-export default function CartCard() {
+export default function CartCard({ quantityAv, seller }) {
 
 
     return (
 
         <Card sx={{
-            minWidth: "25%",
-            maxHeight: 400,
+            minWidth: "100%",
+            height: "85%",
             display: "flex",
             flexDirection: "column",
             alignContent: 'center',
             justifyContent: "space-between",
             alignItems: "center",
-            py: 2
+            pb: 2.5,
+            pt: 2.5
         }}>
 
             <Box sx={{
@@ -36,7 +37,7 @@ export default function CartCard() {
                 alignContent: 'center',
                 justifyContent: "center",
                 alignItems: "center",
-                gap: 2,
+                gap: 1,
                 height: "50%",
                 width: "100%"
 
@@ -45,10 +46,9 @@ export default function CartCard() {
                 {/* <Typography>0.00 €</Typography> */}
                 <QuantitySelector></QuantitySelector>
                 <Typography sx={{ color: "#2E7D32", fontWeight: "bold" }}>In Stock</Typography>
-                <Typography variant="caption" sx={{ color: "red", }}>Only 2 available</Typography>
-                <Typography sx={{ color: "#1976D2", }}>Sold by: <strong>Globe-Mart</strong> </Typography>
+                {(quantityAv <= 3) && <Typography variant="caption" sx={{ color: "red", }}>Only {quantityAv} available</Typography>}
+                <Typography sx={{ fontSize: "0.9rem", color: "#1976D2", }}>Sold by: <strong>{seller}</strong> </Typography>
             </Box>
-
 
             <Box sx={{
 
@@ -68,7 +68,6 @@ export default function CartCard() {
                 <Button variant="contained" color="success" sx={{ width: "68%", height: "30%", }}>Add to Cart</Button>
                 <Divider sx={{ alignSelf: 'center', height: '1px', width: "75%" }} />
                 <Button variant="outlined" sx={{ width: "68%", height: "30%", textTransform: 'lowercase' }}>Add to wish list</Button>
-
 
             </Box>
 

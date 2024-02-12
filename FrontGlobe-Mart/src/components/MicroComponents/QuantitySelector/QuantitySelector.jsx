@@ -31,7 +31,7 @@ export default function QuantitySelector() {
                 inputProps={{ min: 1, style: { textAlign: 'center' } }}
                 value={quantity}
                 onChange={handleChange}
-                sx={{ maxWidth: '50px' }}
+                sx={{ maxWidth: '45px' }}
             />
             <IconButton onClick={handleIncrement} size="small">
                 <AddIcon fontSize="small" />

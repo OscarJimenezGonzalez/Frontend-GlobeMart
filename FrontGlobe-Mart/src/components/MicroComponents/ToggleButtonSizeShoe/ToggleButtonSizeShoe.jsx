@@ -16,7 +16,7 @@ export default function ToggleButtonSizeShoe() {
             exclusive
             onChange={handleChange}
             aria-label="Platform"
-            sx={{ '& > *': { width: 40, height: 41, mb: 1 } }}
+            sx={{  '& > *': { minWidth: 40, minHeight: 41, mb: 1 } }}
         >
             <ToggleButton value="4">4</ToggleButton>
             <ToggleButton value="5">5</ToggleButton>
@@ -25,7 +25,7 @@ export default function ToggleButtonSizeShoe() {
             <ToggleButton value="8">8</ToggleButton>
             <ToggleButton value="9">9</ToggleButton>
             <ToggleButton value="10">10</ToggleButton>
-            <ToggleButton value="11">11</ToggleButton>
+            {/* <ToggleButton value="11">11</ToggleButton> */}
 
         </ToggleButtonGroup>
     );

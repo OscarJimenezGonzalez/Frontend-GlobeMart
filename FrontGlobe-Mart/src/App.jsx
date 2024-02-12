@@ -9,7 +9,7 @@ function App() {
 
   const [mainData, setMainData] = useState({
 
-    selectedProductId: 0,
+    shippingInfoClick: false,
     logged: false,
     searchData: "",
     selectedPCategories: [],
@@ -17,7 +17,6 @@ function App() {
   })
 
   const data = { mainData, setMainData }
-
 
   return (
     <>

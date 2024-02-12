@@ -14,7 +14,7 @@ import RelatedProductsCarousel from '../components/ProductPageComponents/Related
 import ProductImage from '../components/ProductPageComponents/ProductImage/ProductImage';
 import ProductOptions from '../components/ProductPageComponents/ProductOptions/ProductOptions';
 import CartCard from '../components/ProductPageComponents/CartCard/CartCard';
-
+import ShippingInfoButton from '../components/MicroComponents/ShippingInfoButton/ShippingInfoButton';
 // import LoadingTextField from '../../components/MicroComponents/LoadingAnimation/LoadingAnimation';
 
 const images = [
@@ -59,6 +59,10 @@ function ProductPage() {
             const productData = await getProductsFromSellers();
 
             setProducts(productData);
+            setMainData(prevData => ({
+                ...prevData,
+                shippingInfoClick: true
+            }))
 
         }
 
@@ -72,7 +76,6 @@ function ProductPage() {
         const fetchData = async () => {
             const productData = await getOneProductFromSeller(productVersionId);
             setProduct(productData)
-
 
         }
 
@@ -126,7 +129,24 @@ function ProductPage() {
                     hasClothingSize={(product && product.hasClothingSizes)}
                     hasColorOption={(product && product.hasColorOption)}
                 />
-                <CartCard />
+                <Box sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between", alignContent: "center", alignItems: "center",
+                    minWidth: "25%",
+                    minHeight: "100%",
+                    gap: 2,
+                    mb: 0
+                }}>
+                    <CartCard
+                        quantityAv={(product && product.qtyAvailable)}
+                        seller={(product && product.sellerCompany.name)}
+
+                    />
+                    <ShippingInfoButton />
+                </Box>
+
+
 
             </Box>
 
@@ -168,8 +188,7 @@ function ProductPage() {
 
                     {typoClick ?
                         <Box>
-                            This product is Crema Cotton.
-                            It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                            {product && product.productDescription}
                         </Box>
                         :
                         <Box>
