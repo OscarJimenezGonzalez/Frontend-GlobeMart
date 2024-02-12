@@ -15,7 +15,10 @@ import ProductImage from '../components/ProductPageComponents/ProductImage/Produ
 import ProductOptions from '../components/ProductPageComponents/ProductOptions/ProductOptions';
 import CartCard from '../components/ProductPageComponents/CartCard/CartCard';
 import ShippingInfoButton from '../components/MicroComponents/ShippingInfoButton/ShippingInfoButton';
+import purchasePolicy from '../auxStr/auxStructures.jsx';
 // import LoadingTextField from '../../components/MicroComponents/LoadingAnimation/LoadingAnimation';
+
+
 
 const images = [
     {
@@ -49,6 +52,7 @@ function ProductPage() {
     const [products, setProducts] = useState();
     const [product, setProduct] = useState();
     const [typoClick, setTypoClick] = useState(true);
+    const [descriptionId, setDescriptionId] = useState("description")
     const { mainData, setMainData } = useContext(mainContext);
     const { productVersionId } = useParams()
 
@@ -128,6 +132,8 @@ function ProductPage() {
                     hasShoeSize={(product && product.hasShoeSizes)}
                     hasClothingSize={(product && product.hasClothingSizes)}
                     hasColorOption={(product && product.hasColorOption)}
+                    productDescription={(product && product.productDescription)}
+                    descriptionId={(descriptionId)}
                 />
                 <Box sx={{
                     display: "flex",
@@ -161,6 +167,7 @@ function ProductPage() {
                     <Box sx={{ width: '30%', display: 'flex', flexDirection: 'row', justifyContent: 'start', gap: 4, mb: '2%' }}>
 
                         <Typography
+                            id={"description"}
                             onClick={handleDescriptionClick}
                             variant="h6"
                             sx={{
@@ -192,12 +199,7 @@ function ProductPage() {
                         </Box>
                         :
                         <Box>
-                            Returns: Customers can return products within 30 days of receipt if in original condition for a full refund. Initiate returns through your account under 'My Orders'.
-                            Warranty: We offer a 1-year warranty against manufacturing defects, covering repair or replacement. Does not include damage from misuse or wear and tear.
-                            Process: For returns, follow the on-site steps for item return. For warranty claims, contact customer service with order details and issue description.
-                            Exclusions: Shipping fees are non-refundable. Warranty does not cover accidental damage or unauthorized modifications.
-                            Refunds & Replacements: Refunds processed within 7-14 business days to the original payment method. Warranty claims may result in repair or replacement based on our assessment.
-                            Contact Us: For questions or to initiate a claim, contact our customer service. We're committed to a seamless
+                            {purchasePolicy()}
                         </Box>
                     }
                 </Box>

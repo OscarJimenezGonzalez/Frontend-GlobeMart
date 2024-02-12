@@ -15,20 +15,21 @@ import ToggleButtonSize from '../../MicroComponents/ToggleButtonSize/ToggleButto
 import ToggleButtonColor from '../../MicroComponents/ToggleButtonColor/ToggleButtonColor';
 import ToggleButtonSizeShoe from '../../MicroComponents/ToggleButtonSizeShoe/ToggleButtonSizeShoe';
 import ShippingInfoCard from '../../MicroComponents/ShippingInfoCard/ShippingInfoCard';
-import LocalShippingIcon from '@mui/icons-material/LocalShipping';
 import { mainContext } from '../../../contexts/mainContext';
+import { truncateText } from '../../../auxStr/auxStructures';
 
-export default function ProductOptions({ hasShoeSize, hasClothingSize, hasColorOption, sale, name, brand, model, price, id, salePerc }) {
+
+export default function ProductOptions({ hasShoeSize, hasClothingSize, hasColorOption, sale, name, brand, model, price, id, salePerc, productDescription, descriptionId }) {
 
     const [shippingInfoOff, setShippingInfoOff] = useState(true);
     const [financialInfoOff, setFinancialInfoOff] = useState(true);
-    
+
     const { mainData, setMainData } = useContext(mainContext)
     const shippingClick = mainData.shippingInfoClick
 
     return (
 
-        <Box sx={{ minWidth: "30%", minHeight: 450, display: "flex", flexDirection: "column", mx: 5 }}>
+        <Box sx={{ minWidth: "30%", maxWidth: "30%", minHeight: 450, display: "flex", flexDirection: "column", mx: 5 }}>
 
             <Box>
                 <Typography variant='h6' sx={{ mb: 1, fontWeight: "bold", color: "#1976D2" }}>{name}</Typography>
@@ -48,12 +49,25 @@ export default function ProductOptions({ hasShoeSize, hasClothingSize, hasColorO
                     {sale && <Typography sx={{ color: "green" }}>Save: {Math.round(price * (salePerc * 0.01))} € </Typography>}
                 </Box>
                 <Box sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
-                    {sale && <Typography sx={{ fontSize: '18px', fontWeight: 'bold', mb: 1, color: "#2E7D32" }}>Price: {(price - Math.round(price * (salePerc * 0.01))).toFixed(0)} € </Typography>}
-                    {!sale && <Typography sx={{ fontSize: '18px', fontWeight: 'bold', mb: 1, color: "#2E7D32" }}>Price: {price} € </Typography>}
-                    {/* <Typography>shipping Info</Typography> */}
-
+                    {sale &&
+                        <Typography sx={{
+                            fontSize: '18px',
+                            fontWeight: 'bold',
+                            mb: 1,
+                            color: "#2E7D32"
+                        }}>
+                            Price: {(price - Math.round(price * (salePerc * 0.01))).toFixed(0)} €
+                        </Typography>}
+                    {!sale &&
+                        <Typography sx={{
+                            fontSize: '18px',
+                            fontWeight: 'bold',
+                            mb: 1,
+                            color: "#2E7D32"
+                        }}>
+                            Price: {price} €
+                        </Typography>}
                 </Box>
-
             </Box>
 
             <Box sx={{ minHeight: 200 }}>
@@ -78,13 +92,18 @@ export default function ProductOptions({ hasShoeSize, hasClothingSize, hasColorO
 
                 }
 
-                {(shippingClick && !hasShoeSize && !hasClothingSize && !hasColorOption) && <Box>
-
-                    {/* <Typography>Cosas bonitas</Typography>
-                    <Typography>Mas Cosas</Typography>
-                    <Typography>Mas Cositas</Typography> */}
-
-                </Box>}
+                {(shippingClick && !hasShoeSize && !hasClothingSize && !hasColorOption) &&
+                    <Box sx={{ display: "flex", flexDirection: "column", maxWidth: "100%" }} >
+                        <Typography variant="subtitle2" gutterBottom style={{ marginBottom: '10px', lineHeight: '1.5' }}>
+                            Product Description:
+                        </Typography>
+                        <Typography variant="body2" style={{ fontSize: '0.75rem', marginBottom: '10px', lineHeight: '2' }}>
+                            {productDescription ? truncateText(productDescription, 300) : null}
+                        </Typography>
+                        <Link href={descriptionId} style={{ cursor: 'pointer', fontSize: '0.75rem', lineHeight: '2', marginBottom: '20px' }}>
+                            See more details...
+                        </Link>
+                    </Box>}
 
 
             </Box>
