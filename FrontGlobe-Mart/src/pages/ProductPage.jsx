@@ -16,36 +16,6 @@ import ProductOptions from '../components/ProductPageComponents/ProductOptions/P
 import CartCard from '../components/ProductPageComponents/CartCard/CartCard';
 import ShippingInfoButton from '../components/MicroComponents/ShippingInfoButton/ShippingInfoButton';
 import purchasePolicy from '../auxStr/auxStructures.jsx';
-// import LoadingTextField from '../../components/MicroComponents/LoadingAnimation/LoadingAnimation';
-
-
-
-const images = [
-    {
-        id: 1,
-        // label: 'San Francisco – Oakland Bay Bridge, United States',
-        imgPath:
-            'https://images.unsplash.com/photo-1537944434965-cf4679d1a598?auto=format&fit=crop&w=400&h=250&q=60',
-    },
-    {
-        id: 2,
-        // label: 'Bird',
-        imgPath:
-            'https://images.unsplash.com/photo-1538032746644-0212e812a9e7?auto=format&fit=crop&w=400&h=250&q=60',
-    },
-    {
-        id: 3,
-        // label: 'Bali, Indonesia',
-        imgPath:
-            'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=400&h=250',
-    },
-    {
-        id: 4,
-        // label: 'Goč, Serbia',
-        imgPath:
-            'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60',
-    },
-];
 
 function ProductPage() {
 
@@ -55,6 +25,7 @@ function ProductPage() {
     const [descriptionId, setDescriptionId] = useState("description")
     const { mainData, setMainData } = useContext(mainContext);
     const { productVersionId } = useParams()
+
 
     useEffect(() => {
 
@@ -72,7 +43,6 @@ function ProductPage() {
 
         fetchData();
 
-
     }, [])
 
     useEffect(() => {
@@ -85,7 +55,7 @@ function ProductPage() {
 
         fetchData()
 
-    }, [])
+    }, [productVersionId])
 
     useEffect(() => {
         console.log("Products", products)
@@ -93,15 +63,12 @@ function ProductPage() {
     }, [products])
 
     const handleDescriptionClick = () => {
-
         setTypoClick(true)
-
     }
     const handlePolicyClick = () => {
-
         setTypoClick(false)
-
     }
+
 
     return (
 
@@ -118,10 +85,13 @@ function ProductPage() {
                 mb: "7%"
             }}>
 
-                <ProductImage productImg={(product && product.product.imageURL)} />
+                <ProductImage
+                    productImg={(product && product.product.imageURL)}
+                />
+
                 {/* <ProductImageCaroussel></ProductImageCaroussel> */}
+
                 <ProductOptions
-                    // name={(product ? product.product.name : "Loading data")}
                     name={(product && product.product.name)}
                     model={(product && product.product.model)}
                     brand={(product && product.product.brand)}
@@ -147,12 +117,9 @@ function ProductPage() {
                     <CartCard
                         quantityAv={(product && product.qtyAvailable)}
                         seller={(product && product.sellerCompany.name)}
-
                     />
                     <ShippingInfoButton />
                 </Box>
-
-
 
             </Box>
 
@@ -208,7 +175,17 @@ function ProductPage() {
 
                 <Typography variant="h6" sx={{ color: "#1976D2", fontWeight: 'bold', mb: '2%', mt: '2%' }}>Related Products</Typography>
                 <Box sx={{ minHeight: 50, mb: '2%', display: 'flex', flexDirection: 'row', justifyContent: 'center', }}>
-                    <RelatedProductsCarousel />
+
+                    <RelatedProductsCarousel
+
+
+                      
+                        key={productVersionId}
+                        productList={(products)}
+                        productSelectedCat={(product && product.product.productCategoryId)}
+                        productSelectedId={(product && product.productId)}
+
+                    />
                 </Box>
 
             </Box>

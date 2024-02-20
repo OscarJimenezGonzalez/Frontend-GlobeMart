@@ -1,103 +1,99 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, CardContent, CardMedia, Typography, IconButton, Grid } from '@mui/material';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { Box, flexbox } from '@mui/system';
-
-const images = [
-    {
-        id: 1,
-        // label: 'San Francisco – Oakland Bay Bridge, United States',
-        imgPath:
-            'https://images.unsplash.com/photo-1537944434965-cf4679d1a598?auto=format&fit=crop&w=400&h=250&q=60',
-    },
-    {
-        id: 2,
-        // label: 'Bird',
-        imgPath:
-            'https://images.unsplash.com/photo-1538032746644-0212e812a9e7?auto=format&fit=crop&w=400&h=250&q=60',
-    },
-    {
-        id: 3,
-        // label: 'Bali, Indonesia',
-        imgPath:
-            'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=400&h=250',
-    },
-    {
-        id: 4,
-        // label: 'Goč, Serbia',
-        imgPath:
-            'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60',
-    },
-    {
-        id: 5,
-        // label: 'Goč, Serbia',
-        imgPath:
-            'https://images.unsplash.com/photo-1537944434965-cf4679d1a598?auto=format&fit=crop&w=400&h=250&q=60'
-    },
-    {
-        id: 6,
-        // label: 'Goč, Serbia',
-        imgPath:
-            'https://images.unsplash.com/photo-1538032746644-0212e812a9e7?auto=format&fit=crop&w=400&h=250&q=60',
-    },
-    {
-        id: 7,
-        // label: 'Goč, Serbia',
-        imgPath:
-            'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=400&h=250',
-    },
-    {
-        id: 8,
-        // label: 'Goč, Serbia',
-        imgPath:
-            'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60',
-    },
-];
+import { Box } from '@mui/system';
+import { useNavigate } from 'react-router-dom';
 
 
+export default function RelatedProductsCarousel({ productList, productSelectedCat, productSelectedId }) {
 
-export default function RelatedProductsCarousel() {
     const [activeStep, setActiveStep] = React.useState(0);
+    const [widthController, setWidthController] = useState(4)
+
+    const navigate = useNavigate()
 
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
     };
-
     const handleBack = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
 
+    useEffect(() => {
+
+        if (window.innerWidth > 1040) {
+            setWidthController(4)
+        } else if (window.innerWidth > 812 && window.innerWidth < 1040) {
+            setWidthController(3)
+        } else if (window.innerWidth > 562 && window.innerWidth < 812) {
+            setWidthController(2)
+        } else if (window.innerWidth < 562) {
+            setWidthController(1)
+        }
+
+    }, [window.innerWidth])
+
+    const handleRelatedProductClick = (id) => {
+
+        navigate(`/productPage/${id}`)
+        scrollTo(0, 0)
+
+    }
+
     return (
-        <Box sx={{ display: "flex", flexDirection: "row"}}>
+        <Box sx={{
+            height: 230,
+            display: "flex",
+            flexDirection: "row",
+            flexWrap: "nowrap",
+            overflowX: 'auto',
+        }}>
             <IconButton onClick={handleBack} disabled={activeStep === 0}>
                 <ArrowBackIosIcon />
             </IconButton>
             <Grid container spacing={2} justifyContent="center">
-                {images.slice(activeStep, activeStep + 4).map((item, index) => (
+
+                {productList && productList.filter(product => product.product.productCategoryId === productSelectedCat && product.productId !== productSelectedId).slice(activeStep, activeStep + widthController).map((item, index) =>
+
+                (
                     <Grid item key={item.id}>
-                        <Card>
+                        <Card onClick={() => handleRelatedProductClick(item.productId)}>
                             <CardMedia
+
                                 component="img"
-                                height="140"
-                                image={item.imgPath}
-                                alt={item.label}
+                                sx={{
+                                    height: 140,
+                                    width: 200,
+                                    objectFit: 'cover'
+                                }}
+                                image={item.product.imageURL}
                             />
                             <CardContent>
-                                <Typography gutterBottom variant="h5" component="div">
-                                    {item.label}
-                                </Typography>
                                 <Typography variant="body2" color="text.secondary">
-                                    {item.description}
+                                    {item.product.name}
                                 </Typography>
+                                <Box sx={{ display: "flex", flexDirection: "row", gap: 2 }}>
+                                    <Typography variant="body2" color="text.primary">
+
+                                        {item.salePercentage ? (item.price - ((item.price * item.salePercentage) / 100)).toFixed(0) : item.price} €
+
+                                    </Typography>
+                                    <Typography variant="body2" color="red">
+
+                                        {item.salePercentage ? item.salePercentage : null}
+                                        {item.salePercentage && "%" + " discount"}
+
+                                    </Typography>
+                                </Box>
                             </CardContent>
                         </Card>
                     </Grid>
 
                 ))}
             </Grid>
-            <IconButton onClick={handleNext} disabled={activeStep === images.length - 4}>
-                <ArrowForwardIosIcon />
+            <IconButton onClick={handleNext} disabled={activeStep === 6 - widthController}>
+                <ArrowForwardIosIcon sx={{ "&:hover": { color: "blue", opacity: [0.9, 0.8, 0.7] } }} />
             </IconButton>
         </Box>
     );

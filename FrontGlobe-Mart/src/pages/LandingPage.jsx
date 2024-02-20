@@ -8,7 +8,8 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import Link from '@mui/material/Link';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useParams } from 'react-router-dom';
-
+import AdMainCard from '../components/OtherComponents/AdMainCard/AdMainCard';
+import { commercialAds } from '../auxStr/auxStructures.js';
 
 function LandingPage() {
 
@@ -21,7 +22,9 @@ function LandingPage() {
     const searchInputData = mainData.searchData
     const navigate = useNavigate()
 
+
     console.log("Leyendo nuestro contexto principal: ", mainData)
+
 
     useEffect(() => {
 
@@ -31,24 +34,13 @@ function LandingPage() {
             console.log("product data", pData)
             const searchedProducts = pData.filter(products => products.product.name.includes(searchInputData))
             setProductData(searchedProducts)
+            console.log("sdasadas", commercialAds[0].imageURL)
 
         }
 
         fetchProductData()
 
     }, [searchInputData])
-
-
-    // const handleProductClick = (productId) => {
-
-    //     console.log("product id: ", productId)
-    //     setMainData(prevData => {
-    //         return {
-    //             ...prevData,
-    //             selectedProduct: productId
-    //         }
-    //     })
-    // }
 
     async function handleProductClick(productId) {
 
@@ -59,7 +51,6 @@ function LandingPage() {
     useEffect(() => {
         console.log("product id: ", selectedProduct)
     }, [selectedProduct])
-
 
     const renderProducts = () => {
 
@@ -108,8 +99,41 @@ function LandingPage() {
 
     }
 
+    const renderRandomAd = () => {
+
+        const randomNum = Math.floor(Math.random() * commercialAds.length)
+
+        return (
+
+            <AdMainCard
+
+                key={(commercialAds[randomNum].id)}
+                imageURL={(commercialAds[randomNum].imageURL)}
+                title={(commercialAds[randomNum].title)}
+                description={(commercialAds[randomNum].description)}
+                color={(commercialAds[randomNum].color)}
+
+            />
+            // <AdMainCard
+
+            //     key={(commercialAds[0].id)}
+            //     imageURL={(commercialAds[0].imageURL)}
+            //     title={(commercialAds[0].title)}
+            //     description={(commercialAds[0].description)}
+
+            // />
+
+        )
+
+    }
+
     return (
         <Box>
+            <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%', maxHeight: '75vh' }}>
+
+                {commercialAds && renderRandomAd()}
+
+            </Box>
 
             {(selectedCatsLength <= 0) && renderProducts() || renderSelectedCatProducts()}
 
