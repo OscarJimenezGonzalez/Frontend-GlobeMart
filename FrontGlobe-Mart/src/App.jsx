@@ -9,9 +9,10 @@ function App() {
 
   const [mainData, setMainData] = useState({
 
-
+    productsAddedToCart: [{ qty: 0, productAdded: {} }],
     productsOnCart: [],
     productQtyOnCart: 0,
+    joiningFromSellerIntro: false,
     shippingInfoClick: false,
     logged: false,
     searchData: "",

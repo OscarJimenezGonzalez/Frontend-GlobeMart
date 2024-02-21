@@ -1,3 +1,11 @@
+///// Access to context MODIFY 
+
+// setMainData(prevData => ({
+//     ...prevData,
+//     logged: true
+// }))
+
+/////
 
 export function validateEmail(email) {
     const regex = /^[^\s@]+@[^\s@]+\.(com|es|net)$/;
@@ -67,4 +75,28 @@ export const commercialAds = [
     }
 
 ]
+
+export const benefitsJoining = [
+    {
+        id: 1,
+        title: "Ventaja 1",
+        description: "Descripción 1"
+    },
+    {
+        id: 2,
+        title: "Ventaja 2",
+        description: "Descripción 2"
+    },
+    {
+        id: 3,
+        title: "Ventaja 3",
+        description: "Descripción 3"
+    },
+    {
+        id: 4,
+        title: "Ventaja 4",
+        description: "Descripción 4"
+    },
+]
+
 

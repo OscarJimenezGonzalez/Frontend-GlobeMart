@@ -62,13 +62,32 @@ function ProductPage() {
         console.log("One Product", product)
     }, [products])
 
+    useEffect(() => {
+        console.log("context updated", mainData)
+    }, [mainData])
+
     const handleDescriptionClick = () => {
         setTypoClick(true)
     }
     const handlePolicyClick = () => {
         setTypoClick(false)
     }
+    const handleAddToCart = (addedProduct) => {
 
+        setMainData(prevData => ({
+            ...prevData,
+            productsOnCart: [...prevData.productsOnCart, addedProduct]
+        }))
+
+    }
+    const handleAddToCartObj = (addedProduct) => {
+
+        setMainData(prevData => ({
+            ...prevData,
+            productsOnCart: [...prevData.productsOnCart, addedProduct]
+        }))
+
+    }
 
     return (
 
@@ -115,6 +134,7 @@ function ProductPage() {
                     mb: 0
                 }}>
                     <CartCard
+                        addProductClick={() => handleAddToCart(product)}
                         quantityAv={(product && product.qtyAvailable)}
                         seller={(product && product.sellerCompany.name)}
                     />
@@ -123,7 +143,7 @@ function ProductPage() {
 
             </Box>
 
-            <Divider></Divider>
+            <Divider />
 
             <Box sx={{
                 width: '100%', minHeight: 400, mt: '2%', mb: '3%',
@@ -178,8 +198,6 @@ function ProductPage() {
 
                     <RelatedProductsCarousel
 
-
-                      
                         key={productVersionId}
                         productList={(products)}
                         productSelectedCat={(product && product.product.productCategoryId)}

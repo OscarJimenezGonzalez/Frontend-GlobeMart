@@ -1,15 +1,27 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 
-export default function QuantitySelector() {
+export default function QuantitySelector({ quantityAv }) {
+
     const [quantity, setQuantity] = useState(1);
 
+    useEffect(() => {
+        if (quantityAv === 0) {
+            setQuantity(0)
+        }
+    })
+
     const handleIncrement = () => {
-        setQuantity((prevQuantity) => prevQuantity + 1);
+
+        if (quantity === quantityAv) {
+            setQuantity(quantityAv)
+        } else {
+            setQuantity((prevQuantity) => prevQuantity + 1);
+        }
     };
 
     const handleDecrement = () => {

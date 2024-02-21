@@ -78,11 +78,8 @@ function Header() {
   return (
 
     <AppBar >
-
-      {/* {barra menu BLANCA - con logo e inicio de sesion} */}
       {
         !isSmallScreen &&
-        // <AppBar>
         <Box sx={{ height: '100px', backgroundColor: '#FFFFFF', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'start', width: "100%" }}>
             <Box sx={{ ml: 4, width: "10%", minWidth: 130 }}>
@@ -126,63 +123,46 @@ function Header() {
                 <AccountMenu />
               </Box>
             )}
-
           </Box>
-
         </Box>
-        // </AppBar>
       }
-
       {
-
         isSmallScreen &&
         <Box sx={{ height: '100px', backgroundColor: '#FFFFFF', display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: "100%" }}>
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', alignContent: 'center', width: "100%" }}>
-
             <Box sx={{ ml: 4, mr: 1, width: "100%", minWidth: 134 }}>
               <Typography color={'#1976D2'} variant="h5" component="div" ><Link to={'/'} style={{ textDecoration: 'none', color: 'inherit' }}>  Globe-Mart </Link></Typography>
             </Box>
 
+
           </Box>
-
           {/* {basicamente si no hay token, ponme el boton de login} */}
-
           {(!token) && (
             <Box sx={{ mr: 1.5 }}>
-              <Button variant="contained" sx={{ color: '#FFFFFF' }}>
+              <Button variant="contained" sx={{ minWidth: 100, color: '#FFFFFF' }}>
                 <Link to={'/Login'} style={{ textDecoration: 'none', color: 'inherit' }}>
                   Log In
                 </Link>
               </Button>
             </Box>
           )}
-
           {/* {basicamente si hay token, ponme el account menu>} */}
-
           {(token) && (
             <Box>
               <AccountMenu />
             </Box>
           )}
-
         </Box>
-
       }
-
-      {/* FIN ****** {barra menu BLANCA - con logo e inicio de sesion} */}
-
-
-      {/* {barra menu AZUL - con cesta de la compra y drawer} */}
-
       {
         !isSmallScreen &&
 
-        // <AppBar>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', ml: 3 }}>
-
           <Box>
             <SwipeableDrawerMenu productCategory={productCategories} />  {/* Le pasamos las categorias de proguctos como props  */}
           </Box>
+
+          <Button onClick={() => { navigate('/SellerIntroPage') }} variant="contained" sx={{ backgroundColor: "#FE8025" }}>Become a seller</Button>
 
           <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', alignContent: 'center', mr: 4 }}>
             <IconButton
@@ -196,19 +176,15 @@ function Header() {
               <ShoppingCartIcon sx={{ fontSize: 35 }} />
             </IconButton>
           </Box>
-
         </Box>
-        // </AppBar>
       }
-
       {
         isSmallScreen &&
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', ml: 3, mr: 3, height: 100 }}>
 
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', ml: 3, mr: 3, height: 100 }}>
           <Box>
             <SwipeableDrawerMenu productCategory={productCategories} />  {/* Le pasamos las categorias de proguctos como props  */}
           </Box>
-
           <Box sx={{ ml: 3, mr: 2, width: "100%" }}>
             <TextField
               onChange={searchProducts}
@@ -241,8 +217,6 @@ function Header() {
         </Box>
 
       }
-
-      {/* FIN ***** {barra menu AZUL - con cesta de la compra y drawer} */}
 
     </AppBar >
   );

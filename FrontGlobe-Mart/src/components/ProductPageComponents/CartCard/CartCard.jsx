@@ -3,6 +3,7 @@ import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
 import { Box, Typography } from '@mui/material'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -32,7 +33,7 @@ const style = {
 };
 
 
-export default function CartCard({ quantityAv, seller }) {
+export default function CartCard({ quantityAv, seller, addProductClick }) {
 
     const [isFavorite, setIsFavorite] = useState(false);
     const [quantity, setQuantity] = useState(0);
@@ -63,8 +64,6 @@ export default function CartCard({ quantityAv, seller }) {
                 setIsAdded(false)
 
             }, 3000)
-
-            // console.log(mainData.productQtyOnCart)
 
         } else {
             handleOpenLogin()
@@ -98,7 +97,9 @@ export default function CartCard({ quantityAv, seller }) {
             }}
             >
                 {/* No uso el c.ternario para evitar la renderización de la consecuencia de la condicional aparece durante unos pocos segundos*/}
-                <QuantitySelector />
+                <QuantitySelector
+                    quantityAv={(quantityAv)}
+                />
                 {/* {(quantityAv > 0) && <Typography sx={{ color: "#2E7D32", fontWeight: "bold" }}>In Stock</Typography>}
                 {(quantityAv === 0) && <Typography sx={{ color: "red", fontWeight: "bold" }}>Out of Stock</Typography>} */}
                 {(quantityAv <= 3 && quantityAv > 0) && <Typography variant="caption" sx={{ color: "red", }}>Only {quantityAv} available</Typography>}
@@ -116,25 +117,28 @@ export default function CartCard({ quantityAv, seller }) {
                 width: "100%",
             }}
             >
-                <Button
-                    onClick={handleAddProductClick}
-                    disabled={quantityAv === 0}
-                    variant="contained"
-                    color="success"
-                    sx={{ width: "68%", height: "30%", }}>
-                    {!isAdded && <Typography>
-                        {quantityAv > 0 ?
-                            <span > Add to Cart </span> :
-                            <span sx={{ textTransform: 'none' }}>
-                                O<span style={{ textTransform: 'lowercase' }}>
-                                    ut of stock</span>
-                            </span>
-                        }
-                    </Typography>}
-                    {isAdded && <CheckCircleOutlineIcon variant="success" sx={{ fontSize: "1.5rem" }} />}
-                </Button>
+                <Box onClick={handleAddProductClick} sx={{ width: "80%", height: "30%", }}>
+                    <Button
+                        onClick={addProductClick}
+                        disabled={quantityAv === 0}
+                        variant="contained"
+                        color="success"
+                        sx={{ width: "100%", height: "100%", }}>
+                        {!isAdded && <Typography>
+                            {quantityAv > 0 ?
+                                <span > Add to Cart </span> :
+                                <span sx={{ textTransform: 'none' }}>
+                                    O<span style={{ textTransform: 'lowercase' }}>
+                                        ut of stock</span>
+                                </span>
+                            }
+                        </Typography>}
+                        {isAdded && <CheckCircleOutlineIcon variant="success" sx={{ fontSize: "1.5rem" }} />}
+                    </Button>
+                </Box>
+                {/* </IconButton> */}
                 <Divider sx={{ alignSelf: 'center', height: '1px', width: "75%" }} />
-                <Button variant="outlined" sx={{ width: "68%", height: "30%", textTransform: 'none' }}>
+                <Button variant="outlined" sx={{ width: "80%", height: "30%", textTransform: 'none' }}>
                     A<span style={{ textTransform: 'lowercase' }}  >
                         dd to wish list</span></Button>
             </Box>

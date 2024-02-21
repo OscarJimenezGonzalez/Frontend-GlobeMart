@@ -22,9 +22,7 @@ function LandingPage() {
     const searchInputData = mainData.searchData
     const navigate = useNavigate()
 
-
     console.log("Leyendo nuestro contexto principal: ", mainData)
-
 
     useEffect(() => {
 
@@ -46,11 +44,21 @@ function LandingPage() {
 
         await setSelectedProduct(productId)
         navigate(`/productPage/${productId}`)
+        scrollTo(0, 0)
     }
 
     useEffect(() => {
         console.log("product id: ", selectedProduct)
     }, [selectedProduct])
+
+    const handleAddToCart = (addedProduct) => {
+
+        // setMainData(prevData => ({
+        //     ...prevData,
+        //     productsOnCart: [...prevData.productsOnCart, addedProduct]
+        // }))
+
+    }
 
     const renderProducts = () => {
 
@@ -60,6 +68,7 @@ function LandingPage() {
                 {productData.map(productData =>
 
                     <ProductCard
+                        addToCartClick={() => handleAddToCart(productData)}
                         handleClickProduct={() => handleProductClick(productData.id)}
                         key={productData.id}
                         price={productData.price}
@@ -114,14 +123,6 @@ function LandingPage() {
                 color={(commercialAds[randomNum].color)}
 
             />
-            // <AdMainCard
-
-            //     key={(commercialAds[0].id)}
-            //     imageURL={(commercialAds[0].imageURL)}
-            //     title={(commercialAds[0].title)}
-            //     description={(commercialAds[0].description)}
-
-            // />
 
         )
 

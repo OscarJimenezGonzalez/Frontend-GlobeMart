@@ -11,8 +11,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import { Link } from 'react-router-dom';
 
 
-
-export default function ProductCard({ productName, productModel, productBrand, price, productImg, handleClickProduct }) {
+export default function ProductCard({ productName, productModel, productBrand, price, productImg, handleClickProduct, addToCartClick }) {
 
   const [favClicked, setFavClicked] = useState(false)
   const [productClicked, setProductClicked] = useState(false)
@@ -59,7 +58,7 @@ export default function ProductCard({ productName, productModel, productBrand, p
         </Typography>
       </CardContent>
       <CardActions sx={{ display: 'flex' }}>
-        <Button size="small">Add to Cart</Button>
+        <Button onClick={addToCartClick} size="small">Add to Cart</Button>
         <Button onClick={handleFavClick} size="small">
           {favClicked ?
             <FavoriteIcon sx={{ color: '#1976D2', fontSize: '18px', width: '18px', height: '18px' }} /> :

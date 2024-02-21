@@ -8,6 +8,7 @@ import SignUpPage from '../pages/SignUpPage'
 import ProfilePage from '../pages/ProfilePage'
 import ProductPage from '../pages/ProductPage'
 import CartPage from '../pages/CartPage'
+import SellerIntroPage from '../pages/SellerIntroPage'
 
 
 const router = createBrowserRouter([
@@ -48,6 +49,11 @@ const router = createBrowserRouter([
             {
                 path: '/CartPage',
                 element: <CartPage />
+
+            },
+            {
+                path: '/SellerIntroPage',
+                element: <SellerIntroPage />
 
             }
 
