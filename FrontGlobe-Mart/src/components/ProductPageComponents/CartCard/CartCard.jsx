@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import Button from '@mui/material/Button';
@@ -17,23 +17,7 @@ import Modal from '@mui/material/Modal';
 import { isLogged } from '../../../auxStr/auxStructures';
 
 
-
-const style = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    boxShadow: 24,
-    p: 4,
-    borderRadius: 1,
-    textAlign: 'center',
-    outline: 'none'
-};
-
-
-export default function CartCard({ quantityAv, seller, addProductClick }) {
+export default function CartCard({ quantityAv, seller, addProductClick, onQuantityChange }) {
 
     const [isFavorite, setIsFavorite] = useState(false);
     const [quantity, setQuantity] = useState(0);
@@ -49,9 +33,25 @@ export default function CartCard({ quantityAv, seller, addProductClick }) {
     const handleOpenLogin = () => setOpenLoggin(true)
     const handleCloseLogin = () => setOpenLoggin(false)
 
+    // funcion que envía el cambio en la cantidad al componente padre (ProductPage)
+    useEffect(() => {
+
+        onQuantityChange(quantity)
+
+    }, [quantity, quantityAv, onQuantityChange])
+    // funcion que envía el cambio en la cantidad al componente padre (ProductPage)
+
+    // función que recibe la cantidad del componente hijo (QuantitySelector)
+    const handleQuantityChange = (newQuantity) => {
+        setQuantity(newQuantity);
+        console.log("newQuantity", newQuantity)
+    };
+    // función que recibe la cantidad del componente hijo (QuantitySelector)
+
+
     const handleAddProductClick = () => {
 
-        if (isLogged()) {
+        if (localStorage.getItem("token")) {
 
             handleOpenSuccess()
             setIsAdded(true)
@@ -97,11 +97,11 @@ export default function CartCard({ quantityAv, seller, addProductClick }) {
             }}
             >
                 {/* No uso el c.ternario para evitar la renderización de la consecuencia de la condicional aparece durante unos pocos segundos*/}
+
                 <QuantitySelector
                     quantityAv={(quantityAv)}
+                    onQuantityChange={handleQuantityChange}
                 />
-                {/* {(quantityAv > 0) && <Typography sx={{ color: "#2E7D32", fontWeight: "bold" }}>In Stock</Typography>}
-                {(quantityAv === 0) && <Typography sx={{ color: "red", fontWeight: "bold" }}>Out of Stock</Typography>} */}
                 {(quantityAv <= 3 && quantityAv > 0) && <Typography variant="caption" sx={{ color: "red", }}>Only {quantityAv} available</Typography>}
                 <Typography sx={{ mx: 3, fontSize: "0.9rem", color: "#1976D2", }}>Sold by: <strong>{seller}</strong> </Typography>
             </Box>
@@ -136,7 +136,6 @@ export default function CartCard({ quantityAv, seller, addProductClick }) {
                         {isAdded && <CheckCircleOutlineIcon variant="success" sx={{ fontSize: "1.5rem" }} />}
                     </Button>
                 </Box>
-                {/* </IconButton> */}
                 <Divider sx={{ alignSelf: 'center', height: '1px', width: "75%" }} />
                 <Button variant="outlined" sx={{ width: "80%", height: "30%", textTransform: 'none' }}>
                     A<span style={{ textTransform: 'lowercase' }}  >
@@ -184,7 +183,6 @@ export default function CartCard({ quantityAv, seller, addProductClick }) {
                         transform: 'translate(-50%, -50%)',
                         width: 400,
                         bgcolor: 'background.paper',
-                        // border: '1px solid #000',
                         boxShadow: 24,
                         p: 4,
                         display: 'flex',

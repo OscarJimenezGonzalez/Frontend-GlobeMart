@@ -26,3 +26,20 @@ export async function getOneProductFromSeller(id) {
 
     }
 }
+
+
+////// No funciona queda pendiente ponerlo a funcionar !!!!!
+export async function UpdateQtyAvailable(id, qtyAvailable) {
+    try {
+
+        const response = await api.put(`/productSellerCompany/${id}`, { qtyAvailable: qtyAvailable })
+        return response.data
+
+    } catch (error) {
+
+        console.log(error.message)
+        throw error;
+
+    }
+}
+////// No funciona queda pendiente ponerlo a funcionar !!!!!

@@ -9,7 +9,7 @@ function App() {
 
   const [mainData, setMainData] = useState({
 
-    productsAddedToCart: [{ qty: 0, productAdded: {} }],
+    productsAddedToCart: [],
     productsOnCart: [],
     productQtyOnCart: 0,
     joiningFromSellerIntro: false,

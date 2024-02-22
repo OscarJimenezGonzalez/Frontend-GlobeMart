@@ -7,14 +7,16 @@
 
 /////
 
-export function validateEmail(email) {
-    const regex = /^[^\s@]+@[^\s@]+\.(com|es|net)$/;
-    return regex.test(email);
-};
-export function truncateText(text, length) {
-    return text.length > length ? text.substring(0, length) + "..." : text;
-};
+export function removeTokenOnTime() {
 
+    setTimeout(() => {
+
+        localStorage.removeItem("token");
+
+    }, 216000000)
+
+
+}
 export function isLogged() {
 
     if (localStorage.getItem("token")) {
@@ -24,6 +26,20 @@ export function isLogged() {
     }
 
 }
+export function setToken(token) {
+
+    localStorage.setItem("token", token);
+    removeTokenOnTime();
+}
+
+export function validateEmail(email) {
+    const regex = /^[^\s@]+@[^\s@]+\.(com|es|net)$/;
+    return regex.test(email);
+};
+export function truncateText(text, length) {
+    return text.length > length ? text.substring(0, length) + "..." : text;
+};
+
 
 export const commercialAds = [
 

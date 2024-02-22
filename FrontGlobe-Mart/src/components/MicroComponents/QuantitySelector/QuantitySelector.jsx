@@ -5,7 +5,7 @@ import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 
-export default function QuantitySelector({ quantityAv }) {
+export default function QuantitySelector({ quantityAv, onQuantityChange }) {
 
     const [quantity, setQuantity] = useState(1);
 
@@ -13,7 +13,12 @@ export default function QuantitySelector({ quantityAv }) {
         if (quantityAv === 0) {
             setQuantity(0)
         }
-    })
+        
+        // Actualiza al componente padre el valor de quantity
+        onQuantityChange(quantity)
+        // Actualiza al componente padre el valor de quantity
+
+    }, [quantity, quantityAv, onQuantityChange])
 
     const handleIncrement = () => {
 
@@ -26,6 +31,7 @@ export default function QuantitySelector({ quantityAv }) {
 
     const handleDecrement = () => {
         setQuantity((prevQuantity) => (prevQuantity > 1 ? prevQuantity - 1 : 1));
+
     };
 
     const handleChange = (event) => {

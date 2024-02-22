@@ -6,7 +6,7 @@ import { Container, } from '@mui/system';
 import { Link } from 'react-router-dom'
 import { useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom'
-import { getOneProductFromSeller, getProductsFromSellers } from '../services/productSellerService';
+import { getOneProductFromSeller, getProductsFromSellers, UpdateQtyAvailable } from '../services/productSellerService';
 import { mainContext } from '../contexts/mainContext';
 import { Divider } from '@mui/material';
 import ProductImageCaroussel from '../components/ProductPageComponents/ProductImageCaroussel/ProductImageCaroussel';
@@ -16,6 +16,7 @@ import ProductOptions from '../components/ProductPageComponents/ProductOptions/P
 import CartCard from '../components/ProductPageComponents/CartCard/CartCard';
 import ShippingInfoButton from '../components/MicroComponents/ShippingInfoButton/ShippingInfoButton';
 import purchasePolicy from '../auxStr/auxStructures.jsx';
+import { isLogged } from '../auxStr/auxStructures.js';
 
 function ProductPage() {
 
@@ -23,9 +24,10 @@ function ProductPage() {
     const [product, setProduct] = useState();
     const [typoClick, setTypoClick] = useState(true);
     const [descriptionId, setDescriptionId] = useState("description")
+    const [productQtySelected, setProductQtySelected] = useState();
+
     const { mainData, setMainData } = useContext(mainContext);
     const { productVersionId } = useParams()
-
 
     useEffect(() => {
 
@@ -50,13 +52,13 @@ function ProductPage() {
         const fetchData = async () => {
             const productData = await getOneProductFromSeller(productVersionId);
             setProduct(productData)
-
         }
 
         fetchData()
 
     }, [productVersionId])
 
+    ///// Console.logs
     useEffect(() => {
         console.log("Products", products)
         console.log("One Product", product)
@@ -65,29 +67,49 @@ function ProductPage() {
     useEffect(() => {
         console.log("context updated", mainData)
     }, [mainData])
+    ///// Console.logs
 
-    const handleDescriptionClick = () => {
-        setTypoClick(true)
+
+    ////// No funciona queda pendiente ponerlo a funcionar !!!!
+    const updateQtyInDB = (productAddedId, quantity) => {
+
+        const updateQty = async () => {
+
+            try {
+                const updatedData = await UpdateQtyAvailable(productAddedId, quantity);
+                console.log("Updated Data:", updatedData);
+            } catch (error) {
+                console.error("Error updating quantity in DB:", error);
+            }
+        };
+
+        updateQty();
+    };
+    ////// No funciona queda pendiente ponerlo a funcionar !!!!
+
+    // función que nos trae definitivamente la cantidad de producto seleccionado desde el componente CardCard
+    const getQuantity = async (quantity) => {
+
+        await setProductQtySelected(quantity)
+        console.log("Quantity Changing In Father", quantity)
+
     }
-    const handlePolicyClick = () => {
-        setTypoClick(false)
-    }
-    const handleAddToCart = (addedProduct) => {
+    // función que nos trae definitivamente la cantidad de producto seleccionado desde el componente CardCard
+
+    // función que nos mete en contexto los articulos y cantidades elegidos 
+    const handleAddToCartClick = (addedProduct) => {
 
         setMainData(prevData => ({
             ...prevData,
-            productsOnCart: [...prevData.productsOnCart, addedProduct]
+            productsAddedToCart: [...prevData.productsAddedToCart, { qty: productQtySelected, productAdded: addedProduct }]
         }))
 
+        ////// No funciona queda pendiente ponerlo a funcionar !!!!!
+        updateQtyInDB(addedProduct.id, productQtySelected)
+        ////// No funciona queda pendiente ponerlo a funcionar !!!!!
     }
-    const handleAddToCartObj = (addedProduct) => {
+    // función que nos mete en contexto los articulos añadidos a la cesta
 
-        setMainData(prevData => ({
-            ...prevData,
-            productsOnCart: [...prevData.productsOnCart, addedProduct]
-        }))
-
-    }
 
     return (
 
@@ -134,9 +156,10 @@ function ProductPage() {
                     mb: 0
                 }}>
                     <CartCard
-                        addProductClick={() => handleAddToCart(product)}
+                        addProductClick={() => handleAddToCartClick(product)}
                         quantityAv={(product && product.qtyAvailable)}
                         seller={(product && product.sellerCompany.name)}
+                        onQuantityChange={(getQuantity)}
                     />
                     <ShippingInfoButton />
                 </Box>
@@ -155,7 +178,7 @@ function ProductPage() {
 
                         <Typography
                             id={"description"}
-                            onClick={handleDescriptionClick}
+                            onClick={() => { setTypoClick(true) }}
                             variant="h6"
                             sx={{
                                 cursor: 'pointer', // Cambia el cursor a un puntero para indicar interactividad
@@ -167,7 +190,7 @@ function ProductPage() {
                         </Typography>
 
                         <Typography
-                            onClick={handlePolicyClick}
+                            onClick={() => { setTypoClick(false) }}
                             variant="h6"
                             sx={{
                                 cursor: 'pointer',

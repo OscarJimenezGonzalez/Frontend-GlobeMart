@@ -10,7 +10,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 
 
-function ProductAddedCard({ imageURL, name, price, model, company }) {
+function ProductAddedCard({ qty, imageURL, name, price, model, company }) {
 
     return (
         <Box sx={{ display: "flex", flexDirection: "row", alignItems: 'start', width: "100%" }}>
@@ -21,9 +21,9 @@ function ProductAddedCard({ imageURL, name, price, model, company }) {
                         image={imageURL}
                         alt="product Img"
                         sx={{
-                            width: '100%', 
-                            height: '100%', 
-                            objectFit: 'contain', 
+                            width: '100%',
+                            height: '100%',
+                            objectFit: 'contain',
                         }}
                     />
                 </CardActionArea>
@@ -41,7 +41,7 @@ function ProductAddedCard({ imageURL, name, price, model, company }) {
                         {price} €
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                        Amount: 1
+                        Amount: {qty}
                     </Typography>
                     <Box sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
                         <Typography sx={{ fontStyle: 'italic', mt: 1, mb: 2 }} variant="subtitle2" color="text.secondary">
