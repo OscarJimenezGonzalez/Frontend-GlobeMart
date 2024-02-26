@@ -11,35 +11,31 @@ import Divider from '@mui/material/Divider'
 function CartPage() {
 
     const { mainData, setMainData } = useContext(mainContext)
-    const cartList = mainData.productsAddedToCart
+    const [productToDelete, setProductToDelete] = useState()
     const [total, setTotal] = useState()
+    let cartList = mainData.productsAddedToCart
 
-    console.log("main Context", mainData)
-    console.log("cartList", cartList)
-    // console.log("cartListQty", cartList[0].qty)
-    // console.log("cartLisProduct", cartList[0].productAdded)
+    // console.log("contexto", mainData.productsAddedToCart)
 
     useEffect(() => {
 
         allproductSum()
 
-    }, [cartList])
+    }, [mainData.productsAddedToCart])
+
 
     const allproductSum = () => {
-
-        // const totalPrice =  cartList.reduce((total, actualValue) =>  
-        // )
 
         let total = 0;
 
         for (let i = 0; i < cartList.length; i++) {
 
-            total += parseFloat(cartList[i].productAdded.price * cartList[i].qty)
+            total += (cartList[i].productAdded.priceAfterSale) * (cartList[i].qty)
 
         }
 
-        console.log("total", total)
-        setTotal(total.toFixed(2))
+        total = Math.round((total) * 100) / 100
+        setTotal(total)
 
     }
 
@@ -47,22 +43,37 @@ function CartPage() {
 
         return (
 
-            cartList.map((element) =>
+            mainData.productsAddedToCart.map((element) =>
 
                 <ProductAddedCard
 
                     qty={(element.qty)}
+                    quantityAv={(element.productAdded.qtyAvailable)}
                     key={(element.productAdded.id)}
+                    id={(element.productAdded.id)}
                     imageURL={(element.productAdded.product.imageURL)}
                     model={(element.productAdded.product.model)}
                     name={(element.productAdded.product.name)}
-                    price={(element.productAdded.price)}
+                    priceAfterDiscount={(element.productAdded.priceAfterSale)}
                     company={(element.productAdded.sellerCompany.name)}
+                    deleteProductFromCart={deleteProductFromCart}
 
                 />
             )
         )
     }
+
+    const deleteProductFromCart = (productId) => {
+
+        console.log("Deleted", productId)
+        setMainData(prevData => ({
+            ...prevData,
+            productsAddedToCart: prevData.productsAddedToCart.filter(element => element.productAdded.id !== productId)
+            /// actualizamos el contexto filtrando por el id del producto seleccionado para eliminar
+        }))
+
+    }
+
 
     return (
         <Box sx={{ width: "100%", display: "flex", flexDirection: "column", justifyContent: "flex-start", m: 1, p: 3, gap: 1 }} >
@@ -76,7 +87,7 @@ function CartPage() {
             </Box>
             <Box sx={{ display: "flex", justifyContent: "end", pt: 2, pr: 1 }}>
 
-                <Typography variant='h6'>Total: <strong> {total} € { } </strong>  </Typography>
+                <Typography variant='h6'>Total: <strong> {total} € </strong>  </Typography>
             </Box>
             <Box sx={{ display: "flex", justifyContent: "center", pb: 3 }} >
                 <Button

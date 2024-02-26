@@ -10,10 +10,10 @@ export default function QuantitySelector({ quantityAv, onQuantityChange }) {
     const [quantity, setQuantity] = useState(1);
 
     useEffect(() => {
-        if (quantityAv === 0) {
+        if (quantityAv <= 0) {
             setQuantity(0)
         }
-        
+
         // Actualiza al componente padre el valor de quantity
         onQuantityChange(quantity)
         // Actualiza al componente padre el valor de quantity
@@ -45,11 +45,14 @@ export default function QuantitySelector({ quantityAv, onQuantityChange }) {
                 <RemoveIcon fontSize="small" />
             </IconButton>
             <TextField
+
                 size="small"
-                inputProps={{ min: 1, style: { textAlign: 'center' } }}
+                inputProps={{
+                    style: { textAlign: 'center', fontSize: 12 }
+                }}
                 value={quantity}
                 onChange={handleChange}
-                sx={{ maxWidth: '45px' }}
+                sx={{ maxWidth: '45px', }}
             />
             <IconButton onClick={handleIncrement} size="small">
                 <AddIcon fontSize="small" />

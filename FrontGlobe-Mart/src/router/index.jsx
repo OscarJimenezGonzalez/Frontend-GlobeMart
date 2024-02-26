@@ -9,6 +9,7 @@ import ProfilePage from '../pages/ProfilePage'
 import ProductPage from '../pages/ProductPage'
 import CartPage from '../pages/CartPage'
 import SellerIntroPage from '../pages/SellerIntroPage'
+import SellerDashBoard from '../pages/SellerDashBoard'
 
 
 const router = createBrowserRouter([
@@ -54,6 +55,11 @@ const router = createBrowserRouter([
             {
                 path: '/SellerIntroPage',
                 element: <SellerIntroPage />
+
+            },
+            {
+                path: '/SellerDashboard',
+                element: <SellerDashBoard />
 
             }
 

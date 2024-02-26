@@ -76,6 +76,9 @@ function LandingPage() {
                         productModel={productData.product.model}
                         productBrand={productData.product.brand}
                         productImg={productData.product.imageURL}
+                        priceAfterDiscount={productData.priceAfterSale}
+                        salePercentage={productData.salePercentage}
+                        qtyAvailable={productData.qtyAvailable}
                     />
 
                 )}

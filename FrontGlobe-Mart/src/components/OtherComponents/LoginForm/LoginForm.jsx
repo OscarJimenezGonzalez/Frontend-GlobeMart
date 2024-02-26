@@ -27,7 +27,7 @@ function Copyright(props) {
 
 export default function LogInForm() {
 
-    const navigate = useNavigate()
+    let navigate = useNavigate()
     const { mainData, setMainData } = useContext(mainContext)
     const [errorSt, setErrorSt] = useState('');
 
@@ -37,7 +37,8 @@ export default function LogInForm() {
             ...prevData,
             logged: true
         }))
-        navigate('/')
+        navigate(-1)
+        // lo usamos para volver a la pagina anterior. 
     }
     const handleSubmit = async (event) => {
 

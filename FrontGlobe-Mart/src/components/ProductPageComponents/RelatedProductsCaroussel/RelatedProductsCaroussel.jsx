@@ -6,7 +6,7 @@ import { Box } from '@mui/system';
 import { useNavigate } from 'react-router-dom';
 
 
-export default function RelatedProductsCarousel({ productList, productSelectedCat, productSelectedId }) {
+export default function RelatedProductsCarousel({ productList, productSelectedCat, productSelectedId, priceAfterSale }) {
 
     const [activeStep, setActiveStep] = React.useState(0);
     const [widthController, setWidthController] = useState(4)
@@ -76,13 +76,13 @@ export default function RelatedProductsCarousel({ productList, productSelectedCa
                                 <Box sx={{ display: "flex", flexDirection: "row", gap: 2 }}>
                                     <Typography variant="body2" color="text.primary">
 
-                                        {item.salePercentage ? (item.price - ((item.price * item.salePercentage) / 100)).toFixed(0) : item.price} €
+                                        {/* {item.salePercentage ? (item.price - ((item.price * item.salePercentage) / 100)).toFixed(0) : item.price} € */}
+                                        {item.priceAfterSale} € 
 
                                     </Typography>
                                     <Typography variant="body2" color="red">
 
-                                        {item.salePercentage ? item.salePercentage : null}
-                                        {item.salePercentage && "%" + " discount"}
+                                        {item.salePercentage > 0 && item.salePercentage + "% discount"}
 
                                     </Typography>
                                 </Box>

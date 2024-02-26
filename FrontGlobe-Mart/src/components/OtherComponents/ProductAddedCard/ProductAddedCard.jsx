@@ -7,10 +7,21 @@ import Typography from '@mui/material/Typography';
 import { CardActionArea, Button } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useContext, useState, useEffect } from 'react';
+import { mainContext } from '../../../contexts/mainContext';
+import QuantitySelector from '../../MicroComponents/QuantitySelector/QuantitySelector';
+// import Link from '@mui/material/Link';
+import { Link } from 'react-router-dom';
+
+function ProductAddedCard({ qty, imageURL, name, priceAfterDiscount, model, company, id, deleteProductFromCart, quantityAv }) {
+
+    const { mainData, setMainData } = useContext(mainContext);
+    // console.log(quantityAv)
+
+    const setQuantity = () => {
 
 
-
-function ProductAddedCard({ qty, imageURL, name, price, model, company }) {
+    }
 
     return (
         <Box sx={{ display: "flex", flexDirection: "row", alignItems: 'start', width: "100%" }}>
@@ -31,25 +42,37 @@ function ProductAddedCard({ qty, imageURL, name, price, model, company }) {
             <Card sx={{ borderRadius: 0, flex: 1, maxHeight: 200, height: 200, p: 2 }}>
 
                 <Box sx={{ flex: '1', px: 2, py: 1, bgcolor: 'background.paper', borderRadius: 2, boxShadow: 1 }}>
-                    <Typography sx={{ fontWeight: 'bold', mb: 1 }} variant="h6" component="div">
-                        {name}
-                    </Typography>
+                    <Box display="flex" justifyContent="space-between">
+                        <Typography sx={{ fontWeight: 'bold', mb: 1 }} variant="h6" component="div">
+                            {name}
+                        </Typography>
+
+                        {/* <QuantitySelector 
+                            quantityAv={(quantityAv)}
+                            onQuantityChange={setQuantity}
+                        /> */}
+
+                    </Box>
+
                     <Typography sx={{ color: 'text.secondary', mb: 0.5 }} variant="subtitle2">
                         {model}
                     </Typography>
                     <Typography sx={{ color: 'primary.main', my: 0.5 }} variant="body1" component="div">
-                        {price} €
+                        {priceAfterDiscount} €
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
                         Amount: {qty}
                     </Typography>
                     <Box sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
                         <Typography sx={{ fontStyle: 'italic', mt: 1, mb: 2 }} variant="subtitle2" color="text.secondary">
-                            Sold by: {company}
+                            Sold by: <Link to="/SellerDashBoard">{company}</Link>
                         </Typography>
-                        <Button size="small" variant="contained" color="error" startIcon={<DeleteIcon />} sx={{ mt: 1 }}>
+
+                        <Button onClick={() => { deleteProductFromCart(id) }} size="small" variant="contained" color="error" startIcon={<DeleteIcon />} sx={{ mt: 1 }}>
                             Delete
                         </Button>
+
+
                     </Box>
                 </Box>
             </Card>

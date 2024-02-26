@@ -120,7 +120,7 @@ export default function CartCard({ quantityAv, seller, addProductClick, onQuanti
                 <Box onClick={handleAddProductClick} sx={{ width: "80%", height: "30%", }}>
                     <Button
                         onClick={addProductClick}
-                        disabled={quantityAv === 0}
+                        disabled={quantityAv <= 0}
                         variant="contained"
                         color="success"
                         sx={{ width: "100%", height: "100%", }}>

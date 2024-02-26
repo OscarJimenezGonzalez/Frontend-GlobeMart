@@ -19,7 +19,7 @@ import { mainContext } from '../../../contexts/mainContext';
 import { truncateText } from '../../../auxStr/auxStructures';
 
 
-export default function ProductOptions({ hasShoeSize, hasClothingSize, hasColorOption, sale, name, brand, model, price, id, salePerc, productDescription, descriptionId }) {
+export default function ProductOptions({ hasShoeSize, hasClothingSize, hasColorOption, sale, name, brand, model, price, priceAfterDiscount, id, salePerc, productDescription, descriptionId }) {
 
     const [shippingInfoOff, setShippingInfoOff] = useState(true);
     const [financialInfoOff, setFinancialInfoOff] = useState(true);
@@ -56,7 +56,7 @@ export default function ProductOptions({ hasShoeSize, hasClothingSize, hasColorO
                             mb: 1,
                             color: "#2E7D32"
                         }}>
-                            Price: {(price - Math.round(price * (salePerc * 0.01))).toFixed(0)} €
+                            Price: {priceAfterDiscount} €
                         </Typography>}
                     {!sale &&
                         <Typography sx={{

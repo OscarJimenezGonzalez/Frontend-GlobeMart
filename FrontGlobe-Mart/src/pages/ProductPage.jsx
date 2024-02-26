@@ -59,18 +59,16 @@ function ProductPage() {
     }, [productVersionId])
 
     ///// Console.logs
-    useEffect(() => {
-        console.log("Products", products)
-        console.log("One Product", product)
-    }, [products])
+    // useEffect(() => {
+    //     console.log("Products", products)
+    //     console.log("One Product", product)
+    // }, [products])
 
     useEffect(() => {
         console.log("context updated", mainData)
     }, [mainData])
     ///// Console.logs
 
-
-    ////// No funciona queda pendiente ponerlo a funcionar !!!!
     const updateQtyInDB = (productAddedId, quantity) => {
 
         const updateQty = async () => {
@@ -84,29 +82,38 @@ function ProductPage() {
         };
 
         updateQty();
-    };
-    ////// No funciona queda pendiente ponerlo a funcionar !!!!
 
+    };
     // función que nos trae definitivamente la cantidad de producto seleccionado desde el componente CardCard
     const getQuantity = async (quantity) => {
 
         await setProductQtySelected(quantity)
-        console.log("Quantity Changing In Father", quantity)
 
     }
     // función que nos trae definitivamente la cantidad de producto seleccionado desde el componente CardCard
 
     // función que nos mete en contexto los articulos y cantidades elegidos 
-    const handleAddToCartClick = (addedProduct) => {
+    const handleAddToCartClick = async (addedProduct) => {
 
-        setMainData(prevData => ({
-            ...prevData,
-            productsAddedToCart: [...prevData.productsAddedToCart, { qty: productQtySelected, productAdded: addedProduct }]
-        }))
+        if (isLogged()) {
 
-        ////// No funciona queda pendiente ponerlo a funcionar !!!!!
-        updateQtyInDB(addedProduct.id, productQtySelected)
-        ////// No funciona queda pendiente ponerlo a funcionar !!!!!
+            setMainData(prevData => ({
+                ...prevData,
+                productsAddedToCart: [...prevData.productsAddedToCart, { qty: productQtySelected, productAdded: addedProduct }]
+            }))
+
+            try {
+
+                console.log("Added Product:", productQtySelected);
+                let productResultant = addedProduct.qtyAvailable - productQtySelected
+                console.log("Product Resultant:", productResultant);
+                await updateQtyInDB(addedProduct.id, productResultant);
+
+            } catch (error) {
+                console.log("Error en handleAddToCartClick.", error);
+            }
+            
+        }
     }
     // función que nos mete en contexto los articulos añadidos a la cesta
 
@@ -140,6 +147,7 @@ function ProductPage() {
                     sale={(product && product.onSale)}
                     salePerc={(product && product.salePercentage)}
                     price={(product && product.price)}
+                    priceAfterDiscount={(product && product.priceAfterSale)}
                     hasShoeSize={(product && product.hasShoeSizes)}
                     hasClothingSize={(product && product.hasClothingSizes)}
                     hasColorOption={(product && product.hasColorOption)}
@@ -225,6 +233,7 @@ function ProductPage() {
                         productList={(products)}
                         productSelectedCat={(product && product.product.productCategoryId)}
                         productSelectedId={(product && product.productId)}
+                        priceAfterSale={(product && product.priceAfterSale)}
 
                     />
                 </Box>

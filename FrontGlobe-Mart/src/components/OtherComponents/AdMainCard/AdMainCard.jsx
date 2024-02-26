@@ -8,9 +8,8 @@ import { CardActionArea } from '@mui/material';
 export default function AdMainCard({ imageURL, title, description, id, color }) {
   return (
     <Card sx={{
-      maxWidth: "95%",
       minWidth: "95%",
-      maxHeight: "75vh",
+      // maxHeight: "75vh",
       position: 'relative'
     }}>
       <CardActionArea>
