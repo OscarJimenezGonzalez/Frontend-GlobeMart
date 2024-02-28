@@ -10,6 +10,7 @@ import ProductPage from '../pages/ProductPage'
 import CartPage from '../pages/CartPage'
 import SellerIntroPage from '../pages/SellerIntroPage'
 import SellerDashBoard from '../pages/SellerDashBoard'
+import OrderPage from '../pages/OrderPage'
 
 
 const router = createBrowserRouter([
@@ -60,6 +61,11 @@ const router = createBrowserRouter([
             {
                 path: '/SellerDashboard',
                 element: <SellerDashBoard />
+
+            },
+            {
+                path: '/OrderPage',
+                element: <OrderPage />
 
             }
 

@@ -7,12 +7,14 @@ import { mainContext } from '../contexts/mainContext'
 import { Card } from '@mui/material'
 import Button from '@mui/material/Button'
 import Divider from '@mui/material/Divider'
+import { useNavigate } from 'react-router'
 
 function CartPage() {
 
     const { mainData, setMainData } = useContext(mainContext)
     const [productToDelete, setProductToDelete] = useState()
     const [total, setTotal] = useState()
+    const navigate = useNavigate()
     let cartList = mainData.productsAddedToCart
 
     // console.log("contexto", mainData.productsAddedToCart)
@@ -22,6 +24,19 @@ function CartPage() {
         allproductSum()
 
     }, [mainData.productsAddedToCart])
+
+    const goToOrderPage = () => {
+
+        // Se tiene que pasar a contexto el precio total de la compra
+
+        setMainData(prevData => ({
+            ...prevData,
+            totalOrderPrice: total
+        }))
+        
+        // Después acudimos a orderPage a confirmar los datos de pedido
+        navigate("/OrderPage")
+    }
 
 
     const allproductSum = () => {
@@ -74,7 +89,6 @@ function CartPage() {
 
     }
 
-
     return (
         <Box sx={{ width: "100%", display: "flex", flexDirection: "column", justifyContent: "flex-start", m: 1, p: 3, gap: 1 }} >
             {/* <Typography variant='overline' >Your products: </Typography> */}
@@ -91,8 +105,9 @@ function CartPage() {
             </Box>
             <Box sx={{ display: "flex", justifyContent: "center", pb: 3 }} >
                 <Button
+                    onClick={goToOrderPage}
                     disabled={(cartList.length === 0)}
-                    variant='contained' color="success" size='large'>Confirm Order</Button>
+                    variant='contained' color="success" size='large'>Go to Shipping Info</Button>
             </Box>
         </Box >
     )

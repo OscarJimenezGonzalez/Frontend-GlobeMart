@@ -34,7 +34,7 @@ export default function ProfileForm() {
 
             if (profileData.role === "seller") {
                 setIsSeller(true)
-            } 
+            }
             console.log("is seller? ", isSeller)
 
         }
@@ -42,6 +42,7 @@ export default function ProfileForm() {
         fetchData()
 
     }, [isSeller])
+
     useEffect(() => {
 
         const fetchData = async () => {
@@ -54,16 +55,6 @@ export default function ProfileForm() {
         fetchData()
 
     }, [isSeller])
-
-    // useEffect(() => {
-
-    //     console.log("Profile Data: ", profileInfo)
-    //     console.log("Company Data: ", companyInfo)
-
-    // }, [profileInfo, companyInfo])
-
-
-
 
     // Auxiliary functions
     const renderUserError = () => {
@@ -114,7 +105,6 @@ export default function ProfileForm() {
     //**** End Auxiliary functions
 
     // API request functions
-
     const updateUserInfo = async (event) => {
 
         event.preventDefault();
@@ -195,8 +185,7 @@ export default function ProfileForm() {
             await setErrorCompany("Error during profile update:");
         }
 
-    };
-
+    }
     //**** End API request functions
     //Structural component functions
     const renderRepPassword = () => {

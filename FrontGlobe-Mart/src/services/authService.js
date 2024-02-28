@@ -1,12 +1,12 @@
 import api from "./mainConfig/config";
-import { removeTokenOnTime } from "../auxStr/auxStructures";
+import { saveTokenSettingTime } from "../auxStr/auxStructures";
 
 export async function login(loginData) {
 
     try {
         const { data } = await api.post('/auth/login', loginData)
         localStorage.setItem('token', data.token)
-        removeTokenOnTime()
+        saveTokenSettingTime()
         return data
     } catch (error) {
         // console.log(error.message)
@@ -19,7 +19,7 @@ export async function signup(signupData) {
     try {
         const { data } = await api.post('/auth/signup', signupData)
         localStorage.setItem('token', data.token)
-        removeTokenOnTime()
+        saveTokenSettingTime()
         return data
     }
     catch (error) {

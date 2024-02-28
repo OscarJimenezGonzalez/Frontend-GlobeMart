@@ -7,39 +7,41 @@
 
 /////
 
-export function removeTokenOnTime() {
-
-    setTimeout(() => {
-
-        localStorage.removeItem("token");
-
-    }, 216000000)
-
-
+export function saveTokenSettingTime() {
+    const now = new Date().getTime();
+    const expirationTime = now + 3600000;
+    localStorage.setItem('tokenExpiration', expirationTime.toString());
 }
-export function isLogged() {
 
+export function checkTokenExpiration() {
+    const expirationTime = localStorage.getItem('tokenExpiration');
+    const now = new Date().getTime();
+    if (now > parseInt(expirationTime, 10)) {
+        localStorage.removeItem('token');
+        localStorage.removeItem('tokenExpiration');
+    }
+}
+
+export function setToken(token) {
+    localStorage.setItem("token", token);
+}
+
+export function isLogged() {
     if (localStorage.getItem("token")) {
         return true
     } else {
         return false
     }
-
-}
-export function setToken(token) {
-
-    localStorage.setItem("token", token);
-    removeTokenOnTime();
 }
 
 export function validateEmail(email) {
     const regex = /^[^\s@]+@[^\s@]+\.(com|es|net)$/;
     return regex.test(email);
 };
+
 export function truncateText(text, length) {
     return text.length > length ? text.substring(0, length) + "..." : text;
 };
-
 
 export const commercialAds = [
 
@@ -68,7 +70,7 @@ export const commercialAds = [
         // description: "Description 4",
         imageURL: "https://www.smartrmail.com/blog/wp-content/uploads/2023/10/Banner-for-blog.png"
     },
-  
+
 
 
 ]
