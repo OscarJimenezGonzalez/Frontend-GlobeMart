@@ -9,8 +9,9 @@ import ProfilePage from '../pages/ProfilePage'
 import ProductPage from '../pages/ProductPage'
 import CartPage from '../pages/CartPage'
 import SellerIntroPage from '../pages/SellerIntroPage'
-import SellerDashBoard from '../pages/SellerDashBoard'
+import SellerPage from '../pages/SellerPage'
 import OrderPage from '../pages/OrderPage'
+import PaymentPage from '../pages/PaymentPage'
 
 
 const router = createBrowserRouter([
@@ -51,22 +52,22 @@ const router = createBrowserRouter([
             {
                 path: '/CartPage',
                 element: <CartPage />
-
             },
             {
-                path: '/SellerIntroPage',
+                path: '/SellerWelcomePage',
                 element: <SellerIntroPage />
-
             },
             {
-                path: '/SellerDashboard',
-                element: <SellerDashBoard />
-
+                path: '/SellerPage/:sellerCompanyId',
+                element: <SellerPage />
             },
             {
                 path: '/OrderPage',
                 element: <OrderPage />
-
+            },
+            {
+                path: '/PaymentPage',
+                element: <PaymentPage />
             }
 
         ]

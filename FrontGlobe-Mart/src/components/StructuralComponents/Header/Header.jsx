@@ -162,7 +162,7 @@ function Header() {
             <SwipeableDrawerMenu productCategory={productCategories} />  {/* Le pasamos las categorias de proguctos como props  */}
           </Box>
 
-          <Button onClick={() => { navigate('/SellerIntroPage') }} variant="contained" sx={{ backgroundColor: "#FE8025" }}>Become a seller</Button>
+          <Button onClick={() => { navigate('/SellerWelcomePage') }} variant="contained" sx={{ backgroundColor: "#FE8025" }}>Become a seller</Button>
 
           <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', alignContent: 'center', mr: 4 }}>
             <IconButton

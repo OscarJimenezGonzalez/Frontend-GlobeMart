@@ -77,7 +77,7 @@ export default function RelatedProductsCarousel({ productList, productSelectedCa
                                     <Typography variant="body2" color="text.primary">
 
                                         {/* {item.salePercentage ? (item.price - ((item.price * item.salePercentage) / 100)).toFixed(0) : item.price} € */}
-                                        {item.priceAfterSale} € 
+                                        {item.priceAfterSale} €
 
                                     </Typography>
                                     <Typography variant="body2" color="red">

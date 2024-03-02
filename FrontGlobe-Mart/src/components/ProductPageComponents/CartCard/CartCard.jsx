@@ -17,7 +17,7 @@ import Modal from '@mui/material/Modal';
 import { isLogged } from '../../../auxStr/auxStructures';
 
 
-export default function CartCard({ quantityAv, seller, addProductClick, onQuantityChange }) {
+export default function CartCard({ quantityAv, seller, addProductClick, onQuantityChange, sellerCompanyId }) {
 
     const [isFavorite, setIsFavorite] = useState(false);
     const [quantity, setQuantity] = useState(0);
@@ -47,7 +47,6 @@ export default function CartCard({ quantityAv, seller, addProductClick, onQuanti
         console.log("newQuantity", newQuantity)
     };
     // función que recibe la cantidad del componente hijo (QuantitySelector)
-
 
     const handleAddProductClick = () => {
 
@@ -103,7 +102,12 @@ export default function CartCard({ quantityAv, seller, addProductClick, onQuanti
                     onQuantityChange={handleQuantityChange}
                 />
                 {(quantityAv <= 3 && quantityAv > 0) && <Typography variant="caption" sx={{ color: "red", }}>Only {quantityAv} available</Typography>}
-                <Typography sx={{ mx: 3, fontSize: "0.9rem", color: "#1976D2", }}>Sold by: <strong>{seller}</strong> </Typography>
+                <Typography sx={{ mx: 3, fontSize: "0.9rem", color: "#1976D2", }}>
+                    Sold by:
+                    <Link to={`/SellerPage/${sellerCompanyId}`}><strong>{seller}</strong>
+                    </Link>
+                </Typography>
+
             </Box>
 
             <Box sx={{

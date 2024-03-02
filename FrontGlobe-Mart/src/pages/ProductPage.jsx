@@ -58,15 +58,10 @@ function ProductPage() {
 
     }, [productVersionId])
 
-    ///// Console.logs
-    // useEffect(() => {
-    //     console.log("Products", products)
-    //     console.log("One Product", product)
-    // }, [products])
-
     useEffect(() => {
         console.log("context updated", mainData)
-    }, [mainData])
+        console.log("Producto a renderizar:", product)
+    }, [mainData, product])
     ///// Console.logs
 
     const updateQtyInDB = (productAddedId, quantity) => {
@@ -84,12 +79,14 @@ function ProductPage() {
         updateQty();
 
     };
+
     // función que nos trae definitivamente la cantidad de producto seleccionado desde el componente CardCard
     const getQuantity = async (quantity) => {
 
         await setProductQtySelected(quantity)
 
     }
+
     // función que nos trae definitivamente la cantidad de producto seleccionado desde el componente CardCard
 
     // función que nos mete en contexto los articulos y cantidades elegidos 
@@ -112,7 +109,7 @@ function ProductPage() {
             } catch (error) {
                 console.log("Error en handleAddToCartClick.", error);
             }
-            
+
         }
     }
     // función que nos mete en contexto los articulos añadidos a la cesta
@@ -167,6 +164,7 @@ function ProductPage() {
                         addProductClick={() => handleAddToCartClick(product)}
                         quantityAv={(product && product.qtyAvailable)}
                         seller={(product && product.sellerCompany.name)}
+                        sellerCompanyId={(product && product.sellerCompany.id)}
                         onQuantityChange={(getQuantity)}
                     />
                     <ShippingInfoButton />

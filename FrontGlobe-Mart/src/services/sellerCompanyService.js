@@ -28,8 +28,6 @@ export async function updateOwnSellerCompany(sellerCompanyData) {
             }
         })
 
-        // console.log("data updated: ", data)
-
         return data
 
     } catch (error) {
@@ -49,6 +47,20 @@ export async function getOwnSellerCompany() {
             }
         })
 
+        return data
+
+    } catch (error) {
+
+        console.log(error.message)
+
+    }
+
+}
+
+export async function getSellerCompany(sellerCompanyId) {
+    try {
+
+        const { data } = await api.get(`/sellerCompany/${sellerCompanyId}`)
         return data
 
     } catch (error) {

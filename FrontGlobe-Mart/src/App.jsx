@@ -12,7 +12,6 @@ function App() {
 
     totalOrderPrice: 0,
     productsAddedToCart: [],
-    productsOnCart: [],
     productQtyOnCart: 0,
     joiningFromSellerIntro: false,
     shippingInfoClick: false,

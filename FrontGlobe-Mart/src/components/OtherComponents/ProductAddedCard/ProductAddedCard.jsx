@@ -13,9 +13,10 @@ import QuantitySelector from '../../MicroComponents/QuantitySelector/QuantitySel
 // import Link from '@mui/material/Link';
 import { Link } from 'react-router-dom';
 
-function ProductAddedCard({ qty, imageURL, name, priceAfterDiscount, model, company, id, deleteProductFromCart, quantityAv }) {
+function ProductAddedCard({ qty, imageURL, name, priceAfterDiscount, model, company, companyId, id, deleteProductFromCart, quantityAv }) {
 
     const { mainData, setMainData } = useContext(mainContext);
+
     // console.log(quantityAv)
 
     const setQuantity = () => {
@@ -65,7 +66,7 @@ function ProductAddedCard({ qty, imageURL, name, priceAfterDiscount, model, comp
                     </Typography>
                     <Box sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
                         <Typography sx={{ fontStyle: 'italic', mt: 1, mb: 2 }} variant="subtitle2" color="text.secondary">
-                            Sold by: <Link to="/SellerDashBoard">{company}</Link>
+                            Sold by: <Link to={`/sellerPage/${companyId}`}> {company}</Link>
                         </Typography>
 
                         <Button onClick={() => { deleteProductFromCart(id) }} size="small" variant="contained" color="error" startIcon={<DeleteIcon />} sx={{ mt: 1 }}>
@@ -75,8 +76,8 @@ function ProductAddedCard({ qty, imageURL, name, priceAfterDiscount, model, comp
 
                     </Box>
                 </Box>
-            </Card>
-        </Box>
+            </Card >
+        </Box >
     )
 
 }

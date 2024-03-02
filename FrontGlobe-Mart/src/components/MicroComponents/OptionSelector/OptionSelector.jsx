@@ -5,24 +5,24 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { countries } from '../../../auxStr/countries';
 
-export default function CountrySelector({ selectedCountry }) {
-    const [country, setCountry] = React.useState('');
+export default function OptionSelector({ selectedOption, optionList, titleLabel }) {
+    const [option, setOption] = React.useState('');
 
     const handleChange = (event) => {
-        setCountry(event.target.value);
-        selectedCountry(event.target.value);
+        setOption(event.target.value);
+        selectedOption(event.target.value);
     };
 
-    const renderCountries = () => {
+    const renderOptions = () => {
 
         return (
 
             <Select
                 labelId="demo-simple-select-filled-label"
                 id="demo-simple-select-filled"
-                value={country}
+                value={option}
                 onChange={handleChange}
-                onSelect={selectedCountry}
+                onSelect={selectedOption}
                 MenuProps={{
                     anchorOrigin: {
                         vertical: 'bottom',
@@ -40,12 +40,12 @@ export default function CountrySelector({ selectedCountry }) {
                 }}
             >
                 <MenuItem value="">
-                    <em>Select Country ...</em>
+                    <em>Select Option ...</em>
                 </MenuItem>
 
-                {countries.map((country, index) => {
+                {optionList.map((option, index) => {
 
-                    return <MenuItem key={index} value={country.name}>{country.name}
+                    return <MenuItem key={index} value={option.name}>{option.name}
                     </MenuItem>
 
                 })}
@@ -58,10 +58,10 @@ export default function CountrySelector({ selectedCountry }) {
 
     return (
         <div>
-            <FormControl variant="standard" sx={{ my: 2, minWidth: "100%" }}>
-                <InputLabel id="countrySelectLabel">Country *</InputLabel>
+            <FormControl variant="standard" sx={{ minWidth: "100%" }}>
+                <InputLabel id="countrySelectLabel">{titleLabel} *</InputLabel>
 
-                {renderCountries()}
+                {renderOptions()}
 
             </FormControl>
         </div>

@@ -5,9 +5,6 @@ import { useState, useEffect, useContext } from 'react';
 import { getProductsFromSellers } from '../services/productSellerService';
 import { mainContext } from '../contexts/mainContext';
 import { Navigate, useNavigate } from 'react-router-dom';
-import Link from '@mui/material/Link';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { useParams } from 'react-router-dom';
 import AdMainCard from '../components/OtherComponents/AdMainCard/AdMainCard';
 import { commercialAds } from '../auxStr/auxStructures.js';
 
@@ -32,7 +29,6 @@ function LandingPage() {
             console.log("product data", pData)
             const searchedProducts = pData.filter(products => products.product.name.includes(searchInputData))
             setProductData(searchedProducts)
-            console.log("sdasadas", commercialAds[0].imageURL)
 
         }
 
@@ -47,19 +43,6 @@ function LandingPage() {
         scrollTo(0, 0)
     }
 
-    useEffect(() => {
-        console.log("product id: ", selectedProduct)
-    }, [selectedProduct])
-
-    const handleAddToCart = (addedProduct) => {
-
-        // setMainData(prevData => ({
-        //     ...prevData,
-        //     productsOnCart: [...prevData.productsOnCart, addedProduct]
-        // }))
-
-    }
-
     const renderProducts = () => {
 
         return (
@@ -68,7 +51,6 @@ function LandingPage() {
                 {productData.map(productData =>
 
                     <ProductCard
-                        addToCartClick={() => handleAddToCart(productData)}
                         handleClickProduct={() => handleProductClick(productData.id)}
                         key={productData.id}
                         price={productData.price}
@@ -97,12 +79,17 @@ function LandingPage() {
                 {productData.filter((products) => selectedCats.includes(products.product.productCategoryId)).map(productData => (
 
                     <ProductCard
+                        addToCartClick={() => handleAddToCart(productData)}
+                        handleClickProduct={() => handleProductClick(productData.id)}
                         key={productData.id}
                         price={productData.price}
                         productName={productData.product.name}
                         productModel={productData.product.model}
                         productBrand={productData.product.brand}
                         productImg={productData.product.imageURL}
+                        priceAfterDiscount={productData.priceAfterSale}
+                        salePercentage={productData.salePercentage}
+                        qtyAvailable={productData.qtyAvailable}
                     />
                 ))}
             </Box>

@@ -9,7 +9,6 @@ export async function login(loginData) {
         saveTokenSettingTime()
         return data
     } catch (error) {
-        // console.log(error.message)
         throw new Error("Invalid credentials")
     }
 
