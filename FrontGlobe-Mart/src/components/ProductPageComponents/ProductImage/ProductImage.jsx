@@ -43,17 +43,16 @@ export default function ProductImage({ productImg }) {
             >
                 <Box sx={{
                     position: 'absolute',
-                    top: '50%',
+                    top: '60%',
                     left: '50%',
                     transform: 'translate(-50%, -50%)',
                     minWidth: 400,
                     maxWidth: 700,
                     minHeigth: 600,
                     maxHeigth: 700,
-                    bgcolor: 'background.paper',
-                    // border: '1px solid #000',
+                    // bgcolor: 'background.paper',
                     boxShadow: 24,
-                    p: 4,
+                    // p: 5,
                 }}>
                     <CardMedia
                         component="img"

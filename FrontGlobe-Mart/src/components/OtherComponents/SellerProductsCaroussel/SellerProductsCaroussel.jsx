@@ -5,8 +5,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { Box } from '@mui/system';
 import { useNavigate } from 'react-router-dom';
 
-
-export default function RelatedProductsCarousel({ productList, productSelectedCat, productSelectedId, priceAfterSale }) {
+export default function SellerProductCaroussel({ productList }) {
 
     const [activeStep, setActiveStep] = React.useState(0);
     const [widthController, setWidthController] = useState(4)
@@ -23,13 +22,13 @@ export default function RelatedProductsCarousel({ productList, productSelectedCa
     useEffect(() => {
 
         if (window.innerWidth > 1040) {
-            setWidthController(4)
+            setWidthController(10)
         } else if (window.innerWidth > 812 && window.innerWidth < 1040) {
-            setWidthController(3)
+            setWidthController(6)
         } else if (window.innerWidth > 562 && window.innerWidth < 812) {
-            setWidthController(2)
+            setWidthController(7)
         } else if (window.innerWidth < 562) {
-            setWidthController(1)
+            setWidthController(3)
         }
 
     }, [window.innerWidth])
@@ -54,13 +53,12 @@ export default function RelatedProductsCarousel({ productList, productSelectedCa
             </IconButton>
             <Grid container spacing={2} justifyContent="center">
 
-                {productList && productList.filter(product => product.product.productCategoryId === productSelectedCat && product.productId !== productSelectedId).slice(activeStep, activeStep + widthController).map((item, index) =>
+                {productList && productList.slice(activeStep, activeStep + widthController).map((item, index) =>
 
                 (
                     <Grid item key={item.id}>
                         <Card onClick={() => handleRelatedProductClick(item.productId)}>
                             <CardMedia
-
                                 component="img"
                                 sx={{
                                     height: 140,
@@ -76,7 +74,6 @@ export default function RelatedProductsCarousel({ productList, productSelectedCa
                                 <Box sx={{ display: "flex", flexDirection: "row", gap: 2 }}>
                                     <Typography variant="body2" color="text.primary">
 
-                                        {/* {item.salePercentage ? (item.price - ((item.price * item.salePercentage) / 100)).toFixed(0) : item.price} € */}
                                         {item.priceAfterSale} €
 
                                     </Typography>

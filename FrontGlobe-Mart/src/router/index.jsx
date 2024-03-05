@@ -10,6 +10,7 @@ import ProductPage from '../pages/ProductPage'
 import CartPage from '../pages/CartPage'
 import SellerIntroPage from '../pages/SellerIntroPage'
 import SellerPage from '../pages/SellerPage'
+import SellerHome from '../pages/SellerHome'
 import OrderPage from '../pages/OrderPage'
 import PaymentPage from '../pages/PaymentPage'
 
@@ -60,6 +61,10 @@ const router = createBrowserRouter([
             {
                 path: '/SellerPage/:sellerCompanyId',
                 element: <SellerPage />
+            },
+            {
+                path: '/SellerHome/:sellerCompanyId',
+                element: <SellerHome />
             },
             {
                 path: '/OrderPage',

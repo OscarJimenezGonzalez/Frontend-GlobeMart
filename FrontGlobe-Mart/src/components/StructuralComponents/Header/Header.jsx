@@ -83,7 +83,7 @@ function Header() {
         <Box sx={{ height: '100px', backgroundColor: '#FFFFFF', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'start', width: "100%" }}>
             <Box sx={{ ml: 4, width: "10%", minWidth: 130 }}>
-              <Typography color={'#1976D2'} variant="h5" component="div" ><Link to={'/'} style={{ textDecoration: 'none', color: 'inherit' }}> Globe-Mart </Link></Typography>
+              <Typography color={'#3B4FB7'} variant="h5" component="div" ><Link to={'/'} style={{ textDecoration: 'none', color: 'inherit' }}> Globe-Mart </Link></Typography>
             </Box>
             <Box sx={{ ml: 1, width: "100%" }}>
               <TextField
@@ -162,7 +162,7 @@ function Header() {
             <SwipeableDrawerMenu productCategory={productCategories} />  {/* Le pasamos las categorias de proguctos como props  */}
           </Box>
 
-          <Button onClick={() => { navigate('/SellerWelcomePage') }} variant="contained" sx={{ backgroundColor: "#FE8025" }}>Become a seller</Button>
+          <Button onClick={() => { navigate('/SellerWelcomePage') }} variant="contained" sx={{ backgroundColor: "#29D1CA" }}>Become a seller</Button>
 
           <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', alignContent: 'center', mr: 4 }}>
             <IconButton

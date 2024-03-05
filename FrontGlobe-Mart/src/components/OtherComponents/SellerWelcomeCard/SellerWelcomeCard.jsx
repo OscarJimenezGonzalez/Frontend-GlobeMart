@@ -48,48 +48,49 @@ export default function SellerWelcomeCard() {
 
     return (
         <Card sx={{ maxWidth: 1000, minHeight: 500, overflow: 'hidden' }}>
-    
-                <CardMedia
-                    onClick={() => { scrollTo(500, 500) }}
-                    component="img"
-                    alt=""
-                    sx={{
-                        height: 450,
-                        width: 1,
-                        objectFit: 'cover',
-                    }}
-                    image="src\assets\images\AdImages\photo4.png"
 
-                />
+            <CardMedia
+                onClick={() => { scrollTo(500, 500) }}
+                component="img"
+                alt=""
+                sx={{
+                    height: 450,
+                    width: '100%', // Asegúrate de que el ancho se establece correctamente
+                    objectFit: 'cover',
+                    maxWidth: '100%',
+                }}
+                image="src\assets\images\efb5a2a8-fca7-4b1b-a734-07dd996f4673.jpg"
 
-                <CardContent>
+            />
 
-                    <Grid container spacing={2} sx={{ mb: 2, p: 2 }}>
+            <CardContent>
 
-                        <Grid item xs={12}>
-                            <Typography variant="h5" component="div">
-                                Become a seller !
-                            </Typography>
-                        </Grid>
+                <Grid container spacing={2} sx={{ mb: 2, p: 2 }}>
 
-                        <Grid item xs={12} sx={{ mb: 4 }}>
-                            <Typography variant="body2" color="text.primary">
-                                Are you ready to take your business to the next level? Look no further!
-                                GlobeMart is your ultimate destination for reaching a global audience
-                                and maximizing your sales potential.
-                            </Typography>
-                        </Grid>
-
-                        {renderBenefits()}
-
+                    <Grid item xs={12}>
+                        <Typography variant="h5" component="div">
+                            Become a seller !
+                        </Typography>
                     </Grid>
 
-                </CardContent>
+                    <Grid item xs={12} sx={{ mb: 4 }}>
+                        <Typography variant="body2" color="text.primary">
+                            Are you ready to take your business to the next level? Look no further!
+                            GlobeMart is your ultimate destination for reaching a global audience
+                            and maximizing your sales potential.
+                        </Typography>
+                    </Grid>
 
-                <CardActions sx={{ mb: 6, ml: 4 }}>
-                    <Button onClick={activateSeller} variant="contained" size="large">Join as a Seller!</Button>
-                    <Button size="large">Learn More</Button>
-                </CardActions>
+                    {renderBenefits()}
+
+                </Grid>
+
+            </CardContent>
+
+            <CardActions sx={{ mb: 6, ml: 4 }}>
+                <Button onClick={activateSeller} variant="contained" size="large">Join as a Seller!</Button>
+                <Button size="large">Learn More</Button>
+            </CardActions>
         </Card >
     );
 }

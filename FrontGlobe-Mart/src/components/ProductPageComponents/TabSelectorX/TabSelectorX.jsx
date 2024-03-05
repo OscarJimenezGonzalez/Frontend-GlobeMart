@@ -4,12 +4,10 @@ import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
-import Card from '@mui/material/Card';
-import RelatedProductsCarousel from '../../ProductPageComponents/RelatedProductsCaroussel/RelatedProductsCaroussel';
-import SellerProductCaroussel from '../../OtherComponents/SellerProductsCaroussel/SellerProductsCaroussel';
+import { Typography } from '@mui/material';
 
-export default function TabSelector({ itemList, element, sellerProducts }) {
-    const [value, setValue] = React.useState(itemList[0].value);
+export default function TabSelectorX({ itemList, product }) {
+    const [value, setValue] = React.useState("1");
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -34,14 +32,9 @@ export default function TabSelector({ itemList, element, sellerProducts }) {
                     </TabList>
 
                 </Box>
-
-                <TabPanel value="1">
-                    <SellerProductCaroussel
-                        productList={(sellerProducts)}
-                    ></SellerProductCaroussel>
-                </TabPanel>
-                <TabPanel value="2">{element.policy}</TabPanel>
-                <TabPanel value="3">{element.description}</TabPanel>
+                {/* {/* {console.log("proddsfdsfdsfuct", product)} */}
+                <TabPanel value="1"><Typography variant="h7" color={"#666666"}>{product && product.productDescription}</Typography></TabPanel>
+                <TabPanel value="2"><Typography variant="h7" color={"#666666"}>{product && product.sellerCompany.policy}</Typography></TabPanel>
 
             </TabContext>
 

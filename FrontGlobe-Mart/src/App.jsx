@@ -5,6 +5,7 @@ import './App.css'
 import { CssBaseline, ThemeProvider } from '@mui/material'
 import { mainContext } from './contexts/mainContext'
 import { checkTokenExpiration } from './auxStr/auxStructures'
+import { mainTheme } from './themes/mainTheme'
 
 function App() {
 
@@ -31,10 +32,12 @@ function App() {
 
   return (
     <>
-      <CssBaseline />
-      <mainContext.Provider value={data}>
-        <RouterProvider router={router} />
-      </mainContext.Provider>
+      <ThemeProvider theme={mainTheme}>
+        <CssBaseline />
+        <mainContext.Provider value={data}>
+          <RouterProvider router={router} />
+        </mainContext.Provider>
+      </ThemeProvider>
     </>
   )
 }

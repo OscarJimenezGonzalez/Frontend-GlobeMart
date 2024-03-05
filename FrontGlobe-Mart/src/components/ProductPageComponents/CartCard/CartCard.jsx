@@ -103,7 +103,7 @@ export default function CartCard({ quantityAv, seller, addProductClick, onQuanti
                 />
                 {(quantityAv <= 3 && quantityAv > 0) && <Typography variant="caption" sx={{ color: "red", }}>Only {quantityAv} available</Typography>}
                 <Typography sx={{ mx: 3, fontSize: "0.9rem", color: "#1976D2", }}>
-                    Sold by:
+                    Sold by:&nbsp;
                     <Link to={`/SellerPage/${sellerCompanyId}`}><strong>{seller}</strong>
                     </Link>
                 </Typography>

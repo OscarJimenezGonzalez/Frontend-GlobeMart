@@ -71,3 +71,5 @@ export async function getSellerCompany(sellerCompanyId) {
 
 }
 
+// Para traer los productos del vendedor a SellerPage tenemos que crear
+// un nuevo controlador getOwnProductVersions.

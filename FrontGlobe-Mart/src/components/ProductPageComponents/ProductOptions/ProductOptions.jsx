@@ -32,10 +32,10 @@ export default function ProductOptions({ hasShoeSize, hasClothingSize, hasColorO
         <Box sx={{ minWidth: "30%", maxWidth: "30%", minHeight: 450, display: "flex", flexDirection: "column", mx: 5 }}>
 
             <Box>
-                <Typography variant='h6' sx={{ mb: 1, fontWeight: "bold", color: "#1976D2" }}>{name}</Typography>
-                <Typography sx={{ mb: 1, color: "#1976D2" }}>Model: {model}</Typography>
-                <Typography sx={{ mb: 1, color: "#1976D2" }}>Brand: <strong>{brand}</strong>  </Typography>
-                <Typography sx={{ color: "grey" }}>Ref: 000000000000000000{id}</Typography>
+                <Typography variant='h6' sx={{ mb: 1, color: "#3B4FB7", fontWeight: 'bold' }}>{name}</Typography>
+                <Typography variant='subtitle1' sx={{ mb: 0.5, color: "#3B4FB7", }}>Model: {model}</Typography>
+                <Typography variant='subtitle1' sx={{ mb: 1, color: "#3B4FB7", }}>Brand: {brand}</Typography>
+                <Typography variant='subtitleRef' sx={{ color: "grey", display: 'block', mt: 1 }}>Ref: 00000000000000000000{id}</Typography>
             </Box>
 
             <Divider sx={{ my: 3 }}></Divider>

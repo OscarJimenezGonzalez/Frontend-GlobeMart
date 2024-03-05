@@ -15,20 +15,25 @@ import ProductImage from '../components/ProductPageComponents/ProductImage/Produ
 import ProductOptions from '../components/ProductPageComponents/ProductOptions/ProductOptions';
 import CartCard from '../components/ProductPageComponents/CartCard/CartCard';
 import ShippingInfoButton from '../components/MicroComponents/ShippingInfoButton/ShippingInfoButton';
-import purchasePolicy from '../auxStr/auxStructures.jsx';
 import { isLogged } from '../auxStr/auxStructures.js';
+import TabSelectorX from '../components/ProductPageComponents/TabSelectorX/TabSelectorX.jsx';
+import RatingComponentSimple from '../components/MicroComponents/RatingComponentSimple/RatingComponentSimple.jsx';
+import { getReviewsFromProduct } from '../services/productReviewService.js';
+import VerifiedPurchase from '../components/MicroComponents/VerifiedPurchase/VerifiedPurchase.jsx';
+import Stack from '@mui/material/Stack';
 
 function ProductPage() {
 
     const [products, setProducts] = useState();
     const [product, setProduct] = useState();
-    const [typoClick, setTypoClick] = useState(true);
     const [descriptionId, setDescriptionId] = useState("description")
+    const [reviewList, setReviewList] = useState();
     const [productQtySelected, setProductQtySelected] = useState();
 
     const { mainData, setMainData } = useContext(mainContext);
     const { productVersionId } = useParams()
 
+    // Aqui traemos los productos relacionados para el carusel de productos relacionados
     useEffect(() => {
 
         const fetchData = async () => {
@@ -47,21 +52,45 @@ function ProductPage() {
 
     }, [])
 
+    // Aqui traemos los datos específicos del producto a renderizar 
     useEffect(() => {
 
         const fetchData = async () => {
             const productData = await getOneProductFromSeller(productVersionId);
             setProduct(productData)
+            return productData
         }
 
         fetchData()
 
     }, [productVersionId])
 
+    // Aquí traemos las reviews del producto renderizado
     useEffect(() => {
-        console.log("context updated", mainData)
-        console.log("Producto a renderizar:", product)
-    }, [mainData, product])
+
+        if (product) {
+            console.log("este es el param ", product.id)
+            const paramToReview = product.id
+            const fetchData = async () => {
+                const reviews = await getReviewsFromProduct(paramToReview);
+                setReviewList(reviews)
+                return reviews
+            }
+            fetchData()
+        }
+
+    }, [product])
+
+    ///// Console.logs
+    useEffect(() => {
+
+        if (reviewList) {
+            console.log("ReviewList Marica", reviewList[0].createdAt.slice(0, 10))
+        }
+
+        // console.log("context updated", mainData)
+        // console.log("Producto a renderizar:", product)
+    }, [mainData, product, reviewList])
     ///// Console.logs
 
     const updateQtyInDB = (productAddedId, quantity) => {
@@ -87,8 +116,6 @@ function ProductPage() {
 
     }
 
-    // función que nos trae definitivamente la cantidad de producto seleccionado desde el componente CardCard
-
     // función que nos mete en contexto los articulos y cantidades elegidos 
     const handleAddToCartClick = async (addedProduct) => {
 
@@ -112,8 +139,35 @@ function ProductPage() {
 
         }
     }
-    // función que nos mete en contexto los articulos añadidos a la cesta
 
+    // Funcion que renderiza las reviews
+    const renderReviews = () => {
+
+        return reviewList.map((element) => (
+
+            <Box key={element.id} display={"flex"} flexDirection={"row"} gap={2} mb={4} >
+
+                <Box minWidth={"20%"} display={"flex"} flexDirection={"column"} alignContent={"center"} alignItems={"start"} justifyContent={"center"}>
+                    <VerifiedPurchase
+                        name={element.user.username}
+                        date={element.createdAt.slice(0, 10)}
+                    ></VerifiedPurchase>
+                    {/* <Divider sx={{ mt: 3, ml: 5}} width="200%"></Divider> */}
+                </Box>
+
+                <Stack width={"70%"} display={"flex"} flexDirection={"column"} alignContent={"start"} alignItems={"start"} justifyContent={"start"} key={element.id} spacing={2} mb={5} mt={5} >
+
+                    <RatingComponentSimple rating={element.rating}></RatingComponentSimple >
+                    <Typography>{element.opinion}</Typography>
+
+                </Stack>
+
+
+            </Box >
+
+        ))
+
+    }
 
     return (
 
@@ -172,58 +226,44 @@ function ProductPage() {
 
             </Box>
 
-            <Divider />
+            {/* <Divider /> */}
 
             <Box sx={{
-                width: '100%', minHeight: 400, mt: '2%', mb: '3%',
+                width: '100%', minHeight: 400, mt: '0%', mb: '3%',
             }}>
 
                 <Box sx={{ minHeight: 50, mb: '3%' }}>
 
-                    <Box sx={{ width: '30%', display: 'flex', flexDirection: 'row', justifyContent: 'start', gap: 4, mb: '2%' }}>
+                    <TabSelectorX
 
-                        <Typography
-                            id={"description"}
-                            onClick={() => { setTypoClick(true) }}
-                            variant="h6"
-                            sx={{
-                                cursor: 'pointer', // Cambia el cursor a un puntero para indicar interactividad
-                                color: typoClick ? "black" : "#1976D2",
-                                fontWeight: 'bold'
-                            }}
-                        >
-                            Description
-                        </Typography>
+                        itemList={([{ label: "Description", value: "1" }, { label: "Policy", value: "2" }])}
+                        product={(product)}
 
-                        <Typography
-                            onClick={() => { setTypoClick(false) }}
-                            variant="h6"
-                            sx={{
-                                cursor: 'pointer',
-                                color: typoClick ? "#1976D2" : "black",
-                                fontWeight: 'bold'
-                            }}
-                        >
-                            Policy
-                        </Typography>
+                    ></TabSelectorX>
 
-                    </Box>
-
-                    {typoClick ?
-                        <Box>
-                            {product && product.productDescription}
-                        </Box>
-                        :
-                        <Box>
-                            {purchasePolicy()}
-                        </Box>
-                    }
                 </Box>
 
-                <Divider />
+                <Typography variant="tab" color={"orange"} ml={2} > Reviews </Typography>
 
-                <Typography variant="h6" sx={{ color: "#1976D2", fontWeight: 'bold', mb: '2%', mt: '2%' }}>Related Products</Typography>
-                <Box sx={{ minHeight: 50, mb: '2%', display: 'flex', flexDirection: 'row', justifyContent: 'center', }}>
+                <Divider sx={{ mb: '2%', mt: '2%' }} />
+
+                <Box sx={{ minHeight: 50, mt: 4, ml: 5, mb: 5, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+
+                    {reviewList ? renderReviews() :
+
+                        <Box>
+                            <Typography color={"#666666"} ml={2}> Be the first to Write a review !
+                            </Typography>
+                            <Button sx={{ ml: 1, mt: 3, }}>Write a review here ... </Button>
+                        </Box>}
+
+                </Box>
+
+                <Typography variant="tab" color={"orange"} ml={2} > Related Products</Typography>
+
+                <Divider sx={{ mb: '2%', mt: '2%' }} />
+
+                <Box sx={{ minHeight: 50, mb: '2%', mt: '4%', display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
 
                     <RelatedProductsCarousel
 

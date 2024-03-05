@@ -13,6 +13,27 @@ export async function getProductsFromSellers() {
     }
 }
 
+export async function getListOfProductsFromSellers(sellerCompanyId) {
+    try {
+
+        const { data } = await api.get(`/productSellerCompany/customer/${sellerCompanyId}`)
+
+            // {
+            // headers: {
+            //     Authorization: localStorage.getItem("token")
+            // }
+
+        // )
+
+        return data
+
+    } catch (error) {
+
+        console.log(error.message)
+
+    }
+}
+
 export async function getOneProductFromSeller(id) {
     try {
 
@@ -36,11 +57,6 @@ export async function UpdateQtyAvailable(id, availableQty) {
             console.error("No token found in localStorage.");
             throw new Error("Authentication token not found.");
         }
-
-        // Construir el cuerpo de la solicitud
-        // const requestBody = {
-        //     qtyAvailable: qtyAvailable,
-        // };
 
         // Realizar la solicitud PUT
         const response = await api.put(`/productSellerCompany/cart/${id}`, { qtyAvailable: availableQty }, {
