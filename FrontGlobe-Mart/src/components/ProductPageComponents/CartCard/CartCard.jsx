@@ -102,9 +102,9 @@ export default function CartCard({ quantityAv, seller, addProductClick, onQuanti
                     onQuantityChange={handleQuantityChange}
                 />
                 {(quantityAv <= 3 && quantityAv > 0) && <Typography variant="caption" sx={{ color: "red", }}>Only {quantityAv} available</Typography>}
-                <Typography sx={{ mx: 3, fontSize: "0.9rem", color: "#1976D2", }}>
+                <Typography sx={{ mx: 3, fontSize: "0.9rem", color: "primary.main", }}>
                     Sold by:&nbsp;
-                    <Link to={`/SellerPage/${sellerCompanyId}`}><strong>{seller}</strong>
+                    <Link to={`/SellerPage/${sellerCompanyId}`}>{seller}
                     </Link>
                 </Typography>
 
@@ -126,17 +126,24 @@ export default function CartCard({ quantityAv, seller, addProductClick, onQuanti
                         onClick={addProductClick}
                         disabled={quantityAv <= 0}
                         variant="contained"
-                        color="success"
-                        sx={{ width: "100%", height: "100%", }}>
-                        {!isAdded && <Typography>
-                            {quantityAv > 0 ?
-                                <span > Add to Cart </span> :
-                                <span sx={{ textTransform: 'none' }}>
-                                    O<span style={{ textTransform: 'lowercase' }}>
-                                        ut of stock</span>
-                                </span>
-                            }
-                        </Typography>}
+                        color="secondary" // Cambiado a secondary para usar el color secondary.main
+                        sx={{
+                            width: "100%",
+                            height: "100%",
+                            // Añade estilos adicionales aquí si es necesario
+                        }}
+                    >
+                        {!isAdded && (
+                            <Typography variant="button" color="white" sx={{ textTransform: 'none' }}> {/* Agrega color="white" para el texto */}
+                                {quantityAv > 0 ? (
+                                    <span>ADD TO CART</span> // El color del texto se hereda de Typography
+                                ) : (
+                                    <span>
+                                        Out of stock
+                                    </span>
+                                )}
+                            </Typography>
+                        )}
                         {isAdded && <CheckCircleOutlineIcon variant="success" sx={{ fontSize: "1.5rem" }} />}
                     </Button>
                 </Box>

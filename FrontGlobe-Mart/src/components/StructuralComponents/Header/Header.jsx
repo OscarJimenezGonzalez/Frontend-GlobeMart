@@ -77,13 +77,14 @@ function Header() {
 
   return (
 
-    <AppBar >
+    // <AppBar sx={{ backgroundColor: '#FFFFFF' }}>
+    <AppBar>
       {
         !isSmallScreen &&
-        <Box sx={{ height: '100px', backgroundColor: '#FFFFFF', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <Box sx={{ height: '100px', backgroundColor: '#FFFFFF', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #E7E7E7', width: "100%" }}>
           <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'start', width: "100%" }}>
             <Box sx={{ ml: 4, width: "10%", minWidth: 130 }}>
-              <Typography color={'#3B4FB7'} variant="h5" component="div" ><Link to={'/'} style={{ textDecoration: 'none', color: 'inherit' }}> Globe-Mart </Link></Typography>
+              <Typography color={'secondary.main'} variant="h5" component="div" ><Link to={'/'} style={{ textDecoration: 'none', color: 'inherit' }}> Globe-Mart </Link></Typography>
             </Box>
             <Box sx={{ ml: 1, width: "100%" }}>
               <TextField
@@ -162,14 +163,14 @@ function Header() {
             <SwipeableDrawerMenu productCategory={productCategories} />  {/* Le pasamos las categorias de proguctos como props  */}
           </Box>
 
-          <Button onClick={() => { navigate('/SellerWelcomePage') }} variant="contained" sx={{ backgroundColor: "#29D1CA" }}>Become a seller</Button>
+          <Button onClick={() => { navigate('/SellerWelcomePage') }} variant="contained" sx={{ minWidth: 300, backgroundColor: "secondary.main" }}>Become a seller</Button>
 
           <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', alignContent: 'center', mr: 4 }}>
             <IconButton
               onClick={cartLink}
               size="large"
               edge="end"
-              color="inherit"
+              color="secondary"
               aria-label="shopping cart"
               sx={{ mr: 1 }}
             >

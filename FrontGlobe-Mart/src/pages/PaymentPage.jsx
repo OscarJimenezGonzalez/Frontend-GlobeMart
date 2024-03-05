@@ -1,8 +1,16 @@
 import React from 'react'
+import Payment from '../components/OtherComponents/Payment/Payment'
+import { Box } from '@mui/system'
 
 function PaymentPage() {
     return (
-        <div>Insert Payment Technology here</div>
+        <Box>
+
+            Insert Payment Technology here
+
+            <Payment />
+
+        </Box>
     )
 }
 

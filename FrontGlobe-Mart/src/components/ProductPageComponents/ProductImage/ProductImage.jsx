@@ -50,7 +50,7 @@ export default function ProductImage({ productImg }) {
                     maxWidth: 700,
                     minHeigth: 600,
                     maxHeigth: 700,
-                    // bgcolor: 'background.paper',
+                    bgcolor: 'background.paper',
                     boxShadow: 24,
                     // p: 5,
                 }}>

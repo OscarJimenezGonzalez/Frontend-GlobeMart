@@ -17,6 +17,7 @@ import ToggleButtonSizeShoe from '../../MicroComponents/ToggleButtonSizeShoe/Tog
 import ShippingInfoCard from '../../MicroComponents/ShippingInfoCard/ShippingInfoCard';
 import { mainContext } from '../../../contexts/mainContext';
 import { truncateText } from '../../../auxStr/auxStructures';
+import PriceContainer from '../../MicroComponents/PriceContainer/PriceContainer';
 
 
 export default function ProductOptions({ hasShoeSize, hasClothingSize, hasColorOption, sale, name, brand, model, price, priceAfterDiscount, id, salePerc, productDescription, descriptionId }) {
@@ -32,31 +33,33 @@ export default function ProductOptions({ hasShoeSize, hasClothingSize, hasColorO
         <Box sx={{ minWidth: "30%", maxWidth: "30%", minHeight: 450, display: "flex", flexDirection: "column", mx: 5 }}>
 
             <Box>
-                <Typography variant='h6' sx={{ mb: 1, color: "#3B4FB7", fontWeight: 'bold' }}>{name}</Typography>
-                <Typography variant='subtitle1' sx={{ mb: 0.5, color: "#3B4FB7", }}>Model: {model}</Typography>
-                <Typography variant='subtitle1' sx={{ mb: 1, color: "#3B4FB7", }}>Brand: {brand}</Typography>
-                <Typography variant='subtitleRef' sx={{ color: "grey", display: 'block', mt: 1 }}>Ref: 00000000000000000000{id}</Typography>
+                <Typography variant='h6' sx={{ mb: 1, color: "primary.main", fontWeight: 'bold' }}>{name}</Typography>
+                <Typography variant='subtitle1' sx={{ mb: 0.5, color: "primary.main", }}>Model: {model}</Typography>
+                <Typography variant='subtitle1' sx={{ mb: 1, color: "primary.main", }}>Brand: {brand}</Typography>
+                <Typography variant='subtitleRef' sx={{ color: "secondary.main", display: 'block', mt: 1 }}>Ref: 00000000000000000000{id}</Typography>
             </Box>
 
             <Divider sx={{ my: 3 }}></Divider>
 
-            <Box sx={{ '& > *': { mb: 1, color: "#1976D2" } }}>
+            <PriceContainer />
+
+
+            {/* <Box sx={{ '& > *': { mb: 1, color: "#1976D2" } }}>
                 <Box sx={{ display: "flex", flexDirection: "row", gap: 3, color: "black" }}>
                     <Box sx={{ display: "flex", flexDirection: "row" }}>
                         {sale && <Typography sx={{ color: "red" }}>Last Price:&nbsp;</Typography>}
                         {sale && <Typography sx={{ textDecoration: 'line-through', color: "red" }}>{price}€ </Typography>}
                     </Box>
-                    {sale && <Typography sx={{ color: "green" }}>Save: {Math.round(price * (salePerc * 0.01))} € </Typography>}
+                    {sale && <Typography sx={{ color: "grey" }}>Save: {Math.round(price * (salePerc * 0.01))} € </Typography>}
                 </Box>
                 <Box sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
                     {sale &&
-                        <Typography sx={{
-                            fontSize: '18px',
-                            fontWeight: 'bold',
+                        <Typography variant='subtitle1' sx={{
+
                             mb: 1,
-                            color: "#2E7D32"
+                            color: "primary.main",
                         }}>
-                            Price: {priceAfterDiscount} €
+                            Price: <strong>{priceAfterDiscount}</strong> €
                         </Typography>}
                     {!sale &&
                         <Typography sx={{
@@ -65,10 +68,12 @@ export default function ProductOptions({ hasShoeSize, hasClothingSize, hasColorO
                             mb: 1,
                             color: "#2E7D32"
                         }}>
-                            Price: {price} €
+                            Price: <strong>{price}</strong>  €
                         </Typography>}
                 </Box>
-            </Box>
+            </Box> */}
+
+
 
             <Box sx={{ minHeight: 200 }}>
 
@@ -76,14 +81,14 @@ export default function ProductOptions({ hasShoeSize, hasClothingSize, hasColorO
 
                     {(hasShoeSize || hasClothingSize) &&
                         <Box sx={{ mb: 2 }}>
-                            <Typography sx={{ mb: 2, color: "#1976D2" }}>Size:</Typography>
+                            <Typography sx={{ mb: 2, color: "secondary.main" }}>Size:</Typography>
                             {hasClothingSize && <ToggleButtonSize />}
                             {hasShoeSize && <ToggleButtonSizeShoe />}
                         </Box>
                     }
                     {hasColorOption &&
                         <Box>
-                            <Typography sx={{ mb: 2, color: "#1976D2" }}>Color:</Typography>
+                            <Typography sx={{ mb: 2, color: "secondary.main" }}>Color:</Typography>
                             <ToggleButtonColor />
                         </Box>
                     }

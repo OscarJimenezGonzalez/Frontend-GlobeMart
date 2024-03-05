@@ -4,21 +4,23 @@ export const mainTheme = createTheme({
     palette: {
         type: 'light',
         primary: {
-            main: '#3B4FB7',
+            main: '#6E665F',
             // fixed: '#74F8E5',
             // fixedVariant: '#005048'
         },
         secondary: {
-            main: '#29D1CA',
+            main: '#F9AB19',
             // fixedDim: '#FABD00',
             // fixedVariant: '#5B4300'
         },
         terciary: {
-            main: '#CCE5FF',
+            main: '#F0EDE5',
             onContainer: '#001E31'
         },
         background: {
             default: '#FFFFFF'
+            // default: '#F0EDE5'
+
         },
         text: {
             primary: '#00201C',

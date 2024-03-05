@@ -103,7 +103,7 @@ export default function SwipeableDrawerMenu({ productCategory }) {
                 <Box key={anchor}>
 
                     <IconButton onClick={toggleDrawer(anchor, true)}>
-                        <MenuIcon sx={{ fontSize: 35, color: 'white' }} />
+                        <MenuIcon sx={{ fontSize: 35, color: 'secondary.main' }} />
                     </IconButton>
 
                     <SwipeableDrawer

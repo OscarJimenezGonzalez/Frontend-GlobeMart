@@ -42,9 +42,9 @@ function ProductAddedCard({ qty, imageURL, name, priceAfterDiscount, model, comp
             </Card>
             <Card sx={{ borderRadius: 0, flex: 1, maxHeight: 200, height: 200, p: 2 }}>
 
-                <Box sx={{ flex: '1', px: 2, py: 1, bgcolor: 'background.paper', borderRadius: 2, boxShadow: 1 }}>
+                <Box sx={{ flex: '1', px: 2, py: 1, bgcolor: 'background.paper', borderRadius: 2 }}>
                     <Box display="flex" justifyContent="space-between">
-                        <Typography sx={{ fontWeight: 'bold', mb: 1 }} variant="h6" component="div">
+                        <Typography sx={{ fontWeight: 'bold', mb: 1, color: 'primary.main' }} variant="h6" component="div">
                             {name}
                         </Typography>
 
