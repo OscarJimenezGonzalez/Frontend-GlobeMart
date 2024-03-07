@@ -34,47 +34,122 @@ export const mainTheme = createTheme({
             letterSpacing: '0.0em',
         },
         h4: {
-            fontSize: '2.125rem', // Ejemplo: 34px
+            fontSize: '2.125rem',
             fontWeight: 400,
             letterSpacing: '0.025em',
         },
         h5: {
-            fontSize: '1.5rem', // Ejemplo: 24px
+            fontSize: '1.5rem',
             fontWeight: 400,
             letterSpacing: '0.0em',
         },
         h6: {
-            fontSize: '1.25rem', // Ejemplo: 20px
+            fontSize: '1.25rem',
             fontWeight: 200, // Peso medio para más prominencia, similar al de los Tabs
             letterSpacing: '0.015em',
             // textTransform: 'uppercase',
         },
         tab: {
-            fontSize: '0.90rem', // Ejemplo: 20px
-            fontWeight: 400, // Peso medio para más prominencia, similar al de los Tabs
+            fontSize: '0.90rem',
+            fontWeight: 400,
             letterSpacing: '0.015em',
             textTransform: 'uppercase', // Los tabs suelen tener texto en mayúscula
 
         },
         subtitle1: {
-            fontSize: '1rem', // Ejemplo: 16px
+            fontSize: '1rem',
             fontWeight: 400,
             letterSpacing: '0.015em',
         },
         subtitle2: {
-            fontSize: '0.875rem', // Ejemplo: 14px
+            fontSize: '0.875rem',
             fontWeight: 500,
             letterSpacing: '0.01em',
         },
         subtitleRef: {
-            fontSize: '0.90rem', // Ejemplo: 20px
+            fontSize: '0.90rem',
             fontWeight: 400, // Peso medio para más prominencia, similar al de los Tabs
             letterSpacing: '0.015em',
 
         },
-        // Añade aquí más variantes si es necesario
+
     },
-    // Otras configuraciones de tema si es necesario
+
+    components: {
+
+        // Aqui vamos a modificar las propiededes del boton de MUI.
+        MuiButton: {
+            styleOverrides: {
+
+                root: {
+                    // fontWeight: 'bold'
+                },
+                containedPrimary: {
+                    backgroundColor: '#6E665F',
+                    color: '#ffffff',
+                    '&:hover': {
+                        backgroundColor: '#5a524c'
+                    },
+                    '&.Mui-disabled': { // Selector de estado para 'disabled'
+                        backgroundColor: 'lightgray',
+                        color: '#ffffff',
+                    },
+                    // '&:active': {   // Selector de estado para cuando clicamos el boton.
+                    //     backgroundColor: '#c68215', // Un color más oscuro o cualquier estilo que desees al hacer clic
+                    // },
+                },
+                containedSecondary: {
+                    backgroundColor: '#F9AB19',
+                    color: '#ffffff',
+                    '&:hover': {
+                        backgroundColor: '#d89416', // Un poco más oscuro al pasar el mouse
+                    },
+                    '&.Mui-disabled': { // Selector de estado para 'disabled'
+                        backgroundColor: 'lightgray',
+                        color: '#ffffff',
+                    },
+                },
+                containedSuccess: {
+                    backgroundColor: '#2E7D32',
+                    color: '#ffffff',
+                    '&:hover': {
+                        backgroundColor: '#1B5E20', // Un poco más oscuro al pasar el mouse
+                    },
+                    '&.Mui-disabled': { // Selector de estado para 'disabled'
+                        backgroundColor: 'lightgray',
+                        color: '#ffffff',
+                        // textTransform: 'lowercase'
+                    },
+                },
+                containedDanger: {
+                    backgroundColor: '#D32F2F',
+                    color: 'white',
+                    '&:hover': {
+                        backgroundColor: '#B71C1C',
+                    },
+                    '&.Mui-disabled': { // Selector de estado para 'disabled'
+                        backgroundColor: 'lightgray',
+                        color: '#ffffff',
+                    },
+
+                },
+                outlinedPrimary: {
+                    color: '#6E665F',
+                    '&:hover': {
+                        borderColor: '#F9AB19'
+                    },
+                    border: '1px solid #6E665F',
+                    borderColor: '#6E665F',
+                    '&.Mui-disabled': { // Selector de estado para 'disabled'
+                        backgroundColor: 'lightgray',
+                        color: '#ffffff ',
+
+                    },
+                }
+            }
+        }
+    }
+
 });
 
 

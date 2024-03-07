@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import router from './router'
 import './App.css'
 import { CssBaseline, ThemeProvider } from '@mui/material'
+
 import { mainContext } from './contexts/mainContext'
 import { checkTokenExpiration } from './auxStr/auxStructures'
 import { mainTheme } from './themes/mainTheme'

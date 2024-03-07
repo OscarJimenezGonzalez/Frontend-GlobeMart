@@ -109,7 +109,7 @@ function Header() {
 
             {(!token) && (
               <Box sx={{ mr: 1.5 }}>
-                <Button variant="contained" sx={{ color: '#FFFFFF' }}>
+                <Button variant="containedPrimary">
                   <Link to={'/Login'} style={{ textDecoration: 'none', color: 'inherit' }}>
                     Log In
                   </Link>
@@ -163,7 +163,7 @@ function Header() {
             <SwipeableDrawerMenu productCategory={productCategories} />  {/* Le pasamos las categorias de proguctos como props  */}
           </Box>
 
-          <Button onClick={() => { navigate('/SellerWelcomePage') }} variant="contained" sx={{ minWidth: 300, backgroundColor: "secondary.main" }}>Become a seller</Button>
+          <Button onClick={() => { navigate('/SellerWelcomePage') }} variant="containedSecondary" sx={{ minWidth: 300, backgroundColor: "secondary.main" }}>Become a seller</Button>
 
           <Box sx={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center', alignContent: 'center', mr: 4 }}>
             <IconButton

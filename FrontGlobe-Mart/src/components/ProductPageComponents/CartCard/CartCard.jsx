@@ -125,26 +125,19 @@ export default function CartCard({ quantityAv, seller, addProductClick, onQuanti
                     <Button
                         onClick={addProductClick}
                         disabled={quantityAv <= 0}
-                        variant="contained"
-                        color="secondary" // Cambiado a secondary para usar el color secondary.main
+                        variant="containedSecondary"
+                        color="secondary"
                         sx={{
                             width: "100%",
                             height: "100%",
-                            // Añade estilos adicionales aquí si es necesario
                         }}
                     >
                         {!isAdded && (
-                            <Typography variant="button" color="white" sx={{ textTransform: 'none' }}> {/* Agrega color="white" para el texto */}
-                                {quantityAv > 0 ? (
-                                    <span>ADD TO CART</span> // El color del texto se hereda de Typography
-                                ) : (
-                                    <span>
-                                        Out of stock
-                                    </span>
-                                )}
+                            <Typography variant="button" color="white" sx={{ textTransform: 'none' }}>
+                                {quantityAv > 0 ? "ADD TO CART" : "Out of stock"}
                             </Typography>
                         )}
-                        {isAdded && <CheckCircleOutlineIcon variant="success" sx={{ fontSize: "1.5rem" }} />}
+                        {isAdded && <CheckCircleOutlineIcon sx={{ color: 'white', fontSize: "1.5rem" }} />}
                     </Button>
                 </Box>
                 <Divider sx={{ alignSelf: 'center', height: '1px', width: "75%" }} />
@@ -209,11 +202,8 @@ export default function CartCard({ quantityAv, seller, addProductClick, onQuanti
                         </Typography>
 
                         <Button
-                            variant="contained"
-                            sx={{
-                                backgroundColor: "#2E7D32",
-                                '&:hover': { backgroundColor: '#1b5e20' }
-                            }}
+                            variant="containedSuccess"
+
                             onClick={() => { navigate('/Login'); }}>
                             Login
                         </Button>

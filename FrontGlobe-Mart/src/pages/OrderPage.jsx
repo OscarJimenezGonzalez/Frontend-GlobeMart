@@ -18,7 +18,7 @@ import { countries } from '../auxStr/countries'
 import { addressType } from '../auxStr/addressType'
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
-import AutorenewIcon from '@mui/icons-material/Autorenew';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
 function OrderPage() {
 
@@ -79,8 +79,9 @@ function OrderPage() {
 
                 if (response) {
 
-                    console.log(response)
                     setInfoSent(true)
+                    console.log(response)
+
 
                 } else {
 
@@ -130,7 +131,6 @@ function OrderPage() {
         try {
 
             const response = await createOrder({
-                // le pasamos los campos exactos que pide el modelo.
                 billNumber,
                 shippingAddress,
                 date,
@@ -153,7 +153,6 @@ function OrderPage() {
                 console.log("Unexpected Error creating Order.")
                 setInfoSent(false)
 
-
             }
 
         } catch (error) {
@@ -173,7 +172,7 @@ function OrderPage() {
 
             <Box component="form" noValidate sx={{ mt: 3, mb: 8, width: "50vw" }} onSubmit={sendOrderForm}>
 
-                <Typography variant="h6" sx={{ mb: 3 }}>Shipping Info: {""}</Typography>
+                <Typography variant="subtitle1" color={"primary"} sx={{ mb: 3 }}>DELIVERY DETAILS: {""}</Typography>
 
                 <Grid container spacing={2}>
 
@@ -182,6 +181,7 @@ function OrderPage() {
                             selectedOption={((value) => { setSelectedAddessType(value) })}
                             titleLabel={("St. Type:")}
                             optionList={(addressType)}
+
                         />
                     </Grid>
 
@@ -197,6 +197,14 @@ function OrderPage() {
                             id="Address1"
                             autoComplete="off"
                             defaultValue={""}
+
+                            // Colorear el borde cuando este enfocado
+                            sx={{
+                                '& .MuiInput-underline:after': {
+                                    borderBottomColor: 'secondary.main', // Color del borde cuando está enfocado
+                                },
+                            }}
+
                         />
                     </Grid>
                     <Grid item xs={12}>
@@ -253,6 +261,7 @@ function OrderPage() {
                             id="City"
                             autoComplete="off"
                             defaultValue={""}
+
                         />
                     </Grid>
                     <Grid item xs={12}>
@@ -267,6 +276,15 @@ function OrderPage() {
                             id="Zip Code"
                             autoComplete="off"
                             defaultValue={""}
+
+                        // para que se coloree de naranja el borde inferior. 
+                        // sx={{
+
+                        //     '& .MuiInput-underline:hover:not(.Mui-disabled):before': {
+                        //         borderBottomColor: 'secondary.main',
+                        //     },
+                        // }}
+
                         />
                     </Grid>
                     <Grid item xs={12}>
@@ -302,19 +320,45 @@ function OrderPage() {
                 </Grid>
                 <Divider sx={{ mt: 8, mb: 6 }} />
 
-                <Button
+                {/* {!infoSent ? <Button
                     type="submit"
                     fullWidth
                     variant="contained"
+                    color="primary"
                     sx={{ mt: 4, mb: 2 }}
                 >
+
                     Confirm Shipping Info and go to Payment
+                </Button> : */}
+
+
+                <Button
+
+                    type="submit"
+                    variant="contained"
+                    fullWidth
+                    color="secondary" // Cambiado a secondary para usar el color secondary.main
+                    sx={{
+                        width: "100%",
+                        height: "100%",
+                        // Añade estilos adicionales aquí si es necesario
+                    }}
+                >
+                    {!infoSent && (
+                        <Typography variant="button" color="white" sx={{ textTransform: 'toUpperCase' }}>
+                            Confirm Shipping Info and go to Payment
+                        </Typography>
+                    )}
+                    {infoSent && <CheckCircleOutlineIcon variant="success" sx={{ fontSize: "1.5rem" }} />}
                 </Button>
-                {infoSent === true && <Box display="flex" gap={2} alignItems="center" justifyContent="center">
+
+
+                {infoSent && infoSent === true && <Box display="flex" gap={2} alignItems="center" justifyContent="center">
                     <CheckCircleIcon sx={{ fontSize: 60, color: "green" }} />
                     <Typography sx={{ fontSize: 20, color: "green", alignContent: "center" }}>Your order has been created successfully. Redirecting to Payment...{redirectToPayment()}
                     </Typography>
                 </Box>}
+
                 {infoSent === false && <Box display="flex" gap={2} alignItems="center" justifyContent="center">
                     <CancelIcon sx={{ fontSize: 50, color: "red" }} />
                     <Typography sx={{ fontSize: 20, color: "red", alignContent: "center" }}>Your order could not be created. Please try again.</Typography>

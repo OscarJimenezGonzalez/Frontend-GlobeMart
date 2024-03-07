@@ -191,6 +191,8 @@ function ProductPage() {
                 {/* <ProductImageCaroussel></ProductImageCaroussel> */}
 
                 <ProductOptions
+
+                    product={(product && product)}
                     name={(product && product.product.name)}
                     model={(product && product.product.model)}
                     brand={(product && product.product.brand)}

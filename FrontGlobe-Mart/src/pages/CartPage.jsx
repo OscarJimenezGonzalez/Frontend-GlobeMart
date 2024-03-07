@@ -140,7 +140,7 @@ function CartPage() {
                 <Button
                     onClick={goToOrderPage}
                     disabled={(cartList.length === 0)}
-                    variant='contained' color="success" size='large'>Go to Shipping Info
+                    variant='containedSuccess' sx={{ width: "30%" }}>Go to Shipping Info
                 </Button>
             </Box>
         </Box >

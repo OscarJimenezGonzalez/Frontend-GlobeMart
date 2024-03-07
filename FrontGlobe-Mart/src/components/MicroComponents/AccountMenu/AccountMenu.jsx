@@ -17,6 +17,8 @@ import { useNavigate } from 'react-router-dom';
 import { mainContext } from '../../../contexts/mainContext';
 import { useContext, useEffect, useState } from 'react';
 import { getOwnProfile } from '../../../services/userService'
+import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 
 export default function AccountMenu() {
 
@@ -91,6 +93,7 @@ export default function AccountMenu() {
                 PaperProps={{
                     elevation: 0,
                     sx: {
+                        // p: 1,
                         overflow: 'visible',
                         filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
                         mt: 1.5,
@@ -118,10 +121,17 @@ export default function AccountMenu() {
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
                 <MenuItem onClick={handleClose}>
-                    <Avatar /> <Link to="/Profile" style={{ textDecoration: 'none', color: 'inherit' }}>Profile</Link>
+                    <ListItemIcon>
+                        <ManageAccountsIcon />
+                    </ListItemIcon>
+                    <Link to="/Profile" style={{ textDecoration: 'none', color: 'inherit' }}>
+                        My Profile </Link>
                 </MenuItem>
                 <MenuItem onClick={handleClose}>
-                    <Avatar /> My account
+                    <ListItemIcon>
+                        <RocketLaunchIcon />
+                    </ListItemIcon>
+                    My Orders
                 </MenuItem>
                 <Divider />
                 <MenuItem onClick={handleClose}>
@@ -144,7 +154,6 @@ export default function AccountMenu() {
 
                     <Button
                         onClick={logOut}
-
                         style={{
                             background: 'none',
                             border: 'none',
@@ -156,8 +165,6 @@ export default function AccountMenu() {
                         }}>
                         Log Out
                     </Button>
-
-
                 </MenuItem>
             </Menu>
         </React.Fragment >

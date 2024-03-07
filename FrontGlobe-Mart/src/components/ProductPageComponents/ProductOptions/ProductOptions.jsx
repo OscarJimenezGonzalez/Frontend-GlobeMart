@@ -20,7 +20,7 @@ import { truncateText } from '../../../auxStr/auxStructures';
 import PriceContainer from '../../MicroComponents/PriceContainer/PriceContainer';
 
 
-export default function ProductOptions({ hasShoeSize, hasClothingSize, hasColorOption, sale, name, brand, model, price, priceAfterDiscount, id, salePerc, productDescription, descriptionId }) {
+export default function ProductOptions({ hasShoeSize, hasClothingSize, hasColorOption, sale, name, brand, model, price, priceAfterDiscount, id, salePerc, productDescription, descriptionId, product }) {
 
     const [shippingInfoOff, setShippingInfoOff] = useState(true);
     const [financialInfoOff, setFinancialInfoOff] = useState(true);
@@ -41,7 +41,10 @@ export default function ProductOptions({ hasShoeSize, hasClothingSize, hasColorO
 
             <Divider sx={{ my: 3 }}></Divider>
 
-            <PriceContainer />
+            <PriceContainer
+                productInfo={(product)}
+
+            />
 
 
             {/* <Box sx={{ '& > *': { mb: 1, color: "#1976D2" } }}>
