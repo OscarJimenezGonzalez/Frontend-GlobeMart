@@ -17,6 +17,48 @@ export async function getOrders() {
     }
 
 }
+export async function getOneOrder(orderId) {
+
+    try {
+
+        const { data } = await api.get(`/order/${orderId}`,
+            // {
+            // headers: {
+            //     Authorization: localStorage.getItem("token")
+            // }
+            // }
+
+        )
+
+        return data
+
+    } catch (error) {
+        console.log(error.message)
+    }
+
+}
+
+export async function getOwnOrders() {
+
+    try {
+
+        const { data } = await api.get(`/order/customer`,
+            {
+                headers: {
+                    Authorization: localStorage.getItem("token")
+                }
+            }
+        )
+
+        return data
+
+    } catch (error) {
+        console.log(error.message)
+    }
+
+}
+
+
 
 export async function createOrder(orderData) {
 

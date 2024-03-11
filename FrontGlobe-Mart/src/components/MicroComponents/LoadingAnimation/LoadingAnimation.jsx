@@ -1,35 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { CircularProgress, TextField } from '@material-ui/core';
+import React from 'react';
+import { Box } from '@mui/material';
+import loadingGif from '../../../assets/images/loadingOrange.gif';
+import loading from '../../../assets/images/loading.gif';
 
-export default function LoadingTextField() {
 
-    const [loading, setLoading] = useState(true);
-    // const [data, setData] = useState('');
-
-    useEffect(() => {
-        // Simular carga de datos desde la base de datos
-        setTimeout(() => {
-            // setData('Datos cargados desde la base de datos');F
-            setLoading(false);
-        }, 2000); // Simulación de tiempo de carga de 2 segundos
-    }, []);
+export default function LoadingAnimation() {
 
     return (
-        <div>
-            {loading ? (
-                <CircularProgress />
-            ) : (
-                <TextField
-                    label="Datos de la base de datos"
-                    variant="outlined"
-                    value={data}
-                    fullWidth
-                    InputProps={{
-                        readOnly: true,
-                    }}
-                />
-            )}
-        </div>
+        <Box style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100px', height: '100px', overflow: 'hidden' }}>
+            <img src={loadingGif} alt={"animation.gif"} style={{ width: '30%', height: 'auto' }} />
+        </Box>
     );
 }
 

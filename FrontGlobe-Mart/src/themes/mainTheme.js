@@ -110,7 +110,7 @@ export const mainTheme = createTheme({
                     },
                 },
                 containedSuccess: {
-                    backgroundColor: '#2E7D32',
+                    backgroundColor: '#218838',
                     color: '#ffffff',
                     '&:hover': {
                         backgroundColor: '#1B5E20', // Un poco más oscuro al pasar el mouse

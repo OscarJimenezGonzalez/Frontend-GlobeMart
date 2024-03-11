@@ -16,9 +16,9 @@ import { paymentOptions } from '../auxStr/paymentOptions'
 import { deliveryOptions } from '../auxStr/deliveryOptions'
 import { countries } from '../auxStr/countries'
 import { addressType } from '../auxStr/addressType'
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CancelIcon from '@mui/icons-material/Cancel';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import LoadingAnimation from '../components/MicroComponents/LoadingAnimation/LoadingAnimation'
 
 function OrderPage() {
 
@@ -41,6 +41,8 @@ function OrderPage() {
     }, [paymentOption, deliveryOption, selectedCountry])
 
     const redirectToPayment = () => {
+
+        scrollTo(0, 50000)
 
         setTimeout(() => {
             navigate('/PaymentPage')
@@ -131,6 +133,7 @@ function OrderPage() {
         try {
 
             const response = await createOrder({
+
                 billNumber,
                 shippingAddress,
                 date,
@@ -143,8 +146,6 @@ function OrderPage() {
             if (response) {
 
                 console.log(response)
-                console.log("podemos acceder a response?", response.id)
-                // await setLastOrderId(response.id)
                 let lastOrderId = response.id
                 await sendCartItemList(lastOrderId)
 
@@ -285,12 +286,14 @@ function OrderPage() {
                         //     },
                         // }}
 
+
                         />
+
                     </Grid>
                     <Grid item xs={12}>
 
                         <OptionSelector
-                            selectedOption={((value) => { setSelectedCountry(value) })}
+                            selectedOp tion={((value) => { setSelectedCountry(value) })}
                             titleLabel={("Country")}
                             optionList={(countries)}
                         ></OptionSelector>
@@ -320,22 +323,10 @@ function OrderPage() {
                 </Grid>
                 <Divider sx={{ mt: 8, mb: 6 }} />
 
-                {/* {!infoSent ? <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    sx={{ mt: 4, mb: 2 }}
-                >
-
-                    Confirm Shipping Info and go to Payment
-                </Button> : */}
-
-
                 <Button
 
                     type="submit"
-                    variant="contained"
+                    variant={!infoSent ? "contained" : "containedSuccess"}
                     fullWidth
                     color="secondary" // Cambiado a secondary para usar el color secondary.main
                     sx={{
@@ -353,14 +344,16 @@ function OrderPage() {
                 </Button>
 
 
-                {infoSent && infoSent === true && <Box display="flex" gap={2} alignItems="center" justifyContent="center">
-                    <CheckCircleIcon sx={{ fontSize: 60, color: "green" }} />
-                    <Typography sx={{ fontSize: 20, color: "green", alignContent: "center" }}>Your order has been created successfully. Redirecting to Payment...{redirectToPayment()}
+                {infoSent && infoSent === true && <Box display="flex" flexDirection={"column"} gap={2} alignItems="center" justifyContent="center">
+
+                    <Typography variant="subtitle1" sx={{ color: "green", alignContent: "center", mt: 3 }}>Your order has been created successfully. Redirecting to Payment...{redirectToPayment()}
                     </Typography>
+                    <LoadingAnimation />
+
                 </Box>}
 
-                {infoSent === false && <Box display="flex" gap={2} alignItems="center" justifyContent="center">
-                    <CancelIcon sx={{ fontSize: 50, color: "red" }} />
+                {infoSent === false && <Box mb={3} display="flex" gap={2} alignItems="center" justifyContent="center">
+                    <CancelIcon sx={{ fontSize: 20, color: "red" }} />
                     <Typography sx={{ fontSize: 20, color: "red", alignContent: "center" }}>Your order could not be created. Please try again.</Typography>
                 </Box>}
 
@@ -369,7 +362,6 @@ function OrderPage() {
         )
 
     }
-
 
     return (
         <Box>{renderShippingInfo()}</Box>
