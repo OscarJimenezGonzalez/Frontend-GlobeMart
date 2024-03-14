@@ -106,15 +106,16 @@ function CartPage() {
             ...prevData,
             productsAddedToCart: prevData.productsAddedToCart.filter(element => element.productAdded.id !== productId)
             /// actualizamos el contexto filtrando por el id del producto seleccionado para eliminar
+            /// al filtrar regeneramos el array nuevamente. 
+
         }))
 
     }
 
     return (
         <Box sx={{ width: "100%", display: "flex", flexDirection: "column", m: 1, p: 3, gap: 1 }} >
-            {/* <Typography variant='overline' >Your products: </Typography> */}
             <Card sx={{ borderRadius: 0, minHeight: 100, p: 5 }}>
-                <Typography variant='h5' > {cartList.length > 0 ? "Your products: " : "Your cart is empty..."} </Typography>
+                <Typography variant='h5' color="primary" > {cartList.length > 0 ? "Your products: " : "Your cart is empty..."} </Typography>
             </Card>
 
             <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>

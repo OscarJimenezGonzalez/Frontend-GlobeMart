@@ -26,7 +26,6 @@ function LandingPage() {
         const fetchProductData = async () => {
 
             const pData = await getProductsFromSellers()
-            console.log("product data", pData)
             const searchedProducts = pData.filter(products => products.product.name.includes(searchInputData))
             setProductData(searchedProducts)
 

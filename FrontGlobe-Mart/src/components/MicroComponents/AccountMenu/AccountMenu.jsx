@@ -131,7 +131,8 @@ export default function AccountMenu() {
                     <ListItemIcon>
                         <RocketLaunchIcon />
                     </ListItemIcon>
-                    My Orders
+                    <Link to="/CustomerPage" style={{ textDecoration: 'none', color: 'inherit' }}>
+                        My Orders </Link>
                 </MenuItem>
                 <Divider />
                 <MenuItem onClick={handleClose}>

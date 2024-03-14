@@ -17,6 +17,8 @@ const tabList = [
 ]
 
 
+// Commercial page open to customers, to see seller products and other info. 
+
 function SellerPage() {
 
     const { sellerCompanyId } = useParams()

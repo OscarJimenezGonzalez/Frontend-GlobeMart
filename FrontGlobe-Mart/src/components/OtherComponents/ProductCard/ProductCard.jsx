@@ -86,10 +86,7 @@ export default function ProductCard({ productName, productModel, productBrand, p
               {price} €
             </Typography>
           }
-          {/* {salePercentage > 0 &&
-            <Box sx={{ fontSize: '12px', p: 0.5, color: "#1976D2", border: "1px solid #1976D2" }}>-{salePercentage}%
-            </Box>
-          } */}
+
         </Box>
 
       </CardContent>

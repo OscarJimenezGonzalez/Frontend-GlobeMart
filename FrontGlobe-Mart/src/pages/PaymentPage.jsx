@@ -7,33 +7,29 @@ import { Card } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { getOwnOrders } from '../services/orderService';
 import { createPayment } from '../services/paymentService';
-
+import { updateOrderStatus } from '../services/orderService';
+import { updateCartItemListStatus } from '../services/cartItemService';
 
 const stripePromise = loadStripe("pk_test_51OpXQsKsh6DZ7CX8hwIo0Aw5nWx5d5ioqRN9f4B1m4PKUc1oqT7fYwBXzLcGHjb5bvKr331eMQhUqLGXQuxeSMqb00xTAtgGtu");
 
 function PaymentPage() {
 
     const [orderData, setOrderData] = useState([]);
+    const [currentOrder, setCurrentOrder] = useState({})
     const [currentOrderPrice, setCurrentOrderPrice] = useState(0)
     const [clientSecret, setClientSecret] = useState("")
 
+    // Traemos los datos de la ultima order creada por el usuario
     useEffect(() => {
 
         const fetchData = async () => {
 
-            const ownOrders = await getOwnOrders()
-            setOrderData(ownOrders)
-            setCurrentOrderPrice(ownOrders[ownOrders.length - 1].totalPrice)
-
-
             try {
 
-                const amount = 10000
-                console.log(ownOrders[ownOrders.length - 1].totalPrice)
-                // No consigo pasar el amount real, por fallo del formato probablement
-
-                const amount2 = parseFloat(ownOrders[ownOrders.length - 1].totalPrice)
-
+                const ownOrders = await getOwnOrders()
+                setOrderData(ownOrders)
+                setCurrentOrder(ownOrders[ownOrders.length - 1])
+                let amount = ownOrders[ownOrders.length - 1].totalPrice
                 const response = await createPayment({ amount });
                 console.log("client Secret", response)
                 setClientSecret(response.clientSecret);
@@ -50,6 +46,7 @@ function PaymentPage() {
 
     }, [])
 
+    // console logs 
     useEffect(() => {
 
         console.log("Order Data ", orderData)
@@ -57,29 +54,46 @@ function PaymentPage() {
 
     }, [orderData])
 
-    useEffect(() => {
+    // Update order Status y cartItems Status
 
-        console.log("Order Data ", orderData)
-        // console.log("Order length ", orderListLength)
+    const handleOrderStatus = async () => {
 
-    }, [orderData])
+        const orderId = currentOrder.id
+        try {
 
-    // const handleSubmitPayment = async (event) => {
+            const updateOrder = await updateOrderStatus(orderId,
 
-    //     event.preventDefault();
-    //     setLoading(true);
+                { isPayed: true }
 
-    //     try {
+            )
 
-    //         const amount = 1400
+            if (updateOrder) {
 
-    //     } catch (error) {
+                console.log(updateOrder, "Success updating Order!")
 
-    //     }
+            }
+
+            const updatedCartItems = await updateCartItemListStatus(orderId,
+
+                { settled: true }
+
+            )
+
+            if (updatedCartItems) {
+
+                console.log(updatedCartItems, "Success updating CartItems!")
+
+            }
 
 
+        } catch (error) {
 
-    // }
+            console.log("Error updating Order Status")
+
+        }
+
+
+    }
 
     return (
 
@@ -87,7 +101,11 @@ function PaymentPage() {
             <Elements stripe={stripePromise} options={{ clientSecret }}>
                 <Box display={"flex"} alignItems={"center"} >
                     <Card sx={{ minWidth: 600, minHeight: 500, display: "flex", justifyContent: "center", alignItems: "center", mb: 12 }}>
-                        <PaymentForm currentOrderPrice={currentOrderPrice} />
+                        <PaymentForm
+                            currentOrder={currentOrder.totalPrice}
+                            clientSecret={clientSecret}
+                            submitPayment={handleOrderStatus}
+                        />
                     </Card>
                 </Box>
             </Elements >

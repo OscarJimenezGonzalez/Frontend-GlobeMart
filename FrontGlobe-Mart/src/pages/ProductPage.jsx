@@ -21,6 +21,7 @@ import RatingComponentSimple from '../components/MicroComponents/RatingComponent
 import { getReviewsFromProduct } from '../services/productReviewService.js';
 import VerifiedPurchase from '../components/MicroComponents/VerifiedPurchase/VerifiedPurchase.jsx';
 import Stack from '@mui/material/Stack';
+import RatingNotGiven from '../components/MicroComponents/RatingComponent/RatingNotGiven.jsx';
 
 function ProductPage() {
 
@@ -73,6 +74,7 @@ function ProductPage() {
             const paramToReview = product.id
             const fetchData = async () => {
                 const reviews = await getReviewsFromProduct(paramToReview);
+                console.log(reviews, "Lista Reviews")
                 setReviewList(reviews)
                 return reviews
             }
@@ -81,17 +83,25 @@ function ProductPage() {
 
     }, [product])
 
+
+
     ///// Console.logs
     useEffect(() => {
 
         if (reviewList) {
-            console.log("ReviewList Marica", reviewList[0].createdAt.slice(0, 10))
+            console.log("ReviewList", reviewList[0].createdAt.slice(0, 10))
         }
 
         // console.log("context updated", mainData)
         // console.log("Producto a renderizar:", product)
     }, [mainData, product, reviewList])
     ///// Console.logs
+
+    useEffect(() => {
+
+
+
+    }, [], [reviewList])
 
     const updateQtyInDB = (productAddedId, quantity) => {
 
@@ -138,6 +148,14 @@ function ProductPage() {
             }
 
         }
+    }
+
+    const reFetchReviews = async () => {
+
+        const reviews = await getReviewsFromProduct(productVersionId);
+        setReviewList(reviews)
+        return reviews
+
     }
 
     // Funcion que renderiza las reviews
@@ -247,23 +265,29 @@ function ProductPage() {
 
                 <Typography variant="tab" color={"orange"} ml={2} > Reviews </Typography>
 
-                <Divider sx={{ mb: '2%', mt: '2%' }} />
+                <Divider sx={{ mb: '2%', mt: '1%' }} />
 
                 <Box sx={{ minHeight: 50, mt: 4, ml: 5, mb: 5, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
 
                     {reviewList ? renderReviews() :
 
                         <Box>
-                            <Typography color={"#666666"} ml={2}> Be the first to Write a review !
+                            <Typography color={"#666666"} mb={3}> Be the first to Write a review ...
                             </Typography>
-                            <Button sx={{ ml: 1, mt: 3, }}>Write a review here ... </Button>
-                        </Box>}
+                        </Box>
+
+                    }
+
+                    <RatingNotGiven
+                        productVersionId={(productVersionId)}
+                        reFetchReviewsInFather={(reFetchReviews)}
+                    ></RatingNotGiven>
 
                 </Box>
 
                 <Typography variant="tab" color={"orange"} ml={2} > Related Products</Typography>
 
-                <Divider sx={{ mb: '2%', mt: '2%' }} />
+                <Divider sx={{ mb: '2%', mt: '1%' }} />
 
                 <Box sx={{ minHeight: 50, mb: '2%', mt: '4%', display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
 

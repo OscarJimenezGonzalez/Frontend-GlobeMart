@@ -2,7 +2,7 @@ import { Box } from '@mui/system'
 import React from 'react'
 import SellerWelcomeCard from '../components/OtherComponents/SellerWelcomeCard/SellerWelcomeCard'
 
-function SellerIntroPage() {
+function SellerWelcomePage() {
     return (
         <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", mb: 10, mx: 10 }}>
 
@@ -12,4 +12,4 @@ function SellerIntroPage() {
     )
 }
 
-export default SellerIntroPage
+export default SellerWelcomePage

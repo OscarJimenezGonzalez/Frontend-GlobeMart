@@ -20,3 +20,43 @@ export async function createCartItem(itemData) {
     }
 
 }
+
+export async function updateCartItemListStatus(orderId, cartItemStatus) {
+
+    try {
+
+        const { data } = await api.put(`/cartItem/updateStatus/${orderId}`, cartItemStatus, {
+            headers: {
+                Authorization: localStorage.getItem("token")
+            }
+        })
+
+        return data
+
+    } catch (error) {
+
+        console.log(error.message)
+
+    }
+
+}
+
+export async function getCartItemsFromOrder(orderId) {
+
+    try {
+
+        const { data } = await api.get(`/cartItem/customer/${orderId}`,
+            {
+                headers: {
+                    Authorization: localStorage.getItem("token")
+                }
+            }
+        )
+
+        return data
+
+    } catch (error) {
+        console.log(error.message)
+    }
+
+}

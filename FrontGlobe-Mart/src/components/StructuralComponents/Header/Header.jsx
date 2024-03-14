@@ -174,7 +174,7 @@ function Header() {
               aria-label="shopping cart"
               sx={{ mr: 1 }}
             >
-              <ShoppingCartIcon sx={{ fontSize: 35 }} />
+              <ShoppingCartIcon color={"white"} sx={{ fontSize: 35, color: "white" }} />
             </IconButton>
           </Box>
         </Box>

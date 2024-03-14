@@ -1,5 +1,6 @@
 import api from "./mainConfig/config";
 
+
 export async function getOrders() {
 
     try {
@@ -17,6 +18,7 @@ export async function getOrders() {
     }
 
 }
+
 export async function getOneOrder(orderId) {
 
     try {
@@ -58,8 +60,6 @@ export async function getOwnOrders() {
 
 }
 
-
-
 export async function createOrder(orderData) {
 
     try {
@@ -79,3 +79,25 @@ export async function createOrder(orderData) {
     }
 
 }
+
+export async function updateOrderStatus(orderId, orderStatus) {
+
+    try {
+
+        const { data } = await api.put(`/order/${orderId}`, orderStatus, {
+            headers: {
+                Authorization: localStorage.getItem("token")
+            }
+        })
+
+        return data
+
+    } catch (error) {
+
+        console.log(error.message)
+
+    }
+
+}
+
+

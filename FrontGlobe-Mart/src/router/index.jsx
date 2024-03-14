@@ -13,6 +13,8 @@ import SellerPage from '../pages/SellerPage'
 import SellerHome from '../pages/SellerHome'
 import OrderPage from '../pages/OrderPage'
 import PaymentPage from '../pages/PaymentPage'
+import PaymentSucceededPage from '../pages/PaymentSucceededPage'
+import CustomerPage from '../pages/CustomerPage'
 
 
 const router = createBrowserRouter([
@@ -73,6 +75,14 @@ const router = createBrowserRouter([
             {
                 path: '/PaymentPage',
                 element: <PaymentPage />
+            },
+            {
+                path: '/PaymentSucceededPage',
+                element: <PaymentSucceededPage />
+            },
+            {
+                path: '/CustomerPage',
+                element: <CustomerPage />
             }
 
         ]
