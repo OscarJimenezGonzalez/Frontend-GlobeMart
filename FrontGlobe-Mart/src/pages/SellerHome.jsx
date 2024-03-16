@@ -9,4 +9,4 @@ function SellerHome() {
     )
 }
 
-export default SellerHome
+export default SellerHome 

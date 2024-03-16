@@ -13,20 +13,25 @@ import { useNavigate } from 'react-router'
 function CartPage() {
 
     const { mainData, setMainData } = useContext(mainContext)
-    const [productToDelete, setProductToDelete] = useState()
+
     const [total, setTotal] = useState()
+    const [totalAfterTax, setTotalAfterTax] = useState()
+    const [tax, setTax] = useState()
     const [discount, setDiscount] = useState()
+
     const navigate = useNavigate()
     let cartList = mainData.productsAddedToCart
 
-    // console.log("contexto", mainData.productsAddedToCart)
+    console.log("contexto", mainData.productsAddedToCart)
 
     useEffect(() => {
 
         allproductSum()
         alldiscountSum()
+        totalTaxCreator()
+        setTotalAfterTax(total + tax)
 
-    }, [mainData.productsAddedToCart])
+    }, [mainData.productsAddedToCart, total])
 
     const goToOrderPage = () => {
 
@@ -55,6 +60,11 @@ function CartPage() {
         total = Math.round((total) * 100) / 100
         setTotal(total)
 
+    }
+
+    const totalTaxCreator = () => {
+
+        setTax(Math.round((total * 0.07) * 100) / 100)
     }
 
     const alldiscountSum = () => {
@@ -105,12 +115,15 @@ function CartPage() {
         setMainData(prevData => ({
             ...prevData,
             productsAddedToCart: prevData.productsAddedToCart.filter(element => element.productAdded.id !== productId)
+
             /// actualizamos el contexto filtrando por el id del producto seleccionado para eliminar
             /// al filtrar regeneramos el array nuevamente. 
 
         }))
 
     }
+
+
 
     return (
         <Box sx={{ width: "100%", display: "flex", flexDirection: "column", m: 1, p: 3, gap: 1 }} >
@@ -129,10 +142,18 @@ function CartPage() {
                         <Typography sx={{ ml: 2 }} variant='h7'>- {discount} €   </Typography>
 
                     </Box>}
+
+                {tax !== 0 &&
+                    <Box>
+                        <Typography variant='h7' sx={{ color: "primary.main" }}>Tax (7%): </Typography>
+                        <Typography sx={{ ml: 2, color: "primary.main" }} variant='h7'>{tax && tax} €   </Typography>
+
+                    </Box>}
+
                 {total !== 0 &&
                     <Box>
-                        <Typography variant='h7'>Total: </Typography>
-                        <Typography sx={{ ml: 2 }} variant='h7'><strong> {total} € </strong>  </Typography>
+                        <Typography variant='h7' sx={{ ml: 2, color: "primary.main" }}>Total: </Typography>
+                        <Typography sx={{ ml: 2, color: "warning.main" }} variant='h7' ><strong> {totalAfterTax} € </strong>  </Typography>
 
                     </Box>}
             </Box>

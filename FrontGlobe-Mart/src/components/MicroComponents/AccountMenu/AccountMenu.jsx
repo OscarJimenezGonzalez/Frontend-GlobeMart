@@ -19,6 +19,9 @@ import { useContext, useEffect, useState } from 'react';
 import { getOwnProfile } from '../../../services/userService'
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
+import FireplaceIcon from '@mui/icons-material/Fireplace';
+import RoofingIcon from '@mui/icons-material/Roofing';
 
 export default function AccountMenu() {
 
@@ -134,6 +137,15 @@ export default function AccountMenu() {
                     <Link to="/CustomerPage" style={{ textDecoration: 'none', color: 'inherit' }}>
                         My Orders </Link>
                 </MenuItem>
+                {profileInfo && profileInfo.role === "seller" &&
+                    < MenuItem onClick={handleClose}>
+                        <ListItemIcon>
+                            <RoofingIcon />
+                        </ListItemIcon>
+                        <Link to={`/SellerHome/${profileInfo.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                            Seller Dashboard </Link>
+                    </MenuItem>
+                }
                 <Divider />
                 <MenuItem onClick={handleClose}>
                     <ListItemIcon>

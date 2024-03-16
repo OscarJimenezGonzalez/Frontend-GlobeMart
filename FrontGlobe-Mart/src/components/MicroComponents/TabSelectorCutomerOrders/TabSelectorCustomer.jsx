@@ -33,8 +33,10 @@ export default function TabSelectorCustomer({ orderList }) {
                             orderId={order.id}
                             orderStatus={order.orderStatus}
                             isPayed={order.isPayed}
+                            paymentMethod={order.paymentMethod}
                             totalPrice={order.totalPrice}
                             createdAt={formatedDate}
+                            shippingAddress={order.shippingAddress}
 
                         />
                     )
@@ -65,6 +67,7 @@ export default function TabSelectorCustomer({ orderList }) {
                             isPayed={order.isPayed}
                             totalPrice={order.totalPrice}
                             createdAt={formatedDate}
+                            shippingAddress={order.shippingAddress}
                         />
                     )
                 })
@@ -93,6 +96,8 @@ export default function TabSelectorCustomer({ orderList }) {
                             isPayed={order.isPayed}
                             totalPrice={order.totalPrice}
                             createdAt={formatedDate}
+                            shippingAddress={order.shippingAddress}
+
                         />
                     )
                 })
@@ -121,7 +126,7 @@ export default function TabSelectorCustomer({ orderList }) {
 
                 <TabPanel value="1">{renderAllOrders()}
 
-            
+
 
                 </TabPanel>
                 <TabPanel value="2">{renderPendingOrders()}</TabPanel>

@@ -63,6 +63,8 @@ export default function ProductCard({ productName, productModel, productBrand, p
             backgroundColor: 'rgba(0, 0, 0, 0.5)',
             // borderRadius: 1,
           }}>Out of Stock</Typography>}
+
+
         </Box>
       </ Link >
       <CardContent sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
@@ -98,8 +100,8 @@ export default function ProductCard({ productName, productModel, productBrand, p
           <Button onClick={addToCartClick} size="small">Add to Cart</Button>
           <Button onClick={handleFavClick} size="small">
             {favClicked ?
-              <FavoriteIcon sx={{ color: '#1976D2', fontSize: '18px', width: '18px', height: '18px' }} /> :
-              <FavoriteBorderIcon sx={{ color: '#1976D2', fontSize: '18px', width: '18px', height: '18px' }} />
+              <FavoriteIcon sx={{ color: 'secondary.main', fontSize: '18px', width: '18px', height: '18px' }} /> :
+              <FavoriteBorderIcon sx={{ color: 'primary.main', fontSize: '18px', width: '18px', height: '18px' }} />
             }
           </Button>
         </Box>

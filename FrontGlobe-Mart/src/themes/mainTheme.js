@@ -13,23 +13,25 @@ export const mainTheme = createTheme({
             // fixedDim: '#FABD00',
             // fixedVariant: '#5B4300'
         },
-        terciary: {
-            main: '#F0EDE5',
+        warning: {
+            main: '#FF6000',
             onContainer: '#001E31'
         },
         background: {
             default: '#FFFFFF'
             // default: '#F0EDE5'
-
+            // default: '#E7E7E7'
         },
         text: {
             primary: '#00201C',
-        }
+        },
+        type: 'dark',
+        
     },
 
     typography: {
         h3: {
-            fontSize: '3rem', // Ejemplo: 48px
+            fontSize: '3rem',
             fontWeight: 400,
             letterSpacing: '0.0em',
         },

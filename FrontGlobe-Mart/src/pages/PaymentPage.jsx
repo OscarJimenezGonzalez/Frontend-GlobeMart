@@ -63,7 +63,10 @@ function PaymentPage() {
 
             const updateOrder = await updateOrderStatus(orderId,
 
-                { isPayed: true }
+                {
+                    isPayed: true,
+                    orderStatus: "Awaiting Shipment"
+                }
 
             )
 

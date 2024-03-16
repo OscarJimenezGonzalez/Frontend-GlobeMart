@@ -7,9 +7,10 @@ import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import OrderDetailsDropdown from './OrderDetailsDropdown';
+import LocalShippingRoundedIcon from '@mui/icons-material/LocalShippingRounded';
 
 const CustomerOrderCard = ({ cartItemList, orderId, orderStatus, isPayed,
-    totalPrice, createdAt, handleDetailClick }) => {
+    totalPrice, createdAt, shippingAddress, paymentMethod }) => {
 
     const [dropDownIcon, setDropDownIcon] = useState(false)
 
@@ -40,9 +41,16 @@ const CustomerOrderCard = ({ cartItemList, orderId, orderStatus, isPayed,
         <Card variant="outlined" sx={{ maxWidth: "90%", mt: 3, ml: 5, mb: 2, p: 2 }}>
             <CardContent>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <Box>
+                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                         {isPayed && < Chip label={orderStatus} color={orderStatus === "Completed" ? "success" : "primary"} />}
                         {!isPayed && <Chip label="Payment Pending" color='warning' />}
+
+                        {orderStatus === "On Delivery" &&
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, borderRadius: '20px', p: 1, border: "1px solid gray" }}>
+                                <LocalShippingRoundedIcon sx={{ fontSize: 17, color: 'warning.main' }} />
+                            </Box>
+                        }
+
                     </Box>
                     <Box display={"flex"} flexDirection={"column"} gap={1}>
                         <Typography sx={{ mr: 1 }} variant="body2" color="textSecondary">
@@ -109,7 +117,16 @@ const CustomerOrderCard = ({ cartItemList, orderId, orderStatus, isPayed,
                 </Box>
             </CardActions>
 
-            <OrderDetailsDropdown cartItemList={cartItemList} isOpen={dropDownIcon} />
+            <OrderDetailsDropdown
+
+                cartItemList={cartItemList}
+                isOpen={dropDownIcon}
+                shippingAddress={shippingAddress}
+                orderStatus={orderStatus}
+                isPayed={isPayed}
+                paymentMethod={paymentMethod}
+
+            />
 
         </Card >
     );

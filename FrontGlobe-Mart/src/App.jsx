@@ -20,6 +20,7 @@ function App() {
     logged: false,
     searchData: "",
     selectedPCategories: [],
+    
 
   })
 
