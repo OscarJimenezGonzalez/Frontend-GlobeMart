@@ -4,20 +4,19 @@ import React from 'react'
 import ProductAddedCard from '../components/OtherComponents/ProductAddedCard/ProductAddedCard'
 import { useContext, useState, useEffect } from 'react'
 import { mainContext } from '../contexts/mainContext'
-import { Card } from '@mui/material'
+import { Card, Grid } from '@mui/material'
 import Button from '@mui/material/Button'
-import Divider from '@mui/material/Divider'
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { useNavigate } from 'react-router'
+import CartPriceDetail from '../components/MicroComponents/CartPriceDetail/CartPriceDetail'
 
 function CartPage() {
 
     const { mainData, setMainData } = useContext(mainContext)
 
-    const [total, setTotal] = useState()
-    const [totalAfterTax, setTotalAfterTax] = useState()
-    const [tax, setTax] = useState()
-    const [discount, setDiscount] = useState()
+    const [total, setTotal] = useState(0)
+    const [totalAfterTax, setTotalAfterTax] = useState(0)
+    const [tax, setTax] = useState(0)
+    const [discount, setDiscount] = useState(0)
 
     const navigate = useNavigate()
     let cartList = mainData.productsAddedToCart
@@ -29,9 +28,15 @@ function CartPage() {
         allproductSum()
         alldiscountSum()
         totalTaxCreator()
-        setTotalAfterTax(total + tax)
+
 
     }, [mainData.productsAddedToCart, total])
+
+    useEffect(() => {
+
+        setTotalAfterTax(Math.round((total + tax) * 100) / 100)
+
+    }, [total, tax])
 
     const goToOrderPage = () => {
 
@@ -45,7 +50,6 @@ function CartPage() {
         // Después acudimos a orderPage a confirmar los datos de pedido
         navigate("/OrderPage")
     }
-
 
     const allproductSum = () => {
 
@@ -81,7 +85,7 @@ function CartPage() {
         setDiscount(total)
 
     }
-
+    
     const renderAddedProducts = () => {
 
         return (
@@ -123,9 +127,8 @@ function CartPage() {
 
     }
 
-
-
     return (
+
         <Box sx={{ width: "100%", display: "flex", flexDirection: "column", m: 1, p: 3, gap: 1 }} >
             <Card sx={{ borderRadius: 0, minHeight: 100, p: 5 }}>
                 <Typography variant='h5' color="primary" > {cartList.length > 0 ? "Your products: " : "Your cart is empty..."} </Typography>
@@ -135,28 +138,46 @@ function CartPage() {
                 {renderAddedProducts()}
             </Box>
 
-            <Box sx={{ width: "100%", display: "flex", flexDirection: 'column', justifyContent: "flex-end", alignItems: 'end', alignContent: 'end', pt: 2, pr: 1 }}>
-                {discount !== 0 &&
-                    <Box>
-                        <Typography variant='h7'>Discount:     </Typography>
-                        <Typography sx={{ ml: 2 }} variant='h7'>- {discount} €   </Typography>
-
-                    </Box>}
-
-                {tax !== 0 &&
-                    <Box>
-                        <Typography variant='h7' sx={{ color: "primary.main" }}>Tax (7%): </Typography>
-                        <Typography sx={{ ml: 2, color: "primary.main" }} variant='h7'>{tax && tax} €   </Typography>
-
-                    </Box>}
-
-                {total !== 0 &&
-                    <Box>
-                        <Typography variant='h7' sx={{ ml: 2, color: "primary.main" }}>Total: </Typography>
-                        <Typography sx={{ ml: 2, color: "warning.main" }} variant='h7' ><strong> {totalAfterTax} € </strong>  </Typography>
-
-                    </Box>}
+            <Box sx={{ display: "flex", justifyContent: "end" }}>
+                {/* <Divider sx={{ width: "50%", mt: 4, mb: 3 }} /> */}
             </Box>
+
+
+            {cartList.length > 0 &&
+
+                < Box sx={{ width: "100%", display: "flex", flexDirection: 'column', justifyContent: "flex-end", alignItems: 'end', alignContent: 'end', mb: 6 }}>
+
+                    <CartPriceDetail
+                        label="Price"
+                        labelColor="primary.main"
+                        value={total}
+                        valueColor="primary.main"
+                        valueWeigth={"bold"}
+                    ></CartPriceDetail>
+                    {discount > 0 &&
+                        <CartPriceDetail
+                            label="Discount"
+                            labelColor="primary.main"
+                            value={discount}
+                            valueColor="warning.main"
+                        ></CartPriceDetail>
+                    }
+                    <CartPriceDetail
+                        label="Tax (7%)"
+                        labelColor="primary.main"
+                        value={tax}
+                        valueColor="primary.main"
+                    ></CartPriceDetail>
+                    <CartPriceDetail
+                        label="Total"
+                        labelColor="primary.main"
+                        value={totalAfterTax}
+                        valueColor="warning.main"
+                        valueWeigth={"bold"}
+                    ></CartPriceDetail>
+
+                </Box>
+            }
 
             <Box sx={{ display: "flex", justifyContent: "center", pb: 3 }} >
                 <Button

@@ -38,6 +38,7 @@ export default function LogInForm() {
             logged: true
         }))
         navigate(-1)
+        scrollTo(0, 0)
         // lo usamos para volver a la pagina anterior. 
     }
     const handleSubmit = async (event) => {

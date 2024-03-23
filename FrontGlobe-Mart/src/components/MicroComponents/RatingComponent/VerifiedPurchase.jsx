@@ -5,7 +5,7 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 const VerifiedPurchase = ({ name, date }) => {
     return (
         <Box sx={{
-            p: 2,
+            // p: 2,
             display: 'flex',
             flexDirection: 'row',
             justifyContent: 'start',
@@ -15,10 +15,10 @@ const VerifiedPurchase = ({ name, date }) => {
         }}
             elevation={3}>
 
-            <Avatar sx={{ bgcolor: 'green', mr: 2 }}>{name[0].toUpperCase()}</Avatar>
+            <Avatar sx={{ bgcolor: 'primary', mr: 2 }}>{name[0].toUpperCase()}</Avatar>
             <Box>
                 <Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>
-                    {name.length > 10 ? name.slice(0, 15) + '...' : name}
+                    {name.length > 11 ? name.slice(0, 15) + '...' : name}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
                     {date}

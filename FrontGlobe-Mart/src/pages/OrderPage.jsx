@@ -24,7 +24,7 @@ function OrderPage() {
 
     const [error, setError] = useState("")
     const [infoSent, setInfoSent] = useState()
-    const [selectedAddessType, setSelectedAddessType] = useState()
+    const [selectedAddessType, setSelectedAddessType] = useState("")
     const [paymentOption, setPaymentOption] = useState()
     const [deliveryOption, setDeliveryOption] = useState()
     const [selectedCountry, setSelectedCountry] = useState()
@@ -293,7 +293,7 @@ function OrderPage() {
                     <Grid item xs={12}>
 
                         <OptionSelector
-                            selectedOp tion={((value) => { setSelectedCountry(value) })}
+                            selectedOption={((value) => { setSelectedCountry(value) })}
                             titleLabel={("Country")}
                             optionList={(countries)}
                         ></OptionSelector>

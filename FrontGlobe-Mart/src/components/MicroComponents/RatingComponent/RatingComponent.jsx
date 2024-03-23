@@ -2,18 +2,26 @@ import * as React from 'react';
 import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
+import { Box } from '@mui/material';
 
-export default function RatingComponent({ sellerCompanyData }) {
+export default function RatingComponent({ opinionNumber, ratingAverage, backgroundColor }) {
 
-    const sellerCompanyRating = parseFloat(sellerCompanyData.customerRating)
+    const ratingAverageFixed = parseFloat(ratingAverage)
 
     return (
         <Stack
             spacing={1}
+            backgroundColor={backgroundColor}
+            borderRadius={3}
+            height={150}
+            width={170}
+            sx={{display: "flex", alignContent: "center", alignItems: "center", justifyContent: "center"}}
         >
-            <Typography variant="h4" component="legend">{sellerCompanyData.customerRating}</Typography>
-            <Rating name="rating-read" defaultValue={0} precision={0.5} value={sellerCompanyRating} readOnly />
-            <Typography variant="body2" component="legend">{sellerCompanyData.opinionNumber} opinions</Typography>
+            <Box>
+                <Typography variant="h4" component="legend">{ratingAverage}</Typography>
+                <Rating name="rating-read" defaultValue={0} precision={0.5} value={ratingAverageFixed} readOnly />
+                <Typography variant="body2" component="legend">{opinionNumber} opinions</Typography>
+            </Box>
         </Stack>
     );
 }

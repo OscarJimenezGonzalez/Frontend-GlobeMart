@@ -10,8 +10,6 @@ import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import SwipeableViews from 'react-swipeable-views';
 import { autoPlay } from 'react-swipeable-views-utils';
 
-
-
 // const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 
 const images = [
@@ -69,7 +67,7 @@ function ProductImageCaroussel() {
                     bgcolor: 'background.default',
                 }}
             >
-            {/* <Typography>{images[activeStep].label}</Typography> */}
+                {/* <Typography>{images[activeStep].label}</Typography> */}
             </Paper>
             {/* <AutoPlaySwipeableViews */}
             <SwipeableViews

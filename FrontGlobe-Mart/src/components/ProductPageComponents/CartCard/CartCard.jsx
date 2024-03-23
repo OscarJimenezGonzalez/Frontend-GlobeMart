@@ -13,9 +13,8 @@ import Divider from '@mui/material/Divider';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { mainContext } from '../../../contexts/mainContext';
 import Modal from '@mui/material/Modal';
-// import { Divider } from '@mui/material';
-import { isLogged } from '../../../auxStr/auxStructures';
-
+import LoginModal from '../../MicroComponents/LoginModal/LoginModal';
+import SuccessAddingProductModal from '../../MicroComponents/SuccessAddingProductModal/SuccessAddingProductModal';
 
 export default function CartCard({ quantityAv, seller, addProductClick, onQuantityChange, sellerCompanyId }) {
 
@@ -24,14 +23,11 @@ export default function CartCard({ quantityAv, seller, addProductClick, onQuanti
     const [isAdded, setIsAdded] = useState(false);
     const { mainData, setMainData } = useContext(mainContext);
 
-    const navigate = useNavigate()
+    const [openSuccess, setOpenSuccess] = useState(false);
+    const handleOpenSuccess = () => setOpenSuccess(true);
 
-    const [open, setOpen] = useState(false);
-    const [openLogging, setOpenLoggin] = useState(false)
-    const handleOpenSuccess = () => setOpen(true);
-    const handleCloseSuccess = () => setOpen(false);
-    const handleOpenLogin = () => setOpenLoggin(true)
-    const handleCloseLogin = () => setOpenLoggin(false)
+    const [openLogin, setOpenLogin] = useState(false)
+    const handleOpenLogin = () => setOpenLogin(true)
 
     // funcion que envía el cambio en la cantidad al componente padre (ProductPage)
     useEffect(() => {
@@ -145,71 +141,16 @@ export default function CartCard({ quantityAv, seller, addProductClick, onQuanti
                     A<span style={{ textTransform: 'lowercase' }}  >
                         dd to wish list</span></Button>
             </Box>
-            <Box>
-                <Modal
-                    open={open}
-                    onClose={handleCloseSuccess}
-                    aria-labelledby="modal-modal-title"
-                    aria-describedby="modal-modal-description"
-                >
-                    <Box sx={{
-                        position: 'absolute',
-                        top: '50%',
-                        left: '50%',
-                        transform: 'translate(-50%, -50%)',
-                        width: 400,
-                        bgcolor: 'background.paper',
-                        boxShadow: 24,
-                        p: 4,
-                        borderRadius: 1,
-                        textAlign: 'center',
-                        outline: 'none'
-                    }}>
-                        <CheckCircleOutlineIcon sx={{ fontSize: 60, color: "#2E7D32" }} />
-                        <Typography id="modal-title" variant="h6" component="h2" sx={{ color: "#2E7D32", mt: 2 }}>
-                            Product Successfully added to Cart
-                        </Typography>
-                    </Box>
-                </Modal>
-            </Box>
 
-            <Box>
-                <Modal
-                    open={openLogging}
-                    onClose={handleCloseLogin}
-                    aria-labelledby="modal-modal-title"
-                    aria-describedby="modal-modal-description"
-                >
-                    <Box sx={{
-                        position: 'absolute',
-                        top: '50%',
-                        left: '50%',
-                        transform: 'translate(-50%, -50%)',
-                        width: 400,
-                        bgcolor: 'background.paper',
-                        boxShadow: 24,
-                        p: 4,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                    }}>
+            <SuccessAddingProductModal
+                openSuccess={openSuccess}
+                closeSuccessModal={() => { setOpenSuccess(false) }}
+            />
 
-                        <Typography id="modal-title" variant="h6" component="h2" sx={{ color: "#2E7D32", mt: 2, mb: 2 }}>
-                            You must be logged in
-                        </Typography>
-                        <Typography variant="body1" sx={{ color: "#555", mb: 3 }}>
-                            Access exclusive features
-                        </Typography>
-
-                        <Button
-                            variant="containedSuccess"
-
-                            onClick={() => { navigate('/Login'); }}>
-                            Login
-                        </Button>
-                    </Box>
-                </Modal>
-            </Box>
+            <LoginModal
+                openLogin={openLogin}
+                closeLoginModal={() => { setOpenLogin(false) }}
+            />
 
         </Card >
 

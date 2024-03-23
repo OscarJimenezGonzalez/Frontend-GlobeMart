@@ -61,7 +61,6 @@ function LandingPage() {
                         salePercentage={productData.salePercentage}
                         qtyAvailable={productData.qtyAvailable}
                     />
-
                 )}
             </Box>
 
@@ -118,14 +117,15 @@ function LandingPage() {
     }
 
     return (
-        <Box>
+        <Box >
             <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%', maxHeight: '75vh' }}>
 
                 {commercialAds && renderRandomAd()}
 
             </Box>
-
-            {(selectedCatsLength <= 0) && renderProducts() || renderSelectedCatProducts()}
+            <Box sx={{ px: 10 }}>
+                {(selectedCatsLength <= 0) && renderProducts() || renderSelectedCatProducts()}
+            </Box>
 
         </Box>
     )

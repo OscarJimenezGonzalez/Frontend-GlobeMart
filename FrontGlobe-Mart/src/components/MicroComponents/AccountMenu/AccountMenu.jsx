@@ -137,7 +137,7 @@ export default function AccountMenu() {
                     <Link to="/CustomerPage" style={{ textDecoration: 'none', color: 'inherit' }}>
                         My Orders </Link>
                 </MenuItem>
-                {profileInfo && profileInfo.role === "seller" &&
+                {profileInfo.role === "seller" &&
                     < MenuItem onClick={handleClose}>
                         <ListItemIcon>
                             <RoofingIcon />

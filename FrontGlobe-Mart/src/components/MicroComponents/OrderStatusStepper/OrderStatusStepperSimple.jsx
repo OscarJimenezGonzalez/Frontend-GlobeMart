@@ -88,7 +88,7 @@ QontoStepIcon.propTypes = {
     completed: PropTypes.bool,
 };
 
-const steps = ['Pending Payment', 'Awaiting Shipment', 'Shipped', 'On Delivery', 'Completed'];
+const steps = ['Pending Payment', 'Accepted', 'In Progress', 'Completed'];
 
 
 export default function OrderStatusStepperSimple({ orderStatus }) {
@@ -97,7 +97,7 @@ export default function OrderStatusStepperSimple({ orderStatus }) {
     console.log(currentStep)
 
     return (
-        <Stack sx={{ display: 'flex', flexWrap: 'wrap', width: '60%' }} spacing={4}>
+        <Stack sx={{ display: 'flex', flexWrap: 'wrap', width: '50%' }} spacing={4}>
             <Stepper alternativeLabel activeStep={currentStep} connector={<QontoConnector />}>
                 {steps.map((label) => (
                     <Step key={label}>

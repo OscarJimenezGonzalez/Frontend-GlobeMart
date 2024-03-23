@@ -65,7 +65,7 @@ function PaymentPage() {
 
                 {
                     isPayed: true,
-                    orderStatus: "Awaiting Shipment"
+                    orderStatus: "Accepted"
                 }
 
             )
@@ -78,7 +78,10 @@ function PaymentPage() {
 
             const updatedCartItems = await updateCartItemListStatus(orderId,
 
-                { settled: true }
+                {
+                    settled: true,
+                    cartItemStatus: "Awaiting Shipment"
+                }
 
             )
 
@@ -94,7 +97,6 @@ function PaymentPage() {
             console.log("Error updating Order Status")
 
         }
-
 
     }
 

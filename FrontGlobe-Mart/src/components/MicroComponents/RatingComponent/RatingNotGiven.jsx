@@ -7,34 +7,40 @@ import { Button, Divider } from '@mui/material';
 import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
 import { useState, useEffect } from 'react';
 import { createOwnReview } from '../../../services/productReviewService';
-// import Divider from '@mui/material/';
 
-export default function RatingNotGiven({ productVersionId, reFetchReviewsInFather }) {
+export default function RatingNotGiven({ productVersionId, reFetchReviewsInFather, checkForLoggin, isLogged }) {
 
     const [rating, setRating] = useState(0);
     const [commentOn, setCommentOn] = useState(false)
     const [successComment, setSuccessComment] = useState(false)
     const [opinion, setOpinion] = useState("")
 
+    const resetRating = () => {
+
+        setRating(0)
+
+    }
+
     const commentSaved = () => {
 
         return (
             <Box
                 sx={{
-                    mt: 2, // Espacio superior para no pegarse al elemento anterior
-                    p: 1, // Un poco de padding para no estar tan ajustado
+                    mt: 2,
+                    p: 1,
+                    ml: 2,
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    backgroundColor: '#f0f0f0', // Un gris muy suave
-                    borderRadius: '4px', // Bordes ligeramente redondeados
+                    backgroundColor: '#f0f0f0',
+                    borderRadius: '4px', // 
                 }}
             >
                 <Typography
-                    variant="body2" // Un tamaño de letra más estándar y sutil
-                    sx={{ display: 'flex', alignItems: 'center', color: '#4caf50' }} // Un color discreto para el texto
+                    variant="body2"
+                    sx={{ display: 'flex', alignItems: 'center', color: '#4caf50' }}
                 >
-                    <AssignmentTurnedInIcon sx={{ fontSize: '1rem', mr: 0.5 }} /> {/* Icono más pequeño y con menos margen */}
+                    <AssignmentTurnedInIcon sx={{ fontSize: '1rem', mr: 0.5 }} />
                     Comment saved!
                 </Typography>
             </Box>
@@ -75,6 +81,7 @@ export default function RatingNotGiven({ productVersionId, reFetchReviewsInFathe
         }
 
         reFetchReviewsInFather()
+        resetRating()
 
     }
 
@@ -99,42 +106,71 @@ export default function RatingNotGiven({ productVersionId, reFetchReviewsInFathe
             }}
         >
 
-            {/* <Divider sx={{ mx: "auto", width: "30%", my: 3 }}></Divider> */}
-
-            {!commentOn && <Typography variant="subtitle1" color={"primary.main"}>Rate this product here!</Typography>}
-
-            <Rating
-
-                name="simple-controlled"
-                value={rating}
-                onChange={(event, newValue) => {
-                    setRating(newValue);
-                    setCommentOn(true)
-                }}
-            />
-
-            {
-                commentOn && <Box >
-
-                    <TextField
-                        label="Comentario"
-                        multiline
-                        rows={4} // Ajusta el número de líneas según necesites
-                        placeholder="Write your comment here..."
-                        variant="outlined"
-                        fullWidth
-                        sx={{ mb: 1 }}
-                        // value=""
-                        onChange={(e) => setOpinion(e.target.value)}
-
-                    />
-
-                    <Button onClick={submitComment}>Submit Review</Button>
-
-                </Box>
-            }
-
             {successComment && commentSaved()}
+
+            <Box sx={{ px: 2, py: 3, mb: 2, borderRadius: 4, width: "100%", alignItems: "center" }} display={"flex"} flexDirection={"row"} >
+
+                {!commentOn &&
+                    <Button
+                        onClick={() => {
+
+                            checkForLoggin()
+                            if (isLogged) {
+
+                                setCommentOn(true)
+
+                            }
+
+                        }}
+                        mb={1}
+                        variant="containedSecondary"
+                        color={"primary.main"}>
+                        Rate this product here!
+                    </Button>}
+
+                <Box>
+
+                    {
+                        commentOn && <Box mb={3} >
+                            <Rating
+                                sx={{ mb: 2 }}
+                                name="simple-controlled"
+                                value={rating}
+                                onChange={(event, newValue) => {
+                                    setRating(newValue);
+                                    setCommentOn(true)
+
+                                }}
+                            />
+                            <TextField
+                                label="Comentario"
+                                multiline
+                                rows={3}
+                                placeholder="Write your comment here..."
+                                variant="outlined"
+                                fullWidth
+                                sx={{ mb: 1 }}
+                                // value=""
+                                onChange={(e) => setOpinion(e.target.value)}
+
+                            />
+
+                            <Button variant="contained" onClick={submitComment}>Submit Review</Button>
+                            <Button
+                                sx={{ ml: 1 }}
+                                onClick={() => {
+                                    resetRating();
+                                    setCommentOn(false)
+                                }}>
+                                Cancel
+                            </Button>
+
+                        </Box>
+                    }
+                </Box>
+
+
+            </Box>
 
         </Box >
     );

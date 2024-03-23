@@ -21,14 +21,14 @@ function CustomerPage() {
         const orderData = await getOwnOrders()
 
         if (!orderData || orderData.length === 0) {
-          
+
           return console.log("No orders found")
 
         } else {
-          
+
           setOrderList(orderData)
           setInfoFetched(true)
-        
+
         }
 
       } catch (error) {
@@ -89,17 +89,20 @@ function CustomerPage() {
 
     <Box sx={{ width: '100%', display: "flex", flexDirection: "column", p: 2 }}>
 
-      <Typography variant="h6" color="primary" ml={1} sx={{ mb: 8 }}  > Customers Page </Typography>
+      <Typography variant="h6" color="primary" mx={3} mt={3} mb={4}  > Customers Page </Typography>
 
       <Typography variant="tab" color={"orange"} ml={3} > My Orders </Typography>
 
       <Divider sx={{ mb: '2%', mt: '1%', mx: 3 }} />
+      <Box ml={2}>
 
-      <TabSelectorCustomer
+        <TabSelectorCustomer
 
-        orderList={(orderList)}
+          orderList={(orderList)}
 
-      />
+        />
+
+      </Box>
 
       <Typography variant="tab" color={"orange"} ml={3} mt={8}> My Favourites </Typography>
 

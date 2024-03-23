@@ -21,7 +21,6 @@ function App() {
     searchData: "",
     selectedPCategories: [],
     
-
   })
 
   const data = { mainData, setMainData }

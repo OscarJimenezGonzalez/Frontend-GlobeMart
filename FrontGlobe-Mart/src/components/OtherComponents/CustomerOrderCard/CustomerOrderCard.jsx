@@ -52,12 +52,12 @@ const CustomerOrderCard = ({ cartItemList, orderId, orderStatus, isPayed,
                         }
 
                     </Box>
-                    <Box display={"flex"} flexDirection={"column"} gap={1}>
+                    <Box display={"flex"} flexDirection={"column"} alignItems={"end"} gap={1}>
                         <Typography sx={{ mr: 1 }} variant="body2" color="textSecondary">
                             Order created on the: &nbsp;&nbsp;<strong>{createdAt}</strong>
                         </Typography>
                         <Typography sx={{ mr: 1 }} variant="body2" color="textSecondary">
-                            Order number:  &nbsp;&nbsp;000000000000.0{orderId}
+                            Order number:  &nbsp;&nbsp;00000000000.0{orderId}
                         </Typography>
                     </Box>
                 </Box>

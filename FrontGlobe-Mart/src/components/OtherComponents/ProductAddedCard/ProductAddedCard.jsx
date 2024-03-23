@@ -64,12 +64,12 @@ function ProductAddedCard({ qty, imageURL, name, priceAfterDiscount, model, comp
                     <Typography variant="body2" color="text.secondary">
                         Amount: {qty}
                     </Typography>
-                    <Box sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
+                    <Box sx={{ display: "flex", flexDirection: "row", justifyContent: "space-between", }}>
                         <Typography sx={{ fontStyle: 'italic', mt: 1, mb: 2 }} variant="subtitle2" color="text.secondary">
                             Sold by: <Link to={`/sellerPage/${companyId}`}> {company}</Link>
                         </Typography>
 
-                        <Button onClick={() => { deleteProductFromCart(id) }} size="small" variant="contained" color="error" startIcon={<DeleteIcon />} sx={{ mt: 1 }}>
+                        <Button onClick={() => { deleteProductFromCart(id) }} size="small" variant="contained" color="error" startIcon={<DeleteIcon />} sx={{ mt: 1, ml: 3 }}>
                             Delete
                         </Button>
 

@@ -1,5 +1,6 @@
 import { Typography } from "@mui/material";
 
+
 export default function purchasePolicy() {
 
     return (
@@ -10,4 +11,4 @@ export default function purchasePolicy() {
             Refunds & Replacements: Refunds processed within 7-14 business days to the original payment method. Warranty claims may result in repair or replacement based on our assessment.
             Contact Us: For questions or to initiate a claim, contact our customer service. We're committed to a seamless</Typography>
     )
-} 
+}

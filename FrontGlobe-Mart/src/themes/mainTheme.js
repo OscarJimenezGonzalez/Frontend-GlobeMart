@@ -18,15 +18,22 @@ export const mainTheme = createTheme({
             onContainer: '#001E31'
         },
         background: {
-            default: '#FFFFFF'
+            default: '#FFFFFF',
             // default: '#F0EDE5'
             // default: '#E7E7E7'
+            brigth: '#F9F9F9'
+        },
+        borders: {
+            default: '1px solid #E7E7E7',
+            // default: '#F0EDE5'
+            // default: '#E7E7E7'
+            brigth: '#F9F9F9'
         },
         text: {
             primary: '#00201C',
         },
         type: 'dark',
-        
+
     },
 
     typography: {
@@ -123,8 +130,8 @@ export const mainTheme = createTheme({
                         // textTransform: 'lowercase'
                     },
                 },
-                containedDanger: {
-                    backgroundColor: '#D32F2F',
+                containedWarning: {
+                    backgroundColor: '#FF6000',
                     color: 'white',
                     '&:hover': {
                         backgroundColor: '#B71C1C',
@@ -142,6 +149,32 @@ export const mainTheme = createTheme({
                     },
                     border: '1px solid #6E665F',
                     borderColor: '#6E665F',
+                    '&.Mui-disabled': { // Selector de estado para 'disabled'
+                        backgroundColor: 'lightgray',
+                        color: '#ffffff ',
+
+                    },
+                },
+                outlinedSecondary: {
+                    color: '#F9AB19',
+                    '&:hover': {
+                        borderColor: '#FFFFFF'
+                    },
+                    border: '1px solid #6E665F',
+                    borderColor: '#FFFFFF',
+                    '&.Mui-disabled': { // Selector de estado para 'disabled'
+                        backgroundColor: 'lightgray',
+                        color: '#ffffff ',
+
+                    },
+                },
+                outlinedWarning: {
+                    color: '#FF6000',
+                    '&:hover': {
+                        borderColor: '#FF6000'
+                    },
+                    border: '1px solid #6E665F',
+                    borderColor: '#F9AB19',
                     '&.Mui-disabled': { // Selector de estado para 'disabled'
                         backgroundColor: 'lightgray',
                         color: '#ffffff ',

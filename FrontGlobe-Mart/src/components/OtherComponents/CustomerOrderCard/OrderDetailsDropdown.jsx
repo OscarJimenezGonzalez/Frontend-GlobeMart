@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Card, CardContent, Typography, CardActions, Button,
     Box, IconButton, Grid, Chip
@@ -18,6 +18,36 @@ import CreditCardIcon from '@mui/icons-material/CreditCard';
 const OrderDetailsDropdown = ({ cartItemList, isOpen, shippingAddress, orderStatus, isPayed, paymentMethod }) => {
 
     if (!isOpen) return null;
+
+    const [cartItemStatus, setCartItemStatus] = useState("")
+
+    const cartItemStatusColor = (status) => {
+
+        if (status === "Pending Payment") {
+
+            return "rgba(255, 96, 0, 0.6)"
+
+        }
+
+        if (status === "Awaiting Shipment") {
+
+            return "rgba(189, 189, 189, 0.7)"
+        }
+
+        if (status === "Shipped" || status === "On Delivery") {
+
+            return 'rgba(33, 150, 243, 0.5)'
+
+        }
+        if (status === "Delivered") {
+
+            return 'rgba(96, 175, 80, 0.7)'
+
+        }
+
+    }
+
+    console.log("CartItemList", cartItemList)
 
     return (
         <Box sx={{
@@ -40,22 +70,41 @@ const OrderDetailsDropdown = ({ cartItemList, isOpen, shippingAddress, orderStat
 
             {/* <VerticalLinearStepper></VerticalLinearStepper> */}
 
-
             <Typography variant="h6" color="secondary" gutterBottom sx={{ mb: 4, mt: 3 }}>
                 Items in Your Order
             </Typography>
+
+
+
             {cartItemList.map((item) => (
-                <Box key={item.id} sx={{ display: 'flex', alignItems: 'center', mb: 2, ml: 0.5 }}>
-                    <img src={item.product_SellerCompany.product.imageURL} alt="Product" style={{ width: 50, height: 50, borderRadius: '4px', objectFit: 'cover', mr: 2 }} />
-                    <Box sx={{ ml: 2, display: 'flex', flexDirection: 'column' }}>
-                        <Typography variant="subtitle2">
-                            {item.product_SellerCompany.product.name}
-                        </Typography>
-                        <Typography variant="body2" color="textSecondary">
-                            Qty: {item.quantity} &middot; Price: {item.product_SellerCompany.price} €
-                        </Typography>
-                        <Typography variant="body2" color="textSecondary">
-                            Sold By : <Link to={`/sellerPage/${item.product_SellerCompany.sellerCompany.id}`}>{item.product_SellerCompany.sellerCompany.name}</Link>
+                <Box key={item.id} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 2, ml: 0.5 }}>
+                    <Box sx={{ display: 'flex', alignItems: 'center', mb: 0, ml: 0, }}>
+                        <img src={item.product_SellerCompany.product.imageURL} alt="Product" style={{ width: 50, height: 50, borderRadius: '4px', objectFit: 'cover', mr: 2 }} />
+                        <Box sx={{ ml: 2, display: 'flex', flexDirection: 'column' }}>
+                            <Typography variant="subtitle2">
+                                {item.product_SellerCompany.product.name}
+                            </Typography>
+                            <Typography variant="body2" color="textSecondary">
+                                Qty: {item.quantity} &middot; Price: {item.product_SellerCompany.price} €
+                            </Typography>
+                            <Typography variant="body2" color="textSecondary">
+                                Sold By : <Link to={`/sellerPage/${item.product_SellerCompany.sellerCompany.id}`}>{item.product_SellerCompany.sellerCompany.name}</Link>
+                            </Typography>
+                        </Box>
+                    </Box>
+                    <Box key={item.id} sx={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        mb: 2,
+                        ml: 0.5,
+                        p: 1,
+                        px: 5,
+                        backgroundColor: cartItemStatusColor(item.cartItemStatus),
+                        borderRadius: '4px'
+                    }}>
+
+                        <Typography variant="subtitle2" color={"white"} sx={{ ml: 'auto', fontStyle: '' }}>
+                            {item.cartItemStatus}
                         </Typography>
                     </Box>
                 </Box>
@@ -70,23 +119,33 @@ const OrderDetailsDropdown = ({ cartItemList, isOpen, shippingAddress, orderStat
             <Typography variant="h6" color="secondary" gutterBottom sx={{ mb: 4, mt: 4 }}>
                 Payment Method
             </Typography>
-            <Box sx={{ display: 'flex', alignItems: 'center', ml: 0, mt: 4, mb: 4 }}>
 
-                {/* <Typography variant="subtitle1" color="primary" gutterBottom>
-                    {paymentMethod === "Credit Card" ? "Credit / Debit Card :  4242 **** **** **** " : paymentMethod}
-                </Typography> */}
-                <Typography variant="subtitle1" color="primary" gutterBottom>
-                    {paymentMethod === "Credit Card" ? "Credit / Debit Card : " : paymentMethod}
-                </Typography>
-                <Box>
-                    <CreditCardIcon color="action" sx={{ ml: 1 }} />
-                </Box>
-                <Typography sx={{ ml: 1 }} variant="subtitle1" color="primary" gutterBottom>
-                    {paymentMethod === "Credit Card" ? "  **** **** **** 4242 " : paymentMethod}
-                </Typography>
+            {isPayed ? <Box sx={{ display: 'flex', alignItems: 'center', ml: 0, mt: 4, mb: 4 }}>
 
+                {
+                    paymentMethod === "Credit Card" ?
 
-            </Box>
+                        <Box display={"flex"}>
+                            <Typography variant="subtitle1" color="primary" gutterBottom>
+                                {paymentMethod === "Credit Card" ? "Credit / Debit Card : " : paymentMethod}
+                            </Typography>
+                            <Box>
+                                <CreditCardIcon color="action" sx={{ ml: 1 }} />
+                            </Box>
+                            <Typography sx={{ ml: 1 }} variant="subtitle1" color="primary" gutterBottom>
+                                {paymentMethod === "Credit Card" ? "  **** **** **** 4242 " : null}
+                            </Typography>
+                        </Box>
+
+                        :
+
+                        <Typography variant="subtitle1" color="primary" gutterBottom>
+                            {paymentMethod}
+                        </Typography>
+
+                }
+
+            </Box> : <Typography mb={4} variant='subtitle1' color="primary">Pending ...</Typography>}
 
         </Box>
     );

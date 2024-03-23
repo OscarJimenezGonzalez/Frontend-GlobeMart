@@ -70,7 +70,7 @@ function SellerPage() {
 
         <Box sx={{ width: "100%", height: "100%", mx: 4, mb: 4, display: "flex", justifyContent: "start", flexDirection: "column", }} >
 
-            <Typography variant="h5" mb={4}>{sellerCompany.name}</Typography>
+            <Typography variant="h5" color="primary" mb={4} mt={4}>{sellerCompany.name}</Typography>
 
             <Box sx={{ mb: 6, minHeight: 200, display: "flex", gap: 2 }}>
 
@@ -89,7 +89,9 @@ function SellerPage() {
 
                     <RatingComponent
 
-                        sellerCompanyData={(sellerCompany)}
+                        opinionNumber={(sellerCompany.opinionNumber)}
+                        ratingAverage={(sellerCompany.customerRating)}
+                        backgroundColor={"white"}
 
                     ></RatingComponent>
 
