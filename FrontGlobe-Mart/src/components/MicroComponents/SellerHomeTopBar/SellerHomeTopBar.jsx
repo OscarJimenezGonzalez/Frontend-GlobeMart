@@ -20,30 +20,38 @@ import { Typography } from '@mui/material';
 
 const drawerWidth = 280;
 
+
 const menuItems = [
     {
         text: 'DashBoard',
         icon: <DashboardIcon />,
+        component: 'Dashboard'
+    },
+    {
+        text: 'Customer Orders',
+        icon: <ShoppingCartIcon />,
+        component: 'Orders'
     },
     {
         text: 'Sales and Analytics',
         icon: <InsightsIcon />,
+        component: 'Sales'
     },
+
     {
         text: 'Add new products',
         icon: <AddCircleOutlineIcon />,
+        component: 'AddProducts'
     },
-    {
-        text: 'Your Orders',
-        icon: <ShoppingCartIcon />,
-    },
+
     {
         text: 'Your Products',
         icon: <InventoryIcon />,
+        component: 'YourProducts'
     },
 ];
 
-export default function SellerHomeTopBar() {
+export default function SellerHomeTopBar({ sendComponentSelection }) {
     return (
 
         <Box sx={{ display: 'flex' }}>
@@ -52,7 +60,7 @@ export default function SellerHomeTopBar() {
                 <List sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 80 }}>
                     {menuItems.map((item, index) => (
                         <ListItem key={index} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }} disablePadding>
-                            <ListItemButton sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', px: 2 }}>
+                            <ListItemButton onClick={() => { sendComponentSelection(item.component)}} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', px: 2 }}>
                                 <Typography variant='subtitle2' color="primary.main" textAlign="center">
                                     {item.text}
                                 </Typography>

@@ -26,22 +26,29 @@ const menuItems = [
     {
         text: 'DashBoard',
         icon: <DashboardIcon />,
+        component: 'Dashboard'
+    },
+    {
+        text: 'Customer Orders',
+        icon: <ShoppingCartIcon />,
+        component: 'Orders'
     },
     {
         text: 'Sales and Analytics',
         icon: <InsightsIcon />,
+        component: 'Sales'
     },
+
     {
         text: 'Add new products',
         icon: <AddCircleOutlineIcon />,
+        component: 'AddProducts'
     },
-    {
-        text: 'Your Orders',
-        icon: <ShoppingCartIcon />,
-    },
+
     {
         text: 'Your Products',
         icon: <InventoryIcon />,
+        component: 'YourProducts'
     },
 ];
 
@@ -70,7 +77,7 @@ const auxItems = [
 
 ]
 
-export default function SellerHomeSideBar() {
+export default function SellerHomeSideBar({ sendComponentSelection }) {
     return (
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
@@ -94,11 +101,10 @@ export default function SellerHomeSideBar() {
                         {menuItems.map((item, index) => (
                             <Box key={index} mb={1}>
                                 <ListItem disablePadding>
-                                    <ListItemButton >
+                                    <ListItemButton onClick={() => { sendComponentSelection(item.component) }} >
                                         <ListItemIcon sx={{ minWidth: 'auto', mr: 4, '.MuiSvgIcon-root': { fontSize: '1.2rem' } }}>
                                             {item.icon}
                                         </ListItemIcon>
-                                        {/* <ListItemText primary={item.text} /> */}
                                         <Typography variant='tab' color={"primary.main"}>{item.text}</Typography>
                                     </ListItemButton>
                                 </ListItem>

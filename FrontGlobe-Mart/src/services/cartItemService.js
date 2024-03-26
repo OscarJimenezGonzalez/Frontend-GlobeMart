@@ -1,3 +1,4 @@
+import { Try } from "@mui/icons-material";
 import api from "./mainConfig/config";
 
 
@@ -41,6 +42,27 @@ export async function updateCartItemListStatus(orderId, cartItemStatus) {
 
 }
 
+export async function updateCartItemStatus(cartItemId, cartItemStatus) {
+
+    try {
+
+        const { data } = await api.put(`/cartItem/${cartItemId}`, cartItemStatus, {
+            headers: {
+                Authorization: localStorage.getItem("token")
+            }
+        })
+
+        return data
+
+    } catch (error) {
+
+        console.log(error.message)
+
+    }
+
+}
+
+
 export async function getCartItemsFromOrder(orderId) {
 
     try {
@@ -60,3 +82,29 @@ export async function getCartItemsFromOrder(orderId) {
     }
 
 }
+
+export async function getCartItemsFromSeller(sellerCompanyId) {
+
+    try {
+
+        const { data } = await api.get(`/cartItem/seller/${sellerCompanyId}`, {
+
+            headers: {
+                Authorization: localStorage.getItem("token")
+            }
+
+        })
+
+        return data
+
+    } catch (error) {
+
+
+        console.log(error.message)
+
+
+    }
+
+
+}
+

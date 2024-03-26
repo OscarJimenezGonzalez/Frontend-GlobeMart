@@ -32,7 +32,6 @@ export default function TabSelectorX({ itemList, product }) {
                     </TabList>
 
                 </Box>
-                {/* {/* {console.log("proddsfdsfdsfuct", product)} */}
                 <TabPanel value="1"><Typography variant="h7" color={"#666666"}>{product && product.productDescription}</Typography></TabPanel>
                 <TabPanel value="2"><Typography variant="h7" color={"#666666"}>{product && product.sellerCompany.policy}</Typography></TabPanel>
 

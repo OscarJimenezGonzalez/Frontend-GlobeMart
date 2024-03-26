@@ -36,14 +36,65 @@ const CustomerOrderCard = ({ cartItemList, orderId, orderStatus, isPayed,
         }
     }
 
+
+    const orderStatusColor = () => {
+
+
+        if (orderStatus === "Completed") {
+
+            return '#D1D1D1'
+
+        }
+        if (orderStatus === "In progress") {
+
+            return 'rgba(33, 150, 243, 0.5)'
+
+        }
+        if (orderStatus === "Pending Payment") {
+
+            return "warning.main"
+        }
+        else {
+
+            return "rgba(189, 189, 189, 0.7)"
+        }
+
+
+    }
+
     return (
 
-        <Card variant="outlined" sx={{ maxWidth: "90%", mt: 3, ml: 5, mb: 2, p: 2 }}>
+        <Card variant="outlined" sx={{ backgroundColor: "white", maxWidth: "90%", mt: 3, ml: 5, mb: 2, p: 2 }}>
+            {/* <Box variant="outlined" sx={{ backgroundColor: "white", maxWidth: "90%", mt: 3, ml: 5, mb: 2, p: 2 }}> */}
             <CardContent>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                        {isPayed && < Chip label={orderStatus} color={orderStatus === "Completed" ? "success" : "primary"} />}
-                        {!isPayed && <Chip label="Payment Pending" color='warning' />}
+
+
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                alignContent: "center",
+                                justifyContent: "center",
+                                borderRadius: '20px',
+                                px: 1.5,
+                                py: 0.5,
+                                border: "1px solid #F1F1F3",
+                                backgroundColor: orderStatusColor(),
+                                minWidth: "150px"
+
+                            }}
+
+                        >
+                            {/* Puedes colocar un icono o texto aquí, dependiendo de la necesidad */}
+                            <Typography variant="subtitle2" color={orderStatus === "Completed" ? 'white' : 'white'}>{orderStatus}</Typography>
+                        </Box>
+
+                        {/* {orderStatus === "Completed" && <Chip label={orderStatus} color="success" />}
+                        {orderStatus === "In progress" && <Chip label={orderStatus} color="primary" />}
+                        {orderStatus === "Pending Payment" && <Chip label={orderStatus} color="warning" />}
+                        {orderStatus === "Accepted" && <Chip label={orderStatus} color="primary" />} */}
 
                         {orderStatus === "On Delivery" &&
                             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, borderRadius: '20px', p: 1, border: "1px solid gray" }}>
@@ -128,7 +179,10 @@ const CustomerOrderCard = ({ cartItemList, orderId, orderStatus, isPayed,
 
             />
 
+            {/* </Box > */}
+
         </Card >
+
     );
 
 };

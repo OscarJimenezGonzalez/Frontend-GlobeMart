@@ -15,7 +15,6 @@ import ProductImage from '../components/ProductPageComponents/ProductImage/Produ
 import ProductOptions from '../components/ProductPageComponents/ProductOptions/ProductOptions';
 import CartCard from '../components/ProductPageComponents/CartCard/CartCard';
 import ShippingInfoButton from '../components/MicroComponents/ShippingInfoButton/ShippingInfoButton';
-import { isLogged } from '../auxStr/auxStructures.js';
 import TabSelectorX from '../components/ProductPageComponents/TabSelectorX/TabSelectorX.jsx';
 import RatingComponentSimple from '../components/MicroComponents/RatingComponent/RatingComponentSimple.jsx';
 import { getReviewsFromProduct } from '../services/productReviewService.js';
@@ -115,10 +114,9 @@ function ProductPage() {
 
             }
 
-
-
             setOpinionQty(reviewList.length)
             setReviewAverage((avg / reviewList.length).toFixed(2))
+
         }
 
     }, [avg, reviewList])
@@ -132,6 +130,7 @@ function ProductPage() {
 
     }, [])
 
+    // CheckLogin When going to add a product to Cart
     const checkLogin = () => {
 
         const token = localStorage.getItem("token")
@@ -174,7 +173,7 @@ function ProductPage() {
     // función que nos mete en contexto los articulos y cantidades elegidos 
     const handleAddToCartClick = async (addedProduct) => {
 
-        if (isLogged()) {
+        if (isLogged) {
 
             setMainData(prevData => ({
                 ...prevData,
@@ -362,7 +361,6 @@ function ProductPage() {
 
 
                 <LoginModal
-
 
                     openLogin={loginModal}
                     closeLoginModal={() => { setLoginModal(false) }}

@@ -20,19 +20,19 @@ export default function RelatedProductsCarousel({ productList, productSelectedCa
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        if (window.innerWidth > 1040) {
-            setWidthController(4)
-        } else if (window.innerWidth > 812 && window.innerWidth < 1040) {
-            setWidthController(3)
-        } else if (window.innerWidth > 562 && window.innerWidth < 812) {
-            setWidthController(2)
-        } else if (window.innerWidth < 562) {
-            setWidthController(1)
-        }
+    //     if (window.innerWidth > 1040) {
+    //         setWidthController(4)
+    //     } else if (window.innerWidth > 812 && window.innerWidth < 1040) {
+    //         setWidthController(3)
+    //     } else if (window.innerWidth > 562 && window.innerWidth < 812) {
+    //         setWidthController(2)
+    //     } else if (window.innerWidth < 562) {
+    //         setWidthController(1)
+    //     }
 
-    }, [window.innerWidth])
+    // }, [window.innerWidth])
 
     const handleRelatedProductClick = (id) => {
 

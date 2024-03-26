@@ -19,19 +19,19 @@ export default function SellerProductCaroussel({ productList }) {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        if (window.innerWidth > 1040) {
-            setWidthController(10)
-        } else if (window.innerWidth > 812 && window.innerWidth < 1040) {
-            setWidthController(6)
-        } else if (window.innerWidth > 562 && window.innerWidth < 812) {
-            setWidthController(7)
-        } else if (window.innerWidth < 562) {
-            setWidthController(3)
-        }
+    //     if (window.innerWidth > 1040) {
+    //         setWidthController(8)
+    //     } else if (window.innerWidth > 812 && window.innerWidth < 1040) {
+    //         setWidthController(6)
+    //     } else if (window.innerWidth > 562 && window.innerWidth < 812) {
+    //         setWidthController(7)
+    //     } else if (window.innerWidth < 562) {
+    //         setWidthController(3)
+    //     }
 
-    }, [window.innerWidth])
+    // }, [window.innerWidth])
 
     const handleRelatedProductClick = (id) => {
 

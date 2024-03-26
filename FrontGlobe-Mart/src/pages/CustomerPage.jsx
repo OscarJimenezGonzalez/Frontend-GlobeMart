@@ -53,8 +53,6 @@ function CustomerPage() {
 
         try {
           const cartItemsArr = await Promise.all(cartItemsPromises);
-
-          // Ahora que tenemos todos los cartItems, actualizamos cada objeto de orderList
           const updatedOrderList = orderList.map((order, index) => ({
             ...order,
             cartItems: cartItemsArr[index],
@@ -88,13 +86,16 @@ function CustomerPage() {
   return (
 
     <Box sx={{ width: '100%', display: "flex", flexDirection: "column", p: 2 }}>
+      {/* <Box sx={{ backgroundColor: "background.brigth", width: '100%', display: "flex", flexDirection: "column", p: 2 }}> */}
 
-      <Typography variant="h6" color="primary" mx={3} mt={3} mb={4}  > Customers Page </Typography>
+      <Typography variant="h6" color="primary" mx={3} my={6}  > Customers Page </Typography>
 
-      <Typography variant="tab" color={"orange"} ml={3} > My Orders </Typography>
+      <Box marginX={0}>
+        <Typography variant="tab" color={"orange"} ml={4} > My Orders </Typography>
+        <Divider sx={{ mb: '2%', mt: '1%', mx: 3 }} />
+      </Box>
 
-      <Divider sx={{ mb: '2%', mt: '1%', mx: 3 }} />
-      <Box ml={2}>
+      <Box ml={4}>
 
         <TabSelectorCustomer
 
@@ -104,9 +105,10 @@ function CustomerPage() {
 
       </Box>
 
-      <Typography variant="tab" color={"orange"} ml={3} mt={8}> My Favourites </Typography>
-
-      <Divider sx={{ mb: '2%', mt: '1%', ml: 3 }} />
+      <Box>
+        <Typography variant="tab" color={"orange"} ml={3} mt={8}> My Favourites </Typography>
+        <Divider sx={{ mb: '2%', mt: '1%', ml: 3 }} />
+      </Box>
 
     </Box>
 

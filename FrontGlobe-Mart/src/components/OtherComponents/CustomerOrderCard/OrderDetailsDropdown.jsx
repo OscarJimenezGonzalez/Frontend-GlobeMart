@@ -19,8 +19,6 @@ const OrderDetailsDropdown = ({ cartItemList, isOpen, shippingAddress, orderStat
 
     if (!isOpen) return null;
 
-    const [cartItemStatus, setCartItemStatus] = useState("")
-
     const cartItemStatusColor = (status) => {
 
         if (status === "Pending Payment") {
@@ -95,6 +93,9 @@ const OrderDetailsDropdown = ({ cartItemList, isOpen, shippingAddress, orderStat
                     <Box key={item.id} sx={{
                         display: 'flex',
                         alignItems: 'center',
+                        justifyContent: 'center',
+                        alignContent: "center",
+                        minWidth: "200px",
                         mb: 2,
                         ml: 0.5,
                         p: 1,
@@ -103,7 +104,7 @@ const OrderDetailsDropdown = ({ cartItemList, isOpen, shippingAddress, orderStat
                         borderRadius: '4px'
                     }}>
 
-                        <Typography variant="subtitle2" color={"white"} sx={{ ml: 'auto', fontStyle: '' }}>
+                        <Typography variant="subtitle2" color={"white"} sx={{ fontStyle: '' }}>
                             {item.cartItemStatus}
                         </Typography>
                     </Box>
@@ -113,7 +114,7 @@ const OrderDetailsDropdown = ({ cartItemList, isOpen, shippingAddress, orderStat
             <Typography variant="h6" color="secondary" gutterBottom sx={{ mb: 4, mt: 4 }}>
                 Shipping Address
             </Typography>
-            <Typography variant="subtitle1" fontStyle={'italic'} color="primary" gutterBottom sx={{ ml: 0, mb: 4, mt: 4 }}>
+            <Typography variant="subtitle2" fontStyle={'italic'} color="black" gutterBottom sx={{ ml: 0, mb: 4, mt: 4 }}>
                 {shippingAddress}
             </Typography>
             <Typography variant="h6" color="secondary" gutterBottom sx={{ mb: 4, mt: 4 }}>
@@ -126,7 +127,7 @@ const OrderDetailsDropdown = ({ cartItemList, isOpen, shippingAddress, orderStat
                     paymentMethod === "Credit Card" ?
 
                         <Box display={"flex"}>
-                            <Typography variant="subtitle1" color="primary" gutterBottom>
+                            <Typography variant="subtitle2" color="black" gutterBottom>
                                 {paymentMethod === "Credit Card" ? "Credit / Debit Card : " : paymentMethod}
                             </Typography>
                             <Box>
@@ -139,13 +140,13 @@ const OrderDetailsDropdown = ({ cartItemList, isOpen, shippingAddress, orderStat
 
                         :
 
-                        <Typography variant="subtitle1" color="primary" gutterBottom>
+                        <Typography variant="subtitle2" color="black" gutterBottom>
                             {paymentMethod}
                         </Typography>
 
                 }
 
-            </Box> : <Typography mb={4} variant='subtitle1' color="primary">Pending ...</Typography>}
+            </Box> : <Typography mb={4} variant='subtitle2' color="black">Pending ...</Typography>}
 
         </Box>
     );
