@@ -16,6 +16,7 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import { Typography } from '@mui/material';
+import CustomersOrderBadgeIcon from '../CustomersOrderBadgeIcon/CustomersOrderBadgeIcon';
 
 
 const drawerWidth = 280;
@@ -51,7 +52,7 @@ const menuItems = [
     },
 ];
 
-export default function SellerHomeTopBar({ sendComponentSelection }) {
+export default function SellerHomeTopBar({ sendComponentSelection, awaitingShippmentOrders }) {
     return (
 
         <Box sx={{ display: 'flex' }}>
@@ -60,7 +61,8 @@ export default function SellerHomeTopBar({ sendComponentSelection }) {
                 <List sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: 80 }}>
                     {menuItems.map((item, index) => (
                         <ListItem key={index} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }} disablePadding>
-                            <ListItemButton onClick={() => { sendComponentSelection(item.component)}} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', px: 2 }}>
+                            {item.component === "Orders" && <CustomersOrderBadgeIcon awaitingOrders={awaitingShippmentOrders} />}
+                            <ListItemButton onClick={() => { sendComponentSelection(item.component) }} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', px: 2 }}>
                                 <Typography variant='subtitle2' color="primary.main" textAlign="center">
                                     {item.text}
                                 </Typography>

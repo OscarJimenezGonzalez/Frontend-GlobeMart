@@ -34,6 +34,11 @@ function SellerOrderAccordion({ sellerCartItems, handleCartItemStatus }) {
             return 'success.main'
 
         }
+        if (cartItemStatus === "Pending Payment") {
+
+            return '#BDBDBD'
+
+        }
         else {
 
             return 'primary'
@@ -55,8 +60,8 @@ function SellerOrderAccordion({ sellerCartItems, handleCartItemStatus }) {
                             id="panel1a-header"
 
                         >
-                            <Box sx={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "space-between", pr: 3}}>
-                                <Box sx={{ display: 'flex', width: '30%'}}>
+                            <Box sx={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "space-between", pr: 3 }}>
+                                <Box sx={{ display: 'flex', width: '30%' }}>
                                     <Typography variant='subtitle2' color='primary'>Order Id: <strong>000{item.orderId < 10 ? `0${item.orderId}` : item.orderId}</strong> &nbsp; </Typography>
                                 </Box>
                                 <Box sx={{ display: 'flex' }} mr={0} minWidth={250}>
@@ -68,6 +73,9 @@ function SellerOrderAccordion({ sellerCartItems, handleCartItemStatus }) {
                         <AccordionDetails sx={{ borderTop: '1px solid rgba(0, 0, 0, .125)' }}>
                             <Grid container spacing={1} p={3}>
 
+                                <Grid item xs={12} md={12}>
+                                    <Typography variant="subtitle2" color="primary" gutterBottom>Purchase Date: <strong>{item.cartItemStatus === "Pending Payment" ? "Pending..." : item.order.createdAt.slice(0, 10)}</strong></Typography>
+                                </Grid>
                                 <Grid item xs={12} md={12}>
                                     <Typography variant="subtitle2" color="primary" gutterBottom>Seller product reference: <strong>{item.productSellerCompanyId}</strong></Typography>
                                 </Grid>

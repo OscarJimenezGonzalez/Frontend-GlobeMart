@@ -37,13 +37,13 @@ export default function ShippingInfoCard() {
             }}
             >
 
-                <Typography sx={{ fontSize: '11px' }}>Free Shipping</Typography>
-                <Typography sx={{ fontSize: '11px' }}>Free Returns</Typography>
-                <Typography sx={{ fontSize: '11px' }}>Fast Delivery 24/48 hours</Typography>
+                <Typography sx={{ fontSize: '11px' }} variant='tab' color='primary'>Free Shipping</Typography>
+                <Typography sx={{ fontSize: '11px' }} variant='tab' color='primary'>Free Returns</Typography>
+                <Typography sx={{ fontSize: '11px' }} variant='tab' color='primary'>Fast Delivery 24 / 48 hours</Typography>
 
                 <Divider sx={{ alignSelf: 'center', height: '1px', width: "75%" }} />
 
-                <Typography sx={{ fontSize: '11px' }}>Delivered By: DHL</Typography>
+                <Typography sx={{ fontSize: '11px' }} variant='tab' color='warning.main'>Delivered By: DHL</Typography>
 
 
             </Box>

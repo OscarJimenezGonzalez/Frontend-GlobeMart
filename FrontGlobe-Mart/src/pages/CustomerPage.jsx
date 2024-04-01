@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { getOwnOrders } from '../services/orderService';
 import { getCartItemsFromOrder } from '../services/cartItemService';
 import TabSelectorCustomer from '../components/MicroComponents/TabSelectorCutomerOrders/TabSelectorCustomer';
+import SellerProductCaroussel from '../components/OtherComponents/SellerProductsCaroussel/SellerProductsCaroussel';
 
 function CustomerPage() {
 
@@ -105,9 +106,13 @@ function CustomerPage() {
 
       </Box>
 
-      <Box>
-        <Typography variant="tab" color={"orange"} ml={3} mt={8}> My Favourites </Typography>
-        <Divider sx={{ mb: '2%', mt: '1%', ml: 3 }} />
+      <Box mt={4}>
+        <Typography variant="tab" color={"orange"} ml={4} > My Favorites </Typography>
+        <Divider sx={{ mb: '2%', mt: '1%', mx: 3 }} />
+        <Box m={3}>
+          <SellerProductCaroussel ></SellerProductCaroussel>
+        </Box>
+
       </Box>
 
     </Box>

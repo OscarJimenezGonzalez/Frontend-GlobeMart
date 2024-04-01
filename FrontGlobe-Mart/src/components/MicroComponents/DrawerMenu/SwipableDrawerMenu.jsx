@@ -57,9 +57,12 @@ export default function SwipeableDrawerMenu({ productCategory }) {
         return productCategory.map((category) => {
 
             return <FormGroup key={category.id}>
-                <ListItem sx={{ display: 'block', }}>
-                    <ListItemText>
-                        <FormControlLabel onChange={(e) => checkedBox(category.id, e.target.checked)} control={<Checkbox />} label={category.name} />
+                <ListItem sx={{ display: 'block' }}>
+                    <ListItemText sx={{ px: 2 }}>
+                        <FormControlLabel
+                            onChange={(e) => checkedBox(category.id, e.target.checked)}
+                            control={<Checkbox />}
+                            label={<Typography >{category.name}</Typography>} />
                     </ListItemText>
                 </ListItem>
             </FormGroup>
@@ -89,10 +92,11 @@ export default function SwipeableDrawerMenu({ productCategory }) {
             onKeyDown={toggleDrawer(anchor, false)}    // <---- cierre al usar teclado
         // onClick={toggleDrawer(anchor, false)}   // <---- cierre al clicar dentro. 
         >
-            <Typography variant="h6" sx={{ margin: 2, }}>Categories</Typography>
+            <Typography variant="h6" sx={{ my: 3, mx: 3 }} color="primary">Categories</Typography>
             <Divider />
             {renderProductCategories()}
-
+            {/* <Divider mt={30} />
+            <Typography variant="h6" sx={{ my: 4, mx: 3 }} color="primary">Seller</Typography> */}
         </Box >
     );
 
@@ -112,7 +116,6 @@ export default function SwipeableDrawerMenu({ productCategory }) {
                         open={state[anchor]}
                         onClose={toggleDrawer(anchor, false)}
                         onOpen={toggleDrawer(anchor, true)}
-
                     >
 
                         {list(anchor)}

@@ -207,7 +207,8 @@ function Header() {
 
           <TextField
             onChange={searchProducts}
-            fullWidth label="Search for products ..."
+            fullWidth
+            label="Search for products ..."
             id="fullWidth"
             sx={{ backgroundColor: 'white', width: '80%', mx: 5 }}
             InputProps={{

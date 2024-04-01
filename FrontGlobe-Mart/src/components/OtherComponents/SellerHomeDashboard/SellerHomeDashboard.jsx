@@ -1,23 +1,13 @@
 import { Box } from '@mui/system'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Grid, Typography, Card, CardMedia, CardContent, Button, CardActions, Paper, IconButton } from '@mui/material'
 import SellerProductCaroussel from '../SellerProductsCaroussel/SellerProductsCaroussel'
-import { Link } from 'react-router-dom'
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import PlaylistAddCircleIcon from '@mui/icons-material/PlaylistAddCircle';
 
-import { useCustomMediaQueries } from '../../../auxStr/customMediaQueries'
-import SellerHomeSideBar from '../../MicroComponents/SellerHomeSideBar/SellerHomeSideBar'
-import SellerHomeTopBar from '../../MicroComponents/SellerHomeTopBar/SellerHomeTopBar'
 // Page that Integrates Functionall info and data Just for seller use Purpose. 
 
-export default function SellerHomeDashboard({ userData, sellerCompanyData, sellerProducts, totalSales }) {
-
-    const { isMediumLargeScreen, isMediumScreen, isSmallScreen, isTinyScreen } = useCustomMediaQueries();
+export default function SellerHomeDashboard({ userData, sellerCompanyData, sellerProducts, totalSales, sellerCartItems, awaitingShippmentOrders }) {
 
     return (
-
-
 
         <Box sx={{ width: '100%', display: "flex", flexDirection: "column", gap: 2, p: 5 }}>
 
@@ -26,13 +16,13 @@ export default function SellerHomeDashboard({ userData, sellerCompanyData, selle
                 <Grid item xs={12} sx={{ mb: 1 }}>
                     <Box sx={{ backgroundColor: 'white', display: 'flex', alignItems: 'center', p: 2, minHeight: 190 }}>
                         <CardMedia
-                            sx={{ minWidth: 100, minHeight: 120, borderRadius: '50%', mr: 2, ml: 2, objectFit: 'cover' }}
+                            sx={{ minWidth: 100, minHeight: 120, borderRadius: '50%', mr: 4, ml: 2, objectFit: 'cover' }}
                             image={sellerCompanyData.logoURL || 'path/to/default/image.png'}
                             alt="Logo"
                         />
                         <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                             <Typography variant="h6" color={"secondary.main"}>{sellerCompanyData.name}</Typography>
-                            <Typography variant="body2" color="text.secondary">{userData.username} / Community and Digital Resourses Manager </Typography>
+                            <Typography variant="body2" color="text.secondary"><strong>{userData.username}</strong> / Community and Digital Resourses Manager </Typography>
                         </Box>
                     </Box>
                 </Grid>
@@ -46,7 +36,7 @@ export default function SellerHomeDashboard({ userData, sellerCompanyData, selle
                 <Grid item xs={12} sm={6} md={3} sx={{ mb: 1 }}>
                     <Box sx={{ backgroundColor: 'white', width: "100%", minHeight: 150, p: 3 }}>
                         <Typography color={"secondary"}>Orders Pending:</Typography>
-                        <Typography mt={1} variant="h5" color="text.secondary">12</Typography>
+                        <Typography mt={1} variant="h5" color="text.secondary">{awaitingShippmentOrders}</Typography>
                     </Box>
                 </Grid>
 
@@ -100,8 +90,6 @@ export default function SellerHomeDashboard({ userData, sellerCompanyData, selle
                         </Box>
                     </Box>
                 </Grid>
-
-
 
             </Grid>
 

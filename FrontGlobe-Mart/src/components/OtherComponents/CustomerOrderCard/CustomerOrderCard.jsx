@@ -45,7 +45,7 @@ const CustomerOrderCard = ({ cartItemList, orderId, orderStatus, isPayed,
             return '#D1D1D1'
 
         }
-        if (orderStatus === "In progress") {
+        if (orderStatus === "In Progress") {
 
             return 'rgba(33, 150, 243, 0.5)'
 
@@ -56,7 +56,7 @@ const CustomerOrderCard = ({ cartItemList, orderId, orderStatus, isPayed,
         }
         else {
 
-            return "rgba(189, 189, 189, 0.7)"
+            return "rgba(33, 150, 243, 0.5)"
         }
 
 
@@ -77,7 +77,7 @@ const CustomerOrderCard = ({ cartItemList, orderId, orderStatus, isPayed,
                                 alignItems: 'center',
                                 alignContent: "center",
                                 justifyContent: "center",
-                                borderRadius: '20px',
+                                borderRadius: '10px',
                                 px: 1.5,
                                 py: 0.5,
                                 border: "1px solid #F1F1F3",

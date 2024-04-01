@@ -29,6 +29,7 @@ function SellerHome() {
     const [totalSales, setTotalSales] = useState(0)
     const [componentSelector, setComponentSelector] = useState("Dashboard")
     const [cartItemStatusChanging, setCartItemStatusChanging] = useState(false)
+    const [awaitingShippmentOrders, setAwaitingShippmentOrders] = useState(0)
 
     // Fetch Data
     useEffect(() => {
@@ -127,6 +128,10 @@ function SellerHome() {
 
     }
 
+    // Esta función comprueba el estado de los cartItems dentro de una orden
+    // Si algun seller de esa order actualiza cualquier item, la order pasa a 'in progress'
+    // Si todos los items estan "delivered" marca la order como 'completed'
+
     const handleCartItemStatus = async (cartItemId, cartItemState, orderId) => {
 
         setCartItemStatusChanging(!cartItemStatusChanging) // con esto reactivo el useEffect que trae toda la info de la DB. 
@@ -201,6 +206,32 @@ function SellerHome() {
 
     }
 
+    const countAwaitingShippmentOrders = () => {
+
+        let awaitingOrders = 0
+
+        for (let index = 0; index < sellerCartItems.length; index++) {
+
+            if (sellerCartItems[index].cartItemStatus === "Awaiting Shipment") {
+
+                awaitingOrders++
+
+            }
+
+        }
+
+        setAwaitingShippmentOrders(awaitingOrders)
+        return awaitingOrders
+
+    }
+
+    useEffect(() => {
+
+        countAwaitingShippmentOrders()
+
+    }, [sellerCartItems])
+
+
 
     // Render SideBar Options
     const renderSelectedComponent = () => {
@@ -208,7 +239,14 @@ function SellerHome() {
         switch (componentSelector) {
 
             case "Dashboard":
-                return <SellerHomeDashboard userData={userData} sellerCompanyData={sellerCompanyData} sellerProducts={sellerProducts} totalSales={totalSales ? totalSales : <CircularProg />} />
+                return <SellerHomeDashboard
+                    userData={userData}
+                    sellerCompanyData={sellerCompanyData}
+                    sellerProducts={sellerProducts}
+                    // sellerCartItems={sellerCartItems}
+                    awaitingShippmentOrders={awaitingShippmentOrders}
+                    totalSales={totalSales ? totalSales : <CircularProg />}
+                />
 
             case "Orders":
                 return <SellerOrdersStructure
@@ -219,10 +257,20 @@ function SellerHome() {
                 />
 
             case "Sales":
-                return <SalesAnalyticsStructure />
+                return <SalesAnalyticsStructure
+
+                    sellerCartItems={sellerCartItems}
+                    totalSales={totalSales}
+
+                />
 
             default:
-                return <SellerHomeStructure userData={userData} sellerCompanyData={sellerCompanyData} sellerProducts={sellerProducts} totalSales={totalSales} />
+                return <SellerHomeDashboard
+                    userData={userData}
+                    sellerCompanyData={sellerCompanyData}
+                    sellerProducts={sellerProducts}
+                    totalSales={totalSales}
+                />
         }
 
     }
@@ -234,11 +282,14 @@ function SellerHome() {
                 <SellerHomeSideBar
 
                     sendComponentSelection={componentTransformer}
+                    awaitingShippmentOrders={awaitingShippmentOrders}
+
 
                 /> :
                 <SellerHomeTopBar
 
                     sendComponentSelection={componentTransformer}
+                    awaitingShippmentOrders={awaitingShippmentOrders}
 
                 />
             }

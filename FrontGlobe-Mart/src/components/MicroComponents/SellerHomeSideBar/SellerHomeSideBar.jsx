@@ -16,6 +16,7 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
+import CustomersOrderBadgeIcon from '../CustomersOrderBadgeIcon/CustomersOrderBadgeIcon';
 
 import { Typography } from '@mui/material';
 
@@ -31,7 +32,8 @@ const menuItems = [
     {
         text: 'Customer Orders',
         icon: <ShoppingCartIcon />,
-        component: 'Orders'
+        component: 'Orders',
+
     },
     {
         text: 'Sales and Analytics',
@@ -77,7 +79,7 @@ const auxItems = [
 
 ]
 
-export default function SellerHomeSideBar({ sendComponentSelection }) {
+export default function SellerHomeSideBar({ sendComponentSelection, awaitingShippmentOrders }) {
     return (
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
@@ -102,10 +104,11 @@ export default function SellerHomeSideBar({ sendComponentSelection }) {
                             <Box key={index} mb={1}>
                                 <ListItem disablePadding>
                                     <ListItemButton onClick={() => { sendComponentSelection(item.component) }} >
-                                        <ListItemIcon sx={{ minWidth: 'auto', mr: 4, '.MuiSvgIcon-root': { fontSize: '1.2rem' } }}>
+                                        <ListItemIcon sx={{ minWidth: 'auto', mr: 3.5, '.MuiSvgIcon-root': { fontSize: '1.2rem' } }}>
                                             {item.icon}
                                         </ListItemIcon>
-                                        <Typography variant='tab' color={"primary.main"}>{item.text}</Typography>
+                                        <Typography sx={{ position: "relative" }} variant='tab' color={"primary.main"}>{item.text}</Typography>
+                                        {item.component === "Orders" && <CustomersOrderBadgeIcon awaitingOrders={awaitingShippmentOrders} />}
                                     </ListItemButton>
                                 </ListItem>
                             </Box>
@@ -117,7 +120,7 @@ export default function SellerHomeSideBar({ sendComponentSelection }) {
                             <Box key={index} mb={1}>
                                 <ListItem disablePadding>
                                     <ListItemButton>
-                                        <ListItemIcon sx={{ minWidth: 'auto', mr: 4, '.MuiSvgIcon-root': { fontSize: '1.2rem' } }}>
+                                        <ListItemIcon sx={{ minWidth: 'auto', mr: 3.5, '.MuiSvgIcon-root': { fontSize: '1.2rem' } }}>
                                             {item.icon}
                                         </ListItemIcon>
                                         <Typography variant='tab' color={"primary.main"}>{item.text}</Typography>

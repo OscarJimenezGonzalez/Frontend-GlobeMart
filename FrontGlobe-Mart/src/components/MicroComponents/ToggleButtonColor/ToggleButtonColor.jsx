@@ -11,6 +11,7 @@ export default function ToggleButtonColor() {
 
     return (
         <ToggleButtonGroup
+        
             color="primary"
             value={alignment}
             exclusive
