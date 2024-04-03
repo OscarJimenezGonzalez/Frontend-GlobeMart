@@ -269,7 +269,9 @@ function SellerHome() {
                     userData={userData}
                     sellerCompanyData={sellerCompanyData}
                     sellerProducts={sellerProducts}
-                    totalSales={totalSales}
+                    // sellerCartItems={sellerCartItems}
+                    awaitingShippmentOrders={awaitingShippmentOrders}
+                    totalSales={totalSales ? totalSales : <CircularProg />}
                 />
         }
 

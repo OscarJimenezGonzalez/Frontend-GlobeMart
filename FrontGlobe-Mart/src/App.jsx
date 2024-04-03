@@ -7,6 +7,7 @@ import Stripe from 'stripe'
 import { mainContext } from './contexts/mainContext'
 import { checkTokenExpiration } from './auxStr/auxStructures'
 import { mainTheme } from './themes/mainTheme'
+import { darkTheme } from './themes/darkTheme'
 
 function App() {
 
@@ -20,7 +21,8 @@ function App() {
     logged: false,
     searchData: "",
     selectedPCategories: [],
-    
+    themeMode: mainTheme,
+
   })
 
   const data = { mainData, setMainData }
@@ -33,7 +35,8 @@ function App() {
 
   return (
     <>
-      <ThemeProvider theme={mainTheme}>
+      {/* <ThemeProvider theme={darkTheme}> */}
+      <ThemeProvider theme={mainData.themeMode}>
         <CssBaseline />
         <mainContext.Provider value={data}>
           <RouterProvider router={router} />

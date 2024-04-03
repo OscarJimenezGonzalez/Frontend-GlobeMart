@@ -2,7 +2,7 @@ import { createTheme } from "@mui/material";
 
 export const mainTheme = createTheme({
     palette: {
-        type: 'light',
+        mode: 'light',
         primary: {
             main: '#6E665F',
             // fixed: '#74F8E5',
@@ -22,6 +22,7 @@ export const mainTheme = createTheme({
             // default: '#F0EDE5'
             // default: '#E7E7E7'
             brigth: '#F9F9F9'
+
         },
         borders: {
             default: '1px solid #E7E7E7',
@@ -32,7 +33,6 @@ export const mainTheme = createTheme({
         text: {
             primary: '#00201C',
         },
-        type: 'dark',
 
     },
 

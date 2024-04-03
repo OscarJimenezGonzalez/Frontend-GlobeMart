@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Card from '@mui/material/Card';
+import { Box } from '@mui/material';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
@@ -7,9 +8,9 @@ import { CardActionArea } from '@mui/material';
 
 export default function AdMainCard({ imageURL, title, description, id, color }) {
   return (
-    <Card sx={{
-      minWidth: "95%",
-      // maxHeight: "75vh",
+    <Box sx={{
+      width: "100%",
+      height: "100%",
       position: 'relative'
     }}>
       <CardActionArea>
@@ -48,6 +49,6 @@ export default function AdMainCard({ imageURL, title, description, id, color }) 
           </Typography>
         </CardContent>
       </CardActionArea>
-    </Card>
+    </Box>
   );
 }

@@ -22,6 +22,14 @@ import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
 import FireplaceIcon from '@mui/icons-material/Fireplace';
 import RoofingIcon from '@mui/icons-material/Roofing';
+import ThemeSwitch from '../ThemeSwitch/ThemeSwitch';
+
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
+import { mainTheme } from '../../../themes/mainTheme';
+import { darkTheme } from '../../../themes/darkTheme';
+
+
 
 export default function AccountMenu() {
 
@@ -30,6 +38,7 @@ export default function AccountMenu() {
     const navigate = useNavigate()
     const { mainData, setMainData } = useContext(mainContext)
     const [profileInfo, setProfileInfo] = useState([])
+
 
     const loggingOut = () => {
         setMainData(prevData => ({
@@ -72,7 +81,9 @@ export default function AccountMenu() {
     }
 
     return (
+
         <React.Fragment>
+
             <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center', alignContent: 'center', mr: 4 }}>
                 <Tooltip title="Account settings">
                     <IconButton
@@ -83,7 +94,28 @@ export default function AccountMenu() {
                         aria-haspopup="true"
                         aria-expanded={open ? 'true' : undefined}
                     >
-                        <Avatar sx={{ width: 32, height: 32 }}>{accountNameLetter()}</Avatar>
+
+                        <Box
+                            sx={{
+                                width: 32, // ancho de la miniatura
+                                height: 32, // alto de la miniatura
+                                borderRadius: '50%',
+                                overflow: 'hidden',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                            }}
+                        >
+                            {profileInfo.image ?
+                                <img
+                                    src={profileInfo.image}
+                                    alt="URL"
+                                    style={{
+                                        width: '100%',
+                                        height: 'auto',
+                                    }}
+                                /> : <Avatar sx={{ width: 32, height: 32 }}>{accountNameLetter()}</Avatar>}
+                        </Box>
                     </IconButton>
                 </Tooltip>
             </Box>
@@ -93,43 +125,28 @@ export default function AccountMenu() {
                 open={open}
                 onClose={handleClose}
                 onClick={handleClose}
-                PaperProps={{
-                    elevation: 0,
-                    sx: {
-                        // p: 1,
-                        overflow: 'visible',
-                        filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-                        mt: 1.5,
-                        '& .MuiAvatar-root': {
-                            width: 32,
-                            height: 32,
-                            ml: -0.5,
-                            mr: 1,
-                        },
-                        '&::before': {
-                            content: '""',
-                            display: 'block',
-                            position: 'absolute',
-                            top: 0,
-                            right: 14,
-                            width: 10,
-                            height: 10,
-                            bgcolor: 'background.paper',
-                            transform: 'translateY(-50%) rotate(45deg)',
-                            zIndex: 0,
-                        },
-                    },
-                }}
                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
             >
-                <MenuItem onClick={handleClose}>
+                <MenuItem onClick={() => {
+                    handleClose()
+                    setMainData(prevData => ({
+                        ...prevData,
+                        themeMode: prevData.themeMode === mainTheme ? darkTheme : mainTheme
+                    }))
+                }}>
+
                     <ListItemIcon>
-                        <ManageAccountsIcon />
+
+                        {mainData.themeMode === mainTheme ? <Brightness4Icon fontSize='small' /> : <Brightness7Icon />}
+
                     </ListItemIcon>
-                    <Link to="/Profile" style={{ textDecoration: 'none', color: 'inherit' }}>
-                        My Profile </Link>
+
+                    {mainData.themeMode === mainTheme ? "Light mode" : "Dark mode"}
+
                 </MenuItem>
+
+
                 <MenuItem onClick={handleClose}>
                     <ListItemIcon>
                         <RocketLaunchIcon />
@@ -137,6 +154,7 @@ export default function AccountMenu() {
                     <Link to="/CustomerPage" style={{ textDecoration: 'none', color: 'inherit' }}>
                         My Orders </Link>
                 </MenuItem>
+
                 {profileInfo.role === "seller" &&
                     < MenuItem onClick={handleClose}>
                         <ListItemIcon>
@@ -146,12 +164,14 @@ export default function AccountMenu() {
                             Seller Dashboard </Link>
                     </MenuItem>
                 }
+
                 <Divider />
                 <MenuItem onClick={handleClose}>
                     <ListItemIcon>
-                        <PersonAdd fontSize="small" />
+                        <ManageAccountsIcon />
                     </ListItemIcon>
-                    Add another account
+                    <Link to="/Profile" style={{ textDecoration: 'none', color: 'inherit' }}>
+                        My Profile </Link>
                 </MenuItem>
                 <MenuItem onClick={handleClose}>
                     <ListItemIcon>

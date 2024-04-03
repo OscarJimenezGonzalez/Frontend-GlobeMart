@@ -52,18 +52,18 @@ export const commercialAds = [
         imageURL: "https://img.freepik.com/premium-photo/halloween-shelf-decor-with-copy-space-against-white-wall-banner-background-white-shelf-with-pumpkin-spider-candle-decor-wide-banner-background-halloween_685067-4541.jpg?w=1380",
         // position: top subir arriba esto
     },
-    {
-        id: 2,
-        // title: "Ad 4",
-        // description: "Description 4",
-        imageURL: "https://www.vie-aesthetics.com/wp-content/uploads/2023/01/Full-Width-Website-4-1000x400.jpg"
-    },
-    {
-        id: 3,
-        // title: "Ad 4",
-        // description: "Description 4",
-        imageURL: "https://img.freepik.com/premium-vector/black-friday-ad-panoramic-banner-with-3d-rocket-sale-countdown-wide-wallpaper-with-discount_624052-1592.jpg?w=2000"
-    },
+    // {
+    //     id: 2,
+    //     // title: "Ad 4",
+    //     // description: "Description 4",
+    //     imageURL: "https://www.vie-aesthetics.com/wp-content/uploads/2023/01/Full-Width-Website-4-1000x400.jpg"
+    // },
+    // {
+    //     id: 3,
+    //     // title: "Ad 4",
+    //     // description: "Description 4",
+    //     imageURL: "https://img.freepik.com/premium-vector/black-friday-ad-panoramic-banner-with-3d-rocket-sale-countdown-wide-wallpaper-with-discount_624052-1592.jpg?w=2000"
+    // },
     {
         id: 4,
         // title: "Ad 4",

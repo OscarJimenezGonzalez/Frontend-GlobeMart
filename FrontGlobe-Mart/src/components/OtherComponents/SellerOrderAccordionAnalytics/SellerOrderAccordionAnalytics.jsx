@@ -29,15 +29,16 @@ function SellerOrderAccordionAnalytics({ sellerCartItems }) {
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel1a-content"
                             id="panel1a-header"
-
                         >
                             <Box sx={{ width: "100%", display: "flex", flexDirection: "row", justifyContent: "space-between", pr: 3 }}>
-                                <Box sx={{ display: 'flex', width: '30%' }}>
+
+                                <Box sx={{ display: 'flex', width: '80%' }}>
                                     <Typography variant='subtitle2' color='primary'>Order Id: <strong>000{item.orderId < 10 ? `0${item.orderId}` : item.orderId}</strong> &nbsp; </Typography>
+                                    <Typography variant='subtitle2' color='primary'>- {item.product_SellerCompany.product.name.length >= 26 ? item.product_SellerCompany.product.name.slice(0, 26) + "..." : item.product_SellerCompany.product.name} <strong></strong> &nbsp; </Typography>
                                 </Box>
-                                <Box sx={{ display: 'flex' }} mr={0} minWidth={150}>
-                                    <Typography variant='subtitle2' color='primary'>Item Price: &nbsp; </Typography>
-                                    <Typography variant='tab' color='primary'><strong>{item.product_SellerCompany.priceAfterSale} €</strong></Typography>
+                                <Box sx={{ display: 'flex' }} mr={0} minWidth={170}>
+                                    <Typography variant='subtitle2' color='primary'>Invoiced Price: &nbsp; </Typography>
+                                    <Typography variant='tab' color='primary'><strong>{item.product_SellerCompany.priceAfterSale * item.quantity} €</strong></Typography>
                                 </Box>
                             </Box>
                         </AccordionSummary>
@@ -45,7 +46,9 @@ function SellerOrderAccordionAnalytics({ sellerCartItems }) {
                             <Grid container spacing={1} p={3}>
 
                                 <Grid item xs={12} md={12}>
-                                    <Typography variant="subtitle2" color="primary" gutterBottom>Purchase Date: <strong>{item.cartItemStatus === "Pending Payment" ? "Pending..." : formattedDate(item.order.createdAt)}</strong></Typography>
+                                    <Typography variant="subtitle2" color="primary" gutterBottom>Purchase Date: <strong>{item.cartItemStatus === "Pending Payment" ? "Pending..."
+                                        : formattedDate(item.order.createdAt)}</strong>
+                                    </Typography>
                                 </Grid>
                                 <Grid item xs={12} md={12}>
                                     <Typography variant="subtitle2" color="primary" gutterBottom>Seller product reference: <strong>{item.productSellerCompanyId}</strong></Typography>

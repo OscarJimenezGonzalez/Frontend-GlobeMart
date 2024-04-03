@@ -15,17 +15,17 @@ const ShoppingCartButton = ({ shoppingCart }) => {
         >
             <Badge
                 badgeContent={shoppingCart.length} // La cantidad de ítems en el carrito
-                color="warning" 
+                color="warning"
                 sx={{
                     '& .MuiBadge-badge': {
-                        top: 2, 
-                        right: 4, 
+                        top: 2,
+                        right: 4,
                         border: `2px solid white`, // Agrega un borde al badge para separarlo del icono si es necesario
-                        padding: '0 4px', 
+                        padding: '0 4px',
                     },
                 }}
             >
-                <ShoppingCartIcon sx={{ fontSize: 35 }} />
+                <ShoppingCartIcon sx={{ fontSize: 30 }} />
             </Badge>
         </IconButton>
     );

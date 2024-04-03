@@ -1,11 +1,19 @@
-import { Box, Typography } from "@mui/material"
+import { Box, Typography, useTheme } from "@mui/material"
 import { Link } from "react-router-dom"
 import InstagramIcon from '@mui/icons-material/Instagram';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import GitHubIcon from '@mui/icons-material/GitHub';
+import { useContext } from "react";
+import { mainContext } from "../../../contexts/mainContext";
+import { mainTheme } from "../../../themes/mainTheme";
+import { darkTheme } from "../../../themes/darkTheme";
 
 function Footer() {
 
+    const { mainData, setMainData } = useContext(mainContext)
+    const theme = useTheme()
+
+    const backgroundColor = mainData.themeMode === mainTheme ? theme.palette.primary.main : theme.palette.background.brigther
     const footerElements = [{ name: 'PRIVACY', path: 'privacy' }, { name: 'CONTACT', path: 'contact' }, { name: 'ABOUT', path: 'about' }, { name: 'FAQs', path: 'faqs' }]
     const footerArrElements = footerElements.map((element) => {
 
@@ -20,7 +28,7 @@ function Footer() {
     return (
 
         <Box
-            backgroundColor="primary.main"
+            backgroundColor="#1E1E1E"
             color="#fff"
             sx={{
                 display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingX: '100px', height: '100px'

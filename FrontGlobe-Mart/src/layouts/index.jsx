@@ -18,8 +18,7 @@ export default function Root() {
             padding: 0,
         }}>
             <Header />
-            {/* <Box sx={{ backgroundColor: '#F5F5F5', flex: 1, display: 'flex', justifyContent: 'center', marginTop: !isSmallScreen ? "250px" : "150px" }}> */}
-            <Box sx={{ backgroundColor: '#FFFFFF', flex: 1, display: 'flex', justifyContent: 'center', marginTop: !isSmallScreen ? "250px" : "150px" }}>
+            <Box sx={{ backgroundColor: 'background.default', flex: 1, display: 'flex', justifyContent: 'center', marginTop: 0 }}>
                 <Outlet />
             </Box>
             <Footer />

@@ -7,12 +7,16 @@ import { mainContext } from '../contexts/mainContext';
 import { Navigate, useNavigate } from 'react-router-dom';
 import AdMainCard from '../components/OtherComponents/AdMainCard/AdMainCard';
 import { commercialAds } from '../auxStr/auxStructures.js';
+import LandingPageStructure from '../components/OtherComponents/LandingPageStructure/LandingPageStructure.jsx';
 
 function LandingPage() {
 
     // const isSmallScreen = useMediaQuery('(max-width: 600px)')
     const [productData, setProductData] = useState([])
     const [selectedProduct, setSelectedProduct] = useState()
+
+    const [landingElementsRender, setLandingElementsRender] = useState(true)
+
     const { mainData, setMainData } = useContext(mainContext)
     const selectedCatsLength = mainData.selectedPCategories.length
     const selectedCats = mainData.selectedPCategories
@@ -45,7 +49,7 @@ function LandingPage() {
     const renderProducts = () => {
 
         return (
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', marginY: '50px', gap: '20px' }}>
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', backgroundColor: 'background.default', justifyContent: 'center', marginY: '50px', gap: '20px' }}>
 
                 {productData.map(productData =>
 
@@ -102,30 +106,38 @@ function LandingPage() {
 
         return (
 
+
             <AdMainCard
 
                 key={(commercialAds[randomNum].id)}
                 imageURL={(commercialAds[randomNum].imageURL)}
-                title={(commercialAds[randomNum].title)}
-                description={(commercialAds[randomNum].description)}
-                color={(commercialAds[randomNum].color)}
 
             />
+
 
         )
 
     }
 
+    const renderLandingElements = () => {
+
+
+    }
+
     return (
-        <Box >
-            <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%', maxHeight: '75vh' }}>
+        <Box width="100%">
 
-                {commercialAds && renderRandomAd()}
+            {landingElementsRender ? <LandingPageStructure />
 
-            </Box>
-            <Box sx={{ px: 10 }}>
-                {(selectedCatsLength <= 0) && renderProducts() || renderSelectedCatProducts()}
-            </Box>
+                : <>
+                    <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%', maxHeight: '75vh' }}>
+                        {commercialAds && renderRandomAd()}
+                    </Box>
+                    <Box sx={{ px: 10 }}>
+                        {(selectedCatsLength <= 0) && renderProducts() || renderSelectedCatProducts()}
+                    </Box>
+                </>
+            }
 
         </Box>
     )

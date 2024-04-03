@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -10,12 +10,14 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { Link } from 'react-router-dom';
 import { typography } from '@mui/system';
-
+import { mainContext } from '../../../contexts/mainContext';
+import { mainTheme } from '../../../themes/mainTheme';
 
 export default function ProductCard({ productName, productModel, productBrand, price, salePercentage, priceAfterDiscount, productImg, handleClickProduct, addToCartClick, qtyAvailable }) {
 
   const [favClicked, setFavClicked] = useState(false)
   const [productClicked, setProductClicked] = useState(false)
+  const { mainData, setMainData } = useContext(mainContext)
 
   const handleFavClick = () => {
 
@@ -27,16 +29,18 @@ export default function ProductCard({ productName, productModel, productBrand, p
   return (
 
     <Card sx={{
-      display: "flex", flexDirection: "column", justifyContent: "space-between",
-      minWidth: 220, maxWidth: 220, '&:hover': {
-        backgroundColor: "grey.200",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "space-between",
+      minWidth: 220,
+      maxWidth: 220, '&:hover':
+      {
+        backgroundColor: mainData.themeMode === mainTheme ? "grey.200" : "grey.800"
       }
     }}>
       {/* <Link onClick={handleProductClick} to={"/ProductPage"} style={{ textDecoration: 'none', color: 'black' }} > */}
       <Link style={{ textDecoration: 'none', color: 'black' }} >
         <Box position="relative">
-
-
           <CardMedia
             position="relative"
             onClick={handleClickProduct}
@@ -44,12 +48,12 @@ export default function ProductCard({ productName, productModel, productBrand, p
             alt="img"
             height="160px"
             width='100%'
-            style={{ objectFit: 'cover' }}  // controla como se ajusta la imagen dentro de su contenedor
+            style={{ objectFit: 'cover', }} 
             image={productImg}
 
           />
           {qtyAvailable <= 0 && <Typography onClick={handleClickProduct} sx={{
-            // metemos la tipography sobrepuesta a la imagen por medio de relative - abosulute. 
+        
 
             position: 'absolute',
             top: 0,
@@ -92,8 +96,7 @@ export default function ProductCard({ productName, productModel, productBrand, p
         </Box>
 
       </CardContent>
-
-
+      
       <CardActions sx={{ display: 'flex' }}>
 
         <Box sx={{ width: '100%', display: 'flex' }}>
