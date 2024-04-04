@@ -2,10 +2,10 @@ import { createTheme } from "@mui/material";
 
 export const mainTheme = createTheme({
     palette: {
-        mode: 'light',
+        type: 'light',
         primary: {
             main: '#6E665F',
-            // fixed: '#74F8E5',
+            fixed: '#1E1E1E',
             // fixedVariant: '#005048'
         },
         secondary: {
@@ -44,12 +44,17 @@ export const mainTheme = createTheme({
         },
         h4: {
             fontSize: '2.125rem',
-            fontWeight: 400,
+            fontWeight: 500,
             letterSpacing: '0.025em',
         },
         h5: {
             fontSize: '1.5rem',
             fontWeight: 400,
+            letterSpacing: '0.0em',
+        },
+        h5b: {
+            fontSize: '1.5rem',
+            fontWeight: 600,
             letterSpacing: '0.0em',
         },
         h6: {

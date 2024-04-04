@@ -18,6 +18,8 @@ export default function ProductCard({ productName, productModel, productBrand, p
   const [favClicked, setFavClicked] = useState(false)
   const [productClicked, setProductClicked] = useState(false)
   const { mainData, setMainData } = useContext(mainContext)
+  const backgroundColor = mainData.themeMode === mainTheme ? '#FFFFFF' : "#010409"
+
 
   const handleFavClick = () => {
 
@@ -30,13 +32,20 @@ export default function ProductCard({ productName, productModel, productBrand, p
 
     <Card sx={{
       display: "flex",
+      boxShadow: "none",
       flexDirection: "column",
       justifyContent: "space-between",
       minWidth: 220,
-      maxWidth: 220, '&:hover':
+      maxWidth: 220,
+      backgroundColor: backgroundColor,
+      '&:hover':
       {
         backgroundColor: mainData.themeMode === mainTheme ? "grey.200" : "grey.800"
-      }
+      },
+      // '&:active': { // Esto aplicará el estilo cuando el elemento esté activo (click sin soltar)
+      //   backgroundColor: mainData.themeMode === mainTheme ? "grey.300" : "grey.700",
+      // },
+
     }}>
       {/* <Link onClick={handleProductClick} to={"/ProductPage"} style={{ textDecoration: 'none', color: 'black' }} > */}
       <Link style={{ textDecoration: 'none', color: 'black' }} >
@@ -48,12 +57,12 @@ export default function ProductCard({ productName, productModel, productBrand, p
             alt="img"
             height="160px"
             width='100%'
-            style={{ objectFit: 'cover', }} 
+            style={{ objectFit: 'cover', }}
             image={productImg}
 
           />
           {qtyAvailable <= 0 && <Typography onClick={handleClickProduct} sx={{
-        
+
 
             position: 'absolute',
             top: 0,
@@ -96,7 +105,7 @@ export default function ProductCard({ productName, productModel, productBrand, p
         </Box>
 
       </CardContent>
-      
+
       <CardActions sx={{ display: 'flex' }}>
 
         <Box sx={{ width: '100%', display: 'flex' }}>

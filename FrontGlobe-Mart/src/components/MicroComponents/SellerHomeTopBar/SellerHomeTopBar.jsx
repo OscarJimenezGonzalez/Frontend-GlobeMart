@@ -17,11 +17,11 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import { Typography } from '@mui/material';
 import CustomersOrderBadgeIcon from '../CustomersOrderBadgeIcon/CustomersOrderBadgeIcon';
-
+import { useContext } from 'react';
+import { mainContext } from '../../../contexts/mainContext';
+import { mainTheme } from '../../../themes/mainTheme';
 
 const drawerWidth = 280;
-
-
 const menuItems = [
     {
         text: 'DashBoard',
@@ -53,6 +53,10 @@ const menuItems = [
 ];
 
 export default function SellerHomeTopBar({ sendComponentSelection, awaitingShippmentOrders }) {
+
+    const { mainData, setMainData } = useContext(mainContext)
+    const backgroundColor = mainData.themeMode === mainTheme ? '#FFFFFF' : "#1E1E1E"
+
     return (
 
         <Box sx={{ display: 'flex' }}>

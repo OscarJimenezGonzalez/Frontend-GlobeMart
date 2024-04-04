@@ -8,6 +8,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import AdMainCard from '../components/OtherComponents/AdMainCard/AdMainCard';
 import { commercialAds } from '../auxStr/auxStructures.js';
 import LandingPageStructure from '../components/OtherComponents/LandingPageStructure/LandingPageStructure.jsx';
+import { Button } from '@mui/material';
 
 function LandingPage() {
 
@@ -49,7 +50,7 @@ function LandingPage() {
     const renderProducts = () => {
 
         return (
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', backgroundColor: 'background.default', justifyContent: 'center', marginY: '50px', gap: '20px' }}>
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', backgroundColor: 'background.default', justifyContent: 'center', marginY: '50px', gap: '50px' }}>
 
                 {productData.map(productData =>
 
@@ -129,15 +130,24 @@ function LandingPage() {
 
             {landingElementsRender ? <LandingPageStructure />
 
-                : <>
-                    <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%', maxHeight: '75vh' }}>
+                : <Box>
+
+                    <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%', maxHeight: '75vh', mb:10}}>
                         {commercialAds && renderRandomAd()}
                     </Box>
                     <Box sx={{ px: 10 }}>
                         {(selectedCatsLength <= 0) && renderProducts() || renderSelectedCatProducts()}
                     </Box>
-                </>
+
+                    <Box width={"100%"} p={5} mb={10} display={"flex"} justifyContent={"center"}>
+                        <Button variant='outlined'>Load more ...</Button>
+                    </Box>
+
+                </Box>
             }
+
+
+
 
         </Box>
     )

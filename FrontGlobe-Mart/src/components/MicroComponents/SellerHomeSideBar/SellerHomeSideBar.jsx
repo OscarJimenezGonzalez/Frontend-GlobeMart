@@ -17,9 +17,10 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import CustomersOrderBadgeIcon from '../CustomersOrderBadgeIcon/CustomersOrderBadgeIcon';
-
 import { Typography } from '@mui/material';
-
+import { useContext } from 'react';
+import { mainContext } from '../../../contexts/mainContext';
+import { mainTheme } from '../../../themes/mainTheme';
 
 const drawerWidth = 290;
 
@@ -80,14 +81,20 @@ const auxItems = [
 ]
 
 export default function SellerHomeSideBar({ sendComponentSelection, awaitingShippmentOrders }) {
+
+    const { mainData, setMainData } = useContext(mainContext)
+    const backgroundColor = mainData.themeMode === mainTheme ? '#FFFFFF' : "#1E1E1E"
+    const borderColor = mainData.themeMode === mainTheme ? '#E7E7E7' : null
+
+
     return (
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
             <Box
                 sx={{
-                    backgroundColor: 'white',
+                    backgroundColor: backgroundColor,
                     width: '100%',
-                    border: '1px solid #E7E7E7',
+                    borderRight: `1px solid ${borderColor}`,
                     width: drawerWidth,
                     flexShrink: 0,
                     '& .MuiDrawer-paper': {

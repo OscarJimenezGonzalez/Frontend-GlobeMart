@@ -58,7 +58,7 @@ export default function RelatedProductsCarousel({ productList, productSelectedCa
 
                 (
                     <Grid item key={item.id}>
-                        <Card onClick={() => handleRelatedProductClick(item.productId)}>
+                        <Card onClick={() => handleRelatedProductClick(item.productId)} sx={{boxShadow: "none",}}>
                             <CardMedia
 
                                 component="img"

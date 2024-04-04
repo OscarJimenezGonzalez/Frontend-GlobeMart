@@ -90,7 +90,7 @@ export default function SellerProductCaroussel({ productList }) {
                 ))}
             </Grid>
             <IconButton onClick={handleNext} disabled={activeStep === 6 - widthController}>
-                <ArrowForwardIosIcon sx={{ "&:hover": { color: "blue", opacity: [0.9, 0.8, 0.7] } }} />
+                <ArrowForwardIosIcon sx={{ "&:hover": { color: "orange", opacity: [0.9, 0.8, 0.7] } }} />
             </IconButton>
         </Box>
     );
