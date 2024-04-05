@@ -21,7 +21,7 @@ export const darkTheme = createTheme({
         background: {
             default: '#010409',
             brigther: '#1E1E1E',
-            brigther2: '#353535',
+            brigther: '#353535',
             superBright: '#4C4C4C'
             // default: '#F0EDE5'
             // default: '#E7E7E7'
@@ -104,7 +104,7 @@ export const darkTheme = createTheme({
                         backgroundColor: '#5a524c'
                     },
                     '&.Mui-disabled': { // Selector de estado para 'disabled'
-                        
+
                         backgroundColor: '#010409',
                         color: '#ffffff',
                     },

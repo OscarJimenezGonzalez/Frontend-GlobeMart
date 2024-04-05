@@ -9,6 +9,7 @@ export default function SellerProductCaroussel({ productList }) {
 
     const [activeStep, setActiveStep] = React.useState(0);
     const [widthController, setWidthController] = useState(4)
+    
 
     const navigate = useNavigate()
 

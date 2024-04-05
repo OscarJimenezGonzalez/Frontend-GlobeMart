@@ -21,6 +21,7 @@ import { Typography } from '@mui/material';
 import { useContext } from 'react';
 import { mainContext } from '../../../contexts/mainContext';
 import { mainTheme } from '../../../themes/mainTheme';
+import { darkTheme } from '../../../themes/darkTheme';
 
 const drawerWidth = 290;
 
@@ -95,6 +96,7 @@ export default function SellerHomeSideBar({ sendComponentSelection, awaitingShip
                     backgroundColor: backgroundColor,
                     width: '100%',
                     borderRight: `1px solid ${borderColor}`,
+                    borderBottom: mainData.themeMode === darkTheme ? '1px solid #393939 ' : null,
                     width: drawerWidth,
                     flexShrink: 0,
                     '& .MuiDrawer-paper': {

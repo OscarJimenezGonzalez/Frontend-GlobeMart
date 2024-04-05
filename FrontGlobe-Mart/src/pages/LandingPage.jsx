@@ -132,7 +132,7 @@ function LandingPage() {
 
                 : <Box>
 
-                    <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%', maxHeight: '75vh', mb:10}}>
+                    <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%', maxHeight: '75vh', mb: 10 }}>
                         {commercialAds && renderRandomAd()}
                     </Box>
                     <Box sx={{ px: 10 }}>

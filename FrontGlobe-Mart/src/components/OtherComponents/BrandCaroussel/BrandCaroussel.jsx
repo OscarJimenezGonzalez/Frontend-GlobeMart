@@ -3,7 +3,7 @@ import { Card, CardContent, CardMedia, Typography, IconButton, Grid } from '@mui
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { Box } from '@mui/system';
-
+import { useCustomMediaQueries } from '../../../auxStr/customMediaQueries';
 
 const brands = [
     { id: 1, name: "Adidas", logoImg: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMOiVtLgAhGgm4QwImp21rFGo3eX36ZHyy8lPqw5ToVA&s" },
@@ -14,10 +14,13 @@ const brands = [
 ]
 
 
-export default function BrandCaroussel({ productList }) {
+export default function BrandCaroussel() {
 
     const [activeStep, setActiveStep] = React.useState(0);
     const [widthController, setWidthController] = useState(4)
+
+    const { isLargeScreen, isMediumLargeScreen, isMediumScreen, isSmallScreen, isTinyScreen } = useCustomMediaQueries();
+
 
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -25,6 +28,23 @@ export default function BrandCaroussel({ productList }) {
     const handleBack = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
+
+    useEffect(() => {
+
+        if (isLargeScreen) {
+            setWidthController(4)
+        } else if (isMediumScreen) {
+            setWidthController(3)
+        } else if (isSmallScreen) {
+            setWidthController(2)
+        } else if (isTinyScreen) {
+            setWidthController(1)
+        } else {
+            setWidthController(4)
+        }
+
+    }, [isLargeScreen, isMediumLargeScreen, isMediumScreen, isSmallScreen, isTinyScreen])
+
 
     return (
         <Box sx={{
@@ -37,6 +57,7 @@ export default function BrandCaroussel({ productList }) {
             alignItems: "center",
             flexWrap: "nowrap",
             overflowX: 'auto',
+            // px: 4
         }}>
             <IconButton onClick={handleBack} disabled={activeStep === 0}
 
@@ -49,7 +70,7 @@ export default function BrandCaroussel({ productList }) {
                     justifyContent: "center",
                     alignItems: "center",
                     height: 30,
-                    py: '30px', // Aplica el mismo estilo aquí para mantener la consistencia
+                    py: '30px',
                     '&:hover': {
 
                         color: "orange",
@@ -63,18 +84,17 @@ export default function BrandCaroussel({ productList }) {
             >
                 <ArrowBackIosIcon sx={{ fontSize: '25px', "&:hover": { color: "orange", opacity: [0.9, 0.8, 0.7] } }} />
             </IconButton>
-            <Grid container spacing={3} justifyContent="center" px={3}>
-
+            <Grid container spacing={3} mx={6}>
                 {brands.slice(activeStep, activeStep + widthController).map((item, index) =>
 
                 (
                     <Grid item key={item.id}>
-                        <Card sx={{ borderRadius: 7, boxShadow: 'none', minWidth: 230, cursor: 'pointer' }}>
+                        <Card sx={{ borderRadius: 7, boxShadow: 'none', minWidth: 210, cursor: 'pointer' }}>
                             <CardMedia
                                 component="img"
                                 sx={{
-                                    height: 220,
-                                    width: 230,
+                                    height: 210,
+                                    width: 210,
                                     objectFit: 'cover'
                                 }}
                                 image={item.logoImg}
@@ -94,7 +114,8 @@ export default function BrandCaroussel({ productList }) {
                     justifyContent: "center",
                     alignItems: "center",
                     height: 30,
-                    py: '30px', // Aplica el mismo estilo aquí para mantener la consistencia
+                    ml: 2,
+                    py: '30px',
                     '&:hover': {
 
                         color: "orange",

@@ -11,10 +11,12 @@ import clothing from '../../../assets/images/landingPage/clothing.jpeg'
 import megaSales from '../../../assets/images/landingPage/megaSale.jpeg'
 import mobiles from '../../../assets/images/landingPage/mobiles.jpg'
 import toys from '../../../assets/images/landingPage/toys.png'
+import gmLogo from '../../../assets/images/landingPage/gmLogo.png'
 
 import LandingPageCaroussel from '../LandingPageCaroussel/LandingPageCaroussel'
+import LandingPageNewsCaroussel from '../LandingPageNewsCaroussel/LandingPageNewsCaroussel'
 import BrandCaroussel from '../BrandCaroussel/BrandCaroussel'
-
+import NewsLetterForm from '../../MicroComponents/NewsLetterForm/NewsLetterForm'
 
 
 function LandingPageStructure() {
@@ -182,13 +184,13 @@ function LandingPageStructure() {
             <Grid container spacing={2} mb={15} >
 
                 <Grid item xs={12}>
-                    <Box sx={{ backgroundColor: "#F9F9F9", display: 'flex', alignItems: 'center', minHeight: 450, px: 25 }}>
+                    <Box sx={{ backgroundColor: "background.brigth", display: 'flex', alignItems: 'center', minHeight: 450, px: 25 }}>
                         <Box width={"20%"} my={5}>
                             <Typography variant='h4' color='secondary' mb={4}>Discover our brands</Typography>
-                            <Typography variant='h5b' color='primary'>Partnering with the finest in the industry, an exclusive selection that defines excellence.. </Typography>
+                            <Typography variant='h5b' color='1E1E1E'>Partnering with the finest in the industry, an exclusive selection that defines excellence.. </Typography>
                         </Box>
 
-                        <Box ml={10}>
+                        <Box ml={8}>
                             <BrandCaroussel></BrandCaroussel>
                         </Box>
 
@@ -197,82 +199,102 @@ function LandingPageStructure() {
 
             </Grid>
 
-            <Typography variant='h4' color="secondary" mx={25}>Compromises and Commitments</Typography>
+            <Typography variant='h4' color="secondary" mx={25} mb={2}>Our Compromises</Typography>
 
 
             <Grid container spacing={5} py={3} px={25} mb={10}>
 
                 <Grid item xs={12} sm={6} md={4} lg={3}  >
-                    <Box sx={{ borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: "center", p: 2, minHeight: 250 }}>
-                        <Box width={"30%"}>
-                            <Typography variant='h6' color="primary.fixed">Safe & Secure Payment</Typography>
-                        </Box>
+                    <Box sx={{ borderRadius: 10, display: 'flex', flexDirection: "column", gap: 4, alignItems: 'center', justifyContent: "center", p: 2, minHeight: 250 }}>
+
                         <CardMedia
                             sx={{ width: 130, height: 180, borderRadius: '10%', mr: 4, ml: 2, objectFit: 'cover' }}
                             image={safePayImage}
                             alt="Logo"
                         />
+                        <Box width={"50%"}>
+                            <Typography variant='h6' color="primary.fixed">Safe Payment</Typography>
+                        </Box>
 
                     </Box>
                 </Grid>
                 <Grid item xs={12} sm={6} md={4} lg={3}   >
 
-                    <Box sx={{ borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: "center", p: 2, minHeight: 250 }}>
+                    <Box sx={{ borderRadius: 10, display: 'flex', flexDirection: "column", gap: 3, alignItems: 'center', justifyContent: "center", p: 2, minHeight: 250 }}>
 
-                        <Box width={"30%"}>
-                            <Typography variant='h6' color="primary.fixed">24 / 48 hours Delivery</Typography>
-                        </Box>
                         <CardMedia
                             sx={{ width: 80, height: 80, borderRadius: '10%', mr: 4, ml: 2, objectFit: 'cover' }}
                             image={moto}
                             alt="Logo"
                         />
+                        <Box width={"50%"}>
+                            <Typography variant='h6' color="primary.fixed">24 / 48h Delivery</Typography>
+                        </Box>
                     </Box>
                 </Grid>
                 <Grid item xs={12} sm={6} md={4} lg={3}  >
-                    <Box sx={{ borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: "center", p: 2, minHeight: 250 }}>
-                        <Box width={"20%"} mr={3}>
-                            <Typography variant='h6' color="primary.fixed">Free & Safe Returns</Typography>
-                        </Box>
+                    <Box sx={{ borderRadius: 10, display: 'flex', flexDirection: "column", gap: 3, alignItems: 'center', justifyContent: "center", p: 2, minHeight: 250 }}>
+
                         <CardMedia
                             sx={{ width: 100, height: 100, borderRadius: '10%', mr: 4, ml: 2, objectFit: 'cover' }}
                             image={freeReturns}
                             alt="Logo"
                         />
+                        <Box width={"50%"} mr={3}>
+                            <Typography variant='h6' color="primary.fixed">Free & Safe Returns</Typography>
+                        </Box>
                     </Box>
                 </Grid>
                 <Grid item xs={12} sm={6} md={4} lg={3}   >
-                    <Box sx={{ borderRadius: 10, display: 'flex', alignItems: 'center', justifyContent: "center", p: 2, minHeight: 250 }}>
+                    <Box sx={{ borderRadius: 10, display: 'flex', flexDirection: "column", gap: 3, alignItems: 'center', justifyContent: "center", p: 2, minHeight: 250 }}>
 
-                        <Box width={"30%"} mr={2}>
-                            <Typography variant='h6' color="primary.fixed">Our Customers Opinions</Typography>
-                        </Box>
                         <CardMedia
                             sx={{ width: 140, minHeight: 220, borderRadius: '50%', mr: 4, ml: 2, objectFit: 'cover' }}
                             image={reviews}
                             alt="Logo"
                         />
+                        <Box width={"60%"} mr={2} mt={-8}>
+                            <Typography variant='h6' color="primary.fixed">Customers Opinion</Typography>
+                        </Box>
+
                     </Box>
                 </Grid>
 
             </Grid>
 
-            <Grid container spacing={2} mb={15} >
+            <Grid container spacing={2} mb={5} >
 
                 <Grid item xs={12}>
                     <Box sx={{
-                        backgroundColor: "background.main", display: 'flex', alignItems: 'center', minHeight: 450, px: 25,
-                        borderTop: "8px solid #f9f9f9", borderBottom: "8px solid #f9f9f9"
+                        backgroundColor: "background.brigth", display: 'flex', gap: 4, alignItems: 'center', minHeight: 450, px: 35,
                     }}>
-                        <Box width={"20%"} my={5}>
-                            <Typography variant='h4' color='secondary' mb={4}>Join our Newsletter !</Typography>
-                            <Typography variant='h5b' color='primary'>Find out the most relevant news about our products and services ! </Typography>
+                        <Box ml={0} width={"30%"} display={"flex"} flexDirection={"column"} justifyContent={"center"} alignContent={"center"} alignItems={"center"} pr={10}
+
+                            component="img"
+                            sx={{
+                                borderRadius: 2,
+                                height: 330,
+                                display: 'block',
+                                maxWidth: 400,
+                                overflow: 'hidden',
+                                width: '100%',
+                            }}
+                            src={gmLogo}
+                            alt=""
+                        >
+                        </Box>
+                        <Box ml={-5} width={"35%"} borderRadius={3}>
+                            <Typography variant='h4' color='secondary' mb={4}>Subscribe to our Newsletter !</Typography>
+
+                            <NewsLetterForm></NewsLetterForm>
                         </Box>
 
-                        <Box ml={10}>
+                        <Box ml={3} mt={3} width={"30%"} display={"flex"} flexDirection={"column"} justifyContent={"center"} alignContent={"center"} alignItems={"center"}>
 
-                            NewsLetter Form
+                            {/* <Typography variant='h5' color='#1E1E1E'>Find out the most relevant news about our products and services, be the first to know the most promising trends in the market ! </Typography> */}
 
+
+                            <LandingPageNewsCaroussel></LandingPageNewsCaroussel>
                         </Box>
 
                     </Box>
