@@ -9,11 +9,13 @@ import AdMainCard from '../components/OtherComponents/AdMainCard/AdMainCard';
 import { commercialAds } from '../auxStr/auxStructures.js';
 import LandingPageStructure from '../components/OtherComponents/LandingPageStructure/LandingPageStructure.jsx';
 import { Button } from '@mui/material';
+import { ConstructionOutlined } from '@mui/icons-material';
 
 function LandingPage() {
 
     // const isSmallScreen = useMediaQuery('(max-width: 600px)')
     const [productData, setProductData] = useState([])
+    const [allProducts, setAllProducts] = useState([])
     const [selectedProduct, setSelectedProduct] = useState()
 
     const [landingElementsRender, setLandingElementsRender] = useState(true)
@@ -31,6 +33,7 @@ function LandingPage() {
         const fetchProductData = async () => {
 
             const pData = await getProductsFromSellers()
+            setAllProducts(pData.slice(0, 10))
             const searchedProducts = pData.filter(products => products.product.name.includes(searchInputData))
             setProductData(searchedProducts)
 
@@ -39,6 +42,7 @@ function LandingPage() {
         fetchProductData()
 
     }, [searchInputData])
+
 
     async function handleProductClick(productId) {
 
@@ -65,6 +69,7 @@ function LandingPage() {
                         priceAfterDiscount={productData.priceAfterSale}
                         salePercentage={productData.salePercentage}
                         qtyAvailable={productData.qtyAvailable}
+                        rating={productData.rating}
                     />
                 )}
             </Box>
@@ -121,21 +126,31 @@ function LandingPage() {
     }
 
     const renderLandingElements = () => {
+    }
+
+
+    const filterNewProducts = () => {
+
+
 
 
     }
 
+
+
     return (
         <Box width="100%">
 
-            {landingElementsRender ? <LandingPageStructure />
+
+
+            {landingElementsRender ? <LandingPageStructure newProducts={allProducts} />
 
                 : <Box>
 
                     <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%', maxHeight: '75vh', mb: 10 }}>
                         {commercialAds && renderRandomAd()}
                     </Box>
-                    <Box sx={{ px: 10 }}>
+                    <Box sx={{ px: 25 }}>
                         {(selectedCatsLength <= 0) && renderProducts() || renderSelectedCatProducts()}
                     </Box>
 

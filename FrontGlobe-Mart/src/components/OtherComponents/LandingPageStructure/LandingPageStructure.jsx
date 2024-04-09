@@ -1,305 +1,104 @@
 import React from 'react'
-import { Box, Typography, Grid, CardMedia, Card } from '@mui/material'
-import safePayImage from '../../../assets/images/safePay.png'
-import reviews from '../../../assets/images/reviews.png'
-import freeReturns from '../../../assets/images/freeReturns.png'
-import moto from '../../../assets/images/fff.png'
-import bigSales from '../../../assets/images/landingPage/BigSales.jpeg'
-// import electrodomesticos from '../../../assets/images/landingPage/electrodomesticos.png'
-import electroDom from '../../../assets/images/landingPage/electroDom.jpeg'
-import clothing from '../../../assets/images/landingPage/clothing.jpeg'
-import megaSales from '../../../assets/images/landingPage/megaSale.jpeg'
-import mobiles from '../../../assets/images/landingPage/mobiles.jpg'
-import toys from '../../../assets/images/landingPage/toys.png'
+import { Box, Typography, Grid, CardMedia, Card, Button } from '@mui/material'
 import gmLogo from '../../../assets/images/landingPage/gmLogo.png'
+import logoSmallGM from '../../../assets/images/logoSmallGM.png'
 
-import LandingPageCaroussel from '../LandingPageCaroussel/LandingPageCaroussel'
-import LandingPageNewsCaroussel from '../LandingPageNewsCaroussel/LandingPageNewsCaroussel'
-import BrandCaroussel from '../BrandCaroussel/BrandCaroussel'
+import LandingPageCaroussel from '../../LandingPageComponents/LandingPageCaroussel/LandingPageCaroussel'
+import LandingPageNewsCaroussel from '../../LandingPageComponents/LandingPageNewsCaroussel/LandingPageNewsCaroussel'
+import BrandCaroussel from '../../LandingPageComponents/BrandCaroussel/BrandCaroussel'
 import NewsLetterForm from '../../MicroComponents/NewsLetterForm/NewsLetterForm'
+import LandingIconRow from '../../LandingPageComponents/LandingIconRow/LandingIconRow'
+import LandingCategoryRow from '../../LandingPageComponents/LandingCategoryRow/LandingCategoryRow'
+import { SiGooglenews } from "react-icons/si";
+import { ImFire } from "react-icons/im";
+import LandingProducts from '../../LandingPageComponents/LandingProducts/LandingProducts'
 
 
-function LandingPageStructure() {
-
-    const squareStyle = {
-        '&::before': {
-            content: '""',
-            display: 'block',
-            paddingTop: '100%', // Altura igual al 100% del ancho del elemento
-        },
-        position: 'relative',
-        '& > *': {
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            bottom: 0,
-            right: 0,
-        }
-    };
+function LandingPageStructure({ newProducts }) {
 
     return (
         <>
-            <Grid container spacing={4} px={25} mb={12} mt={0} >
+            <Grid container spacing={4} px={25} mb={16} mt={0} >
 
                 <Grid item xs={12} width={"100%"} height={"100%"} >
                     <Box sx={{ maxWidth: "100%", height: 400, borderRadius: 7, backgroundColor: "#F9F9F9", display: 'flex', alignItems: 'center' }}>
-
                         <LandingPageCaroussel></LandingPageCaroussel>
-
                     </Box>
                 </Grid>
-
-                <Grid item xs={12} sm={6} md={4} lg={2}>
-                    <Box sx={{
-                        borderRadius: 7,
-                        backgroundColor: "#F9F9F9",
-                        display: 'flex',
-                        alignItems: 'center',
-                        height: 250,
-                        overflow: 'hidden'
-                    }}>
-                        <img
-                            src={bigSales}
-                            alt="Logo"
-                            style={{
-                                width: "100%",
-                                height: "100%",
-                                objectFit: 'cover',
-                                borderRadius: '10%',
-                            }}
-                        />
-                    </Box>
-                </Grid>
-
-                <Grid item xs={12} sm={6} md={4} lg={2}>
-                    <Box sx={{
-                        borderRadius: 7,
-                        backgroundColor: "#F9F9F9",
-                        display: 'flex',
-                        alignItems: 'center',
-                        height: 250,
-                        overflow: 'hidden'
-                    }}>
-                        <img
-                            src={megaSales}
-                            alt="Logo"
-                            style={{
-                                width: "100%",
-                                height: "100%",
-                                objectFit: 'cover',
-                                borderRadius: '10%',
-                            }}
-                        />
-                    </Box>
-                </Grid>
-                <Grid item xs={12} sm={6} md={4} lg={2}>
-                    <Box sx={{
-                        borderRadius: 7,
-                        backgroundColor: "#F9F9F9",
-                        display: 'flex',
-                        alignItems: 'center',
-                        height: 250,
-                        overflow: 'hidden'
-                    }}>
-                        <img
-                            src={mobiles}
-                            alt="Logo"
-                            style={{
-                                width: "100%",
-                                height: "100%",
-                                objectFit: 'cover',
-                                borderRadius: '10%',
-                            }}
-                        />
-                    </Box>
-                </Grid>
-                <Grid item xs={12} sm={6} md={4} lg={2}>
-                    <Box sx={{
-                        borderRadius: 7,
-                        backgroundColor: "#F9F9F9",
-                        display: 'flex',
-                        alignItems: 'center',
-                        height: 250,
-                        overflow: 'hidden'
-                    }}>
-                        <img
-                            src={electroDom}
-                            alt="Logo"
-                            style={{
-                                width: "100%",
-                                height: "100%",
-                                objectFit: 'cover',
-                                borderRadius: '10%',
-                            }}
-                        />
-                    </Box>
-                </Grid>
-                <Grid item xs={12} sm={6} md={4} lg={2}>
-                    <Box sx={{
-                        borderRadius: 7,
-                        backgroundColor: "#F08C03",
-                        display: 'flex',
-                        alignItems: 'center',
-                        height: 250,
-                        overflow: 'hidden'
-                    }}>
-                        <img
-                            src={toys}
-                            alt="Logo"
-                            style={{
-                                // width: "105%",
-                                // height: "78%",
-                                width: "100%",
-                                height: "100%",
-                                objectFit: 'cover',
-                                borderRadius: '10%',
-                            }}
-                        />
-                    </Box>
-                </Grid>
-                <Grid item xs={12} sm={6} md={4} lg={2}>
-                    <Box sx={{
-                        borderRadius: 7,
-                        backgroundColor: "#F9F9F9",
-                        display: 'flex',
-                        alignItems: 'center',
-                        height: 250,
-                        overflow: 'hidden'
-                    }}>
-                        <img
-                            src={clothing}
-                            alt="Logo"
-                            style={{
-                                width: "100%",
-                                height: "100%",
-                                objectFit: 'cover',
-                                borderRadius: '10%',
-                            }}
-                        />
-                    </Box>
-                </Grid>
+                <LandingCategoryRow></LandingCategoryRow>
 
             </Grid >
 
-            <Grid container spacing={2} mb={15} >
-
+            <Grid container spacing={3} mb={6} >
                 <Grid item xs={12}>
-                    <Box sx={{ backgroundColor: "background.brigth", display: 'flex', alignItems: 'center', minHeight: 450, px: 25 }}>
-                        <Box width={"20%"} my={5}>
-                            <Typography variant='h4' color='secondary' mb={4}>Discover our brands</Typography>
-                            <Typography variant='h5b' color='1E1E1E'>Partnering with the finest in the industry, an exclusive selection that defines excellence.. </Typography>
-                        </Box>
+                    <Box sx={{
+                        backgroundColor: "background.brigth", display: 'flex', alignItems: 'center', minHeight: 480, px: 25
 
+
+                    }}>
+                        <Box width={"22%"}>
+                            <Typography variant='h4' color='secondary.main' mb={2}>Discover our brands</Typography>
+                            <Typography variant='h6' color='primary.fixed'>Partnering with the finest in the industry...</Typography>
+                            <Box gap={5} display={"flex"} mt={3}>
+                                <Button variant='containedWarning'>See more ... </Button>
+                            </Box>
+                        </Box>
                         <Box ml={8}>
                             <BrandCaroussel></BrandCaroussel>
                         </Box>
-
                     </Box>
                 </Grid>
-
             </Grid>
 
-            <Typography variant='h4' color="secondary" mx={25} mb={2}>Our Compromises</Typography>
-
-
-            <Grid container spacing={5} py={3} px={25} mb={10}>
-
-                <Grid item xs={12} sm={6} md={4} lg={3}  >
-                    <Box sx={{ borderRadius: 10, display: 'flex', flexDirection: "column", gap: 4, alignItems: 'center', justifyContent: "center", p: 2, minHeight: 250 }}>
-
-                        <CardMedia
-                            sx={{ width: 130, height: 180, borderRadius: '10%', mr: 4, ml: 2, objectFit: 'cover' }}
-                            image={safePayImage}
-                            alt="Logo"
-                        />
-                        <Box width={"50%"}>
-                            <Typography variant='h6' color="primary.fixed">Safe Payment</Typography>
+            <Grid container spacing={3} mb={8}>
+                <Grid item xs={12}>
+                    <Box sx={{
+                        width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', minHeight: 550,
+                        justifyContent: 'center'
+                    }}>
+                        <Box width={"100%"} my={3} px={25}>
+                            {/* <Box width={"100%"} my={3} px={25} display={"flex"} flexDirection={"column"} justifyContent={'center'} alignContent={'center'} alignItems={'center'}> */}
+                            <Typography variant='h4' color='secondary.main' mb={2}>New Products</Typography>
+                            <Typography variant='h6' color='primary.fixed' mb={0}>+2000 each week </Typography>
                         </Box>
-
-                    </Box>
-                </Grid>
-                <Grid item xs={12} sm={6} md={4} lg={3}   >
-
-                    <Box sx={{ borderRadius: 10, display: 'flex', flexDirection: "column", gap: 3, alignItems: 'center', justifyContent: "center", p: 2, minHeight: 250 }}>
-
-                        <CardMedia
-                            sx={{ width: 80, height: 80, borderRadius: '10%', mr: 4, ml: 2, objectFit: 'cover' }}
-                            image={moto}
-                            alt="Logo"
-                        />
-                        <Box width={"50%"}>
-                            <Typography variant='h6' color="primary.fixed">24 / 48h Delivery</Typography>
+                        <Box width={'100%'} px={25}>
+                            <LandingProducts productList={newProducts}></LandingProducts>
                         </Box>
                     </Box>
                 </Grid>
-                <Grid item xs={12} sm={6} md={4} lg={3}  >
-                    <Box sx={{ borderRadius: 10, display: 'flex', flexDirection: "column", gap: 3, alignItems: 'center', justifyContent: "center", p: 2, minHeight: 250 }}>
-
-                        <CardMedia
-                            sx={{ width: 100, height: 100, borderRadius: '10%', mr: 4, ml: 2, objectFit: 'cover' }}
-                            image={freeReturns}
-                            alt="Logo"
-                        />
-                        <Box width={"50%"} mr={3}>
-                            <Typography variant='h6' color="primary.fixed">Free & Safe Returns</Typography>
-                        </Box>
-                    </Box>
-                </Grid>
-                <Grid item xs={12} sm={6} md={4} lg={3}   >
-                    <Box sx={{ borderRadius: 10, display: 'flex', flexDirection: "column", gap: 3, alignItems: 'center', justifyContent: "center", p: 2, minHeight: 250 }}>
-
-                        <CardMedia
-                            sx={{ width: 140, minHeight: 220, borderRadius: '50%', mr: 4, ml: 2, objectFit: 'cover' }}
-                            image={reviews}
-                            alt="Logo"
-                        />
-                        <Box width={"60%"} mr={2} mt={-8}>
-                            <Typography variant='h6' color="primary.fixed">Customers Opinion</Typography>
-                        </Box>
-
-                    </Box>
-                </Grid>
-
             </Grid>
 
             <Grid container spacing={2} mb={5} >
-
                 <Grid item xs={12}>
                     <Box sx={{
-                        backgroundColor: "background.brigth", display: 'flex', gap: 4, alignItems: 'center', minHeight: 450, px: 35,
+                        backgroundColor: "background.brigth", display: 'flex', alignItems: 'center', minHeight: 550, px: 25,
+                        justifyContent: 'center'
                     }}>
-                        <Box ml={0} width={"30%"} display={"flex"} flexDirection={"column"} justifyContent={"center"} alignContent={"center"} alignItems={"center"} pr={10}
-
-                            component="img"
-                            sx={{
-                                borderRadius: 2,
-                                height: 330,
-                                display: 'block',
-                                maxWidth: 400,
-                                overflow: 'hidden',
-                                width: '100%',
-                            }}
-                            src={gmLogo}
-                            alt=""
+                        {/* <Box
+                            component={'img'}
+                            src={logoSmallGM}
+                            width={450}
+                            height={300}
                         >
-                        </Box>
-                        <Box ml={-5} width={"35%"} borderRadius={3}>
-                            <Typography variant='h4' color='secondary' mb={4}>Subscribe to our Newsletter !</Typography>
+                        </Box> */}
 
+                        <Box width={"20%"} alignContent={"center"} alignItems={"center"} justifyContent={"center"}>
+                            <SiGooglenews fontSize={200} color='#1E1E1E' />
+                        </Box>
+                        <Box width={"50%"} borderRadius={2} backgroundColor={"white"} sx={{ p: 6 }}>
+                            <Typography variant='h4' color='secondary' mb={4}>Subscribe to our Newsletter !</Typography>
                             <NewsLetterForm></NewsLetterForm>
                         </Box>
 
-                        <Box ml={3} mt={3} width={"30%"} display={"flex"} flexDirection={"column"} justifyContent={"center"} alignContent={"center"} alignItems={"center"}>
-
-                            {/* <Typography variant='h5' color='#1E1E1E'>Find out the most relevant news about our products and services, be the first to know the most promising trends in the market ! </Typography> */}
-
-
-                            <LandingPageNewsCaroussel></LandingPageNewsCaroussel>
-                        </Box>
 
                     </Box>
                 </Grid>
+            </Grid>
 
+            <Grid container spacing={5} minHeight={550}>
+                <Box sx={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', minHeight: 550, px: 25 }}>
+                    <LandingIconRow></LandingIconRow>
+                </Box>
             </Grid>
 
         </>

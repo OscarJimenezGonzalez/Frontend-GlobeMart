@@ -22,7 +22,10 @@ import ShoppingCartButton from '../../MicroComponents/ShoppingCartIconButton/Sho
 import { darkTheme } from '../../../themes/darkTheme';
 import { mainTheme } from '../../../themes/mainTheme';
 import { Palette } from '@mui/icons-material';
-
+import logoSmallGM from '../../../assets/images/logoSmallGM.png'
+import logoSmallGMOrng from '../../../assets/images/logoSmallGMOrng.png'
+import logoSmallGMMix from '../../../assets/images/logoSmallGMMix.png'
+import logoSmallGMGray from '../../../assets/images/logoSmallGMGray.png'
 
 
 function Header() {
@@ -114,13 +117,22 @@ function Header() {
 
             sx={{ height: '100px', backgroundColor: 'background.default', display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: "100%" }}>
 
-
             <Box
-
               sx={{ display: 'flex', alignItems: 'center', justifyContent: 'start', width: "100%" }}>
+
               <Box sx={{ ml: 5, mr: 2, width: "10%", minWidth: 130 }}>
+
                 <Typography color={'secondary.main'} variant="h5" component="div" ><Link to={'/'} style={{ textDecoration: 'none', color: 'inherit' }}> Globe-Mart </Link></Typography>
+
               </Box>
+
+              {/* 
+              <Box sx={{ width: "10%", minWidth: 190, minHeight: 0, ml: -2 }}
+                component="img"
+                src={logoSmallGM}
+                alt='logo'
+              >
+              </Box> */}
 
               {
                 isSmallScreen &&

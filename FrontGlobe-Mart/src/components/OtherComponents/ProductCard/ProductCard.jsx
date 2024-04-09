@@ -12,14 +12,14 @@ import { Link } from 'react-router-dom';
 import { typography } from '@mui/system';
 import { mainContext } from '../../../contexts/mainContext';
 import { mainTheme } from '../../../themes/mainTheme';
+import RatingComponentSimple from '../../MicroComponents/RatingComponent/RatingComponentSimple';
 
-export default function ProductCard({ productName, productModel, productBrand, price, salePercentage, priceAfterDiscount, productImg, handleClickProduct, addToCartClick, qtyAvailable }) {
+export default function ProductCard({ productName, productModel, productBrand, price, salePercentage, priceAfterDiscount, productImg, handleClickProduct, addToCartClick, qtyAvailable, rating }) {
 
   const [favClicked, setFavClicked] = useState(false)
   const [productClicked, setProductClicked] = useState(false)
   const { mainData, setMainData } = useContext(mainContext)
   const backgroundColor = mainData.themeMode === mainTheme ? '#FFFFFF' : "#010409"
-
 
   const handleFavClick = () => {
 
@@ -59,11 +59,8 @@ export default function ProductCard({ productName, productModel, productBrand, p
             width='100%'
             style={{ objectFit: 'cover', }}
             image={productImg}
-
           />
           {qtyAvailable <= 0 && <Typography onClick={handleClickProduct} sx={{
-
-
             position: 'absolute',
             top: 0,
             left: 0,
@@ -81,7 +78,6 @@ export default function ProductCard({ productName, productModel, productBrand, p
         </Box>
       </ Link >
       <CardContent sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
-
         <Typography variant="body1" component="div">
           {productName.length > 20 ? productName.slice(0, 20) + '...' : productName}
         </Typography>
@@ -101,21 +97,20 @@ export default function ProductCard({ productName, productModel, productBrand, p
               {price} €
             </Typography>
           }
-
         </Box>
-
+        <RatingComponentSimple rating={4} />
       </CardContent>
 
       <CardActions sx={{ display: 'flex' }}>
 
         <Box sx={{ width: '100%', display: 'flex' }}>
-          <Button onClick={addToCartClick} size="small">Add to Cart</Button>
+          {/* <Button onClick={addToCartClick} size="small">Add to Cart</Button>
           <Button onClick={handleFavClick} size="small">
             {favClicked ?
               <FavoriteIcon sx={{ color: 'secondary.main', fontSize: '18px', width: '18px', height: '18px' }} /> :
               <FavoriteBorderIcon sx={{ color: 'primary.main', fontSize: '18px', width: '18px', height: '18px' }} />
             }
-          </Button>
+          </Button> */}
         </Box>
 
       </CardActions>

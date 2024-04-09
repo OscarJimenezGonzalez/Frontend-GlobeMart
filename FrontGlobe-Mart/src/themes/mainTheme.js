@@ -50,12 +50,12 @@ export const mainTheme = createTheme({
         h5: {
             fontSize: '1.5rem',
             fontWeight: 400,
-            letterSpacing: '0.0em',
+            letterSpacing: '0.02em',
         },
         h5b: {
             fontSize: '1.5rem',
             fontWeight: 600,
-            letterSpacing: '0.0em',
+            letterSpacing: '0.07em',
         },
         h6: {
             fontSize: '1.25rem',
@@ -104,7 +104,7 @@ export const mainTheme = createTheme({
                     '&:hover': {
                         backgroundColor: '#5a524c'
                     },
-                    '&.Mui-disabled': { // Selector de estado para 'disabled'
+                    '&.Mui-disabled': {
                         backgroundColor: 'lightgray',
                         color: '#ffffff',
                     },
@@ -116,9 +116,9 @@ export const mainTheme = createTheme({
                     backgroundColor: '#F9AB19',
                     color: '#ffffff',
                     '&:hover': {
-                        backgroundColor: '#d89416', // Un poco más oscuro al pasar el mouse
+                        backgroundColor: '#d89416', 
                     },
-                    '&.Mui-disabled': { // Selector de estado para 'disabled'
+                    '&.Mui-disabled': { 
                         backgroundColor: 'lightgray',
                         color: '#ffffff',
                     },
@@ -127,12 +127,11 @@ export const mainTheme = createTheme({
                     backgroundColor: '#218838',
                     color: '#ffffff',
                     '&:hover': {
-                        backgroundColor: '#1B5E20', // Un poco más oscuro al pasar el mouse
+                        backgroundColor: '#1B5E20', 
                     },
-                    '&.Mui-disabled': { // Selector de estado para 'disabled'
+                    '&.Mui-disabled': { 
                         backgroundColor: 'lightgray',
                         color: '#ffffff',
-                        // textTransform: 'lowercase'
                     },
                 },
                 containedWarning: {
