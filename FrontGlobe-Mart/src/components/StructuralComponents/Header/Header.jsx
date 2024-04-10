@@ -122,7 +122,19 @@ function Header() {
 
               <Box sx={{ ml: 5, mr: 2, width: "10%", minWidth: 130 }}>
 
-                <Typography color={'secondary.main'} variant="h5" component="div" ><Link to={'/'} style={{ textDecoration: 'none', color: 'inherit' }}> Globe-Mart </Link></Typography>
+                <Typography color={'secondary.main'} variant="h5" component="div" >
+                  <Box sx={{}}
+                    onClick={() => {
+                      navigate('/')
+                      scrollTo(0, 0)
+                      setMainData(prevData => ({
+                        ...prevData,
+                        landingPageElements: true
+                      }))
+
+                    }}> Globe-Mart
+                  </Box>
+                </Typography>
 
               </Box>
 
@@ -219,78 +231,78 @@ function Header() {
 
           </Box>
         }
-      </AppBar >
-      {/* Aqui acaba el topHeader ????*/}
 
-      <AppBar position='static' sx={{ backgroundColor: 'white', boxShadow: '0', borderBottom: `1px solid ${borderColor}` }}>
-        {
-          !isSmallScreen &&
-          <Box sx={{
-            height: '100px',
-            backgroundColor: 'background.default',
-            display: 'flex',
-            justifyContent: 'start',
-            alignItems: 'center',
-            alignContent: 'center',
-            borderBottom: `1px solid ${borderColor}`,
-            width: "100%",
-          }}>
-            <TextField
-              onChange={searchProducts}
-              fullWidth
-              label="Search for products ..."
-              id="fullWidth"
-              sx={{ backgroundColor: backgroundColor, width: '80%', mx: 5 }}
-              InputProps={{
-                endAdornment: (
-                  <IconButton onClick={saveSearchInput}>
-                    <SearchIcon />
-                  </IconButton>
-                )
-              }}
-            />
-          </Box>
-        }
+        {/* Aqui acaba el topHeader ????*/}
 
-        {
-
-          <Box
-
-            sx={{ backgroundColor: 'background.default', display: 'flex', justifyContent: 'space-between', alignItems: 'center', pl: 3, }}>
-            <Box backgroundColor="background.default">
-              <SwipeableDrawerMenu productCategory={productCategories} />  {/* Le pasamos las categorias de proguctos como props  */}
-            </Box >
-
-            <Box display={"flex"}>
-
-              {profileInfo && profileInfo.role === "seller" ?
-                <Button
-                  startIcon={<RoofingIcon />}
-                  onClick={() => { navigate(`/SellerHome/${profileInfo.id}`) }}
-                  variant=""
-                  sx={{
-                    minWidth: 150,
-                    mr: 5,
-                    color: "#F9AB19"
-                  }}>
-                  Seller DashBoard
-                </Button> : <Button
-                  onClick={() => { navigate('/SellerWelcomePage') }}
-                  variant="outlinedSecondary"
-                  sx={{
-                    minWidth: 150,
-                    mr: 5
-                  }}>
-                  Become a seller
-                </Button>
-              }
-
+        <Box position='sticky' sx={{ backgroundColor: 'white', boxShadow: '0' }}>
+          {
+            !isSmallScreen &&
+            <Box sx={{
+              height: '100px',
+              backgroundColor: 'background.default',
+              display: 'flex',
+              justifyContent: 'start',
+              alignItems: 'center',
+              alignContent: 'center',
+              borderBottom: `1px solid ${borderColor}`,
+              width: "100%",
+            }}>
+              <TextField
+                onChange={searchProducts}
+                fullWidth
+                label="Search for products ..."
+                id="fullWidth"
+                sx={{ backgroundColor: backgroundColor, width: '80%', mx: 5 }}
+                InputProps={{
+                  endAdornment: (
+                    <IconButton onClick={saveSearchInput}>
+                      <SearchIcon />
+                    </IconButton>
+                  )
+                }}
+              />
             </Box>
-          </Box>
+          }
 
-        }
-      </AppBar>
+          {
 
+            <Box
+
+              sx={{ borderTop: `1px solid ${borderColor}`, backgroundColor: 'background.default', display: 'flex', justifyContent: 'space-between', alignItems: 'center', pl: 3, }}>
+              <Box backgroundColor="background.default">
+                <SwipeableDrawerMenu productCategory={productCategories} />  {/* Le pasamos las categorias de proguctos como props  */}
+              </Box >
+
+              <Box display={"flex"}>
+
+                {profileInfo && profileInfo.role === "seller" ?
+                  <Button
+                    startIcon={<RoofingIcon />}
+                    onClick={() => { navigate(`/SellerHome/${profileInfo.id}`) }}
+                    variant=""
+                    sx={{
+                      minWidth: 150,
+                      mr: 5,
+                      color: "#F9AB19"
+                    }}>
+                    Seller DashBoard
+                  </Button> : <Button
+                    onClick={() => { navigate('/SellerWelcomePage') }}
+                    variant="outlinedSecondary"
+                    sx={{
+                      minWidth: 150,
+                      mr: 5
+                    }}>
+                    Become a seller
+                  </Button>
+                }
+
+              </Box>
+            </Box>
+
+          }
+        </Box>
+      </AppBar >
 
     </>
   );

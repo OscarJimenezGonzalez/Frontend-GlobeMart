@@ -8,8 +8,10 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import AdMainCard from '../components/OtherComponents/AdMainCard/AdMainCard';
 import { commercialAds } from '../auxStr/auxStructures.js';
 import LandingPageStructure from '../components/OtherComponents/LandingPageStructure/LandingPageStructure.jsx';
-import { Button } from '@mui/material';
+import { Button, Grid } from '@mui/material';
 import { ConstructionOutlined } from '@mui/icons-material';
+import { getReviewsFromProduct } from '../services/productReviewService.js';
+import LandingPageCaroussel from '../components/LandingPageComponents/LandingPageCaroussel/LandingPageCaroussel.jsx';
 
 function LandingPage() {
 
@@ -17,13 +19,12 @@ function LandingPage() {
     const [productData, setProductData] = useState([])
     const [allProducts, setAllProducts] = useState([])
     const [selectedProduct, setSelectedProduct] = useState()
-
-    const [landingElementsRender, setLandingElementsRender] = useState(true)
-
     const { mainData, setMainData } = useContext(mainContext)
+
     const selectedCatsLength = mainData.selectedPCategories.length
     const selectedCats = mainData.selectedPCategories
     const searchInputData = mainData.searchData
+
     const navigate = useNavigate()
 
     console.log("Leyendo nuestro contexto principal: ", mainData)
@@ -43,10 +44,9 @@ function LandingPage() {
 
     }, [searchInputData])
 
-
     async function handleProductClick(productId) {
 
-        await setSelectedProduct(productId)
+        setSelectedProduct(productId)
         navigate(`/productPage/${productId}`)
         scrollTo(0, 0)
     }
@@ -54,7 +54,7 @@ function LandingPage() {
     const renderProducts = () => {
 
         return (
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', backgroundColor: 'background.default', justifyContent: 'center', marginY: '50px', gap: '50px' }}>
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', backgroundColor: 'background.default', justifyContent: 'center', marginY: '50px', gap: '36px' }}>
 
                 {productData.map(productData =>
 
@@ -70,6 +70,8 @@ function LandingPage() {
                         salePercentage={productData.salePercentage}
                         qtyAvailable={productData.qtyAvailable}
                         rating={productData.rating}
+                        numberOfRates={productData.numberOfRates ? productData.numberOfRates : 0}
+
                     />
                 )}
             </Box>
@@ -82,12 +84,11 @@ function LandingPage() {
 
         return (
 
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', margin: '50px', gap: '40px' }}>
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', margin: '50px', gap: '36px' }}>
 
                 {productData.filter((products) => selectedCats.includes(products.product.productCategoryId)).map(productData => (
 
                     <ProductCard
-                        addToCartClick={() => handleAddToCart(productData)}
                         handleClickProduct={() => handleProductClick(productData.id)}
                         key={productData.id}
                         price={productData.price}
@@ -98,6 +99,8 @@ function LandingPage() {
                         priceAfterDiscount={productData.priceAfterSale}
                         salePercentage={productData.salePercentage}
                         qtyAvailable={productData.qtyAvailable}
+                        rating={productData.rating}
+                        numberOfRates={productData.numberOfRates ? productData.numberOfRates : 0}
                     />
                 ))}
             </Box>
@@ -105,6 +108,13 @@ function LandingPage() {
         )
 
     }
+
+    const renderSaleProducts = () => {
+
+
+    }
+
+
 
     const renderRandomAd = () => {
 
@@ -126,30 +136,41 @@ function LandingPage() {
     }
 
     const renderLandingElements = () => {
-    }
-
-
-    const filterNewProducts = () => {
-
-
-
 
     }
-
-
 
     return (
         <Box width="100%">
 
+            <Grid container spacing={4} px={25} mt={0} >
+                <Grid item xs={12} width={"100%"} height={"100%"} >
+                    <Box sx={{ maxWidth: "100%", height: 400, borderRadius: 7, backgroundColor: "#F9F9F9", display: 'flex', alignItems: 'center' }}>
+                        <LandingPageCaroussel></LandingPageCaroussel>
+                    </Box>
+                </Grid>
+            </Grid >
 
+            {mainData.landingPageElements ? <LandingPageStructure
 
-            {landingElementsRender ? <LandingPageStructure newProducts={allProducts} />
+                newProducts={allProducts}
+                renderAllProducts={() => {
+
+                    setMainData(prevData => ({
+                        ...prevData,
+                        landingPageElements: false
+                    }))
+
+                }}
+
+            />
 
                 : <Box>
 
-                    <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%', maxHeight: '75vh', mb: 10 }}>
+                    {/* <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%', maxHeight: '75vh', mb: 10 }}>
                         {commercialAds && renderRandomAd()}
-                    </Box>
+                    </Box> */}
+
+
                     <Box sx={{ px: 25 }}>
                         {(selectedCatsLength <= 0) && renderProducts() || renderSelectedCatProducts()}
                     </Box>

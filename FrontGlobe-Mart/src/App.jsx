@@ -22,6 +22,7 @@ function App() {
     searchData: "",
     selectedPCategories: [],
     themeMode: mainTheme,
+    landingPageElements: true
 
   })
 
@@ -35,7 +36,6 @@ function App() {
 
   return (
     <>
-      {/* <ThemeProvider theme={darkTheme}> */}
       <ThemeProvider theme={mainData.themeMode}>
         <CssBaseline />
         <mainContext.Provider value={data}>

@@ -1,12 +1,13 @@
-import { Box, Typography, useTheme } from "@mui/material"
-import { Link } from "react-router-dom"
-import InstagramIcon from '@mui/icons-material/Instagram';
-import TwitterIcon from '@mui/icons-material/Twitter';
 import GitHubIcon from '@mui/icons-material/GitHub';
-import { useContext } from "react";
 import { mainContext } from "../../../contexts/mainContext";
 import { mainTheme } from "../../../themes/mainTheme";
 import { darkTheme } from "../../../themes/darkTheme";
+import React, { useContext } from 'react';
+import { Box, Typography, Grid, Link, useTheme } from "@mui/material";
+import InstagramIcon from '@mui/icons-material/Instagram';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import YouTubeIcon from '@mui/icons-material/YouTube';
+
 
 function Footer() {
 

@@ -1,4 +1,5 @@
 import React from 'react'
+import { useState, useEffect } from 'react'
 import { Grid, Box, Typography } from '@mui/material'
 import bigSales from '../../../assets/images/landingPage/BigSales.jpeg'
 import megaSales from '../../../assets/images/landingPage/megaSale.jpeg'
@@ -10,36 +11,73 @@ import clothing from '../../../assets/images/landingPage/clothing.jpeg'
 import mobiles from '../../../assets/images/landingPage/mobiles.jpg'
 import toys from '../../../assets/images/landingPage/toys.png'
 import allProducts from '../../../assets/images/landingPage/allProducts.jpg'
+import CircularLoading from '../../MicroComponents/CircularLoading/CircularLoading'
 
+function LandingCategoryRow({ renderAllProducts }) {
 
-function LandingCategoryRow({allProductsClick,}) {
+    const [imagesLoaded, setImagesLoaded] = useState({
+        bigSales: false,
+        megaSales: false,
+        allProducts: false,
+        mobiles: false,
+        electrodomesticos: false,
+        toys: false,
+    });
 
+    useEffect(() => {
+        // Simula la carga de imágenes con un retraso
+        const timer = setTimeout(() => {
+            setImagesLoaded({
+                bigSales: true,
+                megaSales: true,
+                allProducts: true,
+                mobiles: true,
+                electrodomesticos: true,
+                toys: true,
+            });
+        }, 700); // Ajusta el retraso según sea necesario
 
+        return () => clearTimeout(timer);
+
+    }, []);
+
+    const renderImageOrProgress = (imageSrc, loadedState, altText) => {
+        if (!loadedState) {
+            return <CircularLoading />;
+        } else {
+            return (
+                <img
+                    src={imageSrc}
+                    alt={altText}
+                    style={{
+                        width: "100%",
+                        height: "100%",
+                        objectFit: 'cover',
+                        borderRadius: '10%',
+                    }}
+                />
+            );
+        }
+    };
 
     return (
         <>
             <Grid item xs={12} sm={6} md={4} lg={2}>
                 <Box display={"flex"} flexDirection={"column"} alignContent={"center"} alignItems={"center"} justifyContent={"center"}>
                     <Box
-                        onClick={() => { }}
+                        onClick={() => { renderAllProducts() }}
                         sx={{
                             borderRadius: 7,
-                            backgroundColor: "#F9F9F9",
                             display: 'flex',
                             alignItems: 'center',
                             height: 230,
-                            overflow: 'hidden'
-                        }}>
-                        <img
-                            src={bigSales}
-                            alt="Logo"
-                            style={{
-                                width: "100%",
-                                height: "100%",
-                                objectFit: 'cover',
-                                borderRadius: '10%',
-                            }}
-                        />
+                            overflow: 'hidden',
+                            justifyContent: 'center',
+                        }}
+                    >
+                        
+                        {renderImageOrProgress(bigSales, imagesLoaded.bigSales, "Big Sales")}
+
                     </Box>
                     <Typography sx={{ mt: 1 }} variant='h6' color="primary.fixed">Big Sales</Typography>
                 </Box>
@@ -48,10 +86,10 @@ function LandingCategoryRow({allProductsClick,}) {
             <Grid item xs={12} sm={6} md={4} lg={2}>
                 <Box display={"flex"} flexDirection={"column"} alignContent={"center"} alignItems={"center"} justifyContent={"center"}>
                     <Box
-                        onClick={() => {}}
+                        onClick={() => { }}
                         sx={{
                             borderRadius: 7,
-                            backgroundColor: "#F9F9F9",
+                            // backgroundColor: "#F9F9F9",
                             display: 'flex',
                             alignItems: 'center',
                             height: 230,

@@ -12,9 +12,9 @@ import { Link } from 'react-router-dom';
 import { typography } from '@mui/system';
 import { mainContext } from '../../../contexts/mainContext';
 import { mainTheme } from '../../../themes/mainTheme';
-import RatingComponentSimple from '../../MicroComponents/RatingComponent/RatingComponentSimple';
+import RatingComponentCard from '../../MicroComponents/RatingComponent/RatingComponentCard';
 
-export default function ProductCard({ productName, productModel, productBrand, price, salePercentage, priceAfterDiscount, productImg, handleClickProduct, addToCartClick, qtyAvailable, rating }) {
+export default function ProductCard({ productName, productModel, productBrand, price, salePercentage, priceAfterDiscount, productImg, handleClickProduct, addToCartClick, qtyAvailable, rating, numberOfRates }) {
 
   const [favClicked, setFavClicked] = useState(false)
   const [productClicked, setProductClicked] = useState(false)
@@ -74,9 +74,20 @@ export default function ProductCard({ productName, productModel, productBrand, p
             // borderRadius: 1,
           }}>Out of Stock</Typography>}
 
+          {/* <Button
+
+            sx={{ position: 'absolute', top: 8, right: 8 }}
+            onClick={handleFavClick} size="small">
+            {favClicked ?
+              <FavoriteIcon sx={{ color: 'secondary.main', fontSize: '18px', width: '18px', height: '18px' }} /> :
+              <FavoriteBorderIcon sx={{ color: 'secondary.main', fontSize: '18px', width: '18px', height: '18px' }} />
+            }
+          </Button> */}
 
         </Box>
+
       </ Link >
+
       <CardContent sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
         <Typography variant="body1" component="div">
           {productName.length > 20 ? productName.slice(0, 20) + '...' : productName}
@@ -89,16 +100,21 @@ export default function ProductCard({ productName, productModel, productBrand, p
         </Typography>
 
         <Box sx={{ display: "flex", flexDirection: "row", gap: 2, height: 30, alignItems: 'center' }}>
-          <Typography variant="body2" color="text.primary">
-            {priceAfterDiscount} €
+          <Typography variant="h6" color="primary.fixed">
+            {parseFloat(priceAfterDiscount).toFixed(0)} €
           </Typography>
           {salePercentage > 0 &&
             <Typography variant="body2" sx={{ textDecoration: 'line-through', color: "red" }}>
-              {price} €
+              {parseFloat(price).toFixed(0)} €
             </Typography>
           }
         </Box>
-        <RatingComponentSimple rating={4} />
+
+        <RatingComponentCard
+          rating={rating}
+          numberOfRates={numberOfRates}
+        />
+
       </CardContent>
 
       <CardActions sx={{ display: 'flex' }}>

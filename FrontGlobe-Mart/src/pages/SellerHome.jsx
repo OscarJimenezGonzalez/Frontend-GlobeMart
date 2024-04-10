@@ -13,7 +13,7 @@ import { useCustomMediaQueries } from '../auxStr/customMediaQueries.js'
 import SalesAnalyticsStructure from '../components/OtherComponents/SalesAnalyticsStructure/SalesAnalyticsStructure.jsx'
 import SellerOrdersStructure from '../components/OtherComponents/SellerOrdersStructure/SellerOrdersStructure.jsx'
 import SellerHomeStructure from '../components/OtherComponents/SellerHomeDashboard/SellerHomeDashboard.jsx'
-import CircularProg from '../components/MicroComponents/CircularProgress/CircularProgress.jsx'
+import CircularProg from '../components/MicroComponents/CircularLoading/CircularLoading.jsx'
 import SellerHomeDashboard from '../components/OtherComponents/SellerHomeDashboard/SellerHomeDashboard.jsx'
 import { updateOrderStatus } from '../services/orderService.js'
 

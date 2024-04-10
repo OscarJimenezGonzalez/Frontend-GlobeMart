@@ -5,6 +5,9 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { Box } from '@mui/system';
 import { useCustomMediaQueries } from '../../../auxStr/customMediaQueries';
 import ProductCard from '../../OtherComponents/ProductCard/ProductCard';
+import { useNavigate } from 'react-router-dom';
+import { getReviewsFromProduct } from '../../../services/productReviewService';
+
 
 const brands = [
     { id: 1, name: "Adidas", logoImg: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMOiVtLgAhGgm4QwImp21rFGo3eX36ZHyy8lPqw5ToVA&s" },
@@ -20,7 +23,9 @@ export default function LandingProducts({ productList }) {
 
     const [activeStep, setActiveStep] = React.useState(0);
     const [widthController, setWidthController] = useState(4)
+    const [opinionNum, setOpinionNum] = useState(0)
     const { isLargeScreen, isMediumLargeScreen, isMediumScreen, isSmallScreen, isTinyScreen } = useCustomMediaQueries();
+    const navigate = useNavigate();
 
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -28,7 +33,6 @@ export default function LandingProducts({ productList }) {
     const handleBack = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
-
 
     console.log(productList, "LISTA ")
 
@@ -90,23 +94,26 @@ export default function LandingProducts({ productList }) {
                     {productList.slice(activeStep, activeStep + widthController).map((item, index) =>
 
                     (
-                        <>
 
-                            <ProductCard
-                                handleClickProduct={() => handleProductClick(productList.id)}
-                                key={item.id}
-                                price={item.price}
-                                productName={item.product.name}
-                                productModel={item.product.model}
-                                productBrand={item.product.brand}
-                                productImg={item.product.imageURL}
-                                priceAfterDiscount={item.priceAfterSale}
-                                salePercentage={item.salePercentage}
-                                qtyAvailable={item.qtyAvailable}
-                            />
+                        <ProductCard
+                            handleClickProduct={() => {
+                                navigate(`/productPage/${item.id}`)
+                                scrollTo(0, 0)
+                            }}
+                            key={item.id}
+                            price={item.price}
+                            productName={item.product.name}
+                            productModel={item.product.model}
+                            productBrand={item.product.brand}
+                            productImg={item.product.imageURL}
+                            priceAfterDiscount={item.priceAfterSale}
+                            salePercentage={item.salePercentage}
+                            qtyAvailable={item.qtyAvailable}
+                            rating={item.rating}
+                            numberOfRates={item.numberOfRates}
 
 
-                        </>
+                        />
 
                     ))}
                 </Box>

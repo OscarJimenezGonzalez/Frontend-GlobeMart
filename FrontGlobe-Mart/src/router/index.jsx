@@ -15,6 +15,7 @@ import OrderPage from '../pages/OrderPage'
 import PaymentPage from '../pages/PaymentPage'
 import PaymentSucceededPage from '../pages/PaymentSucceededPage'
 import CustomerPage from '../pages/CustomerPage'
+import ProductCategoryPage from '../pages/ProductCategoryPage'
 
 
 const router = createBrowserRouter([
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
             {
                 path: '/',
                 element: <LandingPage />
+            },
+            {
+                path: '/:categoryName',
+                element: <ProductCategoryPage />
             },
             {
                 path: '/About',
