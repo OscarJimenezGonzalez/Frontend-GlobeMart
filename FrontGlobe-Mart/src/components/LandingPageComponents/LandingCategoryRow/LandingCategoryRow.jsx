@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { Grid, Box, Typography } from '@mui/material'
 import bigSales from '../../../assets/images/landingPage/BigSales.jpeg'
 import megaSales from '../../../assets/images/landingPage/megaSale.jpeg'
@@ -12,8 +12,12 @@ import mobiles from '../../../assets/images/landingPage/mobiles.jpg'
 import toys from '../../../assets/images/landingPage/toys.png'
 import allProducts from '../../../assets/images/landingPage/allProducts.jpg'
 import CircularLoading from '../../MicroComponents/CircularLoading/CircularLoading'
+import { mainContext } from '../../../contexts/mainContext'
 
-function LandingCategoryRow({ renderAllProducts }) {
+
+function LandingCategoryRow({ renderAllProducts, renderMegaSales, renderBigSales }) {
+
+    const { mainData, setMainData } = useContext(mainContext)
 
     const [imagesLoaded, setImagesLoaded] = useState({
         bigSales: false,
@@ -25,7 +29,7 @@ function LandingCategoryRow({ renderAllProducts }) {
     });
 
     useEffect(() => {
-        // Simula la carga de imágenes con un retraso
+
         const timer = setTimeout(() => {
             setImagesLoaded({
                 bigSales: true,
@@ -35,13 +39,28 @@ function LandingCategoryRow({ renderAllProducts }) {
                 electrodomesticos: true,
                 toys: true,
             });
-        }, 700); // Ajusta el retraso según sea necesario
+        }, 800);
 
         return () => clearTimeout(timer);
 
     }, []);
 
     const renderImageOrProgress = (imageSrc, loadedState, altText) => {
+
+        const imageSelector = (imageSrc) => {
+
+            if (imageSrc === allProducts) {
+                return "150%"
+            }
+            else if (imageSrc === electrodomesticos) {
+                return "75"
+            }
+            else {
+                return "100%"
+            }
+
+        }
+
         if (!loadedState) {
             return <CircularLoading />;
         } else {
@@ -50,8 +69,8 @@ function LandingCategoryRow({ renderAllProducts }) {
                     src={imageSrc}
                     alt={altText}
                     style={{
-                        width: "100%",
-                        height: "100%",
+                        width: imageSrc === electrodomesticos ? "105%" : "100%",
+                        height: imageSelector(imageSrc),
                         objectFit: 'cover',
                         borderRadius: '10%',
                     }}
@@ -65,7 +84,13 @@ function LandingCategoryRow({ renderAllProducts }) {
             <Grid item xs={12} sm={6} md={4} lg={2}>
                 <Box display={"flex"} flexDirection={"column"} alignContent={"center"} alignItems={"center"} justifyContent={"center"}>
                     <Box
-                        onClick={() => { renderAllProducts() }}
+                        onClick={() => {
+                            renderAllProducts()
+                            setMainData(prevData => ({
+                                ...prevData,
+                                selectedPCategories: [0]
+                            }))
+                        }}
                         sx={{
                             borderRadius: 7,
                             display: 'flex',
@@ -73,11 +98,10 @@ function LandingCategoryRow({ renderAllProducts }) {
                             height: 230,
                             overflow: 'hidden',
                             justifyContent: 'center',
+                            cursor: 'pointer',
                         }}
                     >
-                        
                         {renderImageOrProgress(bigSales, imagesLoaded.bigSales, "Big Sales")}
-
                     </Box>
                     <Typography sx={{ mt: 1 }} variant='h6' color="primary.fixed">Big Sales</Typography>
                 </Box>
@@ -86,25 +110,22 @@ function LandingCategoryRow({ renderAllProducts }) {
             <Grid item xs={12} sm={6} md={4} lg={2}>
                 <Box display={"flex"} flexDirection={"column"} alignContent={"center"} alignItems={"center"} justifyContent={"center"}>
                     <Box
-                        onClick={() => { }}
+                        onClick={() => {
+                            renderAllProducts()
+                            setMainData(prevData => ({
+                                ...prevData,
+                                selectedPCategories: [0]
+                            }))
+                        }}
                         sx={{
                             borderRadius: 7,
-                            // backgroundColor: "#F9F9F9",
                             display: 'flex',
                             alignItems: 'center',
                             height: 230,
-                            overflow: 'hidden'
+                            overflow: 'hidden',
+                            cursor: 'pointer',
                         }}>
-                        <img
-                            src={megaSales}
-                            alt="Logo"
-                            style={{
-                                width: "100%",
-                                height: "100%",
-                                objectFit: 'cover',
-                                borderRadius: '10%',
-                            }}
-                        />
+                        {renderImageOrProgress(megaSales, imagesLoaded.megaSales, "Mega Sales")}
                     </Box>
                     <Typography sx={{ mt: 1 }} variant='h6' color="primary.fixed">Outlet</Typography>
                 </Box>
@@ -112,26 +133,22 @@ function LandingCategoryRow({ renderAllProducts }) {
             <Grid item xs={12} sm={6} md={4} lg={2}>
                 <Box display={"flex"} flexDirection={"column"} alignContent={"center"} alignItems={"center"} justifyContent={"center"}>
                     <Box
-                        onClick={() => { }}
+                        onClick={() => {
+                            renderAllProducts()
+                            setMainData(prevData => ({
+                                ...prevData,
+                                selectedPCategories: []
+                            }))
+                        }}
                         sx={{
                             borderRadius: 7,
-                            backgroundColor: "#F9F9F9",
                             display: 'flex',
                             alignItems: 'center',
                             height: 230,
-                            overflow: 'hidden'
+                            overflow: 'hidden',
+                            cursor: 'pointer',
                         }}>
-                        <img
-                            src={allProducts}
-                            alt="Logo"
-                            style={{
-                                width: "120%",
-                                height: "137%",
-                                objectFit: 'cover',
-                                borderRadius: '10%',
-                                transform: 'scale(1)'
-                            }}
-                        />
+                        {renderImageOrProgress(allProducts, imagesLoaded.allProducts, "All Products")}
                     </Box>
                     <Typography sx={{ mt: 1 }} variant='h6' color="primary.fixed">All Products</Typography>
                 </Box>
@@ -141,25 +158,24 @@ function LandingCategoryRow({ renderAllProducts }) {
             <Grid item xs={12} sm={6} md={4} lg={2}>
                 <Box display={"flex"} flexDirection={"column"} alignContent={"center"} alignItems={"center"} justifyContent={"center"}>
                     <Box
-                        onClick={() => { }}
+                        onClick={() => {
+
+                            renderAllProducts()
+                            setMainData(prevData => ({
+                                ...prevData,
+                                selectedPCategories: [4]
+                            }))
+
+                        }}
                         sx={{
                             borderRadius: 7,
-                            backgroundColor: "#F9F9F9",
                             display: 'flex',
                             alignItems: 'center',
                             height: 230,
-                            overflow: 'hidden'
+                            overflow: 'hidden',
+                            cursor: 'pointer',
                         }}>
-                        <img
-                            src={mobiles}
-                            alt="Logo"
-                            style={{
-                                width: "100%",
-                                height: "100%",
-                                objectFit: 'cover',
-                                borderRadius: '10%',
-                            }}
-                        />
+                        {renderImageOrProgress(mobiles, imagesLoaded.mobiles, "Mobiles")}
                     </Box>
                     <Typography sx={{ mt: 1 }} variant='h6' color="primary.fixed">Mobile</Typography>
                 </Box>
@@ -167,25 +183,23 @@ function LandingCategoryRow({ renderAllProducts }) {
             <Grid item xs={12} sm={6} md={4} lg={2}>
                 <Box display={"flex"} flexDirection={"column"} alignContent={"center"} alignItems={"center"} justifyContent={"center"}>
                     <Box
-                        onClick={() => { }}
+                        onClick={() => {
+                            renderAllProducts()
+                            setMainData(prevData => ({
+                                ...prevData,
+                                selectedPCategories: [2]
+                            }))
+                        }}
                         sx={{
                             borderRadius: 7,
-                            backgroundColor: "#F0DCCF",
+                            backgroundColor: imagesLoaded.electrodomesticos && "#F0DDD4",
                             display: 'flex',
                             alignItems: 'center',
                             height: 230,
-                            overflow: 'hidden'
+                            overflow: 'hidden',
+                            cursor: 'pointer',
                         }}>
-                        <img
-                            src={electrodomesticos}
-                            alt="Logo"
-                            style={{
-                                width: "105%",
-                                height: "75%",
-                                objectFit: 'cover',
-                                borderRadius: '10%',
-                            }}
-                        />
+                        {renderImageOrProgress(electrodomesticos, imagesLoaded.electrodomesticos, "Electrodom")}
                     </Box>
                     <Typography sx={{ mt: 1 }} variant='h6' color="primary.fixed">Electronics</Typography>
                 </Box>
@@ -193,25 +207,22 @@ function LandingCategoryRow({ renderAllProducts }) {
             <Grid item xs={12} sm={6} md={4} lg={2}>
                 <Box display={"flex"} flexDirection={"column"} alignContent={"center"} alignItems={"center"} justifyContent={"center"}>
                     <Box
-                        onClick={() => { }}
+                        onClick={() => {
+                            renderAllProducts()
+                            setMainData(prevData => ({
+                                ...prevData,
+                                selectedPCategories: [3]
+                            }))
+                        }}
                         sx={{
                             borderRadius: 7,
-                            backgroundColor: "background.default",
                             display: 'flex',
                             alignItems: 'center',
                             height: 230,
-                            overflow: 'hidden'
+                            overflow: 'hidden',
+                            cursor: 'pointer',
                         }}>
-                        <img
-                            src={toys}
-                            alt="Logo"
-                            style={{
-                                width: "100%",
-                                height: "100%",
-                                objectFit: 'cover',
-                                borderRadius: '10%',
-                            }}
-                        />
+                        {renderImageOrProgress(toys, imagesLoaded.toys, "Toys")}
                     </Box>
                     <Box display={"flex"} flexDirection={"column"} alignContent={"center"} alignItems={"center"} justifyContent={"center"}>
                         <Typography px={1} sx={{ mt: 1 }} variant='h6' color="primary.fixed">Toys</Typography>

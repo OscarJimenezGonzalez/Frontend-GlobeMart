@@ -3,7 +3,6 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import { countries } from '../../../auxStr/countries';
 
 export default function OptionSelector({ selectedOption, optionList, titleLabel }) {
     const [option, setOption] = React.useState('');
@@ -45,7 +44,8 @@ export default function OptionSelector({ selectedOption, optionList, titleLabel 
 
                 {optionList.map((option, index) => {
 
-                    return <MenuItem key={index} value={option.name}>{option.name}
+                    return <MenuItem key={index} value={option.name}>
+                        {option.name}
                     </MenuItem>
 
                 })}
@@ -59,7 +59,7 @@ export default function OptionSelector({ selectedOption, optionList, titleLabel 
     return (
         <div>
             <FormControl variant="standard" sx={{ minWidth: "100%" }}>
-                <InputLabel id="countrySelectLabel">{titleLabel} *</InputLabel>
+                <InputLabel id="countrySelectLabel">{titleLabel}</InputLabel>
 
                 {renderOptions()}
 

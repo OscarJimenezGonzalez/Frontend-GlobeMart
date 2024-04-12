@@ -4,6 +4,10 @@ import { Grid, Typography, Card, CardMedia, CardContent, Button, CardActions, Pa
 import SellerProductCaroussel from '../SellerProductsCaroussel/SellerProductsCaroussel'
 import { mainContext } from '../../../contexts/mainContext'
 import { mainTheme } from '../../../themes/mainTheme'
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import MoreTimeIcon from '@mui/icons-material/MoreTime';
+
+
 // Page that Integrates Functionall info and data Just for seller use Purpose. 
 
 
@@ -61,25 +65,27 @@ export default function SellerHomeDashboard({ userData, sellerCompanyData, selle
 
                 <Grid item xs={12} sm={6} md={6} sx={{ mb: 1 }}>
                     <Box sx={{ backgroundColor: backgroundColor, minHeight: 200, p: 3 }}>
+
                         <Typography color={"primary"}>Add New Products</Typography>
-                        <Typography mt={1} variant="body2" color="text.secondary">Click here to add new products to your companys catalogue! </Typography>
-                        <Box mx={3} my={2}>
-                            <IconButton>
-                                {/* <AddCircleOutlineIcon sx={{ fontSize: '4rem' }} /> */}
+                        <Box display={"flex"} alignContent={"center"} alignItems={"center"} p={2}>
+                            <IconButton sx={{ width: 60 }}>
+                                <AddCircleOutlineIcon sx={{ fontSize: '3rem' }} />
                             </IconButton>
+                            <Typography ml={1} variant="body2" color="text.secondary">Click here to add new products to your companys catalogue! </Typography>
                         </Box>
+
                     </Box>
                 </Grid>
 
                 <Grid item xs={12} sm={6} md={6} sx={{ mb: 1 }}>
                     <Box sx={{ backgroundColor: backgroundColor, minHeight: 200, p: 3 }}>
-                        <Typography color={"primary"}>Create A Version of an existing Product</Typography>
-                        <Typography mt={1} variant="body2" color="text.secondary">Create your own version of a product that has allready been registered</Typography>
 
-                        <Box mx={3} my={2}>
-                            <IconButton>
-                                {/* <PlaylistAddCircleIcon sx={{ fontSize: '4rem' }} /> */}
+                        <Typography color={"primary"}>Create A Version of an existing Product</Typography>
+                        <Box display={"flex"} alignContent={"center"} alignItems={"center"} p={2}>
+                            <IconButton sx={{ width: 60 }}>
+                                <MoreTimeIcon sx={{ fontSize: '3rem' }} />
                             </IconButton>
+                            <Typography ml={1} variant="body2" color="text.secondary">Create your own version of a product that has allready been registered </Typography>
                         </Box>
                     </Box>
                 </Grid>

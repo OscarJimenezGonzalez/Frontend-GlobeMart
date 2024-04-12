@@ -162,7 +162,7 @@ export default function ProfileForm() {
 
         if (!name || !location || !cif) {
             setErrorCompany("Please fill all the fields");
-            return; // Salir de la función si no se han llenado todos los campos
+            return; 
         }
 
         try {
@@ -176,7 +176,7 @@ export default function ProfileForm() {
 
             } else {
                 console.log("Unexpected Error.")
-                await setErrorCompany("There is already a company with that name.");
+                setErrorCompany("There is already a company with that name.");
             }
 
         } catch (error) {
@@ -210,7 +210,7 @@ export default function ProfileForm() {
 
         return (
 
-            <Box component="form" noValidate sx={{ mt: 3, mb: 8, width: "50vw" }} onSubmit={updateUserInfo}>
+            <Box component="form" noValidate sx={{ mt: 3, mb: 8, width: "50vw" }} onSubmit={updateUserInfo()}>
 
                 <Typography sx={{ mb: 3 }}>Welcome to your profile, {profileInfo.username}</Typography>
 

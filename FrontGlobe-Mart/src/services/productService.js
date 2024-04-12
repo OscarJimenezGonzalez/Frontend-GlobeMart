@@ -1,27 +1,29 @@
 import api from "./mainConfig/config";
 
-
-export async function createProducts() {
+export async function createProducts(productBody) {
 
     try {
 
-        const token = localStorage.getItem("token");
-        if (!token) {
-            console.error("No token found in localStorage.");
-            throw new Error("Authentication token not found.");
-        }
-
         const response = await api.post('/product', productBody, {
             headers: {
-                Authorization: token
-            },
+                Authorization: localStorage.getItem("token")
+            }
         })
 
-        return response.data
+        if (response && response.data) {
+
+            return response.data
+
+        } else {
+
+            throw new Error("no data received")
+
+        }
 
     } catch (error) {
 
-        console.log(error)
+        console.log(error.message)
+        throw error;
 
     }
 

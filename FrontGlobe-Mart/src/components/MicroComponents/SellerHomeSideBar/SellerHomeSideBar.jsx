@@ -17,6 +17,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import CustomersOrderBadgeIcon from '../CustomersOrderBadgeIcon/CustomersOrderBadgeIcon';
+import MoreTimeIcon from '@mui/icons-material/MoreTime';
 import { Typography } from '@mui/material';
 import { useContext } from 'react';
 import { mainContext } from '../../../contexts/mainContext';
@@ -42,13 +43,16 @@ const menuItems = [
         icon: <InsightsIcon />,
         component: 'Sales'
     },
-
     {
         text: 'Add new products',
         icon: <AddCircleOutlineIcon />,
-        component: 'AddProducts'
+        component: 'AddNewProduct'
     },
-
+    {
+        text: 'Create versions',
+        icon: <MoreTimeIcon />,
+        component: 'AddNewVersions'
+    },
     {
         text: 'Your Products',
         icon: <InventoryIcon />,
@@ -87,7 +91,6 @@ export default function SellerHomeSideBar({ sendComponentSelection, awaitingShip
     const backgroundColor = mainData.themeMode === mainTheme ? '#FFFFFF' : "#1E1E1E"
     const borderColor = mainData.themeMode === mainTheme ? '#E7E7E7' : null
 
-
     return (
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
@@ -104,9 +107,7 @@ export default function SellerHomeSideBar({ sendComponentSelection, awaitingShip
                         boxSizing: 'border-box',
                     },
                 }}
-
             >
-
                 <Box position={"fixed"} sx={{ mt: 1, p: 2, width: drawerWidth }}>
                     <List>
                         {menuItems.map((item, index) => (

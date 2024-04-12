@@ -29,6 +29,7 @@ function LandingPage() {
 
     console.log("Leyendo nuestro contexto principal: ", mainData)
 
+    // * busqueda inicial de todos los productos sin fltrar
     useEffect(() => {
 
         const fetchProductData = async () => {
@@ -44,6 +45,7 @@ function LandingPage() {
 
     }, [searchInputData])
 
+    // * navegar al producto seleccionado
     async function handleProductClick(productId) {
 
         setSelectedProduct(productId)
@@ -54,7 +56,7 @@ function LandingPage() {
     const renderProducts = () => {
 
         return (
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', backgroundColor: 'background.default', justifyContent: 'center', marginY: '50px', gap: '36px' }}>
+            <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', marginY: '50px', gap: '36px' }}>
 
                 {productData.map(productData =>
 
@@ -73,7 +75,9 @@ function LandingPage() {
                         numberOfRates={productData.numberOfRates ? productData.numberOfRates : 0}
 
                     />
+
                 )}
+
             </Box>
 
         )
@@ -82,39 +86,63 @@ function LandingPage() {
 
     const renderSelectedCatProducts = () => {
 
-        return (
+        if (selectedCats[0] === 0) {
 
-            <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', margin: '50px', gap: '36px' }}>
+            return (
 
-                {productData.filter((products) => selectedCats.includes(products.product.productCategoryId)).map(productData => (
+                <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', marginY: '50px', gap: '36px' }}>
 
-                    <ProductCard
-                        handleClickProduct={() => handleProductClick(productData.id)}
-                        key={productData.id}
-                        price={productData.price}
-                        productName={productData.product.name}
-                        productModel={productData.product.model}
-                        productBrand={productData.product.brand}
-                        productImg={productData.product.imageURL}
-                        priceAfterDiscount={productData.priceAfterSale}
-                        salePercentage={productData.salePercentage}
-                        qtyAvailable={productData.qtyAvailable}
-                        rating={productData.rating}
-                        numberOfRates={productData.numberOfRates ? productData.numberOfRates : 0}
-                    />
-                ))}
-            </Box>
+                    {productData.filter((products) => products.salePercentage > 0).map(productData => (
 
-        )
+                        <ProductCard
+                            handleClickProduct={() => handleProductClick(productData.id)}
+                            key={productData.id}
+                            price={productData.price}
+                            productName={productData.product.name}
+                            productModel={productData.product.model}
+                            productBrand={productData.product.brand}
+                            productImg={productData.product.imageURL}
+                            priceAfterDiscount={productData.priceAfterSale}
+                            salePercentage={productData.salePercentage}
+                            qtyAvailable={productData.qtyAvailable}
+                            rating={productData.rating}
+                            numberOfRates={productData.numberOfRates ? productData.numberOfRates : 0}
+                        />
+                    ))}
+                </Box>
+
+            )
+
+        } else {
+
+            return (
+
+                <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', marginY: '50px', gap: '36px' }}>
+
+                    {productData.filter((products) => selectedCats.includes(products.product.productCategoryId)).map(productData => (
+
+                        <ProductCard
+                            handleClickProduct={() => handleProductClick(productData.id)}
+                            key={productData.id}
+                            price={productData.price}
+                            productName={productData.product.name}
+                            productModel={productData.product.model}
+                            productBrand={productData.product.brand}
+                            productImg={productData.product.imageURL}
+                            priceAfterDiscount={productData.priceAfterSale}
+                            salePercentage={productData.salePercentage}
+                            qtyAvailable={productData.qtyAvailable}
+                            rating={productData.rating}
+                            numberOfRates={productData.numberOfRates ? productData.numberOfRates : 0}
+                        />
+                    ))}
+
+                </Box>
+
+            )
+        }
 
     }
-
-    const renderSaleProducts = () => {
-
-
-    }
-
-
 
     const renderRandomAd = () => {
 
@@ -132,10 +160,6 @@ function LandingPage() {
 
 
         )
-
-    }
-
-    const renderLandingElements = () => {
 
     }
 
@@ -166,13 +190,8 @@ function LandingPage() {
 
                 : <Box>
 
-                    {/* <Box sx={{ display: 'flex', justifyContent: 'center', width: '100%', maxHeight: '75vh', mb: 10 }}>
-                        {commercialAds && renderRandomAd()}
-                    </Box> */}
-
-
                     <Box sx={{ px: 25 }}>
-                        {(selectedCatsLength <= 0) && renderProducts() || renderSelectedCatProducts()}
+                        {(selectedCatsLength === 0) ? renderProducts() : renderSelectedCatProducts()}
                     </Box>
 
                     <Box width={"100%"} p={5} mb={10} display={"flex"} justifyContent={"center"}>

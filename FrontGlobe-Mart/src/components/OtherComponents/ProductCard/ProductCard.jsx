@@ -35,8 +35,8 @@ export default function ProductCard({ productName, productModel, productBrand, p
       boxShadow: "none",
       flexDirection: "column",
       justifyContent: "space-between",
-      minWidth: 220,
-      maxWidth: 220,
+      width: 220,
+      width: 220,
       backgroundColor: backgroundColor,
       '&:hover':
       {

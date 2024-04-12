@@ -15,6 +15,9 @@ import SellerOrdersStructure from '../components/OtherComponents/SellerOrdersStr
 import SellerHomeStructure from '../components/OtherComponents/SellerHomeDashboard/SellerHomeDashboard.jsx'
 import CircularProg from '../components/MicroComponents/CircularLoading/CircularLoading.jsx'
 import SellerHomeDashboard from '../components/OtherComponents/SellerHomeDashboard/SellerHomeDashboard.jsx'
+import AddNewProductStructure from '../components/OtherComponents/AddNewProductStructure/AddNewProductStructure.jsx'
+import AddNewVersionStructure from '../components/OtherComponents/AddNewVersionStructure/AddNewVersionStructure.jsx'
+
 import { updateOrderStatus } from '../services/orderService.js'
 
 // Page that Integrates Functionall info and data Just for seller use Purpose. 
@@ -31,7 +34,7 @@ function SellerHome() {
     const [cartItemStatusChanging, setCartItemStatusChanging] = useState(false)
     const [awaitingShippmentOrders, setAwaitingShippmentOrders] = useState(0)
 
-    // Fetch Data
+    // Fetch Data 
     useEffect(() => {
 
         const fetchData = async () => {
@@ -123,6 +126,11 @@ function SellerHome() {
         if (componentName === "Orders") {
 
             setComponentSelector("Orders")
+
+        }
+        if (componentName === "AddNewProduct") {
+
+            setComponentSelector("AddNewProduct")
 
         }
 
@@ -263,13 +271,17 @@ function SellerHome() {
                     totalSales={totalSales}
 
                 />
+            case "AddNewProduct":
+                return <AddNewProductStructure
+
+
+                />
 
             default:
                 return <SellerHomeDashboard
                     userData={userData}
                     sellerCompanyData={sellerCompanyData}
                     sellerProducts={sellerProducts}
-                    // sellerCartItems={sellerCartItems}
                     awaitingShippmentOrders={awaitingShippmentOrders}
                     totalSales={totalSales ? totalSales : <CircularProg />}
                 />
@@ -285,7 +297,6 @@ function SellerHome() {
 
                     sendComponentSelection={componentTransformer}
                     awaitingShippmentOrders={awaitingShippmentOrders}
-
 
                 /> :
                 <SellerHomeTopBar
