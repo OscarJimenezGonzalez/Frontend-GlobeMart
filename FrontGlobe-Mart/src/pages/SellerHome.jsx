@@ -273,7 +273,8 @@ function SellerHome() {
                 />
             case "AddNewProduct":
                 return <AddNewProductStructure
-
+                    sellerCompanyData={sellerCompanyData}
+                    
 
                 />
 

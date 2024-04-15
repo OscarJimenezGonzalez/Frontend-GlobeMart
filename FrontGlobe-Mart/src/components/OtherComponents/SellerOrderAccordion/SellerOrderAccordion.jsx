@@ -3,11 +3,7 @@ import { useState, useEffect } from 'react'
 import { Box, Accordion, AccordionSummary, AccordionDetails, Typography, Grid, Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-
-
 function SellerOrderAccordion({ sellerCartItems, handleCartItemStatus }) {
-
-    const [cartItemState, setCartItemState] = useState("")
 
     const handleStatusChange = (cartItemId, event, orderId) => {
         // Función para manejar el cambio de estado de un pedido

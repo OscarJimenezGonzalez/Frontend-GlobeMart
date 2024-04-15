@@ -7,8 +7,6 @@ import SellerOrderAccordion from '../SellerOrderAccordion/SellerOrderAccordion';
 
 function SellerOrdersStructure({ sellerCartItems, handleCartItemStatus }) {
 
-
-
     const renderAllOrders = () => {
 
         return <SellerOrderAccordion

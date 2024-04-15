@@ -1,14 +1,78 @@
 import React from 'react'
 import { useState, useEffect, useContext } from 'react'
 import { Box, Grid, Typography, Button, IconButton, TextField } from '@mui/material'
-import { useNavigate } from 'react-router-dom'
 import { createProducts } from '../../../services/productService'
+import { createVersionOfProduct } from '../../../services/productSellerService'
 import productCategories from '../../../auxStr/productCategories'
+import booleanOption from '../../../auxStr/booleanOption'
 import OptionSelectorBig from '../../MicroComponents/OptionSelectorBig/OptionSelectorBig'
-function AddNewProductStructure() {
+import GridTextField from '../../MicroComponents/GridTextField/GridTextField'
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+
+function AddNewProductStructure({ sellerCompanyData }) {
+
+    // console.log(sellerCompanyData)
 
     const [createdProduct, setCreatedProduct] = useState({})
-    const [pCategory, setPCategory] = useState("")
+    const [successCreating, setSuccessCreating] = useState(false)
+
+    const [formFields, setFormFields] = useState({
+
+        name: "",
+        model: "",
+        brand: "",
+        imageURL: "",
+        pCategory: "",
+
+    })
+
+    const [versionFormFields, setVersionFormFields] = useState({
+
+        price: 0,
+        onSale: false,
+        salePercentage: 0,
+        qtyAvailable: 0,
+        productDescription: "",
+        hasShoeSizes: false,
+        hasClothingSizes: false,
+        hasColorOption: false,
+
+    })
+
+    // const productCategoryTransformer = (category) => {
+
+    //     switch (category) {
+    //         case "footwear":
+    //             return 1
+    //         case "electronics":
+    //             return 2
+    //         case "toys":
+    //             return 3
+    //         case "mobile":
+    //             return 4
+    //         case "music":
+    //             return 5
+    //         case "clothing":
+    //             return 6
+    //         default:
+    //             return 0
+    //     }
+
+    // }
+
+    // useEffect(() => {
+
+    //     console.log(formFields)
+
+    // }, [formFields])
+
+
+    // useEffect(() => {
+
+    //     console.log(versionFormFields)
+
+    // }, [versionFormFields])
+
 
     const saveProductInfo = async (event) => {
 
@@ -17,13 +81,13 @@ function AddNewProductStructure() {
         event.preventDefault();
         const data = new FormData(event.currentTarget)
 
-        const name = data.get('name')
-        const model = data.get('model')
-        const brand = data.get('brand')
-        const imageURL = data.get('imageURL')
-        const productCategoryId = data.get('productCategoryId')
+        const name = formFields.name
+        const model = formFields.model
+        const brand = formFields.brand
+        const imageURL = formFields.imageURL
+        const pCategory = formFields.pCategory
 
-        if (!name || !model || !brand || !imageURL || !productCategoryId) {
+        if (!name || !model || !brand || !imageURL || !pCategory) {
 
             console.log("Field missing! ")
             return
@@ -36,12 +100,10 @@ function AddNewProductStructure() {
                 model: String(model),
                 brand: String(brand),
                 imageURL: String(imageURL),
-                productCategoryId: Number(productCategoryId)
+                productCategoryId: Number(pCategory)
             }
 
-            console.log("wdfskdflsf")
             const response = await createProducts(productBody)
-            console.log(response, "product Created")
 
             if (!response) {
 
@@ -49,9 +111,12 @@ function AddNewProductStructure() {
 
             } else {
 
-                console.log(response, "Product Created Successfully.")
+                console.log("Product Created Successfully.", response,)
                 setCreatedProduct(response)
+
             }
+
+
 
         } catch (error) {
 
@@ -59,8 +124,72 @@ function AddNewProductStructure() {
 
         }
 
-    }
+        const productId = createdProduct.id
+        const sellerCompanyId = sellerCompanyData.id
 
+        const price = versionFormFields.price
+        const onSale = versionFormFields.onSale
+        const salePercentage = versionFormFields.salePercentage
+        const qtyAvailable = versionFormFields.qtyAvailable
+        const productDescription = versionFormFields.productDescription
+        const hasColorOption = versionFormFields.hasColorOption
+
+        console.log(pCategory, "p.pCategory")
+
+        const hasShoeSizes = formFields.pCategory === 1 ? true : false
+        const hasClothingSizes = formFields.pCategory === 6 ? true : false
+
+        console.log(hasShoeSizes, hasClothingSizes, "hasShoeSizes, hasClothingSizes")
+
+
+        const versionBody = {
+
+            price: Number(price),
+            onSale: onSale,
+            salePercentage: Number(salePercentage),
+            qtyAvailable: Number(qtyAvailable),
+            productDescription: String(productDescription),
+            hasShoeSizes: hasShoeSizes,
+            hasClothingSizes: hasClothingSizes,
+            hasColorOption: hasColorOption,
+            sellerCompanyId: Number(sellerCompanyId),
+            productId: Number(productId),
+
+        }
+
+        if (!price || !onSale || !salePercentage || !qtyAvailable || !productDescription || !hasColorOption) {
+
+            console.log("Field missing! ")
+            return
+        }
+
+        try {
+
+            const version = await createVersionOfProduct(versionBody)
+
+            if (version) {
+
+                console.log("VERSION Created Successfully.", version,)
+                setSuccessCreating(true)
+
+            }
+
+            else {
+
+                console.log("VERSION couldnt be created.")
+
+            }
+
+
+
+        } catch (error) {
+
+            console.log("Error creating VERSION!")
+
+        }
+
+
+    }
 
     return (
 
@@ -68,177 +197,248 @@ function AddNewProductStructure() {
 
         <Box component="form" noValidate sx={{ width: '100%', display: "flex", flexDirection: "column", gap: 2, p: 5 }} onSubmit={saveProductInfo}>
 
-            <Typography m={1} variant='h5' color="primary">Add new products </Typography>
-
+            <Typography m={1} variant='h5' color="primary">Add new products</Typography>
             <Grid container spacing={2}>
-                <Grid item xs={12}>
-                    <TextField
-                        // onChange={cleanErrorCompany}
-                        variant="outlined"
-                        required
-                        fullWidth
-                        name="name"
-                        label="Product name"
-                        type="string"
-                        id="name"
-                        autoComplete="off"
-                        defaultValue={`${""}`}
-                        InputProps={{
-                            style: {
-                                backgroundColor: 'white', // Establece el fondo en blanco
-                            },
+                <Grid item xs={12} sm={6}>
+                    {/* <Box width={"100%"} border={"1px solid black"} p={2}>jajajaja</Box> */}
+                    <GridTextField
+                        textfieldType={"outlined"}
+                        label={"Product name"}
+                        onInputChange={(value) => {
+
+                            setFormFields(prevData => ({
+
+                                ...prevData,
+                                name: value
+
+                            }))
+
                         }}
-                    />
+                    >
+                    </GridTextField>
+
                 </Grid>
-                <Grid item xs={12}>
-                    <TextField
-                        // onChange={cleanErrorCompany}
-                        variant="outlined"
-                        required
-                        fullWidth
-                        name="model"
-                        label="model"
-                        type="string"
-                        id="model"
-                        autoComplete="off"
-                        defaultValue={`${""}`}
-                        InputProps={{
-                            style: {
-                                backgroundColor: 'white', // Establece el fondo en blanco
-                            },
+                <Grid item xs={12} sm={6}>
+                    <GridTextField
+                        textfieldType={"outlined"}
+                        label={"Product model"}
+                        onInputChange={(value) => {
+
+                            setFormFields(prevData => ({
+
+                                ...prevData,
+                                model: value
+
+                            }))
+
                         }}
-                    />
+                    >
+                    </GridTextField>
+
                 </Grid>
-                <Grid item xs={12}>
-                    <TextField
-                        // onChange={cleanErrorCompany}
-                        variant="outlined"
-                        required
-                        fullWidth
-                        name="brand"
-                        label="brand"
-                        type="string"
-                        id="brand"
-                        autoComplete="off"
-                        defaultValue={`${""}`}
-                        InputProps={{
-                            style: {
-                                backgroundColor: 'white', // Establece el fondo en blanco
-                            },
+
+                <Grid item xs={12} sm={6}>
+                    <GridTextField
+                        textfieldType={"outlined"}
+                        label={"Product brand"}
+                        onInputChange={(value) => {
+
+                            setFormFields(prevData => ({
+
+                                ...prevData,
+                                brand: value
+
+                            }))
+
                         }}
-                    />
+                    >
+                    </GridTextField>
+
                 </Grid>
-                <Grid item xs={12}>
-                    <TextField
-                        // onChange={cleanErrorCompany}
-                        variant="outlined"
-                        required
-                        fullWidth
-                        name="imageURL"
-                        label="imageURL"
-                        type="string"
-                        id="imageURL"
-                        autoComplete="off"
-                        defaultValue={`${""}`}
-                        InputProps={{
-                            style: {
-                                backgroundColor: 'white', // Establece el fondo en blanco
-                            },
+
+                <Grid item xs={12} sm={6}>
+                    <GridTextField
+                        textfieldType={"outlined"}
+                        label={"ImageURL"}
+                        onInputChange={(value) => {
+
+                            setFormFields(prevData => ({
+
+                                ...prevData,
+                                imageURL: value
+
+                            }))
+
                         }}
-                    />
+                    >
+                    </GridTextField>
+
                 </Grid>
+
                 <Grid item xs={12}>
 
                     <OptionSelectorBig
+                        itemList={productCategories}
+                        label={"Product Category"}
+                        handleOptionSelected={(value) => {
 
-                        selectedOption={setPCategory}
-                        optionList={productCategories}
-                        titleLabel={""}
+                            setFormFields(prevData => ({
 
-                    />
+                                ...prevData,
+                                pCategory: value
+
+                            }))
+
+                        }}
+
+                    ></OptionSelectorBig>
 
                 </Grid>
 
-                {/* A partir de aqui es formulario de la versión  */}
-                <Grid item xs={12} sm={6} md={3} lg={3}>
-                    <TextField
-                        // onChange={cleanErrorCompany}
-                        variant="outlined"
-                        required
-                        fullWidth
-                        name="Price"
-                        label="Price"
-                        type="amount"
-                        id="price"
-                        autoComplete="off"
-                        // defaultValue=
-                        InputProps={{
-                            style: {
-                                backgroundColor: 'white', // Establece el fondo en blanco
-                            },
-                        }}
+                {/* Aqui empieza el formulario de la version */}
 
-                    />
+                <Grid item xs={12} sm={6}>
+                    <GridTextField
+                        textfieldType={"outlined"}
+                        label={"Price"}
+                        onInputChange={(value) => {
+
+                            setVersionFormFields(prevData => ({
+
+                                ...prevData,
+                                price: value
+
+                            }))
+
+                        }}
+                    >
+                    </GridTextField>
+                </Grid>
+
+                <Grid item xs={12} sm={6}>
+                    <GridTextField
+                        textfieldType={"outlined"}
+                        label={"Quantity on Stock"}
+                        onInputChange={(value) => {
+
+                            setVersionFormFields(prevData => ({
+
+                                ...prevData,
+                                qtyAvailable: value
+
+                            }))
+
+                        }}
+                    >
+                    </GridTextField>
 
                 </Grid>
-                <Grid item xs={12} sm={6} md={3} lg={3}>
-                    <TextField
-                        // onChange={cleanErrorCompany}
-                        variant="outlined"
-                        required
-                        fullWidth
-                        name="onSale"
-                        label="on Sale"
-                        type="string"
-                        id="onSale"
-                        autoComplete="off"
-                        defaultValue={`${""}`}
-                        InputProps={{
-                            style: {
-                                backgroundColor: 'white', // Establece el fondo en blanco
-                            },
+
+                <Grid item xs={12} sm={4}>
+                    <OptionSelectorBig
+                        itemList={booleanOption}
+                        label={"On Sale?"}
+                        handleOptionSelected={(value) => {
+
+                            setVersionFormFields(prevData => ({
+
+                                ...prevData,
+                                onSale: value
+
+                            }))
+
                         }}
-                    />
+
+                    ></OptionSelectorBig>
+                </Grid>
+                {versionFormFields.onSale ?
+                    <Grid item xs={12} sm={4}>
+                        <GridTextField
+                            textfieldType={"outlined"}
+                            label={"Sale Percentage"}
+                            onInputChange={(value) => {
+
+                                setVersionFormFields(prevData => ({
+
+                                    ...prevData,
+                                    salePercentage: value
+
+                                }))
+
+                            }}
+                        >
+                        </GridTextField>
+                    </Grid>
+                    : null}
+
+
+                <Grid item xs={4}>
+                    <OptionSelectorBig
+                        itemList={booleanOption}
+                        label={"Has the product color option?"}
+                        handleOptionSelected={(value) => {
+
+                            setVersionFormFields(prevData => ({
+
+                                ...prevData,
+                                hasColorOption: value
+
+                            }))
+
+                        }}
+
+                    ></OptionSelectorBig>
                 </Grid>
                 <Grid item xs={12}>
-                    <TextField
-                        // onChange={cleanErrorCompany}
-                        variant="outlined"
-                        required
-                        fullWidth
-                        name="productCategoryId"
-                        label="productCategoryId"
-                        type="string"
-                        id="productCategoryId"
-                        autoComplete="off"
-                        defaultValue={`${""}`}
-                        InputProps={{
-                            style: {
-                                backgroundColor: 'white', // Establece el fondo en blanco
-                            },
+                    <GridTextField
+                        textfieldType={"outlined"}
+                        label={"Product description"}
+                        onInputChange={(value) => {
+
+                            setVersionFormFields(prevData => ({
+
+                                ...prevData,
+                                productDescription: value
+
+                            }))
+
                         }}
-                    />
+                    >
+                    </GridTextField>
+
                 </Grid>
 
-
-
+                <Grid item xs={12}>
+                    <Typography color={"error"}>Error Rendering Space</Typography>
+                </Grid>
 
                 <Grid item xs={12}>
-                    Error Rendering Space
-                    {/* {errorCompany && renderCompanyError()} */}
+
+                    {successCreating ? <Button
+                        fullWidth
+                        variant="contained"
+                        sx={{ mt: 2, mb: 2, bgcolor: 'success.main', color: 'white', '&:hover': { bgcolor: 'success.dark' } }}
+                        startIcon={<CheckCircleOutlineIcon />} // Agrega un icono de check para indicar éxito
+                    >
+                        Product Created Successfully
+                    </Button>
+
+                        :
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            sx={{ mt: 2, mb: 2 }}
+                        >
+                            Create Product !
+                        </Button>
+                    }
+
                 </Grid>
 
             </Grid>
 
-            <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 2, mb: 2 }}
-            >
-                Create Product !
-            </Button>
-        </Box>
+        </Box >
 
     )
 }

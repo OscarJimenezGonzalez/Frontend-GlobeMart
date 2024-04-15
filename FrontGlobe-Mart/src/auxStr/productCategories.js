@@ -1,10 +1,10 @@
 const productCategories = [
-    { id: 1, name: "Footwear" },
-    { id: 2, name: "Electronics" },
-    { id: 3, name: "Toys" },
-    { id: 4, name: "Mobile" },
-    { id: 5, name: "Music" },
-    { id: 6, name: "Clothing" },
+    { id: 1, text: "Footwear" },
+    { id: 2, text: "Electronics" },
+    { id: 3, text: "Toys" },
+    { id: 4, text: "Mobile" },
+    { id: 5, text: "Music" },
+    { id: 6, text: "Clothing" },
 ]
 
 export default productCategories

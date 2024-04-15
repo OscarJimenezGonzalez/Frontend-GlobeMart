@@ -22,6 +22,7 @@ export default function OptionSelector({ selectedOption, optionList, titleLabel 
                 value={option}
                 onChange={handleChange}
                 onSelect={selectedOption}
+                
                 MenuProps={{
                     anchorOrigin: {
                         vertical: 'bottom',

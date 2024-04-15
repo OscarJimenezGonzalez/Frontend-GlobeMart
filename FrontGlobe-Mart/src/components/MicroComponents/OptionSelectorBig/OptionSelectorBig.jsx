@@ -2,74 +2,63 @@ import * as React from 'react';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
+import { Typography } from '@mui/material';
 import Select from '@mui/material/Select';
+import { useState, useEffect } from 'react';
 
-export default function OptionSelectorBig({ selectedOption, optionList, titleLabel }) {
-    const [option, setOption] = React.useState('');
 
-    const handleChange = (event) => {
-        setOption(event.target.value);
-        selectedOption(event.target.value);
+
+export default function OptionSelectorBig({ itemList, defaultValue, label, handleOptionSelected }) {
+
+    const [optionSel, setOptionSel] = useState("")
+
+    const handleOptionChange = (event) => {
+
+        setOptionSel(event.target.value)
+        handleOptionSelected(event.target.value)
+        return event.target.value
+
     };
 
-    const renderOptions = () => {
+    const optionListRender = (list) => {
 
         return (
 
-            <Select
-                labelId="demo-simple-select-filled-label"
-                id="demo-simple-select-filled"
-                value={option}
-                onChange={handleChange}
-                onSelect={selectedOption}
-                sx={{ borderRadius: '3px', px: 1.5, border: '1px solid #E7E7E7', backgroundColor: 'white', height: '50px' }} // Ajustes de estilo
-                InputProps={{
-                    style: {
-                        backgroundColor: 'white',
-                    },
-                }}
-                MenuProps={{
-                    anchorOrigin: {
-                        vertical: 'bottom',
-                        horizontal: 'left',
-                    },
-                    transformOrigin: {
-                        vertical: 'top',
-                        horizontal: 'left',
-                    },
-                    PaperProps: {
-                        style: {
-                            maxHeight: 150,
-                        },
-                    },
-                }}
-            >
-                <MenuItem value="">
-                    <em>Select Option ...</em>
-                </MenuItem>
+            list.map((item) => {
 
-                {optionList.map((option, index) => {
+                return (<MenuItem value={item.id} key={item.id}><Typography variant='subtitle2'>{item.text}</Typography></MenuItem>)
 
-                    return <MenuItem key={index} value={option.name}>
-                        {option.name}
-                    </MenuItem>
-
-                })}
-
-            </Select >
+            })
 
         )
 
     }
 
     return (
-        <div>
-            <FormControl variant="standard" sx={{ minWidth: "100%" }}>
-                <InputLabel id="countrySelectLabel">{titleLabel}</InputLabel>
 
-                {renderOptions()}
+        <FormControl fullWidth
+        >
 
-            </FormControl>
-        </div>
-    );
+            <InputLabel>{`${label}`}</InputLabel>
+            <Select
+                sx={{ height: 50, backgroundColor: "white" }}
+                labelId={`status-select-label-${""}`}
+                id={`status-select-${""}`}
+                value={optionSel}
+                label={label}
+                onChange={(event) => {
+
+                    handleOptionChange(event)
+
+                }}
+
+            >
+
+                {optionListRender(itemList)}
+
+            </Select>
+
+        </FormControl>
+
+    )
 }
