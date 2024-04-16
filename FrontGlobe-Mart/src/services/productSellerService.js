@@ -74,7 +74,8 @@ export async function UpdateQtyAvailable(id, availableQty) {
         throw error;
     }
 }
-/// No lo hemos probado todavía ... 
+
+
 export async function createVersionOfProduct(productBody) {
     try {
 

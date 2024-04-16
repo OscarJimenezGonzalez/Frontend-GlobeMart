@@ -18,7 +18,7 @@ export default function OptionSelectorBig({ itemList, defaultValue, label, handl
         handleOptionSelected(event.target.value)
         return event.target.value
 
-    };
+    }
 
     const optionListRender = (list) => {
 
@@ -26,7 +26,7 @@ export default function OptionSelectorBig({ itemList, defaultValue, label, handl
 
             list.map((item) => {
 
-                return (<MenuItem value={item.id} key={item.id}><Typography variant='subtitle2'>{item.text}</Typography></MenuItem>)
+                return (<MenuItem value={item.id} key={item.id} > <Typography variant='subtitle2'>{item.text}</Typography></MenuItem>)
 
             })
 
@@ -48,6 +48,7 @@ export default function OptionSelectorBig({ itemList, defaultValue, label, handl
                 label={label}
                 onChange={(event) => {
 
+                    console.log(event)
                     handleOptionChange(event)
 
                 }}

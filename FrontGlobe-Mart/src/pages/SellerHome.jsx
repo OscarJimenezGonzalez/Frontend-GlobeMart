@@ -5,21 +5,20 @@ import { Box } from '@mui/system'
 import { getOwnProfile } from '../services/userService.js'
 import { getOwnSellerCompany } from '../services/sellerCompanyService'
 import { getListOfProductsFromSellers, createVersionOfProduct } from '../services/productSellerService.js'
-import { createProducts } from '../services/productService.js'
+import { createProducts, getProducts } from '../services/productService.js'
 import { getCartItemsFromOrder, getCartItemsFromSeller, updateCartItemStatus } from '../services/cartItemService.js'
 import SellerHomeSideBar from '../components/MicroComponents/SellerHomeSideBar/SellerHomeSideBar.jsx'
 import SellerHomeTopBar from '../components/MicroComponents/SellerHomeTopBar/SellerHomeTopBar.jsx'
 import { useCustomMediaQueries } from '../auxStr/customMediaQueries.js'
+
 import SalesAnalyticsStructure from '../components/OtherComponents/SalesAnalyticsStructure/SalesAnalyticsStructure.jsx'
-import SellerOrdersStructure from '../components/OtherComponents/SellerOrdersStructure/SellerOrdersStructure.jsx'
-import SellerHomeStructure from '../components/OtherComponents/SellerHomeDashboard/SellerHomeDashboard.jsx'
-import CircularProg from '../components/MicroComponents/CircularLoading/CircularLoading.jsx'
 import SellerHomeDashboard from '../components/OtherComponents/SellerHomeDashboard/SellerHomeDashboard.jsx'
+import SellerOrdersStructure from '../components/OtherComponents/SellerOrdersStructure/SellerOrdersStructure.jsx'
+import CreateVersionStructure from '../components/OtherComponents/CreateVersionStructure/CreateVersionStructure.jsx'
+
+import CircularProg from '../components/MicroComponents/CircularLoading/CircularLoading.jsx'
 import AddNewProductStructure from '../components/OtherComponents/AddNewProductStructure/AddNewProductStructure.jsx'
-import AddNewVersionStructure from '../components/OtherComponents/AddNewVersionStructure/AddNewVersionStructure.jsx'
-
 import { updateOrderStatus } from '../services/orderService.js'
-
 // Page that Integrates Functionall info and data Just for seller use Purpose. 
 
 function SellerHome() {
@@ -29,6 +28,7 @@ function SellerHome() {
     const [sellerCompanyData, setSellerCompanyData] = useState({})
     const [sellerProducts, setSellerProducts] = useState([])
     const [sellerCartItems, setSellerCartItems] = useState([])
+    const [listOfProducts, setListOfProducts] = useState([])
     const [totalSales, setTotalSales] = useState(0)
     const [componentSelector, setComponentSelector] = useState("Dashboard")
     const [cartItemStatusChanging, setCartItemStatusChanging] = useState(false)
@@ -65,11 +65,25 @@ function SellerHome() {
 
             }
 
+            const allProducts = await getProducts()
+            if (allProducts) {
+
+                setListOfProducts(allProducts)
+
+            }
+
         }
 
         fetchData()
 
     }, [cartItemStatusChanging])
+
+    // Console.logs 
+    useEffect(() => {
+
+        console.log("List OF Products ", listOfProducts)
+
+    }, [listOfProducts])
 
     // Calculate totalSales
     useEffect(() => {
@@ -131,6 +145,11 @@ function SellerHome() {
         if (componentName === "AddNewProduct") {
 
             setComponentSelector("AddNewProduct")
+
+        }
+        if (componentName === "AddNewVersions") {
+
+            setComponentSelector("AddNewVersions")
 
         }
 
@@ -274,7 +293,13 @@ function SellerHome() {
             case "AddNewProduct":
                 return <AddNewProductStructure
                     sellerCompanyData={sellerCompanyData}
-                    
+
+
+                />
+            case "AddNewVersions":
+                return <CreateVersionStructure
+                    sellerCompanyData={sellerCompanyData}
+                    listOfProducts={listOfProducts}
 
                 />
 

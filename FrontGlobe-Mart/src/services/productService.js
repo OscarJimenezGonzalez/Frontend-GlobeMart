@@ -1,5 +1,34 @@
 import api from "./mainConfig/config";
 
+
+export async function getProducts() {
+
+    try {
+
+        const { data } = await api.get('/product', {
+            headers: {
+                Authorization: localStorage.getItem("token")
+            }
+
+        })
+
+        return data
+
+
+
+    } catch (error) {
+
+
+        console.log(error.message)
+        throw error;
+
+
+    }
+
+
+}
+
+
 export async function createProducts(productBody) {
 
     try {

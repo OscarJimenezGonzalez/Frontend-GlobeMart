@@ -9,22 +9,35 @@ import OptionSelectorBig from '../../MicroComponents/OptionSelectorBig/OptionSel
 import GridTextField from '../../MicroComponents/GridTextField/GridTextField'
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
-function AddNewProductStructure({ sellerCompanyData }) {
+// const productCategories = [
+//     { id: 1, text: "Footwear" },
+//     { id: 2, text: "Electronics" },
+//     { id: 3, text: "Toys" },
+//     { id: 4, text: "Mobile" },
+//     { id: 5, text: "Music" },
+//     { id: 6, text: "Clothing" },
+// ]
 
-    // console.log(sellerCompanyData)
+function CreateVersionStructure({ sellerCompanyData, listOfProducts }) {
 
-    const [createdProduct, setCreatedProduct] = useState({})
     const [successCreating, setSuccessCreating] = useState(false)
+    const [allProductsList, setAllProductList] = useState([])
+    const [selectedProductId, setSelectedProductId] = useState(0)
+    const [categorySelected, setCategorySelected] = useState(0)
 
-    const [formFields, setFormFields] = useState({
+    useEffect(() => {
 
-        name: "",
-        model: "",
-        brand: "",
-        imageURL: "",
-        pCategory: "",
+        reMadeProductList(listOfProducts)
 
-    })
+    }, [listOfProducts])
+
+    const foundCategory = (listOfProducts, productId) => {
+
+        const product = listOfProducts.find(element => element.id === productId);
+        setCategorySelected((product ? product.productCategoryId : 0))
+        return product ? product.productCategoryId : 0;
+
+    }
 
     const [versionFormFields, setVersionFormFields] = useState({
 
@@ -33,102 +46,54 @@ function AddNewProductStructure({ sellerCompanyData }) {
         salePercentage: 0,
         qtyAvailable: 0,
         productDescription: "",
+        productId: 0,
         hasShoeSizes: false,
         hasClothingSizes: false,
         hasColorOption: false,
 
+        // pCategory: foundCategory(listOfProducts, versionFormFields.productId),
     })
 
-    // const productCategoryTransformer = (category) => {
 
-    //     switch (category) {
-    //         case "footwear":
-    //             return 1
-    //         case "electronics":
-    //             return 2
-    //         case "toys":
-    //             return 3
-    //         case "mobile":
-    //             return 4
-    //         case "music":
-    //             return 5
-    //         case "clothing":
-    //             return 6
-    //         default:
-    //             return 0
-    //     }
+    useEffect(() => {
 
-    // }
+        console.log(versionFormFields)
 
-    // useEffect(() => {
+    }, [versionFormFields])
 
-    //     console.log(formFields)
+    useEffect(() => {
 
-    // }, [formFields])
+        console.log("dfsdf", selectedProductId)
+        foundCategory(listOfProducts, selectedProductId)
+        console.log(categorySelected)
+
+    }, [selectedProductId, categorySelected])
 
 
-    // useEffect(() => {
+    const reMadeProductList = (listOfProducts) => {
 
-    //     console.log(versionFormFields)
+        const reMadePList = listOfProducts.map((item) => ({
 
-    // }, [versionFormFields])
+            id: item.id,
+            text: item.name + (", ") + item.model,
+            pCategory: item.productCategoryId
 
+        }))
 
-    const saveProductInfo = async (event) => {
+        reMadePList.sort((a, b) => {
+            return a.text.localeCompare(b.text);
+        });
 
-        console.log("Submit Form Working !")
+        console.log(reMadePList)
+        setAllProductList(reMadePList)
 
-        event.preventDefault();
-        const data = new FormData(event.currentTarget)
-
-        const name = formFields.name
-        const model = formFields.model
-        const brand = formFields.brand
-        const imageURL = formFields.imageURL
-        const pCategory = formFields.pCategory
-
-        if (!name || !model || !brand || !imageURL || !pCategory) {
-
-            console.log("Field missing! ")
-            return
-        }
-
-        try {
-
-            const productBody = {
-                name: String(name),
-                model: String(model),
-                brand: String(brand),
-                imageURL: String(imageURL),
-                productCategoryId: Number(pCategory)
-            }
-
-            const response = await createProducts(productBody)
-
-            if (!response) {
-
-                console.log("Product couldnt be created.")
-
-            } else {
-
-                console.log("Product Created Successfully.", response,)
-                setCreatedProduct(response)
-                await createVersion(response.id)
-            }
-
-
-
-        } catch (error) {
-
-            console.log("Error!")
-
-        }
     }
 
-    const createVersion = async (productId) => {
+    const createVersion = async () => {
 
         const sellerCompanyId = sellerCompanyData.id
 
+        const productId = versionFormFields.productId
         const price = versionFormFields.price
         const onSale = versionFormFields.onSale
         const salePercentage = versionFormFields.salePercentage
@@ -136,8 +101,8 @@ function AddNewProductStructure({ sellerCompanyData }) {
         const productDescription = versionFormFields.productDescription
         const hasColorOption = versionFormFields.hasColorOption
 
-        const hasShoeSizes = formFields.pCategory === 1 ? true : false
-        const hasClothingSizes = formFields.pCategory === 6 ? true : false
+        const hasShoeSizes = categorySelected === 1 ? true : false
+        const hasClothingSizes = categorySelected === 6 ? true : false
 
         const versionBody = {
 
@@ -177,13 +142,12 @@ function AddNewProductStructure({ sellerCompanyData }) {
 
             }
 
-
-
         } catch (error) {
 
             console.log("Error creating VERSION!")
 
         }
+
     }
 
 
@@ -192,96 +156,22 @@ function AddNewProductStructure({ sellerCompanyData }) {
 
         // En este formulario creamos además del producto, una primera versión.
 
-        <Box component="form" noValidate sx={{ width: '100%', display: "flex", flexDirection: "column", gap: 2, p: 5 }} onSubmit={saveProductInfo}>
+        // <Box component="form" noValidate sx={{ width: '100%', display: "flex", flexDirection: "column", gap: 2, p: 5 }} onSubmit={createVersion}>
+        <Box component="form" noValidate sx={{ width: '100%', display: "flex", flexDirection: "column", gap: 2, p: 5 }}>
 
-            <Typography m={1} variant='h5' color="primary">Add new products</Typography>
+            <Typography m={1} variant='h5' color="primary">Create new Versions of Products</Typography>
             <Grid container spacing={2}>
-                <Grid item xs={12} sm={6}>
-                    <GridTextField
-                        textfieldType={"outlined"}
-                        label={"Product name"}
-                        onInputChange={(value) => {
-
-                            setFormFields(prevData => ({
-
-                                ...prevData,
-                                name: value
-
-                            }))
-
-                        }}
-                    >
-                    </GridTextField>
-
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                    <GridTextField
-                        textfieldType={"outlined"}
-                        label={"Product model"}
-                        onInputChange={(value) => {
-
-                            setFormFields(prevData => ({
-
-                                ...prevData,
-                                model: value
-
-                            }))
-
-                        }}
-                    >
-                    </GridTextField>
-
-                </Grid>
-
-                <Grid item xs={12} sm={6}>
-                    <GridTextField
-                        textfieldType={"outlined"}
-                        label={"Product brand"}
-                        onInputChange={(value) => {
-
-                            setFormFields(prevData => ({
-
-                                ...prevData,
-                                brand: value
-
-                            }))
-
-                        }}
-                    >
-                    </GridTextField>
-
-                </Grid>
-
-                <Grid item xs={12} sm={6}>
-                    <GridTextField
-                        textfieldType={"outlined"}
-                        label={"ImageURL"}
-                        onInputChange={(value) => {
-
-                            setFormFields(prevData => ({
-
-                                ...prevData,
-                                imageURL: value
-
-                            }))
-
-                        }}
-                    >
-                    </GridTextField>
-
-                </Grid>
-
                 <Grid item xs={12}>
-
                     <OptionSelectorBig
-                        itemList={productCategories}
-                        label={"Product Category"}
+                        itemList={allProductsList}
+                        label={"Select an Existing Product"}
                         handleOptionSelected={(value) => {
 
-                            setFormFields(prevData => ({
+                            setSelectedProductId(value)
+                            setVersionFormFields(prevData => ({
 
                                 ...prevData,
-                                pCategory: value
+                                productId: value
 
                             }))
 
@@ -382,9 +272,9 @@ function AddNewProductStructure({ sellerCompanyData }) {
                             }))
 
                         }}
+
                     ></OptionSelectorBig>
                 </Grid>
-
                 <Grid item xs={12}>
                     <GridTextField
                         textfieldType={"outlined"}
@@ -421,10 +311,11 @@ function AddNewProductStructure({ sellerCompanyData }) {
 
                         :
                         <Button
-                            type="submit"
+                            // type="submit"
                             fullWidth
                             variant="contained"
                             sx={{ mt: 2, mb: 2 }}
+                            onClick={createVersion}
                         >
                             Create Product !
                         </Button>
@@ -440,4 +331,4 @@ function AddNewProductStructure({ sellerCompanyData }) {
 }
 
 
-export default AddNewProductStructure
+export default CreateVersionStructure
