@@ -8,6 +8,7 @@ import booleanOption from '../../../auxStr/booleanOption'
 import OptionSelectorBig from '../../MicroComponents/OptionSelectorBig/OptionSelectorBig'
 import GridTextField from '../../MicroComponents/GridTextField/GridTextField'
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import CloudinaryComponent from '../CloudinaryComponent/CloudinaryComponent'
 
 function AddNewProductStructure({ sellerCompanyData }) {
 
@@ -15,13 +16,13 @@ function AddNewProductStructure({ sellerCompanyData }) {
 
     const [createdProduct, setCreatedProduct] = useState({})
     const [successCreating, setSuccessCreating] = useState(false)
-
+    const [imageURLs, setImageURLs] = useState('')
     const [formFields, setFormFields] = useState({
 
         name: "",
         model: "",
         brand: "",
-        imageURL: "",
+        // imageURL: "",
         pCategory: "",
 
     })
@@ -74,17 +75,31 @@ function AddNewProductStructure({ sellerCompanyData }) {
     // }, [versionFormFields])
 
 
+    useEffect(() => {
+
+        console.log("Image URL : ", imageURLs)
+        console.log(formFields)
+        console.log(versionFormFields)
+
+
+    }, [imageURLs, formFields, versionFormFields])
+
+
+
     const saveProductInfo = async (event) => {
 
         console.log("Submit Form Working !")
 
         event.preventDefault();
-        const data = new FormData(event.currentTarget)
+        // const data = new FormData(event.currentTarget)
 
         const name = formFields.name
         const model = formFields.model
         const brand = formFields.brand
-        const imageURL = formFields.imageURL
+        // const imageURL = formFields.imageURL
+
+        const imageURL = imageURLs
+
         const pCategory = formFields.pCategory
 
         if (!name || !model || !brand || !imageURL || !pCategory) {
@@ -127,11 +142,14 @@ function AddNewProductStructure({ sellerCompanyData }) {
 
     const createVersion = async (productId) => {
 
+
+        console.log("Id del producto en la funcion de la version: ", productId)
+
         const sellerCompanyId = sellerCompanyData.id
 
         const price = versionFormFields.price
         const onSale = versionFormFields.onSale
-        const salePercentage = versionFormFields.salePercentage
+        const salePercentage = versionFormFields.salePercentage ? versionFormFields.salePercentage : 0  
         const qtyAvailable = versionFormFields.qtyAvailable
         const productDescription = versionFormFields.productDescription
         const hasColorOption = versionFormFields.hasColorOption
@@ -156,7 +174,7 @@ function AddNewProductStructure({ sellerCompanyData }) {
 
         if (!price || !onSale || !salePercentage || !qtyAvailable || !productDescription || !hasColorOption || !productId || !sellerCompanyId) {
 
-            console.log("Field missing! ")
+            console.log("Field missing! In version ")
             return
         }
 
@@ -186,13 +204,11 @@ function AddNewProductStructure({ sellerCompanyData }) {
         }
     }
 
-
-
     return (
 
         // En este formulario creamos además del producto, una primera versión.
 
-        <Box component="form" noValidate sx={{ width: '100%', display: "flex", flexDirection: "column", gap: 2, p: 5 }} onSubmit={saveProductInfo}>
+        <Box noValidate sx={{ width: '100%', display: "flex", flexDirection: "column", gap: 2, p: 5 }} onSubmit={saveProductInfo}>
 
             <Typography m={1} variant='h5' color="primary">Add new products</Typography>
             <Grid container spacing={2}>
@@ -253,7 +269,7 @@ function AddNewProductStructure({ sellerCompanyData }) {
                 </Grid>
 
                 <Grid item xs={12} sm={6}>
-                    <GridTextField
+                    {/* <GridTextField
                         textfieldType={"outlined"}
                         label={"ImageURL"}
                         onInputChange={(value) => {
@@ -267,7 +283,7 @@ function AddNewProductStructure({ sellerCompanyData }) {
 
                         }}
                     >
-                    </GridTextField>
+                    </GridTextField> */}
 
                 </Grid>
 
@@ -386,6 +402,12 @@ function AddNewProductStructure({ sellerCompanyData }) {
                 </Grid>
 
                 <Grid item xs={12}>
+                    <CloudinaryComponent
+                        onUpload={(url) => { setImageURLs(url) }}
+                    ></CloudinaryComponent>
+
+                </Grid>
+                <Grid item xs={12}>
                     <GridTextField
                         textfieldType={"outlined"}
                         label={"Product description"}
@@ -421,7 +443,8 @@ function AddNewProductStructure({ sellerCompanyData }) {
 
                         :
                         <Button
-                            type="submit"
+                            // type="submit"
+                            onClick={saveProductInfo}
                             fullWidth
                             variant="contained"
                             sx={{ mt: 2, mb: 2 }}

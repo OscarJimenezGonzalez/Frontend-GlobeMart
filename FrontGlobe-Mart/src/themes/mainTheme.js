@@ -80,6 +80,13 @@ export const mainTheme = createTheme({
             fontWeight: 500,
             letterSpacing: '0.01em',
         },
+        subtitleItalic: {
+            fontSize: '0.875rem',
+            fontWeight: 500,
+            letterSpacing: '0.01em',
+            fontStyle: 'italic'
+            
+        },
         subtitleRef: {
             fontSize: '0.90rem',
             fontWeight: 400, // Peso medio para más prominencia, similar al de los Tabs
