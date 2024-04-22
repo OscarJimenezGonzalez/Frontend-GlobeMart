@@ -75,14 +75,14 @@ function AddNewProductStructure({ sellerCompanyData }) {
     // }, [versionFormFields])
 
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        console.log("Image URL : ", imageURLs)
-        console.log(formFields)
-        console.log(versionFormFields)
+    //     console.log("Image URL : ", imageURLs)
+    //     console.log(formFields)
+    //     console.log(versionFormFields)
 
 
-    }, [imageURLs, formFields, versionFormFields])
+    // }, [imageURLs, formFields, versionFormFields])
 
 
 
@@ -131,8 +131,6 @@ function AddNewProductStructure({ sellerCompanyData }) {
                 await createVersion(response.id)
             }
 
-
-
         } catch (error) {
 
             console.log("Error!")
@@ -149,7 +147,7 @@ function AddNewProductStructure({ sellerCompanyData }) {
 
         const price = versionFormFields.price
         const onSale = versionFormFields.onSale
-        const salePercentage = versionFormFields.salePercentage ? versionFormFields.salePercentage : 0  
+        const salePercentage = versionFormFields.salePercentage ? versionFormFields.salePercentage : 0
         const qtyAvailable = versionFormFields.qtyAvailable
         const productDescription = versionFormFields.productDescription
         const hasColorOption = versionFormFields.hasColorOption
@@ -172,8 +170,9 @@ function AddNewProductStructure({ sellerCompanyData }) {
 
         }
 
-        if (!price || !onSale || !salePercentage || !qtyAvailable || !productDescription || !hasColorOption || !productId || !sellerCompanyId) {
+        if (!price || !salePercentage || !qtyAvailable || !productDescription || !productId || !sellerCompanyId) {
 
+            console.log("Fields to send: ", "price:", price, "onSale: ", )
             console.log("Field missing! In version ")
             return
         }
@@ -265,25 +264,6 @@ function AddNewProductStructure({ sellerCompanyData }) {
                         }}
                     >
                     </GridTextField>
-
-                </Grid>
-
-                <Grid item xs={12} sm={6}>
-                    {/* <GridTextField
-                        textfieldType={"outlined"}
-                        label={"ImageURL"}
-                        onInputChange={(value) => {
-
-                            setFormFields(prevData => ({
-
-                                ...prevData,
-                                imageURL: value
-
-                            }))
-
-                        }}
-                    >
-                    </GridTextField> */}
 
                 </Grid>
 
@@ -427,7 +407,7 @@ function AddNewProductStructure({ sellerCompanyData }) {
                 </Grid>
 
                 <Grid item xs={12}>
-                    <Typography color={"error"}>Error Rendering Space</Typography>
+                    <Typography color={""}>Validations Rendering Space</Typography>
                 </Grid>
 
                 <Grid item xs={12}>

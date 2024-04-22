@@ -78,13 +78,6 @@ function SellerHome() {
 
     }, [cartItemStatusChanging])
 
-    // Console.logs 
-    useEffect(() => {
-
-        console.log("List OF Products ", listOfProducts)
-
-    }, [listOfProducts])
-
     // Calculate totalSales
     useEffect(() => {
 
@@ -116,11 +109,12 @@ function SellerHome() {
 
         // console.log("userData", userData)
         // console.log("sellerCo Data", sellerCompanyData)
-        // console.log("sellerProductList", sellerProducts)
+        console.log("sellerProductList", sellerProducts)
         // console.log("sellerCartItemList", sellerCartItems)
         // console.log("Total Sales", totalSales)
+        // console.log("List OF Products ", listOfProducts)
 
-    }, [userData, sellerCompanyData, sellerProducts, sellerCartItems, totalSales])
+    }, [userData, sellerCompanyData, sellerProducts, sellerCartItems, totalSales, listOfProducts])
 
     // Navigate throught SideBar Options
     const componentTransformer = (componentName) => {
@@ -273,7 +267,13 @@ function SellerHome() {
                     // sellerCartItems={sellerCartItems}
                     awaitingShippmentOrders={awaitingShippmentOrders}
                     totalSales={totalSales ? totalSales : <CircularProg />}
+
+                    enableAddProducts={() => setComponentSelector("AddNewProduct")}
+                    enableAddVersions={() => setComponentSelector("AddNewVersions")}
+
+
                 />
+
 
             case "Orders":
                 return <SellerOrdersStructure
@@ -290,12 +290,14 @@ function SellerHome() {
                     totalSales={totalSales}
 
                 />
+
             case "AddNewProduct":
                 return <AddNewProductStructure
                     sellerCompanyData={sellerCompanyData}
 
 
                 />
+
             case "AddNewVersions":
                 return <CreateVersionStructure
                     sellerCompanyData={sellerCompanyData}
@@ -310,6 +312,11 @@ function SellerHome() {
                     sellerProducts={sellerProducts}
                     awaitingShippmentOrders={awaitingShippmentOrders}
                     totalSales={totalSales ? totalSales : <CircularProg />}
+
+                    enableAddProducts={() => setComponentSelector("AddNewProduct")}
+                    enableAddVersions={() => setComponentSelector("AddNewVersions")}
+
+
                 />
         }
 

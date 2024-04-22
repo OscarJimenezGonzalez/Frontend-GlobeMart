@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 export default function SellerProductCaroussel({ productList }) {
 
     const [activeStep, setActiveStep] = React.useState(0);
-    const [widthController, setWidthController] = useState(4)
+    const [widthController, setWidthController] = useState(6)
     
 
     const navigate = useNavigate()
@@ -52,13 +52,13 @@ export default function SellerProductCaroussel({ productList }) {
             <IconButton onClick={handleBack} disabled={activeStep === 0}>
                 <ArrowBackIosIcon />
             </IconButton>
-            <Grid container spacing={2} justifyContent="center">
+            <Grid container spacing={4} justifyContent="center">
 
                 {productList && productList.slice(activeStep, activeStep + widthController).map((item, index) =>
 
                 (
                     <Grid item key={item.id}>
-                        <Card onClick={() => handleRelatedProductClick(item.productId)}>
+                        <Card onClick={() => handleRelatedProductClick(item.productId)}  sx={{boxShadow: "none", cursor: 'pointer'  }}>
                             <CardMedia
                                 component="img"
                                 sx={{
@@ -90,7 +90,7 @@ export default function SellerProductCaroussel({ productList }) {
 
                 ))}
             </Grid>
-            <IconButton onClick={handleNext} disabled={activeStep === 6 - widthController}>
+            <IconButton onClick={handleNext} disabled={activeStep === productList.length - widthController}>
                 <ArrowForwardIosIcon sx={{ "&:hover": { color: "orange", opacity: [0.9, 0.8, 0.7] } }} />
             </IconButton>
         </Box>

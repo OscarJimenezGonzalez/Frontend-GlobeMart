@@ -1,20 +1,32 @@
 import { Box } from '@mui/system'
 import React, { useEffect, useState, useContext } from 'react'
 import { Grid, Typography, Card, CardMedia, CardContent, Button, CardActions, Paper, IconButton } from '@mui/material'
-import SellerProductCaroussel from '../SellerProductsCaroussel/SellerProductsCaroussel'
+
 import { mainContext } from '../../../contexts/mainContext'
 import { mainTheme } from '../../../themes/mainTheme'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import MoreTimeIcon from '@mui/icons-material/MoreTime';
+import LandingProducts from '../../LandingPageComponents/LandingProducts/LandingProducts'
 
 
 // Page that Integrates Functionall info and data Just for seller use Purpose. 
 
 
-export default function SellerHomeDashboard({ userData, sellerCompanyData, sellerProducts, totalSales, sellerCartItems, awaitingShippmentOrders }) {
+export default function SellerHomeDashboard({ userData, sellerCompanyData, sellerProducts, totalSales, sellerCartItems, awaitingShippmentOrders, enableAddProducts, enableAddVersions }) {
 
     const { mainData, setMainData } = useContext(mainContext)
     const backgroundColor = mainData.themeMode === mainTheme ? '#FFFFFF' : "#1E1E1E"
+
+    // Ordenamos nuestra sellerProducts por su Id de mayor a menos para que salgan los
+    // ultimos productos creados primero. 
+
+    useEffect(() => {
+
+        console.log("SellerProduct List: ", sellerProducts)
+        const sortedList = sellerProducts.sort((a, b) => b.id - a.id)
+        console.log("Lista productos ordenada por ID de mayor a menor: ", sortedList)
+
+    }, [sellerProducts])
 
     return (
 
@@ -68,7 +80,7 @@ export default function SellerHomeDashboard({ userData, sellerCompanyData, selle
 
                         <Typography color={"primary"}>Add New Products</Typography>
                         <Box display={"flex"} alignContent={"center"} alignItems={"center"} p={2}>
-                            <IconButton sx={{ width: 60 }}>
+                            <IconButton onClick={enableAddProducts} sx={{ width: 60 }}>
                                 <AddCircleOutlineIcon sx={{ fontSize: '3rem' }} />
                             </IconButton>
                             <Typography ml={1} variant="body2" color="text.secondary">Click here to add new products to your companys catalogue! </Typography>
@@ -82,7 +94,7 @@ export default function SellerHomeDashboard({ userData, sellerCompanyData, selle
 
                         <Typography color={"primary"}>Create A Version of an existing Product</Typography>
                         <Box display={"flex"} alignContent={"center"} alignItems={"center"} p={2}>
-                            <IconButton sx={{ width: 60 }}>
+                            <IconButton onClick={enableAddVersions} sx={{ width: 60 }}>
                                 <MoreTimeIcon sx={{ fontSize: '3rem' }} />
                             </IconButton>
                             <Typography ml={1} variant="body2" color="text.secondary">Create your own version of a product that has allready been registered </Typography>
@@ -97,7 +109,7 @@ export default function SellerHomeDashboard({ userData, sellerCompanyData, selle
                             <Typography variant="body2" color="text.secondary">You can click on any product of your list and edit its data from this site: </Typography>
                         </Box>
                         <Box mt={4}>
-                            <SellerProductCaroussel productList={(sellerProducts)}></SellerProductCaroussel>
+                            <LandingProducts productList={sellerProducts}></LandingProducts>
                         </Box>
                     </Box>
                 </Grid>

@@ -34,10 +34,10 @@ const CloudinaryComponent = ({ onUpload }) => {
                 formData
             );
             onUpload(response.data.url);
-            alert('Imagen cargada con éxito!');
+            alert('Image loaded Successfully!');
         } catch (error) {
-            console.error('Error al cargar la imagen', error);
-            alert('Falló la carga de la imagen.');
+            console.error('Image loading failed, try again', error);
+            alert('Image loading failed, try again.');
         } finally {
             setLoading(false);
         }

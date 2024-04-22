@@ -119,7 +119,7 @@ function CreateVersionStructure({ sellerCompanyData, listOfProducts }) {
 
         }
 
-        if (!price || !onSale || !salePercentage || !qtyAvailable || !productDescription || !hasColorOption || !productId || !sellerCompanyId) {
+        if (!price || !onSale || !salePercentage || !qtyAvailable || !productDescription || !productId || !sellerCompanyId) {
 
             console.log("Field missing! ")
             return

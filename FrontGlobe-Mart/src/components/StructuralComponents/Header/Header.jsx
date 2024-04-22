@@ -123,7 +123,7 @@ function Header() {
               <Box sx={{ ml: 5, mr: 2, width: "10%", minWidth: 130 }}>
 
                 <Typography color={'secondary.main'} variant="h5" component="div" >
-                  <Box sx={{}}
+                  <Box sx={{boxShadow: "none", cursor: 'pointer'  }}
                     onClick={() => {
                       navigate('/')
                       scrollTo(0, 0)

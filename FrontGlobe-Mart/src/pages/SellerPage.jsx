@@ -68,7 +68,7 @@ function SellerPage() {
 
     return (
 
-        <Box sx={{ width: "100%", height: "100%", mx: 4, mb: 4, display: "flex", justifyContent: "start", flexDirection: "column", }} >
+        <Box sx={{ width: "100%", height: "100%", mx: 4, mb: 4, display: "flex", justifyContent: "start", flexDirection: "column", py: 3, px: 3 }} >
 
             <Typography variant="h5" color="primary" mb={4} mt={4}>{sellerCompany.name}</Typography>
 
@@ -113,15 +113,18 @@ function SellerPage() {
 
             </Box>
 
-            <Divider></Divider>
+            {/* <Divider></Divider> */}
+            <Box p={2}>
 
-            <TabSelector
+                <TabSelector
 
-                sellerProducts={(sellerProductList && sellerProductList)}
-                itemList={(tabList)}
-                element={(sellerCompany)}
+                    sellerProducts={(sellerProductList && sellerProductList)}
+                    itemList={(tabList)}
+                    element={(sellerCompany)}
 
-            ></TabSelector>
+                ></TabSelector>
+
+            </Box>
 
         </Box>
 

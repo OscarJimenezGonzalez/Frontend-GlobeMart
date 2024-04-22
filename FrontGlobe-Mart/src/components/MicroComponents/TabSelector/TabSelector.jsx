@@ -7,6 +7,7 @@ import TabPanel from '@mui/lab/TabPanel';
 import Card from '@mui/material/Card';
 import RelatedProductsCarousel from '../../ProductPageComponents/RelatedProductsCaroussel/RelatedProductsCaroussel';
 import SellerProductCaroussel from '../../OtherComponents/SellerProductsCaroussel/SellerProductsCaroussel';
+import LandingProducts from '../../LandingPageComponents/LandingProducts/LandingProducts';
 
 export default function TabSelector({ itemList, element, sellerProducts }) {
     const [value, setValue] = React.useState(itemList[0].value);
@@ -35,10 +36,10 @@ export default function TabSelector({ itemList, element, sellerProducts }) {
 
                 </Box>
 
-                <TabPanel value="1">
-                    <SellerProductCaroussel
+                <TabPanel value="1" sx={{p: 12}}>
+                    <LandingProducts
                         productList={(sellerProducts)}
-                    ></SellerProductCaroussel>
+                    ></LandingProducts>
                 </TabPanel>
                 <TabPanel value="2">{element.policy}</TabPanel>
                 <TabPanel value="3">{element.description}</TabPanel>

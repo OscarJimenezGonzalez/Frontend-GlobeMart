@@ -24,11 +24,13 @@ import RatingNotGiven from '../components/MicroComponents/RatingComponent/Rating
 import RatingComponent from '../components/MicroComponents/RatingComponent/RatingComponent.jsx';
 import RatingProgressBar from '../components/MicroComponents/RatingComponent/RatingProgressBar.jsx';
 import LoginModal from '../components/MicroComponents/LoginModal/LoginModal.jsx';
+import LandingProducts from '../components/LandingPageComponents/LandingProducts/LandingProducts.jsx';
 
 function ProductPage() {
 
     const [products, setProducts] = useState();
     const [product, setProduct] = useState();
+    const [relatedProductList, setRelatedProductList] = useState([])
     const [descriptionId, setDescriptionId] = useState("description")
     const [reviewList, setReviewList] = useState();
     const [reviewAverage, setReviewAverage] = useState(0)
@@ -57,7 +59,7 @@ function ProductPage() {
 
         fetchData();
 
-    }, [])
+    }, [product])
 
     // Aqui traemos los datos específicos del producto a renderizar 
     useEffect(() => {
@@ -65,12 +67,17 @@ function ProductPage() {
         const fetchData = async () => {
             const productData = await getOneProductFromSeller(productVersionId);
             setProduct(productData)
+
             return productData
         }
 
         fetchData()
 
+
     }, [productVersionId])
+
+
+
 
     // Aquí traemos las reviews del producto renderizado
     useEffect(() => {
@@ -92,12 +99,21 @@ function ProductPage() {
     ///// Console.logs
     useEffect(() => {
 
-        if (reviewList) {
-            console.log("ReviewList", reviewList[0].createdAt.slice(0, 10))
+        // if (reviewList) {
+        //     console.log("ReviewList", reviewList[0].createdAt.slice(0, 10))
+        // }
+
+        if (products) {
+
+            console.log("Products", products)
+
         }
+
+        console.log("Current Product", product)
 
         // console.log("context updated", mainData)
         // console.log("Producto a renderizar:", product)
+
     }, [mainData, product, reviewList])
     ///// Console.logs
 
@@ -129,6 +145,28 @@ function ProductPage() {
         }
 
     }, [])
+
+
+    useEffect(() => {
+
+        const createRelatedList = () => {
+
+            if (products && product) {
+
+                const relatedProduct = products.filter((item) => item.product.productCategoryId === product.product.productCategoryId)
+
+                const excludeSelf = relatedProduct.filter((item) => item.id !== product.id)
+                console.log("related Proddsfsucts: ", excludeSelf)
+                setRelatedProductList(excludeSelf)
+
+            }
+
+        }
+
+        createRelatedList()
+
+    }, [products, product])
+
 
     // CheckLogin When going to add a product to Cart
     const checkLogin = () => {
@@ -346,9 +384,9 @@ function ProductPage() {
 
                 <Divider sx={{ mb: '2%', mt: '1%' }} />
 
-                <Box sx={{ minHeight: 50, mb: '2%', mt: '4%', display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
+                <Box sx={{ minHeight: 50, mb: '2%', mt: '4%', display: 'flex', justifyContent: 'center', pl:15, pr: 20 }}>
 
-                    <RelatedProductsCarousel
+                    {/* <RelatedProductsCarousel
 
                         key={productVersionId}
                         productList={(products)}
@@ -356,7 +394,13 @@ function ProductPage() {
                         productSelectedId={(product && product.productId)}
                         priceAfterSale={(product && product.priceAfterSale)}
 
-                    />
+                    /> */}
+
+
+                    <LandingProducts productList={relatedProductList} ></LandingProducts>
+
+
+
                 </Box>
 
 

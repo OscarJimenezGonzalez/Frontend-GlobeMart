@@ -9,10 +9,10 @@ import { useNavigate } from 'react-router-dom';
 import { getReviewsFromProduct } from '../../../services/productReviewService';
 
 
-export default function LandingProducts({ productList }) {
+export default function LandingProductsMod({ productList }) {
 
     const [activeStep, setActiveStep] = React.useState(0);
-    const [widthController, setWidthController] = useState(5)
+    const [widthController, setWidthController] = useState(4)
     const [opinionNum, setOpinionNum] = useState(0)
     const { isLargeScreen, isMediumLargeScreen, isMediumScreen, isSmallScreen, isTinyScreen } = useCustomMediaQueries();
     const navigate = useNavigate();
@@ -29,7 +29,7 @@ export default function LandingProducts({ productList }) {
     useEffect(() => {
 
         if (isLargeScreen) {
-            setWidthController(5)
+            setWidthController(4)
         } else if (isMediumScreen) {
             setWidthController(4)
         } else if (isSmallScreen) {
@@ -104,7 +104,7 @@ export default function LandingProducts({ productList }) {
                     ))}
                 </Box>
             </Grid>
-            <IconButton onClick={handleNext} disabled={activeStep === productList.length - widthController}
+            <IconButton onClick={handleNext} disabled={activeStep === 3 - widthController}
                 sx={{
                     border: "1px solid #E7E7E7",
                     borderRadius: 2,

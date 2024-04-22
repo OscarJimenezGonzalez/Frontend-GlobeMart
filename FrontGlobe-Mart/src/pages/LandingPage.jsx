@@ -55,11 +55,11 @@ function LandingPage() {
 
     const renderProducts = () => {
 
+        const sortedProductData = [...productData].sort((a, b) => b.numberOfRates - a.numberOfRates);
+
         return (
             <Box sx={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', marginY: '50px', gap: '36px' }}>
-
-                {productData.map(productData =>
-
+                {sortedProductData.map(productData => (
                     <ProductCard
                         handleClickProduct={() => handleProductClick(productData.id)}
                         key={productData.id}
@@ -73,16 +73,11 @@ function LandingPage() {
                         qtyAvailable={productData.qtyAvailable}
                         rating={productData.rating}
                         numberOfRates={productData.numberOfRates ? productData.numberOfRates : 0}
-
                     />
-
-                )}
-
+                ))}
             </Box>
-
-        )
-
-    }
+        );
+    };
 
     const renderSelectedCatProducts = () => {
 
@@ -200,8 +195,6 @@ function LandingPage() {
 
                 </Box>
             }
-
-
 
 
         </Box>

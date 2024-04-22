@@ -7,9 +7,9 @@ function NewsLetterForm() {
 
       <Grid container spacing={2}>
 
-        <Grid item xs={12}>
-          <Typography color="primary"><strong>Email</strong> required</Typography>
-        </Grid>
+        {/* <Grid item xs={12}> */}
+          {/* <Typography color="primary"><strong>Email</strong> required</Typography> */}
+        {/* </Grid> */}
 
         <Grid item xs={12}>
           <TextField
@@ -34,7 +34,7 @@ function NewsLetterForm() {
                 color="primary"
               />
             }
-            label={<Typography variant='subtitle2'>Check the box to agree with privacy policy (required)</Typography>}>
+            label={<Typography variant='subtitle2'>Check the box to agree with privacy policy</Typography>}>
           </FormControlLabel>
         </Grid>
 
