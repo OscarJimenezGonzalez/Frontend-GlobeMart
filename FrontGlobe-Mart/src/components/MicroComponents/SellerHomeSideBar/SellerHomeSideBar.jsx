@@ -98,7 +98,7 @@ export default function SellerHomeSideBar({ sendComponentSelection, awaitingShip
                 sx={{
                     backgroundColor: backgroundColor,
                     width: '100%',
-                    borderRight: `1px solid ${borderColor}`,
+                    // borderRight: `1px solid ${borderColor}`,
                     borderBottom: mainData.themeMode === darkTheme ? '1px solid #393939 ' : null,
                     width: drawerWidth,
                     flexShrink: 0,
@@ -106,6 +106,7 @@ export default function SellerHomeSideBar({ sendComponentSelection, awaitingShip
                         width: drawerWidth,
                         boxSizing: 'border-box',
                     },
+                    mb: 100
                 }}
             >
                 <Box position={"fixed"} sx={{ mt: 1, p: 2, width: drawerWidth }}>

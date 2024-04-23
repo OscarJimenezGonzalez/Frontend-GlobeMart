@@ -42,12 +42,13 @@ const CustomerOrderCard = ({ cartItemList, orderId, orderStatus, isPayed,
 
         if (orderStatus === "Completed") {
 
-            return '#D1D1D1'
+            // return '#D1D1D1'
+            return '#8FC784'
 
         }
         if (orderStatus === "In Progress") {
 
-            return 'rgba(33, 150, 243, 0.5)'
+            return '#D1D1D1'
 
         }
         if (orderStatus === "Pending Payment") {
@@ -56,7 +57,7 @@ const CustomerOrderCard = ({ cartItemList, orderId, orderStatus, isPayed,
         }
         else {
 
-            return "rgba(33, 150, 243, 0.5)"
+            return "#D1D1D1"
         }
 
 
@@ -77,7 +78,7 @@ const CustomerOrderCard = ({ cartItemList, orderId, orderStatus, isPayed,
                                 alignItems: 'center',
                                 alignContent: "center",
                                 justifyContent: "center",
-                                borderRadius: '10px',
+                                borderRadius: '4px',
                                 px: 1.5,
                                 py: 0.5,
                                 border: "1px solid #F1F1F3",
@@ -87,14 +88,8 @@ const CustomerOrderCard = ({ cartItemList, orderId, orderStatus, isPayed,
                             }}
 
                         >
-                            {/* Puedes colocar un icono o texto aquí, dependiendo de la necesidad */}
                             <Typography variant="subtitle2" color={orderStatus === "Completed" ? 'white' : 'white'}>{orderStatus}</Typography>
                         </Box>
-
-                        {/* {orderStatus === "Completed" && <Chip label={orderStatus} color="success" />}
-                        {orderStatus === "In progress" && <Chip label={orderStatus} color="primary" />}
-                        {orderStatus === "Pending Payment" && <Chip label={orderStatus} color="warning" />}
-                        {orderStatus === "Accepted" && <Chip label={orderStatus} color="primary" />} */}
 
                         {orderStatus === "On Delivery" &&
                             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, borderRadius: '20px', p: 1, border: "1px solid gray" }}>

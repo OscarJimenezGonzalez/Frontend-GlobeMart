@@ -42,9 +42,10 @@ function OrderPage() {
 
     const redirectToPayment = () => {
 
-        scrollTo(0, 50000)
+        // scrollTo(0, 80000)
 
         setTimeout(() => {
+            scrollTo(0, 0)
             navigate('/PaymentPage')
         }, 3000)
 
@@ -171,15 +172,15 @@ function OrderPage() {
 
         return (
 
-            <Box component="form" noValidate sx={{ mt: 3, mb: 8, width: "50vw" }} onSubmit={sendOrderForm}>
+            <Box component="form" noValidate sx={{ mt: 8, mb: 8, width: "50vw" }} onSubmit={sendOrderForm}>
 
-                <Typography variant="subtitle1" color={"primary"} sx={{ mb: 3 }}>DELIVERY DETAILS: {""}</Typography>
+                <Typography variant="h5" color={"primary"} sx={{ mb: 3 }}>Delivery Details: {""}</Typography>
 
                 <Grid container spacing={2}>
 
                     <Grid item xs={12}>
                         <OptionSelector
-                        
+
                             selectedOption={((value) => { setSelectedAddessType(value) })}
                             titleLabel={("St. Type:")}
                             optionList={(addressType)}

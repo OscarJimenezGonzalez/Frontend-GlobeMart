@@ -9,7 +9,7 @@ const PaymentSuccess = () => {
     const navigate = useNavigate();
 
     return (
-        <Box sx={{ mt: 8, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <Box sx={{ mt: 15, mb: 20, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <Typography variant="h4" sx={{ mb: 2 }}>
                 Payment Successful!
             </Typography>

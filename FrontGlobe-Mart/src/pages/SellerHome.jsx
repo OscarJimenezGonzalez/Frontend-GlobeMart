@@ -37,6 +37,7 @@ function SellerHome() {
     // Fetch Data 
     useEffect(() => {
 
+        scrollTo(0, 0)
         const fetchData = async () => {
 
             const userInfo = await getOwnProfile()
@@ -76,7 +77,7 @@ function SellerHome() {
 
         fetchData()
 
-    }, [cartItemStatusChanging])
+    }, [cartItemStatusChanging], [])
 
     // Calculate totalSales
     useEffect(() => {
@@ -124,26 +125,31 @@ function SellerHome() {
         if (componentName === "Dashboard") {
 
             setComponentSelector("Dashboard")
+            scrollTo(0, 0)
 
         }
         if (componentName === "Sales") {
 
             setComponentSelector("Sales")
+            scrollTo(0, 0)
 
         }
         if (componentName === "Orders") {
 
             setComponentSelector("Orders")
+            scrollTo(0, 0)
 
         }
         if (componentName === "AddNewProduct") {
 
             setComponentSelector("AddNewProduct")
+            scrollTo(0, 0)
 
         }
         if (componentName === "AddNewVersions") {
 
             setComponentSelector("AddNewVersions")
+            scrollTo(0, 0)
 
         }
 
@@ -252,8 +258,6 @@ function SellerHome() {
 
     }, [sellerCartItems])
 
-
-
     // Render SideBar Options
     const renderSelectedComponent = () => {
 
@@ -268,9 +272,17 @@ function SellerHome() {
                     awaitingShippmentOrders={awaitingShippmentOrders}
                     totalSales={totalSales ? totalSales : <CircularProg />}
 
-                    enableAddProducts={() => setComponentSelector("AddNewProduct")}
-                    enableAddVersions={() => setComponentSelector("AddNewVersions")}
+                    enableAddProducts={() => {
 
+                        setComponentSelector("AddNewProduct")
+                        scrollTo(0, 0)
+
+                    }}
+                    enableAddVersions={() => {
+
+                        setComponentSelector("AddNewVersions")
+                        scrollTo(0, 0)
+                    }}
 
                 />
 
@@ -298,7 +310,7 @@ function SellerHome() {
 
                 />
 
-            case "AddNewVersions":
+            case "AddNewVersions": 
                 return <CreateVersionStructure
                     sellerCompanyData={sellerCompanyData}
                     listOfProducts={listOfProducts}

@@ -20,13 +20,27 @@ function SellerOrdersStructure({ sellerCartItems, handleCartItemStatus }) {
 
         return <SellerOrderAccordion
 
-            sellerCartItems={sellerCartItems.filter((item) => item.cartItemStatus !== "Delivered")}
+            sellerCartItems={sellerCartItems.filter((item) => item.cartItemStatus === "Awaiting Shipment")}
             handleCartItemStatus={handleCartItemStatus}
 
         ></SellerOrderAccordion>
 
     }
 
+
+
+    
+    const renderProcessedOrders = () => {
+
+        return <SellerOrderAccordion
+
+            sellerCartItems={sellerCartItems.filter((item) => item.cartItemStatus === "Shipped" || item.cartItemStatus === "On Delivery" )}
+            handleCartItemStatus={handleCartItemStatus}
+
+        ></SellerOrderAccordion>
+
+    }
+    
     const renderCompletedOrders = () => {
 
         return <SellerOrderAccordion
@@ -53,11 +67,16 @@ function SellerOrdersStructure({ sellerCartItems, handleCartItemStatus }) {
                 },
                 {
                     key: 2,
-                    label: "Pending Orders",
+                    label: "Pending",
                     rendering: renderPendingOrders()
                 },
                 {
                     key: 3,
+                    label: "Processed",
+                    rendering: renderProcessedOrders()
+                },
+                {
+                    key: 4,
                     label: "Completed",
                     rendering: renderCompletedOrders()
                 },

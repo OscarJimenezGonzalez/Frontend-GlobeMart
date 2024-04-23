@@ -40,6 +40,7 @@ function CartPage() {
 
     const goToOrderPage = () => {
 
+        scrollTo(0, 0)
         // Se tiene que pasar a contexto el precio total de la compra
 
         setMainData(prevData => ({
@@ -85,7 +86,7 @@ function CartPage() {
         setDiscount(total)
 
     }
-    
+
     const renderAddedProducts = () => {
 
         return (

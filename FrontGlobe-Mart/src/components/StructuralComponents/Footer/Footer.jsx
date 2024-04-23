@@ -26,7 +26,7 @@ function Footer() {
     };
 
     return (
-        <Box component="footer" sx={{ backgroundColor: '#1E1E1E', color: '#fff', py: 12 }}>
+        <Box component="footer" sx={{ backgroundColor: '#1E1E1E', color: '#fff', py: 12, mt: 40 }}>
             <Container maxWidth="lg">
                 <Grid container spacing={10} pl={12}>
                     {Object.entries(footerLinks).map(([section, links]) => (

@@ -25,7 +25,7 @@ const ShoppingCartButton = ({ shoppingCart }) => {
                     },
                 }}
             >
-                <ShoppingCartIcon sx={{ fontSize: 30 }} />
+                <ShoppingCartIcon sx={{ fontSize: 30, color: "" }} />
             </Badge>
         </IconButton>
     );

@@ -5,6 +5,7 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import CustomerOrderCard from '../../OtherComponents/CustomerOrderCard/CustomerOrderCard';
+import { Divider } from '@mui/material';
 
 export default function TabSelectorCustomer({ orderList }) {
 
@@ -123,7 +124,7 @@ export default function TabSelectorCustomer({ orderList }) {
                     </TabList>
 
                 </Box>
-
+                {/* <Divider sx={{ mb: '0%', mt: '-0.5%', mx: 4 }} /> */}
                 <TabPanel value="1">{renderAllOrders()}
 
 

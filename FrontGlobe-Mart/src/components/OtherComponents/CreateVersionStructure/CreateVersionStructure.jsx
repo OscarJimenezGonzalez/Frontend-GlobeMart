@@ -9,14 +9,6 @@ import OptionSelectorBig from '../../MicroComponents/OptionSelectorBig/OptionSel
 import GridTextField from '../../MicroComponents/GridTextField/GridTextField'
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
-// const productCategories = [
-//     { id: 1, text: "Footwear" },
-//     { id: 2, text: "Electronics" },
-//     { id: 3, text: "Toys" },
-//     { id: 4, text: "Mobile" },
-//     { id: 5, text: "Music" },
-//     { id: 6, text: "Clothing" },
-// ]
 
 function CreateVersionStructure({ sellerCompanyData, listOfProducts }) {
 
@@ -119,7 +111,7 @@ function CreateVersionStructure({ sellerCompanyData, listOfProducts }) {
 
         }
 
-        if (!price || !onSale || !salePercentage || !qtyAvailable || !productDescription || !productId || !sellerCompanyId) {
+        if (!price  || !qtyAvailable || !productDescription || !productId || !sellerCompanyId) {
 
             console.log("Field missing! ")
             return

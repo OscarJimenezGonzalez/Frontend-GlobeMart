@@ -80,7 +80,7 @@ export default function LandingProducts({ productList }) {
                 <ArrowBackIosIcon sx={{ fontSize: '25px', "&:hover": { color: "orange", opacity: [0.9, 0.8, 0.7] } }} />
             </IconButton>
             <Grid container spacing={2}>
-                <Box display={"flex"} justifyContent={"center"} gap={6} px={8}>
+                <Box display={"flex"} justifyContent={"center"} gap={6} px={7}>
                     {productList.slice(activeStep, activeStep + widthController).map((item, index) =>
                     (
                         <ProductCard
@@ -98,7 +98,7 @@ export default function LandingProducts({ productList }) {
                             salePercentage={item.salePercentage}
                             qtyAvailable={item.qtyAvailable}
                             rating={item.rating}
-                            numberOfRates={item.numberOfRates}
+                            numberOfRates={item.numberOfRates ? item.numberOfRates : 0 }
                         />
 
                     ))}

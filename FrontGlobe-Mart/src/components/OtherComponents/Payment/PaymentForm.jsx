@@ -25,7 +25,8 @@ function PaymentForm({ currentOrder, submitPayment }) {
             confirmParams: {
 
                 // redirect: "if_required",
-                return_url: "http://localhost:5179/PaymentSucceededPage",
+                // return_url: "http://localhost:5179/PaymentSucceededPage",
+                return_url: "http://localhost:5177/PaymentSucceededPage",
 
             },
 

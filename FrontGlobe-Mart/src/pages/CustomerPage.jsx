@@ -47,7 +47,7 @@ function CustomerPage() {
     const fetchData = async () => {
 
       if (orderList && orderList.length > 0) {
-        // Usamos Promise.all para manejar múltiples llamadas asíncronas en paralelo
+     
         const cartItemsPromises = orderList.map(order =>
           getCartItemsFromOrder(order.id)
         );
@@ -59,7 +59,6 @@ function CustomerPage() {
             cartItems: cartItemsArr[index],
           }));
 
-          // Y ahora actualizamos el estado una sola vez con el nuevo array
           setOrderList(updatedOrderList);
 
         } catch (error) {
@@ -80,7 +79,7 @@ function CustomerPage() {
   useEffect(() => {
 
     console.log(orderList)
-    // console.log(cartItemList)
+
 
   }, [orderList])
 
@@ -89,15 +88,15 @@ function CustomerPage() {
     <Box sx={{ width: '100%', display: "flex", flexDirection: "column", p: 2 }}>
       {/* <Box sx={{ backgroundColor: "background.brigth", width: '100%', display: "flex", flexDirection: "column", p: 2 }}> */}
 
-      <Typography variant="h6" color="primary" mx={3} my={6}  > Customers Page </Typography>
+      <Typography variant="h5" color="primary" mx={4} mt={4} mb={5} > Customers Page </Typography>
 
       <Box marginX={0}>
-        <Typography variant="tab" color={"orange"} ml={4} > My Orders </Typography>
-        <Divider sx={{ mb: '2%', mt: '1%', mx: 3 }} />
+        <Typography variant="tab" color={"orange"} ml={6} > My Orders </Typography>
+        <Divider sx={{ mb: '1%', mt: '1%', mx: 4 }} />
       </Box>
 
-      <Box ml={4}>
-
+      <Box ml={0}>
+      
         <TabSelectorCustomer
 
           orderList={(orderList)}
@@ -105,12 +104,13 @@ function CustomerPage() {
         />
 
       </Box>
+      
 
       <Box mt={4}>
         <Typography variant="tab" color={"orange"} ml={4} > My Favorites </Typography>
         <Divider sx={{ mb: '2%', mt: '1%', mx: 3 }} />
         <Box m={3}>
-          <SellerProductCaroussel ></SellerProductCaroussel>
+          {/* <SellerProductCaroussel ></SellerProductCaroussel> */}
         </Box>
 
       </Box>

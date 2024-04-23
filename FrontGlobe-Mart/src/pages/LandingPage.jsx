@@ -16,9 +16,12 @@ import LandingPageCaroussel from '../components/LandingPageComponents/LandingPag
 function LandingPage() {
 
     // const isSmallScreen = useMediaQuery('(max-width: 600px)')
+    const [selectedProduct, setSelectedProduct] = useState()
     const [productData, setProductData] = useState([])
     const [allProducts, setAllProducts] = useState([])
-    const [selectedProduct, setSelectedProduct] = useState()
+    const [bestOfClothing, setBestOfClothing] = useState([])
+    const [sortedProducts, setSortedProducts] = useState([])
+    const [newStuff, setNewStuff] = useState([])
     const { mainData, setMainData } = useContext(mainContext)
 
     const selectedCatsLength = mainData.selectedPCategories.length
@@ -35,9 +38,20 @@ function LandingPage() {
         const fetchProductData = async () => {
 
             const pData = await getProductsFromSellers()
+            const sorted = pData.sort((a, b) => b.numberOfRates - a.numberOfRates)
+            setSortedProducts(sorted)
+
+            const clothing = pData.filter((item) => item.product.productCategoryId === 6)
+            setBestOfClothing(clothing)
+
             setAllProducts(pData.slice(0, 10))
             const searchedProducts = pData.filter(products => products.product.name.includes(searchInputData))
             setProductData(searchedProducts)
+
+            const pData2 = await getProductsFromSellers()
+            
+            setNewStuff(pData2.sort(((a,b)=> b.id - a.id)))
+
 
         }
 
@@ -172,6 +186,8 @@ function LandingPage() {
             {mainData.landingPageElements ? <LandingPageStructure
 
                 newProducts={allProducts}
+                newStuff={newStuff}
+                bestOfClothing={bestOfClothing}
                 renderAllProducts={() => {
 
                     setMainData(prevData => ({

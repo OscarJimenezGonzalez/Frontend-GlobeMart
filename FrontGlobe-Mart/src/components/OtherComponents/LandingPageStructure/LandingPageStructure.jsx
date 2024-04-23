@@ -11,7 +11,7 @@ import LandingProductsMod from '../../LandingPageComponents/LandingProductsMod/L
 
 import newsletter from '../../../assets/images/landingPage/newsletter.jpg'
 
-function LandingPageStructure({ newProducts, renderAllProducts }) {
+function LandingPageStructure({ newProducts, bestOfClothing, newStuff, renderAllProducts }) {
 
     return (
         <>
@@ -48,7 +48,7 @@ function LandingPageStructure({ newProducts, renderAllProducts }) {
                             <Typography variant='h6' color='primary.fixed' mb={0}>+2000 each week </Typography>
                         </Box>
                         <Box width={'100%'} px={25}>
-                            <LandingProducts productList={newProducts}></LandingProducts>
+                            <LandingProducts productList={newStuff}></LandingProducts>
                         </Box>
                     </Box>
                 </Grid>
@@ -84,12 +84,12 @@ function LandingPageStructure({ newProducts, renderAllProducts }) {
                         justifyContent: 'center'
                     }}>
                         <Box width={"100%"} my={3} px={25}>
-                            <Typography variant='h4' color='secondary.main' mb={2}>Best Seller Products</Typography>
+                            <Typography variant='h4' color='secondary.main' mb={2}>Best Of Clothing </Typography>
                             <Typography variant='h6' color='primary.fixed' mb={0}>discover the very best...</Typography>
 
                         </Box>
                         <Box width={'100%'} px={25}>
-                            <LandingProducts productList={newProducts}></LandingProducts>
+                            <LandingProducts productList={bestOfClothing}></LandingProducts>
                         </Box>
                     </Box>
                 </Grid>
@@ -98,7 +98,7 @@ function LandingPageStructure({ newProducts, renderAllProducts }) {
             <Grid container spacing={3} mb={4} >
                 <Grid item xs={12}>
                     <Box sx={{
-                        backgroundColor: "background.brigth", display: 'flex', alignItems: 'center',minHeight: 520, px: 25
+                        backgroundColor: "background.brigth", display: 'flex', alignItems: 'center', minHeight: 520, px: 25
                     }}>
                         <Box width={"22%"}>
                             <Typography variant='h4' color='secondary.main' mb={2}>Discover our brands</Typography>

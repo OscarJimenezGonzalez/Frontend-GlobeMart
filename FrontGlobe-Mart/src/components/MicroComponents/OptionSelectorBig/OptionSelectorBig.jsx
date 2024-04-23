@@ -36,7 +36,9 @@ export default function OptionSelectorBig({ itemList, defaultValue, label, handl
 
     return (
 
-        <FormControl fullWidth
+        <FormControl
+            fullWidth
+
         >
 
             <InputLabel>{`${label}`}</InputLabel>
@@ -50,7 +52,13 @@ export default function OptionSelectorBig({ itemList, defaultValue, label, handl
 
                     console.log(event)
                     handleOptionChange(event)
-
+                }}
+                MenuProps={{
+                    PaperProps: {
+                        style: {
+                            maxHeight: 215, 
+                        },
+                    },
                 }}
 
             >
