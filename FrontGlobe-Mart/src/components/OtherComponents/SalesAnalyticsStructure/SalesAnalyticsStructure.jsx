@@ -21,7 +21,7 @@ function SalesAnalyticsStructure({ sellerCartItems, totalSales }) {
     const [bestCustomer, setBestCustomer] = useState({})
     const [bestSellerProduct, setBestSellerProduct] = useState({})
 
-    // console.log("seller cartITemList", sellerCartItems)
+    console.log("seller cartITemList", sellerCartItems)
 
     const filterPurchasesLastMonth = (sellerCartItems) => {
         // Obtener la fecha actual
@@ -32,7 +32,12 @@ function SalesAnalyticsStructure({ sellerCartItems, totalSales }) {
         // console.log(firstDayOfMonth, "firstOfMonth")
 
         // Filtrar items creados en el último mes
-        const filteredItems = sellerCartItems.filter(item => {
+
+        const filterStatus = sellerCartItems.filter((item) => item.cartItemStatus !== "Pending Payment")
+
+        console.log("filtered STATUS ", filterStatus)
+
+        const filteredItems = filterStatus.filter(item => {
             const itemDate = new Date(item.order.createdAt);
             return itemDate >= firstDayOfMonth;
         });
@@ -110,45 +115,27 @@ function SalesAnalyticsStructure({ sellerCartItems, totalSales }) {
 
     const getBestCustomerData = (sellerCartItems) => {
 
-        const counts = {}
+        const counts = {};
 
-        const customerList = sellerCartItems.map((item) => {
-
-            return item.order.user.username
-
-        })
-
-        for (const element of customerList) {
-
-            counts[element] = (counts[element] || 0) + 1
-
+        for (const item of sellerCartItems) {
+            const username = item.order.user.username;
+            counts[username] = (counts[username] || 0) + 1;
         }
 
-        let max = 0
+        let maxCount = 0;
+        let bestCustomerUsername;
 
-        for (let prop in counts) {
-
-            if (counts[prop] > max) {
-
-                max = prop
+        for (const username in counts) {
+            if (counts[username] > maxCount) {
+                maxCount = counts[username];
+                bestCustomerUsername = username;
             }
-
         }
 
-        let bestCustomerObj;
-        const bestObj = sellerCartItems.map((element) => {
+        const bestCustomerr = sellerCartItems.find(item => item.order.user.username === bestCustomerUsername)?.order.user;
 
-            if (element.order.user.username === max) {
-
-                bestCustomerObj = element.order.user
-                setBestCustomer(bestCustomerObj)
-                return bestCustomerObj
-
-            }
-
-        })
-
-        return max
+        setBestCustomer(bestCustomerr)
+        return bestCustomerr;
 
     }
 
@@ -186,8 +173,6 @@ function SalesAnalyticsStructure({ sellerCartItems, totalSales }) {
 
         bestProductObj["productName"] = max
 
-        console.log(bestProductObj["productName"], "FUNCIONA COÑO")
-
         bestProductObj["productQty"] = sellerCartItems.filter((element) =>
             element.product_SellerCompany.product.name === bestProductObj["productName"]
         ).reduce((total, item) => total + item.quantity, 0)
@@ -202,7 +187,9 @@ function SalesAnalyticsStructure({ sellerCartItems, totalSales }) {
 
     useEffect(() => {
 
-        getBestCustomerData(sellerCartItems)
+        if (sellerCartItems.length > 0) {
+            getBestCustomerData(sellerCartItems)
+        }
         // getBestSellerProductData(sellerCartItems)
 
     }, [sellerCartItems, bestCustomer, bestSellerProduct])
