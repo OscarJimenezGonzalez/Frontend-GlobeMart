@@ -26,6 +26,11 @@ import logoSmallGM from '../../../assets/images/logoSmallGM.png'
 import logoSmallGMOrng from '../../../assets/images/logoSmallGMOrng.png'
 import logoSmallGMMix from '../../../assets/images/logoSmallGMMix.png'
 import logoSmallGMGray from '../../../assets/images/logoSmallGMGray.png'
+import logoOficialGM from '../../../assets/images/logoOficialGM.png'
+import logoOficialGM2 from '../../../assets/images/logoOficialGM2.png'
+import logoGM3 from '../../../assets/images/logoGM3.png'
+import logoGM3dark from '../../../assets/images/logoGM3dark.png'
+
 
 
 function Header() {
@@ -105,6 +110,7 @@ function Header() {
   const dashButton = theme.components.MuiButton.styleOverrides.outlinedSecondary;
   const backgroundColor = mainData.themeMode === mainTheme ? "#FFFFFF" : "#1E1E1E"
   const borderColor = mainData.themeMode === mainTheme ? "#E7E7E7" : "#1E1E1E"
+  const logo = mainData.themeMode === mainTheme ? logoGM3 : logoGM3dark
 
   return (
 
@@ -120,10 +126,11 @@ function Header() {
             <Box
               sx={{ display: 'flex', alignItems: 'center', justifyContent: 'start', width: "100%" }}>
 
-              <Box sx={{ ml: 5, mr: 2, width: "10%", minWidth: 130 }}>
+              <Box sx={{ ml: 6, mr: 12, width: "10%", minWidth: 155 }}>
 
                 <Typography color={'secondary.main'} variant="h5" component="div" >
-                  <Box sx={{boxShadow: "none", cursor: 'pointer'  }}
+
+                  {/* <Box sx={{boxShadow: "none", cursor: 'pointer'  }}
                     onClick={() => {
                       navigate('/')
                       scrollTo(0, 0)
@@ -133,18 +140,31 @@ function Header() {
                       }))
 
                     }}> Globe-Mart
+                  </Box> */}
+
+                  <Box
+                    sx={{ width: "10%", minWidth: 210, minHeight: 'auto', ml: -2, mt: 1, boxShadow: "none", cursor: 'pointer' }}
+                    onClick={() => {
+                      navigate('/')
+                      scrollTo(0, 0)
+                      setMainData(prevData => ({
+                        ...prevData,
+                        landingPageElements: true
+                      }))
+
+                    }}
+                    component="img"
+                    src={logo}
+                    alt='logo'
+                  >
                   </Box>
+
+
                 </Typography>
 
               </Box>
 
-              {/* 
-              <Box sx={{ width: "10%", minWidth: 190, minHeight: 0, ml: -2 }}
-                component="img"
-                src={logoSmallGM}
-                alt='logo'
-              >
-              </Box> */}
+
 
               {
                 isSmallScreen &&
@@ -152,7 +172,7 @@ function Header() {
                   <TextField
                     onChange={searchProducts}
                     fullWidth
-                    label={<Typography>Search for products...</Typography>}
+                    label={<Typography variant='subtitle2'>Search...</Typography>}
                     id="fullWidth"
                     sx={{ backgroundColor: backgroundColor, width: '87%', mr: 1 }}
                     InputProps={{
@@ -198,11 +218,11 @@ function Header() {
                   justifyContent: 'flex-end',
                   alignItems: 'center',
                   alignContent: 'center',
-                  mr: 0
+                  mr: 2
                 }}>
                   <AccountMenu />
                   {isMediumScreen &&
-                    <Typography color={"primary"} sx={{ minWidth: 90, ml: -3 }}>My Acount</Typography>
+                    <Typography variant='tab' color={"primary"} sx={{ minWidth: 90, ml: -3 }}>My Acount</Typography>
                   }
                 </Box>
               )}
@@ -224,7 +244,7 @@ function Header() {
                 />
               </Box>
               {isMediumScreen &&
-                <Typography color={"primary"} sx={{ minWidth: 90, ml: -1 }}>My Cart</Typography>
+                <Typography color={"primary"} variant='tab' sx={{ minWidth: 90, ml: -1 }}>My Cart</Typography>
               }
             </Box>
 
@@ -285,7 +305,7 @@ function Header() {
                       mr: 5,
                       color: "#F9AB19"
                     }}>
-                    Seller DashBoard
+                    Seller Store
                   </Button> : <Button
                     onClick={() => { navigate('/SellerWelcomePage') }}
                     variant="outlinedSecondary"

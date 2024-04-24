@@ -25,9 +25,15 @@ function SellerPage() {
     const [sellerCompany, setSellerCompany] = useState({})
     const [sellerProductList, setSellerProductList] = useState([])
 
-    /// Traer la info del vendedor con el Id del param. 
-
     useEffect(() => {
+
+        scrollTo(0, 0)
+
+    }, [])
+
+    /// Traer la info del vendedor con el Id del param. 
+    useEffect(() => {
+
 
         const fetchData = async () => {
             const sellerCompanyData = await getSellerCompany(sellerCompanyId);

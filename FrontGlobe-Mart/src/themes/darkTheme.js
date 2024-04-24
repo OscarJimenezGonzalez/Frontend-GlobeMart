@@ -10,7 +10,7 @@ export const darkTheme = createTheme({
             // fixedVariant: '#005048'
         },
         secondary: {
-            main: '#F9AB19',
+            main: '#FC944E',
             // fixedDim: '#FABD00',
             // fixedVariant: '#5B4300'
         },
