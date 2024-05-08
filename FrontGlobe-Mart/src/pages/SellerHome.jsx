@@ -90,12 +90,12 @@ function SellerHome() {
 
                 if (sellerCartItems[index].cartItemStatus !== "Pending Payment") {
 
-                    totalCoSales += parseFloat(sellerCartItems[index].product_SellerCompany.priceAfterSale)
+                    totalCoSales += parseFloat(sellerCartItems[index].product_SellerCompany.priceAfterSale * sellerCartItems[index].quantity  )
 
                 }
 
             }
-            // totalCoSales = Math.floor((totalCoSales * 100) / 100)
+
             totalCoSales = totalCoSales.toFixed(2)
             setTotalSales(totalCoSales)
 

@@ -6,6 +6,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import FilterListOffIcon from '@mui/icons-material/FilterListOff';
 import DatePickerFilter from '../../MicroComponents/DatePickerFilter/DatePickerFilter';
+import { ConstructionOutlined, ContentPasteOffSharp } from '@mui/icons-material';
 
 
 function SalesAnalyticsStructure({ sellerCartItems, totalSales }) {
@@ -21,7 +22,7 @@ function SalesAnalyticsStructure({ sellerCartItems, totalSales }) {
     const [bestCustomer, setBestCustomer] = useState({})
     const [bestSellerProduct, setBestSellerProduct] = useState({})
 
-    console.log("seller cartITemList", sellerCartItems)
+
 
     const filterPurchasesLastMonth = (sellerCartItems) => {
         // Obtener la fecha actual
@@ -35,7 +36,7 @@ function SalesAnalyticsStructure({ sellerCartItems, totalSales }) {
 
         const filterStatus = sellerCartItems.filter((item) => item.cartItemStatus !== "Pending Payment")
 
-        console.log("filtered STATUS ", filterStatus)
+        // console.log("filtered STATUS ", filterStatus)
 
         const filteredItems = filterStatus.filter(item => {
             const itemDate = new Date(item.order.createdAt);
@@ -117,10 +118,18 @@ function SalesAnalyticsStructure({ sellerCartItems, totalSales }) {
 
         const counts = {};
 
-        for (const item of sellerCartItems) {
+        console.log("SELLER CART ITEMS >>>>", sellerCartItems)
+
+        const sellerCartItemListFiltered = sellerCartItems.filter((item) => item.cartItemStatus != "Pending Payment")
+
+        console.log("FILTERED LIST >>>> ", sellerCartItemListFiltered)
+
+        for (const item of sellerCartItemListFiltered) {
             const username = item.order.user.username;
             counts[username] = (counts[username] || 0) + 1;
         }
+
+        console.log("CONTEOS >>>>", counts)
 
         let maxCount = 0;
         let bestCustomerUsername;
@@ -144,13 +153,16 @@ function SalesAnalyticsStructure({ sellerCartItems, totalSales }) {
         const bestProductObj = { productName: "", productQty: 0 }
         const counts = {}
 
-        const productList = sellerCartItems.map((item) => {
+        // console.log("SELLERCART ITEMS >>>>> ", sellerCartItems,)
+
+        // Convertimos el array de objetos (de productos) a unicamente una lista de nombres y unicamente aquellos que estén pagados.
+        const productList = sellerCartItems.filter((item) => item.cartItemStatus != "Pending Payment").map((item) => {
 
             return item.product_SellerCompany.product.name
 
         })
 
-        console.log(productList, "productList")
+        // console.log("productList >>>>> ", productList,)
 
         for (const element of productList) {
 
@@ -158,45 +170,58 @@ function SalesAnalyticsStructure({ sellerCartItems, totalSales }) {
 
         }
 
-        let max = 0
+        // console.log("CONTEOS >>> ", counts)
 
+        let max = 0
+        let maxName = "";
         for (let prop in counts) {
+
+            // console.log("dentro de iteR >>> ", prop)
 
             if (counts[prop] > max) {
 
-                max = prop
+                max = counts[prop]
+                maxName = prop
+
             }
 
         }
 
-        console.log(max, "max")
+        // console.log("Max >>>>", max)
 
-        bestProductObj["productName"] = max
+        bestProductObj["productName"] = maxName
 
-        bestProductObj["productQty"] = sellerCartItems.filter((element) =>
+        bestProductObj["productQty"] = sellerCartItems.filter((item) => item.cartItemStatus != "Pending Payment").filter((element) =>
             element.product_SellerCompany.product.name === bestProductObj["productName"]
         ).reduce((total, item) => total + item.quantity, 0)
 
+        // console.log(bestProductObj["productQty"])
 
-        console.log(bestProductObj["productQty"])
         console.log(bestProductObj)
         setBestSellerProduct(bestProductObj)
         return bestProductObj
 
     }
 
+    // console.log("seller cartITemsList", sellerCartItems)
+
     useEffect(() => {
 
         if (sellerCartItems.length > 0) {
             getBestCustomerData(sellerCartItems)
-        }
-        // getBestSellerProductData(sellerCartItems)
+            // getBestSellerProductData(sellerCartItems)
 
-    }, [sellerCartItems, bestCustomer, bestSellerProduct])
+        }
+
+    }, [sellerCartItems, bestSellerProduct])
 
     useEffect(() => {
 
-        getBestSellerProductData(sellerCartItems)
+        if (sellerCartItems.length > 0) {
+            // getBestCustomerData(sellerCartItems)
+            getBestSellerProductData(sellerCartItems)
+
+        }
 
     }, [sellerCartItems])
 
