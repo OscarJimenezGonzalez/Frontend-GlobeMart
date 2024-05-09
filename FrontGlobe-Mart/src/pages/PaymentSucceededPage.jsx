@@ -5,7 +5,7 @@ import { Box } from '@mui/material'
 function PaymentSucceededPage() {
   return (
 
-    <Box>
+    <Box mb={40}>
 
       <PaymentSuccess></PaymentSuccess>
 

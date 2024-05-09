@@ -124,25 +124,31 @@ const OrderDetailsDropdown = ({ cartItemList, isOpen, shippingAddress, orderStat
             {isPayed ? <Box sx={{ display: 'flex', alignItems: 'center', ml: 0, mt: 4, mb: 4 }}>
 
                 {
-                    paymentMethod === "Credit Card" ?
+                    // paymentMethod === "Credit Card" ?
 
-                        <Box display={"flex"}>
-                            <Typography variant="subtitle2" color="black" gutterBottom>
+                    <Box display={"flex"}>
+                        {/* <Typography variant="subtitle2" color="black" gutterBottom>
                                 {paymentMethod === "Credit Card" ? "Credit / Debit Card : " : paymentMethod}
                             </Typography>
                             <Box>
                                 <CreditCardIcon color="action" sx={{ ml: 1 }} />
-                            </Box>
-                            <Typography sx={{ ml: 1 }} variant="subtitle1" color="primary" gutterBottom>
+                            </Box> */}
+                        {/* <Typography sx={{ ml: 1 }} variant="subtitle1" color="primary" gutterBottom>
                                 {paymentMethod === "Credit Card" ? "  **** **** **** 4242 " : null}
-                            </Typography>
-                        </Box>
+                            </Typography> */}
 
-                        :
+                        <Typography variant="subtitle2" color="primary" gutterBottom>
 
-                        <Typography variant="subtitle2" color="black" gutterBottom>
-                            {paymentMethod}
+                            Credit Card:   <strong>**** **** **** 4242</strong>
+
                         </Typography>
+                    </Box>
+
+                    // :
+
+                    // <Typography variant="subtitle2" color="black" gutterBottom>
+                    //     {paymentMethod}
+                    // </Typography>
 
                 }
 

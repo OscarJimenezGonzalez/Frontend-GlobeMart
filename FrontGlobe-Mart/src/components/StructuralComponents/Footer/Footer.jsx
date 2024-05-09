@@ -12,8 +12,6 @@ import XIcon from '@mui/icons-material/X';
 import AdbIcon from '@mui/icons-material/Adb';
 
 
-
-
 function Footer() {
     // Your links structure might look something like this
     const footerLinks = {
@@ -26,7 +24,7 @@ function Footer() {
     };
 
     return (
-        <Box component="footer" sx={{ backgroundColor: '#1E1E1E', color: '#fff', py: 12, mt: 40 }}>
+        <Box component="footer" sx={{ backgroundColor: '#1E1E1E', color: '#fff', py: 12, mt: 15 }}>
             <Container maxWidth="lg">
                 <Grid container spacing={10} pl={12}>
                     {Object.entries(footerLinks).map(([section, links]) => (

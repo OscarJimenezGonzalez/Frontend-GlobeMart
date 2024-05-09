@@ -104,7 +104,7 @@ function PaymentPage() {
 
         clientSecret ? (
             <Elements stripe={stripePromise} options={{ clientSecret }}>
-                <Box display={"flex"} alignItems={"center"} >
+                <Box display={"flex"} alignItems={"center"} mb={20} mt={5}>
                     <Card sx={{ minWidth: 600, minHeight: 500, display: "flex", justifyContent: "center", alignItems: "center",  mt: 10 }}>
                         <PaymentForm
                             currentOrder={currentOrder.totalPrice}
